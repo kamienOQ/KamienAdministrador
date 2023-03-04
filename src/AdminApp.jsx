@@ -1,10 +1,10 @@
-import { LoginPage } from "./auth/pages/LoginPage";
+import { AppRouter } from "./router/AppRouter";
 import { AppTheme } from "./theme";
 
 export const AdminApp = () => {
   return (
     <AppTheme>
-      <LoginPage />
+      <AppRouter />
     </AppTheme>
   )
 };

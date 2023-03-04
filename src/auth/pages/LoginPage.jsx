@@ -1,21 +1,56 @@
-import { Button, Grid, Link, TextField } from "@mui/material";
+import { useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Alert, Button, Grid, IconButton, InputAdornment, Link, TextField } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 import { AuthLayout } from "../layout/AuthLayout";
+import { useForm } from "../../hooks/useForm";
+import { logout, startLoginWithEmailPassword } from "../../store/auth";
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
+  const { status, errorMessage } = useSelector((state) => state.auth);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { email, password, onInputChange } = useForm({
+    email: "kamienoriginalquality@gmail.com",
+    password: "kamien@cr.2023?#$",
+  });
+
+  const isAuthenticating = useMemo(() => status === "checking", [status]);
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    if (email.trim() === "") {
+      dispatch(logout({ errorMessage: "El correo es obligatorio"}));
+    } else if (password.trim() === "") {
+      dispatch(logout({ errorMessage: "La contraseña es obligatoria"}));
+    } else {
+      dispatch(startLoginWithEmailPassword(email, password));
+    }
+  };
+
+  const onClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <AuthLayout title="Iniciar Sesión">
-      <form>
+      <form onSubmit={ onSubmit }>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
-            <label htmlFor="username">Nombre de Usuario</label>
+            <label htmlFor="email">Email</label>
             <TextField
               hiddenLabel
-              id="username"
-              name="username"
+              id="email"
               fullWidth
               variant="outlined"
-              required
               sx={{ bgcolor: "#f0f0f0", mt: 1 }}
+              name="email"
+              value={email}
+              onChange={onInputChange}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -23,17 +58,38 @@ export const LoginPage = () => {
             <TextField
               hiddenLabel
               id="password"
-              name="password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={onClickShowPassword} sx={{ pr: 0 }}>
+                      {showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               fullWidth
-              required
-              className="login_input"
               sx={{ bgcolor: "#f0f0f0", mt: 1, mb: 2 }}
+              name="password"
+              value={password}
+              onChange={onInputChange}
             />
+          </Grid>
+          <Grid 
+            container
+            display={ !!errorMessage ? '': 'none' }
+            sx={{ mb: 2 }}>
+            <Grid 
+                item 
+                xs={ 12 }
+              >
+              <Alert severity='error'>{ errorMessage }</Alert>
+            </Grid>
           </Grid>
           <Button
             type="submit"
             variant="contained"
+            disabled={ isAuthenticating }
             fullWidth
             color="secondary"
             sx={{
@@ -42,15 +98,22 @@ export const LoginPage = () => {
               fontSize: "16px",
               color: "#ffffff",
               "&:hover": {
-                bgcolor: "#ffe34f"
-              }
+                bgcolor: "#ffe34f",
+              },
             }}
           >
             Iniciar Sesión
           </Button>
         </Grid>
       </form>
-      <Link href="#" color="#333333" sx={{ mt: 2, '&:hover': { textDecoration: 'underline' } }} display="block" textAlign="center" underline="none">
+      <Link
+        href="#"
+        color="#333333"
+        sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
+        display="block"
+        textAlign="center"
+        underline="none"
+      >
         ¿Olvidaste tu contraseña?
       </Link>
     </AuthLayout>
