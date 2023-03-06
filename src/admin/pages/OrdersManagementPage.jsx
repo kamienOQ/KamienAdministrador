@@ -36,7 +36,7 @@ export const OrdersManagementPage = () => {
           textAlign="center"
           sx={{ mb: 1 }}
         >
-          Orders Management
+          Gestión de pedidos
         </Typography>
         <Button
           onClick={onLogout}
