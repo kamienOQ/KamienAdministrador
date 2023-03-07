@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
 export const loginWithEmailPassword = async (email, password) => {
@@ -20,7 +20,7 @@ export const loginWithEmailPassword = async (email, password) => {
       },
     };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     const errorCode = error.code;
     let errorMessage = error.message;
 
@@ -36,6 +36,57 @@ export const loginWithEmailPassword = async (email, password) => {
     };
   }
 };
+
+export const resetPasswordEmail = async (email) => {
+  try {
+    await sendPasswordResetEmail( FirebaseAuth, email );
+
+    return {
+      ok: true,
+      success: true
+    };
+  } catch (error) {
+    console.log(error);
+    const errorCode = error.code;
+    let errorMessage = error.message;
+
+    if (errorCode === "auth/user-not-found") {
+      errorMessage = "Por favor, verifica tu correo e intenta de nuevo.";
+    } else if (errorCode === "auth/invalid-email") {
+      errorMessage = "El correo es inválido.";
+    }
+
+    return {
+      ok: false,
+      errorMessage,
+    };
+  }
+}
+
+export const resetPassword = async (oobCode, password) => {
+  try {
+    await confirmPasswordReset( FirebaseAuth, oobCode, password );
+
+    return {
+      ok: true,
+      success: true
+    };
+  } catch (error) {
+    console.log(error);
+    const errorCode = error.code;
+    let errorMessage = error.message;
+
+    if (errorCode === "auth/invalid-action-code") {
+      errorMessage = "El enlace de restablecimiento de contraseña que se ha proporcionado es inválido, expirado o ya se ha utilizado.";
+    }
+
+    return {
+      ok: false,
+      errorMessage,
+    };
+  }
+}
+
 
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut();
