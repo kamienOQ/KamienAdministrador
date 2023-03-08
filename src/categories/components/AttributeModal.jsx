@@ -3,7 +3,7 @@ import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogCon
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { useUiStore } from "../../hooks"
-import { FloatingTags } from "./";
+import { FloatingTags } from ".";
 
 const products = [
   {
