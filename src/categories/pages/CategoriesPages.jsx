@@ -10,14 +10,14 @@ export const CategoriesPages = () => {
 
   return (
     <Grid
-      className="categories-container"
+      className="attributes-container"
       container
       spacing={0}
       sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main' }}
     >
       <Grid
         alignItems="center"
-        className="box-border secundary-categories-container"
+        className="box-border secundary-attributes-container"
         container
         direction="column"
         justifyContent="center"

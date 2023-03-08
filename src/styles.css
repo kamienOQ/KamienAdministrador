@@ -105,15 +105,15 @@
 
 
 @media (max-width: 680px) {
-    .categories-container div{
+    .attributes-container div{
         margin: 4px;
         padding-right: 1px;
         padding-left: 1px !important;
     }
-    .categories-container h4{
+    .attributes-container h4{
         font-size: 24px;
     }
-    .categories-container button{
+    .attributes-container button{
         font-size: 12px;
     }
     .tags-container{
@@ -136,11 +136,11 @@
 }
 
 @media (max-width: 410px) {
-    .secundary-categories-container{
+    .secundary-attributes-container{
         max-height: 180px !important;
         flex-direction: row !important;
     }
-    .secundary-categories-container div{
+    .secundary-attributes-container div{
         display: flex;
         justify-content: center;
         padding: 1px;
