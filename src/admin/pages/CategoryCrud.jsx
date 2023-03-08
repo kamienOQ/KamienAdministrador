@@ -1,5 +1,6 @@
+
 import BottomNav from "../Components/BottomNav"
-const AdminCrud = () => {
+export const CategoryCrud = () => {
   return (
     <>
       <BottomNav/>
@@ -7,4 +8,4 @@ const AdminCrud = () => {
   )
 }
 
-export default AdminCrud
+export default CategoryCrud

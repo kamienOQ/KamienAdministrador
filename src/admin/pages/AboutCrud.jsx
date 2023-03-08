@@ -1,5 +1,6 @@
+
 import BottomNav from "../Components/BottomNav"
-const ProfilePage = () => {
+export const AboutCrud = () => {
   return (
     <>
 
@@ -8,4 +9,3 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage

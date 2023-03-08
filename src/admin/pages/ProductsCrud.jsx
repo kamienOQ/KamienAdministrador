@@ -1,12 +1,8 @@
-
 import BottomNav from "../Components/BottomNav"
-const Home = () => {
+export const ProductsCrud = () => {
   return (
     <>
-
       <BottomNav/>
     </>
   )
 }
-
-export default Home

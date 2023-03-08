@@ -39,7 +39,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }));
 
-const AddAdminPage = () => {
+export const Navbar = () => {
     const [open, setOpen] = useState(false);
     const [dark, setDark] = useState(true);
     const darkTheme = useMemo(
@@ -100,4 +100,3 @@ const AddAdminPage = () => {
     </ThemeProvider>
   )
 }
-export default AddAdminPage

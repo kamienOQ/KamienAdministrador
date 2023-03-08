@@ -1,26 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {BrowserRouter,Route, Routes} from 'react-router-dom'
-import Home from './pages/Home'
-import AboutCrud from './pages/AboutCrud'
-import CategoryCrud from './pages/CategoryCrud'
-import AdminCrud from './pages/AdminCrud'
-import ProductsCrud from './pages/ProductsCrud'
-import ProfilePage from './pages/ProfilePage'
-import Navbar from "./Components/Navbar"
-ReactDOM.createRoot(document.getElementById('root')).render
-(
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from 'react-redux';
+import { BrowserRouter } from "react-router-dom";
+
+import { AdminApp } from "./AdminApp";
+import { store } from './store';
+import "./styles.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Administradores" element={<AdminCrud/>} />
-          <Route path= "/Perfil" element = {<ProfilePage/>}/>
-          <Route path= "/About" element = {<AboutCrud/>}/>
-          <Route path= "/Producto" element = {<ProductsCrud/>}/>
-          <Route path= "/Categorias" element = {<CategoryCrud/>}/>
-        </Routes>
+    <Provider store={ store }>
+      <BrowserRouter>
+        <AdminApp />
       </BrowserRouter>
-  </React.StrictMode>,
-)
+    </Provider>
+  </React.StrictMode>
+);
