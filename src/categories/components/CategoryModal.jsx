@@ -3,7 +3,7 @@ import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogCon
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
-import { useCategoriesForm, useCategoriesStore, useUiStore } from "../../hooks"
+import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from "./";
 
 const products = [
@@ -39,17 +39,21 @@ const products = [
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen, cleanProductsSelected, productsSelected } = useUiStore();
-  const { activeCategory } = useCategoriesStore();
+  const { activeCategory, addImages, addProducts, setActiveCategory } = useCategoriesStore();
   // const [imageLoad, setImageLoad] = useState(false);
   // const [iconLoad, setIconLoad] = useState(false);
   // const [selected, setSelected] = useState(false);
 
 
-  // const ImageInputRef = useRef();
-  // const IconInputRef = useRef();
+  // const imageInputRef = useRef();
+  // const iconInputRef = useRef();
 
-  const { name, onInputChange, imageLoad, iconLoad, selected, imageInputRef,
-    iconInputRef, onUploadImage, onUploadIcon, onSelectProduct, } = useCategoriesForm(activeCategory);
+  const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
+  const { imageLoad, iconLoad, selected, imageInputRef, iconInputRef, onUploadImage, onUploadIcon, onSelectProduct } = useCategoriesState()
+
+  useEffect(() => {
+    setActiveCategory(formState);
+  }, [formState])
 
   // useEffect(() => {
   //   setImageLoad(false);
@@ -61,12 +65,12 @@ export const CategoryModal = () => {
 
 
   // const onUploadImage = ({ target }) => {
-  //   setImageLoad(true);
+  //   setImageLoad(target.files[0]);
   //   ImageInputRef.current.value = target.files[0].name;
   // }
 
   // const onUploadIcon = ({ target }) => {
-  //   setIconLoad(true);
+  //   setIconLoad(target.files[0]);
   //   IconInputRef.current.value = target.files[0].name;
   // }
 
@@ -82,27 +86,29 @@ export const CategoryModal = () => {
 
   const onSave = () => {
     //TODO: Realizar metodo en el slice para guardar imagen, icono y procutos
-    // activeCategory.images.push(imageLoad);
-    // activeCategory.images.push(...iconLoad);
-    // activeCategory.products = productsSelected;
+    // addImages(imageLoad);
+    // addImages([...iconLoad]);
+    addProducts(productsSelected);
   }
 
   return (
     <Dialog
       className="modal-container-categories"
       open={isCategoryModalOpen}
-      onClose={closeCategoryModal}
+      onClose={onCloseModa}
     >
       <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
         <DialogTitle>Agregar Categoría</DialogTitle>
         <form className="category-form">
           <TextField
-            fullWidth label="Nombre de Categoría"
+            type="text"
+            fullWidth
+            label="Nombre de Categoría"
             variant="outlined"
-            value={ name }
-            onChange={ onInputChange }
-          >
-          </TextField>
+            name="categoryName"
+            value={ categoryName || '' }
+            onChange={onInputChange}
+          />
           <TextField
             fullWidth
             id="outlined-select-currency"

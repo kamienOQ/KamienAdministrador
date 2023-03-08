@@ -7,7 +7,7 @@ export const onStartNewCategory = () => {
         // const { uid } = getState().auth;
 
         const newNote = {
-            name: '',
+            categoryName: '',
             products: [],
             images: [],
             date: new Date().getTime(),
