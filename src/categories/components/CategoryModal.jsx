@@ -59,13 +59,13 @@ export const CategoryModal = () => {
 
   return (
     <Dialog
-      className="modal-container-categories"
+      className="modal-container-attributes"
       open={isCategoryModalOpen}
       onClose={closeCategoryModal}
     >
       <DialogContent sx={{maxHeight: 600, pl:.1, pr:.1 }}>
         <DialogTitle>Nuevo Atributo</DialogTitle>
-        <form className="category-form">
+        <form className="attribute-form">
           <TextField fullWidth label="Nombre del Atributo" variant="outlined"></TextField>
           <TextField
             fullWidth
@@ -84,7 +84,7 @@ export const CategoryModal = () => {
           </TextField>
 
           {selected && <FloatingTags/>}
-          <div className="categories-modal-buttons">
+          <div className="attributes-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
                 <input
@@ -106,7 +106,7 @@ export const CategoryModal = () => {
             </div>
             <div className="action-buttons">
               <Button
-                className="cancelCategory-button"
+                className="cancelAttribute-button"
                 onClick={onCloseModa}
                 variant="contained"
                 sx={{ backgroundColor: "error.main" }}
