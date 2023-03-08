@@ -14,7 +14,7 @@ export const uiSlice = createSlice({
             state.isCategoryModalOpen = false;
         },
         onAddProductsSelected: ( state, { payload } ) => {
-            if (!state.productsSelected.includes(payload)) {
+            if (!state.productsSelected.some((product) => product.toLowerCase() === payload.toLowerCase())) {
                 state.productsSelected.push( payload );
             }
         },

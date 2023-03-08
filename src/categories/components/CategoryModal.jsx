@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
-import { useUiStore } from "../../hooks"
+
+import { useCategoriesForm, useCategoriesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from "./";
 
 const products = [
@@ -37,42 +38,53 @@ const products = [
 
 export const CategoryModal = () => {
 
-  const { closeCategoryModal, isCategoryModalOpen, productsSelected, addProductsSelected, cleanProductsSelected } = useUiStore();
-  const [imageLoad, setImageLoad] = useState(false);
-  const [iconLoad, setIconLoad] = useState(false);
-  const [selected, setSelected] = useState(false);
-  // const [selectedProducts, setSelectedProducts] = useState([]);
-
-  const ImageInputRef = useRef();
-  const IconInputRef = useRef();
-
-  useEffect(() => {
-    setImageLoad(false);
-    setIconLoad(false);
-    setSelected(false);
-    cleanProductsSelected();
-
-  }, [isCategoryModalOpen])
+  const { closeCategoryModal, isCategoryModalOpen, cleanProductsSelected, productsSelected } = useUiStore();
+  const { activeCategory } = useCategoriesStore();
+  // const [imageLoad, setImageLoad] = useState(false);
+  // const [iconLoad, setIconLoad] = useState(false);
+  // const [selected, setSelected] = useState(false);
 
 
-  const onUploadImage = ({ target }) => {
-    setImageLoad(true);
-    ImageInputRef.current.value = target.files[0].name;
-  }
+  // const ImageInputRef = useRef();
+  // const IconInputRef = useRef();
 
-  const onUploadIcon = ({ target }) => {
-    setIconLoad(true);
-    IconInputRef.current.value = target.files[0].name;
-  }
+  const { name, onInputChange, imageLoad, iconLoad, selected, imageInputRef,
+    iconInputRef, onUploadImage, onUploadIcon, onSelectProduct, } = useCategoriesForm(activeCategory);
 
-  const onSelectProduct = ({ target }) => {
-    addProductsSelected(target.value);
-    setSelected(true);
-  }
+  // useEffect(() => {
+  //   setImageLoad(false);
+  //   setIconLoad(false);
+  //   setSelected(false);
+  //   cleanProductsSelected();
+
+  // }, [isCategoryModalOpen])
+
+
+  // const onUploadImage = ({ target }) => {
+  //   setImageLoad(true);
+  //   ImageInputRef.current.value = target.files[0].name;
+  // }
+
+  // const onUploadIcon = ({ target }) => {
+  //   setIconLoad(true);
+  //   IconInputRef.current.value = target.files[0].name;
+  // }
+
+  // const onSelectProduct = ({ target }) => {
+  //   addProductsSelected(target.value);
+  //   setSelected(true);
+  // }
 
   const onCloseModa = () => {
     cleanProductsSelected();
     closeCategoryModal();
+  }
+
+  const onSave = () => {
+    //TODO: Realizar metodo en el slice para guardar imagen, icono y procutos
+    // activeCategory.images.push(imageLoad);
+    // activeCategory.images.push(...iconLoad);
+    // activeCategory.products = productsSelected;
   }
 
   return (
@@ -81,10 +93,16 @@ export const CategoryModal = () => {
       open={isCategoryModalOpen}
       onClose={closeCategoryModal}
     >
-      <DialogContent sx={{maxHeight: 600, pl:.1, pr:.1 }}>
+      <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
         <DialogTitle>Agregar Categoría</DialogTitle>
         <form className="category-form">
-          <TextField fullWidth label="Nombre de Categoría" variant="outlined"></TextField>
+          <TextField
+            fullWidth label="Nombre de Categoría"
+            variant="outlined"
+            value={ name }
+            onChange={ onInputChange }
+          >
+          </TextField>
           <TextField
             fullWidth
             id="outlined-select-currency"
@@ -101,22 +119,22 @@ export const CategoryModal = () => {
             ))}
           </TextField>
 
-          {selected && <FloatingTags/>}
+          {selected && <FloatingTags />}
           <div className="categories-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
                 <input
                   type="text"
-                  ref={ImageInputRef}
+                  ref={imageInputRef}
                   style={{
-                    visibility: imageLoad ? '' : 'hidden'
+                    visibility: !!imageLoad ? '' : 'hidden'
                   }}
                 />
                 <input
                   type="text"
-                  ref={IconInputRef}
+                  ref={iconInputRef}
                   style={{
-                    visibility: iconLoad ? '' : 'hidden'
+                    visibility: !!iconLoad ? '' : 'hidden'
                   }}
                 />
               </div>
@@ -156,6 +174,7 @@ export const CategoryModal = () => {
               </Button>
               <Button
                 className="addCategory-button"
+                onClick={onSave}
                 variant="contained"
                 sx={{ backgroundColor: "golden.main" }}
               >

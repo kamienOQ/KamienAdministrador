@@ -1,12 +1,18 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useUiStore } from "../../hooks";
+import { useCategoriesStore, useUiStore } from "../../hooks";
 import { CategoryModal } from "../";
 
 
 export const CategoriesPages = () => {
 
   const { openCategoryModal } = useUiStore();
+  const { startNewCategory } = useCategoriesStore();
+
+  const onOpenModal = () => {
+    startNewCategory();
+    openCategoryModal();
+  }
 
   return (
     <Grid
@@ -48,7 +54,7 @@ export const CategoriesPages = () => {
         >
           <Button
             className="addCategory-button"
-            onClick={openCategoryModal}
+            onClick={onOpenModal}
             startIcon={<AddCircleIcon />}
             sx={{ backgroundColor: 'golden.main', minWidth: 0 }}
             variant='contained'

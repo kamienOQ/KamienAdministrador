@@ -8,7 +8,7 @@ export const useUiStore = () => {
     const { 
         isCategoryModalOpen,
         productsSelected
-    } = useSelector( state => state.ui )
+    } = useSelector( state => state.ui );
 
     const openCategoryModal = () => {
         dispatch( onOpenCategoryModal() )
