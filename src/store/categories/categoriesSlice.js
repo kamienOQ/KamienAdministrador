@@ -38,9 +38,11 @@ export const categoriesSlice = createSlice({
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
             
         },
-        onAddImages: ( state, { payload } ) => {
-            console.log(state.activeCategory.images)
-            state.activeCategory.images = [ ...state.activeCategory.images, ...payload ]
+        onAddImage: ( state, { payload } ) => {
+            state.activeCategory.image = payload;
+        },
+        onAddIcon: ( state, { payload } ) => {
+            state.activeCategory.icon = payload;
         },
         onAddProducts: ( state, { payload } ) => {
             state.activeCategory.products = payload
@@ -50,4 +52,4 @@ export const categoriesSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onAddNewCategory, onSetActiveCategory, onSetCategory, onUpdateCategory, onDeleteCategory, onAddImages, onAddProducts } = categoriesSlice.actions;
+export const { onAddNewCategory, onSetActiveCategory, onSetCategory, onUpdateCategory, onDeleteCategory, onAddImage, onAddIcon, onAddProducts } = categoriesSlice.actions;

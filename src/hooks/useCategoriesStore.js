@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onAddImages, onAddProducts, onSetActiveCategory, onStartNewCategory } from "../store";
+import { onAddIcon, onAddImage, onAddProducts, onSetActiveCategory, onStartNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch()
@@ -11,21 +11,25 @@ export const useCategoriesStore = () => {
     } = useSelector( state => state.categories );
 
     const setActiveCategory = ( category ) => {
-        dispatch( onSetActiveCategory( category ) )
+        dispatch( onSetActiveCategory( category ) );
     }
 
-    const addImages = ( images ) => {
-        dispatch( onAddImages( images ) )
+    const addImage = ( images ) => {
+        dispatch( onAddImage( images ) );
+    }
+
+    const addIcon = ( images ) => {
+        dispatch( onAddIcon( images ) );
     }
 
     const addProducts = ( products ) => {
-        dispatch( onAddProducts( products ) )
+        dispatch( onAddProducts( products ) );
     }
 
     //*Thunks
 
     const startNewCategory = () => {
-        dispatch( onStartNewCategory() )
+        dispatch( onStartNewCategory() );
     }
 
     return {
@@ -36,7 +40,8 @@ export const useCategoriesStore = () => {
         addProducts,
 
         //*Métodos
-        addImages,
+        addImage,
+        addIcon,
         startNewCategory,
 
     }

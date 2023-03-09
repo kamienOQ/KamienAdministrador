@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { useUiStore } from "./";
+import { useCategoriesStore, useUiStore } from "./";
 
 export const useCategoriesState = () => {
     const { isCategoryModalOpen, cleanProductsSelected, addProductsSelected } = useUiStore();
+    const { addImage, addIcon } = useCategoriesStore();
     const [ imageLoad, setImageLoad ] = useState(false);
     const [ iconLoad, setIconLoad ] = useState(false);
     const [ selected, setSelected ] = useState(false);
@@ -20,15 +21,21 @@ export const useCategoriesState = () => {
 
 
      const onUploadImage = ({ target }) => {
-        // setImageLoad(true);
-        setImageLoad(target.files[0]);
-        imageInputRef.current.value = target.files[0].name;
+        setImageLoad(true);
+        const reader = new FileReader();
+        reader.readAsDataURL(target.files[0]);
+        reader.onload = () => {
+          addImage( reader.result );
+        };
       }
     
       const onUploadIcon = ({ target }) => {
-        // setIconLoad(true);
-        setIconLoad(target.files[0]);
-        iconInputRef.current.value = target.files[0].name;
+        setIconLoad(true);
+        const reader = new FileReader();
+        reader.readAsDataURL(target.files[0]);
+        reader.onload = () => {
+          addIcon(reader.result);
+        };
       }
     
       const onSelectProduct = ({ target }) => {

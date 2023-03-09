@@ -40,7 +40,7 @@ export const CategoriesPages = () => {
           xs={12}
           sm={4}
         >
-          <Typography variant='h4'>Lista de Categorías</Typography>
+          <Typography variant='h4'>Gestión de Categorías</Typography>
         </Grid>
 
         <Grid

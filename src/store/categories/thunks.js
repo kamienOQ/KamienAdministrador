@@ -9,7 +9,8 @@ export const onStartNewCategory = () => {
         const newNote = {
             categoryName: '',
             products: [],
-            images: [],
+            image: null,
+            icon: null,
             date: new Date().getTime(),
         }
 
