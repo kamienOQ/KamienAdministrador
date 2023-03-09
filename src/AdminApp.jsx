@@ -1,4 +1,4 @@
-import { CategoriesPages } from './categories'
+import { CategoriesPages } from './attributes'
 import './styles.css'
 import { AppTheme } from './theme'
 
