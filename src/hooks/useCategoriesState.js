@@ -21,21 +21,25 @@ export const useCategoriesState = () => {
 
 
      const onUploadImage = ({ target }) => {
-        setImageLoad(true);
-        const reader = new FileReader();
-        reader.readAsDataURL(target.files[0]);
-        reader.onload = () => {
-          addImage( reader.result );
-        };
+        if(target.files.length != 0){
+          setImageLoad(true);
+          const reader = new FileReader();
+          reader.readAsDataURL(target.files[0]);
+          reader.onload = () => {
+            addImage( reader.result );
+          };
+        } 
       }
     
       const onUploadIcon = ({ target }) => {
-        setIconLoad(true);
-        const reader = new FileReader();
-        reader.readAsDataURL(target.files[0]);
-        reader.onload = () => {
-          addIcon(reader.result);
-        };
+        if(target.files.length != 0){
+          setIconLoad(true);
+          const reader = new FileReader();
+          reader.readAsDataURL(target.files[0]);
+          reader.onload = () => {
+            addIcon(reader.result);
+          };
+        }
       }
     
       const onSelectProduct = ({ target }) => {

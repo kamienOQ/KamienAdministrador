@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar } from "@mui/material"
+import { useEffect } from "react";
+import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
@@ -39,7 +39,7 @@ const products = [
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen, cleanProductsSelected, productsSelected } = useUiStore();
-  const { activeCategory, addProducts, setActiveCategory } = useCategoriesStore();
+  const { activeCategory, addProducts, setActiveCategory, cleanCategories } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -50,8 +50,9 @@ export const CategoryModal = () => {
 
 
   const onCloseModa = () => {
-    cleanProductsSelected();
     closeCategoryModal();
+    cleanProductsSelected();
+    cleanCategories();
   }
 
   const onSave = () => {
@@ -63,7 +64,7 @@ export const CategoryModal = () => {
     <Dialog
       className="modal-container-categories"
       open={isCategoryModalOpen}
-      onClose={onCloseModa}
+      // onClose={onCloseModa}
     >
       <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
         <DialogTitle>Agregar Categoría</DialogTitle>
@@ -84,7 +85,7 @@ export const CategoryModal = () => {
             label="Productos relacionados"
             defaultValue=""
             onChange={onSelectProduct}
-            helperText="Please select your currency"
+            helperText="Por favor seleccione los productos"
           >
             {products.map((option) => (
               <MenuItem key={option.label} value={option.label}>
@@ -96,11 +97,14 @@ export const CategoryModal = () => {
           <div className="categories-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
-                {/* TODO: quitar este contenedor y sus estilos */}
+                <Typography>
+                  Imagen
+                </Typography>
+                <Typography>
+                  Icono
+                </Typography>
               </div>
               <div className="iconImage-buttons">
-                {/* TODO: corregir el error al no seleccionar imagen
-                TODO: limitar los iconos a png */}
                 <IconButton
                   className="addCategory-button"
                   color="primary"
@@ -114,7 +118,7 @@ export const CategoryModal = () => {
                   {imageLoad &&
                     <Avatar
                       alt="Imagen"
-                      src={activeCategory.image}
+                      src={activeCategory?.image}
                     />
                   }
                 </IconButton>
@@ -126,12 +130,12 @@ export const CategoryModal = () => {
                   onChange={onUploadIcon}
                   sx={{ backgroundColor: "golden.main", color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
                 >
-                  <input hidden accept="image/*" type="file" />
+                  <input hidden accept=".png" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
                   {iconLoad &&
                     <Avatar
                       alt="Icono"
-                      src={activeCategory.icon}
+                      src={activeCategory?.icon}
                     />
                   }
                 </IconButton>

@@ -9,12 +9,16 @@ export const categoriesSlice = createSlice({
         activeCategory: null, 
     },
     reducers: {
-        onAddNewCategory: ( state, { payload } ) => {
-            if (!state.categories.some((category) => category.toLowerCase() === payload.toLowerCase())) {
-                state.categories.push( payload );
-            }else{
-                state.messageError = `La categoría ${ action } ya había sido creada previamente`
+        onAddNewCategory: ( state ) => {
+            const newNote = {
+                categoryName: '',
+                products: [],
+                image: null,
+                icon: null,
+                date: new Date().getTime(),
             }
+            state.categories.push( newNote );
+            state.activeCategory = newNote;
         },
         onSetActiveCategory: ( state, { payload } ) => {
             state.activeCategory = payload;
@@ -27,7 +31,7 @@ export const categoriesSlice = createSlice({
             state.categories = state.categories.map( category => {
 
                 if (category.categoryName === payload.categoryName ){
-                    return payload
+                    return payload;
                 }
 
                 return category;
@@ -45,11 +49,15 @@ export const categoriesSlice = createSlice({
             state.activeCategory.icon = payload;
         },
         onAddProducts: ( state, { payload } ) => {
-            state.activeCategory.products = payload
+            state.activeCategory.products = payload;
+        },
+        OnCleanCategories: ( state ) => {
+            state.categories = [];
+            state.activeCategory = null;
         }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onAddNewCategory, onSetActiveCategory, onSetCategory, onUpdateCategory, onDeleteCategory, onAddImage, onAddIcon, onAddProducts } = categoriesSlice.actions;
+export const { onAddNewCategory, onSetActiveCategory, onSetCategory, onUpdateCategory, onDeleteCategory, onAddImage, onAddIcon, onAddProducts, OnCleanCategories } = categoriesSlice.actions;

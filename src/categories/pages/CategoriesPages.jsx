@@ -7,10 +7,10 @@ import { CategoryModal } from "../";
 export const CategoriesPages = () => {
 
   const { openCategoryModal } = useUiStore();
-  const { startNewCategory } = useCategoriesStore();
+  const { addNewCategory } = useCategoriesStore();
 
   const onOpenModal = () => {
-    startNewCategory();
+    addNewCategory();
     openCategoryModal();
   }
 
