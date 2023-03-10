@@ -9,12 +9,21 @@ export const categoriesSlice = createSlice({
         activeCategory: null, 
     },
     reducers: {
+        onChangeSavingNewCategory: ( state, { payload } ) => {
+            state.isSaving = payload;
+        },
         onAddNewCategory: ( state ) => {
             const newNote = {
                 categoryName: '',
                 products: [],
-                image: null,
-                icon: null,
+                image: {
+                    name: null,
+                    url: null
+                },
+                icon: {
+                    name: null,
+                    url: null
+                },
                 date: new Date().getTime(),
             }
             state.categories.push( newNote );
@@ -43,10 +52,12 @@ export const categoriesSlice = createSlice({
             
         },
         onAddImage: ( state, { payload } ) => {
-            state.activeCategory.image = payload;
+            state.activeCategory.image.name = payload[0];
+            state.activeCategory.image.url = payload[1];
         },
         onAddIcon: ( state, { payload } ) => {
-            state.activeCategory.icon = payload;
+            state.activeCategory.icon.name = payload[0];
+            state.activeCategory.icon.url = payload[1];
         },
         onAddProducts: ( state, { payload } ) => {
             state.activeCategory.products = payload;
@@ -60,4 +71,15 @@ export const categoriesSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onAddNewCategory, onSetActiveCategory, onSetCategory, onUpdateCategory, onDeleteCategory, onAddImage, onAddIcon, onAddProducts, OnCleanCategories } = categoriesSlice.actions;
+export const { 
+    onChangeSavingNewCategory, 
+    onAddNewCategory, 
+    onSetActiveCategory, 
+    onSetCategory, 
+    onUpdateCategory, 
+    onDeleteCategory, 
+    onAddImage, 
+    onAddIcon, 
+    onAddProducts, 
+    OnCleanCategories 
+} = categoriesSlice.actions;

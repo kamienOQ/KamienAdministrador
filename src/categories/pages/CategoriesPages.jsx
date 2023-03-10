@@ -7,7 +7,7 @@ import { CategoryModal } from "../";
 export const CategoriesPages = () => {
 
   const { openCategoryModal } = useUiStore();
-  const { addNewCategory } = useCategoriesStore();
+  const { isSaving, addNewCategory } = useCategoriesStore();
 
   const onOpenModal = () => {
     addNewCategory();
@@ -58,6 +58,7 @@ export const CategoriesPages = () => {
             startIcon={<AddCircleIcon />}
             sx={{ backgroundColor: 'golden.main', minWidth: 0 }}
             variant='contained'
+            disabled={ isSaving }
           >
             Nueva Categoría
           </Button>

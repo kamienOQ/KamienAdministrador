@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from "./";
+import { useDispatch } from "react-redux";
+import { onStartUploadNewCategory } from "../../store";
+import { deleteFileUpload } from "../../helpers/deleteFileUpload";
 
 const products = [
   {
@@ -39,25 +42,40 @@ const products = [
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen, cleanProductsSelected, productsSelected } = useUiStore();
-  const { activeCategory, addProducts, setActiveCategory, cleanCategories } = useCategoriesStore();
+  const { activeCategory, addProducts, setActiveCategory, cleanCategories, startUploadNewCategory } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
+  const [nombreVacio, setNombreVacio] = useState(false)
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setActiveCategory(formState);
+    setNombreVacio(false);
   }, [formState])
 
 
   const onCloseModa = () => {
+    if(imageLoad){
+      deleteFileUpload(activeCategory.image.name)
+    }
+    if(iconLoad){
+      deleteFileUpload(activeCategory.icon.name)
+    }
+
     closeCategoryModal();
     cleanProductsSelected();
     cleanCategories();
   }
 
   const onSave = () => {
-    addProducts(productsSelected);
-    // TODO: crear y llamar función para subir a firebase
+    if(activeCategory.categoryName === ''){
+      setNombreVacio(true);
+    }else{
+      addProducts(productsSelected);
+      startUploadFile();
+    }
   }
 
   return (
@@ -77,6 +95,8 @@ export const CategoryModal = () => {
             name="categoryName"
             value={categoryName || ''}
             onChange={onInputChange}
+            error={nombreVacio}
+            helperText={ nombreVacio ? 'Campo vacío': '' }
           />
           <TextField
             fullWidth
@@ -118,7 +138,7 @@ export const CategoryModal = () => {
                   {imageLoad &&
                     <Avatar
                       alt="Imagen"
-                      src={activeCategory?.image}
+                      src={activeCategory?.image.url}
                     />
                   }
                 </IconButton>
@@ -135,7 +155,7 @@ export const CategoryModal = () => {
                   {iconLoad &&
                     <Avatar
                       alt="Icono"
-                      src={activeCategory?.icon}
+                      src={activeCategory?.icon.url}
                     />
                   }
                 </IconButton>

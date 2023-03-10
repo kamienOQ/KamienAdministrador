@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddIcon, onAddImage, onAddNewCategory, onAddProducts, OnCleanCategories, onSetActiveCategory } from "../store";
+import { onAddIcon, onAddImage, onAddNewCategory, onAddProducts, OnCleanCategories, 
+    onSetActiveCategory, onStartUploadFile, onStartUploadNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
 
     //*Slice
     const { 
+        isSaving,
         categories,
         activeCategory
     } = useSelector( state => state.categories );
@@ -37,12 +39,17 @@ export const useCategoriesStore = () => {
 
     //*Thunks
 
-    // const startNewCategory = () => {
-    //     dispatch( onStartNewCategory() );
-    // }
+    const startUploadFile = ( file, type, collectionName ) => {
+        dispatch( onStartUploadFile( file, type, collectionName ) )
+    }
+
+    const startUploadNewCategory = () => {
+        dispatch( onStartUploadNewCategory() );
+    }
 
     return {
         //*Propiedades
+        isSaving,
         categories,
         activeCategory,
 
@@ -52,7 +59,9 @@ export const useCategoriesStore = () => {
         addImage,
         addIcon,
         addProducts,
-        cleanCategories
+        cleanCategories,
+        startUploadFile,
+        startUploadNewCategory,
 
     }
 }
