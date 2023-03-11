@@ -4,7 +4,10 @@ export const categoriesSlice = createSlice({
     name: 'categories',
     initialState: {
         isSaving: false,
-        messageError: '',
+        message: {
+            error: '',
+            success: ''
+        },
         categories: [],
         activeCategory: null, 
     },
@@ -62,6 +65,12 @@ export const categoriesSlice = createSlice({
         onAddProducts: ( state, { payload } ) => {
             state.activeCategory.products = payload;
         },
+        onAddErrorMessage: ( state, { payload } ) => {
+            state.message.error = payload
+        },
+        onAddSuccessMessage: ( state, { payload } ) => {
+            state.message.success = payload
+        },
         OnCleanCategories: ( state ) => {
             state.categories = [];
             state.activeCategory = null;
@@ -81,5 +90,7 @@ export const {
     onAddImage, 
     onAddIcon, 
     onAddProducts, 
+    onAddErrorMessage,
+    onAddSuccessMessage,
     OnCleanCategories 
 } = categoriesSlice.actions;

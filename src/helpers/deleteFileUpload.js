@@ -1,7 +1,7 @@
 import { deleteObject, ref } from "firebase/storage";
 import { FirebaseStorage } from "../firebase/config";
 
-export const deleteFileUpload = async(name) => {
+export const deleteFileUpload = (name) => {
     let fileRef = ref(FirebaseStorage, name);
     console.log(`Eliminó el archivo "${fileRef}"`);
 

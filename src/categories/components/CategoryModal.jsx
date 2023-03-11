@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography } from "@mui/material"
+import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from "./";
-import { useDispatch } from "react-redux";
-import { onStartUploadNewCategory } from "../../store";
 import { deleteFileUpload } from "../../helpers/deleteFileUpload";
 
 const products = [
@@ -26,10 +25,10 @@ const products = [
     label: 'Reloj B'
   },
   {
-    label: 'Reloj C'
+    label: 'Perfume C'
   },
   {
-    label: 'Reloj D'
+    label: 'Perfume D'
   },
   {
     label: 'Reloj E'
@@ -42,26 +41,30 @@ const products = [
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen, cleanProductsSelected, productsSelected } = useUiStore();
-  const { activeCategory, addProducts, setActiveCategory, cleanCategories, startUploadNewCategory } = useCategoriesStore();
+  const { activeCategory, message, addProducts, setActiveCategory, cleanCategories, addErrorMessage, addSuccessMessage, startUploadNewCategory } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
-  const [nombreVacio, setNombreVacio] = useState(false)
+  const [emptyName, setEmptyName] = useState(false);
 
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setActiveCategory(formState);
-    setNombreVacio(false);
-  }, [formState])
+    setEmptyName(false);
+  }, [formState]);
 
+  useEffect(() => {
+    addErrorMessage('');
+    addSuccessMessage('');
+  }, [formState, productsSelected, imageLoad, iconLoad ]);
+  
 
   const onCloseModa = () => {
-    if(imageLoad){
-      deleteFileUpload(activeCategory.image.name)
+    if (imageLoad) {
+      deleteFileUpload(activeCategory.image.name);
     }
-    if(iconLoad){
-      deleteFileUpload(activeCategory.icon.name)
+    if (iconLoad) {
+      deleteFileUpload(activeCategory.icon.name);
     }
 
     closeCategoryModal();
@@ -70,11 +73,12 @@ export const CategoryModal = () => {
   }
 
   const onSave = () => {
-    if(activeCategory.categoryName === ''){
-      setNombreVacio(true);
-    }else{
+    if (activeCategory.categoryName === '') {
+      setEmptyName(true);
+    } else {
       addProducts(productsSelected);
-      startUploadFile();
+      startUploadNewCategory();
+
     }
   }
 
@@ -82,10 +86,25 @@ export const CategoryModal = () => {
     <Dialog
       className="modal-container-categories"
       open={isCategoryModalOpen}
-      // onClose={onCloseModa}
+    // onClose={onCloseModa}
     >
       <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
-        <DialogTitle>Agregar Categoría</DialogTitle>
+        <Grid container direction="row" alignItems="center">
+          <Grid item xs={9.5} md={11}>
+            <DialogTitle >Agregar Categoría</DialogTitle>
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <IconButton
+              className="addCategory-button"
+              color="primary"
+              aria-label="cargar imagen"
+              component="label"
+              onClick={onCloseModa}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
         <form className="category-form">
           <TextField
             type="text"
@@ -95,8 +114,8 @@ export const CategoryModal = () => {
             name="categoryName"
             value={categoryName || ''}
             onChange={onInputChange}
-            error={nombreVacio}
-            helperText={ nombreVacio ? 'Campo vacío': '' }
+            error={emptyName}
+            helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
             fullWidth
@@ -161,6 +180,20 @@ export const CategoryModal = () => {
                 </IconButton>
               </div>
             </div>
+            <Grid
+              item
+              xs={12}
+              display={!!message.error ? '' : 'none'}
+            >
+              <Alert severity='error'>{ message.error }</Alert>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              display={!!message.success ? '' : 'none'}
+            >
+              <Alert severity='success'>{ message.success }</Alert>
+            </Grid>
             <div className="action-buttons">
               <Button
                 className="cancelCategory-button"

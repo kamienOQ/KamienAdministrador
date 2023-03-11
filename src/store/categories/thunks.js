@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, query, setDoc } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewCategory, onAddImage, onAddIcon } from "./categoriesSlice";
+import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage } from "./categoriesSlice";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -29,7 +29,7 @@ export const onStartUploadNewCategory = () => {
     dispatch(onChangeSavingNewCategory(true));
 
     const { activeCategory } = getState().categories;
-    let duplicateCategory = false
+    let duplicateCategory = false;
 
     const collectionRef = collection(FirebaseDB, `/categories`);
     const q = query( collectionRef );
@@ -38,12 +38,17 @@ export const onStartUploadNewCategory = () => {
     querySnapshot.forEach((doc) => {
       const { categoryName } = doc.data();
       if( categoryName.toLowerCase() === activeCategory.categoryName.toLowerCase() ){
-        duplicateCategory = true
+        duplicateCategory = true;
+        dispatch(onAddErrorMessage( 'Ya existe una categoría con este nombre' ));
+        dispatch(onAddSuccessMessage( '' ));
+        console.log("guardó")
       }
     });
     if(!duplicateCategory){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeCategory);
+        dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
+        dispatch(onAddErrorMessage( '' ));
     }
     dispatch(onChangeSavingNewCategory(false));
   }
