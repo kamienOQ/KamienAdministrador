@@ -1,4 +1,4 @@
 
 export * from './components';
 
-export * from './pages/CategoriesPages';
+export * from './pages/AttributesPages';

@@ -1,4 +1,4 @@
-export * from './Category';
-export * from './CategoryFilters';
-export * from './CategoryModal';
+export * from './Attribute';
+export * from './AttributeFilters';
+export * from './AttributeModal';
 export * from './FloatingTags';

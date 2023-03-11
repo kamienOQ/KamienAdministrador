@@ -3,7 +3,7 @@ import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogCon
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { useUiStore } from "../../hooks"
-import { FloatingTags } from "./";
+import { FloatingTags } from ".";
 
 const products = [
   {
@@ -17,9 +17,9 @@ const products = [
   }
 ];
 
-export const CategoryModal = () => {
+export const AttributeModal = () => {
 
-  const { closeCategoryModal, isCategoryModalOpen, productsSelected, addProductsSelected, cleanProductsSelected } = useUiStore();
+  const { closeAttributeModal, isAttributeModalOpen, productsSelected, addProductsSelected, cleanProductsSelected } = useUiStore();
   const [imageLoad, setImageLoad] = useState(false);
   const [iconLoad, setIconLoad] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -34,7 +34,7 @@ export const CategoryModal = () => {
     setSelected(false);
     cleanProductsSelected();
 
-  }, [isCategoryModalOpen])
+  }, [isAttributeModalOpen])
 
 
   const onUploadImage = ({ target }) => {
@@ -54,14 +54,14 @@ export const CategoryModal = () => {
 
   const onCloseModa = () => {
     cleanProductsSelected();
-    closeCategoryModal();
+    closeAttributeModal();
   }
 
   return (
     <Dialog
       className="modal-container-attributes"
-      open={isCategoryModalOpen}
-      onClose={closeCategoryModal}
+      open={isAttributeModalOpen}
+      onClose={closeAttributeModal}
     >
       <DialogContent sx={{maxHeight: 600, pl:.1, pr:.1 }}>
         <DialogTitle>Nuevo Atributo</DialogTitle>

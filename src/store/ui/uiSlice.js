@@ -3,15 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isCategoryModalOpen: false,
+        isAttributeModalOpen: false,
         productsSelected: []
     },
     reducers: {
-        onOpenCategoryModal: ( state ) => {
-            state.isCategoryModalOpen = true;
+        onOpenAttributeModal: ( state ) => {
+            state.isAttributeModalOpen = true;
         },
-        onCloseCategoryModal: ( state ) => {
-            state.isCategoryModalOpen = false;
+        onCloseAttributeModal: ( state ) => {
+            state.isAttributeModalOpen = false;
         },
         onAddProductsSelected: ( state, { payload } ) => {
             if (!state.productsSelected.includes(payload)) {
@@ -30,4 +30,4 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onOpenCategoryModal, onCloseCategoryModal, onAddProductsSelected, onDeleteProductsSelected, onCleanProductsSelected } = uiSlice.actions;
+export const { onOpenAttributeModal, onCloseAttributeModal, onAddProductsSelected, onDeleteProductsSelected, onCleanProductsSelected } = uiSlice.actions;

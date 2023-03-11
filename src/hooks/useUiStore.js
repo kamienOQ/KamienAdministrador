@@ -1,21 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { onAddProductsSelected, onCleanProductsSelected, onCloseCategoryModal, onDeleteProductsSelected, onOpenCategoryModal } from '../store/ui/uiSlice'
+import { onAddProductsSelected, onCleanProductsSelected, onCloseAttributeModal, onDeleteProductsSelected, onOpenAttributeModal } from '../store/ui/uiSlice'
 
 export const useUiStore = () => {
 
     const dispatch = useDispatch()
 
     const { 
-        isCategoryModalOpen,
+        isAttributeModalOpen,
         productsSelected
     } = useSelector( state => state.ui )
 
-    const openCategoryModal = () => {
-        dispatch( onOpenCategoryModal() )
+    const openAttributeModal = () => {
+        dispatch( onOpenAttributeModal() )
     }
 
-    const closeCategoryModal = () => {
-        dispatch( onCloseCategoryModal() )
+    const closeAttributeModal = () => {
+        dispatch( onCloseAttributeModal() )
     }
 
     const addProductsSelected = ( productSelected ) => {
@@ -33,12 +33,12 @@ export const useUiStore = () => {
 
     return {
         //*Propiedades
-        isCategoryModalOpen,
+        isAttributeModalOpen,
         productsSelected,
 
         //*Métodos
-        openCategoryModal,
-        closeCategoryModal,
+        openAttributeModal,
+        closeAttributeModal,
         addProductsSelected,
         deleteProductsSelected,
         cleanProductsSelected
