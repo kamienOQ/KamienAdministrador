@@ -8,6 +8,7 @@ export const categoriesSlice = createSlice({
             error: '',
             success: ''
         },
+        productsUploaded: [],
         categories: [],
         activeCategory: null, 
     },
@@ -16,7 +17,7 @@ export const categoriesSlice = createSlice({
             state.isSaving = payload;
         },
         onAddNewCategory: ( state ) => {
-            const newNote = {
+            const newCategory = {
                 categoryName: '',
                 products: [],
                 image: {
@@ -29,14 +30,11 @@ export const categoriesSlice = createSlice({
                 },
                 date: new Date().getTime(),
             }
-            state.categories.push( newNote );
-            state.activeCategory = newNote;
+            state.categories.push( newCategory );
+            state.activeCategory = newCategory;
         },
         onSetActiveCategory: ( state, { payload } ) => {
             state.activeCategory = payload;
-        },
-        onSetCategory: ( state, { payload } ) => {
-            state.categories = payload;
         },
         onUpdateCategory: ( state, { payload } ) => {
             state.isSaving = false;
@@ -54,6 +52,9 @@ export const categoriesSlice = createSlice({
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
             
         },
+        onChargeProductsUploaded: ( state, { payload } ) => {
+            state.productsUploaded.push( payload );
+        },
         onAddImage: ( state, { payload } ) => {
             state.activeCategory.image.name = payload[0];
             state.activeCategory.image.url = payload[1];
@@ -66,14 +67,17 @@ export const categoriesSlice = createSlice({
             state.activeCategory.products = payload;
         },
         onAddErrorMessage: ( state, { payload } ) => {
-            state.message.error = payload
+            state.message.error = payload;
         },
         onAddSuccessMessage: ( state, { payload } ) => {
-            state.message.success = payload
+            state.message.success = payload;
         },
-        OnCleanCategories: ( state ) => {
+        onCleanCategories: ( state ) => {
             state.categories = [];
             state.activeCategory = null;
+        },
+        onCleanProductsUploaded: ( state ) => {
+            state.productsUploaded = [];
         }
     }
 });
@@ -84,13 +88,14 @@ export const {
     onChangeSavingNewCategory, 
     onAddNewCategory, 
     onSetActiveCategory, 
-    onSetCategory, 
     onUpdateCategory, 
-    onDeleteCategory, 
+    onDeleteCategory,
+    onChargeProductsUploaded, 
     onAddImage, 
     onAddIcon, 
     onAddProducts, 
     onAddErrorMessage,
     onAddSuccessMessage,
-    OnCleanCategories 
+    onCleanCategories ,
+    onCleanProductsUploaded
 } = categoriesSlice.actions;

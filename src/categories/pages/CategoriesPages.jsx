@@ -2,15 +2,23 @@ import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useCategoriesStore, useUiStore } from "../../hooks";
 import { CategoryModal } from "../";
+import { useEffect } from "react";
 
 
 export const CategoriesPages = () => {
 
-  const { openCategoryModal } = useUiStore();
-  const { isSaving, addNewCategory } = useCategoriesStore();
+  const { openCategoryModal, closeCategoryModal} = useUiStore();
+  const { isSaving, message, addNewCategory } = useCategoriesStore();
+
+  useEffect(() => {
+    if (!!message.success) {
+      closeCategoryModal();
+    }
+  }, [message.success]);
 
   const onOpenModal = () => {
     addNewCategory();
+    // TODO: (starGetProductsUploaded)cargar al estado todo los productos que se han subido a la base de datos
     openCategoryModal();
   }
 

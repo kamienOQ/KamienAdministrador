@@ -3,7 +3,7 @@ import { deleteFileUpload } from "../helpers/deleteFileUpload";
 import { useCategoriesStore, useUiStore } from "./";
 
 export const useCategoriesState = () => {
-    const { isCategoryModalOpen, cleanProductsSelected, addProductsSelected } = useUiStore();
+    const { isCategoryModalOpen, addProductsSelected } = useUiStore();
     const { activeCategory, startUploadFile } = useCategoriesStore();
     const [ imageLoad, setImageLoad ] = useState(false);
     const [ iconLoad, setIconLoad ] = useState(false);
@@ -16,7 +16,6 @@ export const useCategoriesState = () => {
         setImageLoad(false);
         setIconLoad(false);
         setSelected(false);
-        cleanProductsSelected();
     
     }, [isCategoryModalOpen])
 
@@ -28,12 +27,6 @@ export const useCategoriesState = () => {
           }
           setImageLoad(true);
           startUploadFile(target.files[0], 'image', 'categories');
-
-          // const reader = new FileReader();
-          // reader.readAsDataURL(target.files[0]);
-          // reader.onload = () => {
-          //   addImage( reader.result );
-          // };
         } 
       }
     
@@ -44,12 +37,6 @@ export const useCategoriesState = () => {
           }
           setIconLoad(true);
           startUploadFile(target.files[0], 'icon', 'categories');
-
-          // const reader = new FileReader();
-          // reader.readAsDataURL(target.files[0]);
-          // reader.onload = () => {
-          //   addIcon(reader.result);
-          // };
         }
       }
     

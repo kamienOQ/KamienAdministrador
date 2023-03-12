@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddProducts, onAddSuccessMessage, OnCleanCategories, 
-    onSetActiveCategory, onStartUploadFile, onStartUploadNewCategory } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddProducts, onAddSuccessMessage, onCleanCategories, 
+    onSetActiveCategory, onStarGetProductsUploaded, onStartUploadFile, onStartUploadNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -9,6 +9,7 @@ export const useCategoriesStore = () => {
     const { 
         isSaving,
         message,
+        productsUploaded,
         categories,
         activeCategory
     } = useSelector( state => state.categories );
@@ -42,7 +43,7 @@ export const useCategoriesStore = () => {
     }
 
     const cleanCategories = () => {
-        dispatch( OnCleanCategories() );
+        dispatch( onCleanCategories() );
     }
     
 
@@ -56,10 +57,15 @@ export const useCategoriesStore = () => {
         dispatch( onStartUploadNewCategory() );
     }
 
+    const starGetProductsUploaded = () => {
+        dispatch( onStarGetProductsUploaded() );
+    }
+
     return {
         //*Propiedades
         message,
         isSaving,
+        productsUploaded,
         categories,
         activeCategory,
 
@@ -74,6 +80,7 @@ export const useCategoriesStore = () => {
         cleanCategories,
         startUploadFile,
         startUploadNewCategory,
+        starGetProductsUploaded,
 
     }
 }

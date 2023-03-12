@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, query, setDoc } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage } from "./categoriesSlice";
+import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, onChargeProductsUploaded } from "./categoriesSlice";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -41,7 +41,6 @@ export const onStartUploadNewCategory = () => {
         duplicateCategory = true;
         dispatch(onAddErrorMessage( 'Ya existe una categoría con este nombre' ));
         dispatch(onAddSuccessMessage( '' ));
-        console.log("guardó")
       }
     });
     if(!duplicateCategory){
@@ -51,6 +50,17 @@ export const onStartUploadNewCategory = () => {
         dispatch(onAddErrorMessage( '' ));
     }
     dispatch(onChangeSavingNewCategory(false));
+  }
+}
+
+export const onStarGetProductsUploaded = () => {
+  return async (dispatch) => {
+
+    const collectionRef = collection(FirebaseDB, `/products`);
+    const q = query( collectionRef );
+    querySnapshot.forEach((doc) => {
+        dispatch(onChargeProductsUploaded( doc ));
+    });
   }
 }
 

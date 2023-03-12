@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
-import CloseIcon from '@mui/icons-material/Close';
 
 import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from "./";
@@ -40,8 +39,10 @@ const products = [
 
 export const CategoryModal = () => {
 
-  const { closeCategoryModal, isCategoryModalOpen, cleanProductsSelected, productsSelected } = useUiStore();
-  const { activeCategory, message, addProducts, setActiveCategory, cleanCategories, addErrorMessage, addSuccessMessage, startUploadNewCategory } = useCategoriesStore();
+  const { closeCategoryModal, isCategoryModalOpen, productsSelected } = useUiStore();
+  const { activeCategory, message, addProducts, setActiveCategory, 
+          addErrorMessage, addSuccessMessage, startUploadNewCategory 
+        } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -58,6 +59,7 @@ export const CategoryModal = () => {
     addSuccessMessage('');
   }, [formState, productsSelected, imageLoad, iconLoad ]);
   
+  
 
   const onCloseModa = () => {
     if (imageLoad) {
@@ -68,8 +70,6 @@ export const CategoryModal = () => {
     }
 
     closeCategoryModal();
-    cleanProductsSelected();
-    cleanCategories();
   }
 
   const onSave = () => {
@@ -78,7 +78,6 @@ export const CategoryModal = () => {
     } else {
       addProducts(productsSelected);
       startUploadNewCategory();
-
     }
   }
 
@@ -86,25 +85,9 @@ export const CategoryModal = () => {
     <Dialog
       className="modal-container-categories"
       open={isCategoryModalOpen}
-    // onClose={onCloseModa}
     >
       <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
-        <Grid container direction="row" alignItems="center">
-          <Grid item xs={9.5} md={11}>
-            <DialogTitle >Agregar Categoría</DialogTitle>
-          </Grid>
-          <Grid item xs={2} md={1}>
-            <IconButton
-              className="addCategory-button"
-              color="primary"
-              aria-label="cargar imagen"
-              component="label"
-              onClick={onCloseModa}
-            >
-              <CloseIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
+        <DialogTitle >Agregar Categoría</DialogTitle>
         <form className="category-form">
           <TextField
             type="text"
@@ -126,6 +109,7 @@ export const CategoryModal = () => {
             onChange={onSelectProduct}
             helperText="Por favor seleccione los productos"
           >
+            {/* importar y recorrer productsUploaded opteniendo el nombre */}
             {products.map((option) => (
               <MenuItem key={option.label} value={option.label}>
                 {option.label}
@@ -186,13 +170,6 @@ export const CategoryModal = () => {
               display={!!message.error ? '' : 'none'}
             >
               <Alert severity='error'>{ message.error }</Alert>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              display={!!message.success ? '' : 'none'}
-            >
-              <Alert severity='success'>{ message.success }</Alert>
             </Grid>
             <div className="action-buttons">
               <Button
