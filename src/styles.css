@@ -1,5 +1,29 @@
+:root {
+    --main-color: #ca995f;
+    --hover-main:   #643A07;
+    --hover-error:   #800c0c;
+    --border: #b1b1b1;
+    --white: #ffffff;
+    --backgroud: #383838;
+    --roboto: 'Roboto', sans-serif;
+}
+
+.addCategory-button:hover{
+    background-color: var(--hover-main) !important;
+}
+
+.cancelCategory-button:hover{
+    background-color: var(--hover-error) !important;
+    
+}
+
+.closeTag-button:hover{
+    background-color: var(--hover-main);
+    cursor: pointer;
+}
+
 .box-border{
-    border: 1px solid lightgray;
+    border: 1px solid var(--border);
     border-radius: 5px;
 }
 
@@ -13,19 +37,6 @@
     margin: 2rem 1rem 2rem 1rem !important;
 }
 
-.addCategory-button:hover{
-    background-color: #643A07 !important;
-}
-
-.cancelCategory-button:hover{
-    background-color: #800c0c !important;
-    
-}
-
-.closeTag-button:hover{
-    background-color: #643A07;
-    cursor: pointer;
-}
 
 .tags-container{
     display: grid;
@@ -39,9 +50,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #ca995f;
+    background-color: var(--main-color);
     border-radius: 30px;
-    color: white;
+    color: var(--white);
     width: auto;
     font-size: 14px;
     padding: 0 10px 0 10px;
@@ -49,8 +60,8 @@
 }
 
 .closeTag-button{
-    background-color: #ca995f;
-    color: white;
+    background-color: var(--main-color);
+    color: var(--white);
     border: none;
     font-size: 16px;
     border-radius: 50px;
@@ -83,9 +94,9 @@
 .files-name-container input{
     width: 100px;
     height: 30px;
-    border: 1px solid #c4c4c4;
+    border: 1px solid var(--border);
     border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--roboto);
     font-size: 16px;
 }
 
@@ -102,7 +113,33 @@
     width: 318px;
 }
 
+.custom-input input {
+    color: var(--white) !important;
+}
 
+.page-button{
+    width: 30px;
+    height: 30px;
+    margin: 0px 4px 0px 4px;
+    border: none;
+    font-weight: bold;
+    border-radius: 50px;
+    background-color: var(--backgroud);
+    color: var(--white);
+    font-family: var(--roboto);
+}
+
+.page-button-selected{
+    width: 30px;
+    height: 30px;
+    margin: 0px 4px 0px 4px;
+    border: none;
+    font-weight: bold;
+    border-radius: 50px;
+    font-family: var(--roboto);
+    background-color: var(--main-color);
+    color: var(--white);
+}
 
 @media (max-width: 680px) {
     .categories-container div{

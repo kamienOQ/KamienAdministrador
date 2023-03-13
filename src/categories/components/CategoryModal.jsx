@@ -164,8 +164,7 @@ export const CategoryModal = () => {
                 </IconButton>
               </div>
             </div>
-            <Grid
-              item
+            <Grid item
               xs={12}
               display={!!message.error ? '' : 'none'}
             >
