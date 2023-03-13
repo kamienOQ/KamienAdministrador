@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid  } from "@mui/material"
+import { TextField, Dialog, DialogTitle, Button, MenuItem, DialogContent, Alert, Grid  } from "@mui/material"
 import {  useAttributesForm, useAttributesState, useAttributesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from ".";
 import { deleteFileUpload } from "../../helpers/deleteFileUpload";

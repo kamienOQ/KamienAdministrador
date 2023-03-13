@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { deleteFileUpload } from "../helpers/deleteFileUpload";
+//import { deleteFileUpload } from "../helpers/deleteFileUpload";
 import { useAttributesStore, useUiStore } from "./";
 
 export const useAttributesState = () => {
     const { isAttributeModalOpen, addCategoriesSelected } = useUiStore();
-    const { activeAttribute, startUploadFile } = useAttributesStore();
+    //const { activeAttribute, startUploadFile } = useAttributesStore();
     const [ selected, setSelected ] = useState(false);
 
-    const imageInputRef = useRef();
-    const iconInputRef = useRef();
+    //const imageInputRef = useRef();
+    //const iconInputRef = useRef();
 
     useEffect(() => {
         setSelected(false);
@@ -17,7 +17,7 @@ export const useAttributesState = () => {
 
     
     const onSelectCategory = ({ target }) => {
-        addProductsSelected(target.value);
+        addCategoriesSelected(target.value);
         setSelected(true);
     }
 

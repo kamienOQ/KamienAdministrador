@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useAttributesStore, useUiStore } from "../../hooks";
-import { AttributeModal } from "..";
+import {Attribute, AttributeFilters, AttributeModal } from "..";
 import { useEffect } from "react";
 
 export const AttributesPages = () => {
@@ -26,16 +26,18 @@ export const AttributesPages = () => {
       className="attributes-container"
       container
       spacing={0}
-      sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main' }}
+      alignContent="start"
+      sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main', mb:0}}
     >
+      <Grid container>
       <Grid
         alignItems="center"
-        className="box-border secundary-attributes-container"
+        className="secundary-categories-container"
         container
         direction="column"
         justifyContent="center"
         spacing={2}
-        sx={{ m: 2, padding: 4, maxHeight: 20 }}
+        sx={{ m: 2, padding: 4, maxHeight: 20, backgroundColor: 'darkGray.main', borderRadius: 1.2 }}
 
       >
         {/* TODO: justify-content: space-between */}
@@ -72,6 +74,8 @@ export const AttributesPages = () => {
         </Grid>
       </Grid>
       <AttributeModal/>
+      <AttributeFilters/>
+    </Grid>
     </Grid>
   )
 }
