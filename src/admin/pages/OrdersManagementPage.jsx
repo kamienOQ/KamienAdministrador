@@ -1,15 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
-
-import { startLogout } from "../../store/auth";
 
 export const OrdersManagementPage = () => {
-  const dispatch = useDispatch();
-
-  const onLogout = () => {
-    dispatch(startLogout());
-  };
-
   return (
     <Grid
       container
@@ -39,7 +30,6 @@ export const OrdersManagementPage = () => {
           Gestión de pedidos
         </Typography>
         <Button
-          onClick={onLogout}
           variant="contained"
           fullWidth
           color="secondary"
