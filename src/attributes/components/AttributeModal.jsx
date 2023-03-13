@@ -5,7 +5,7 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import { useUiStore } from "../../hooks"
 import { FloatingTags } from ".";
 
-const products = [
+const categories = [
   {
     label: 'Reloj'
   },
@@ -19,7 +19,7 @@ const products = [
 
 export const AttributeModal = () => {
 
-  const { closeAttributeModal, isAttributeModalOpen, productsSelected, addProductsSelected, cleanProductsSelected } = useUiStore();
+  const { closeAttributeModal, isAttributeModalOpen, categoriesSelected, addCategoriesSelected, cleanCategoriesSelected } = useUiStore();
   const [imageLoad, setImageLoad] = useState(false);
   const [iconLoad, setIconLoad] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -32,7 +32,7 @@ export const AttributeModal = () => {
     setImageLoad(false);
     setIconLoad(false);
     setSelected(false);
-    cleanProductsSelected();
+    cleanCategoriesSelected();
 
   }, [isAttributeModalOpen])
 
@@ -47,13 +47,13 @@ export const AttributeModal = () => {
     IconInputRef.current.value = target.files[0].name;
   }
 
-  const onSelectProduct = ({ target }) => {
-    addProductsSelected(target.value);
+  const onSelectCategory = ({ target }) => {
+    addCategoriesSelected(target.value);
     setSelected(true);
   }
 
   const onCloseModa = () => {
-    cleanProductsSelected();
+    cleanCategoriesSelected();
     closeAttributeModal();
   }
 
@@ -73,10 +73,10 @@ export const AttributeModal = () => {
             select
             label="Categorias a las que pertenece"
             defaultValue=""
-            onChange={onSelectProduct}
+            onChange={onSelectCategory}
             helperText="Por favor, seleccione una opción"
           >
-            {products.map((option) => (
+            {categories.map((option) => (
               <MenuItem key={option.label} value={option.label}>
                 {option.label}
               </MenuItem>

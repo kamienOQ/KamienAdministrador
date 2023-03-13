@@ -8,7 +8,7 @@ export const attributesSlice = createSlice({
             error: '',
             success: ''
         },
-        productsUploaded: [],
+        categoriesUploaded: [],
         attributes: [],
         activeAttribute: null, 
     },
@@ -19,7 +19,7 @@ export const attributesSlice = createSlice({
         onAddNewAttribute: ( state ) => {
             const newAttribute = {
                 attributeName: '',
-                products: [],
+                categories: [],
                 image: {
                     name: null,
                     url: null
@@ -52,8 +52,8 @@ export const attributesSlice = createSlice({
             state.attributes =  state.attributes.filter( (attribute) => attribute.attributeName !== payload );
             
         },
-        onChargeProductsUploaded: ( state, { payload } ) => {
-            state.productsUploaded.push( payload );
+        onChargeCategoriesUploaded: ( state, { payload } ) => {
+            state.categoriesUploaded.push( payload );
         },
         onAddImage: ( state, { payload } ) => {
             state.activeAttribute.image.name = payload[0];
@@ -63,8 +63,8 @@ export const attributesSlice = createSlice({
             state.activeAttribute.icon.name = payload[0];
             state.activeAttribute.icon.url = payload[1];
         },
-        onAddProducts: ( state, { payload } ) => {
-            state.activeAttribute.products = payload;
+        onAddCategories: ( state, { payload } ) => {
+            state.activeAttribute.categories = payload;
         },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
@@ -76,8 +76,8 @@ export const attributesSlice = createSlice({
             state.attributes = [];
             state.activeAttribute = null;
         },
-        onCleanProductsUploaded: ( state ) => {
-            state.productsUploaded = [];
+        onCleanCategoriesUploaded: ( state ) => {
+            state.categoriesUploaded = [];
         }
     }
 });
@@ -90,12 +90,12 @@ export const {
     onSetActiveAttribute, 
     onUpdateAttribute, 
     onDeleteAttribute,
-    onChargeProductsUploaded, 
+    onChargeCategoriesUploaded, 
     onAddImage, 
     onAddIcon, 
-    onAddProducts, 
+    onAddCategories, 
     onAddErrorMessage,
     onAddSuccessMessage,
     onCleanattributes ,
-    onCleanProductsUploaded
+    onCleanCategoriesUploaded
 } = attributesSlice.actions;

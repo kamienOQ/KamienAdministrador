@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { onAddProductsSelected, onCleanProductsSelected, onCloseAttributeModal, onDeleteProductsSelected, onOpenAttributeModal } from '../store/ui/uiSlice'
+import { onAddCategoriesSelected, oncleanCategoriesSelected, onCloseAttributeModal, onDeleteCategoriesSelected, onOpenAttributeModal } from '../store/ui/uiSlice'
 
 export const useUiStore = () => {
 
@@ -7,7 +7,7 @@ export const useUiStore = () => {
 
     const { 
         isAttributeModalOpen,
-        productsSelected
+        categoriesSelected
     } = useSelector( state => state.ui )
 
     const openAttributeModal = () => {
@@ -18,30 +18,30 @@ export const useUiStore = () => {
         dispatch( onCloseAttributeModal() )
     }
 
-    const addProductsSelected = ( productSelected ) => {
-        dispatch( onAddProductsSelected( productSelected ) )
+    const addCategoriesSelected = ( categorieselected ) => {
+        dispatch( onAddCategoriesSelected( categorySelected ) )
     }
 
-    const deleteProductsSelected = ( productSelected ) => {
-        dispatch( onDeleteProductsSelected( productSelected ) )
+    const deleteCategoriesSelected = ( categorySelected ) => {
+        dispatch( onDeleteCategoriesSelected( categorySelected ) )
     }
 
-    const cleanProductsSelected = () => {
-        dispatch( onCleanProductsSelected() )
+    const cleanCategoriesSelected = () => {
+        dispatch( oncleanCategoriesSelected() )
     }
     
 
     return {
         //*Propiedades
         isAttributeModalOpen,
-        productsSelected,
+        categoriesSelected,
 
         //*Métodos
         openAttributeModal,
         closeAttributeModal,
-        addProductsSelected,
-        deleteProductsSelected,
-        cleanProductsSelected
+        addCategoriesSelected,
+        deleteCategoriesSelected,
+        cleanCategoriesSelected
     }
 
 }

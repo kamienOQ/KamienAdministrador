@@ -4,7 +4,7 @@ export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         isAttributeModalOpen: false,
-        productsSelected: []
+        categoriesSelected: []
     },
     reducers: {
         onOpenAttributeModal: ( state ) => {
@@ -13,16 +13,16 @@ export const uiSlice = createSlice({
         onCloseAttributeModal: ( state ) => {
             state.isAttributeModalOpen = false;
         },
-        onAddProductsSelected: ( state, { payload } ) => {
-            if (!state.productsSelected.includes(payload)) {
-                state.productsSelected.push( payload );
+        onAddCategoriesSelected: ( state, { payload } ) => {
+            if (!state.categoriesSelected.includes(payload)) {
+                state.categoriesSelected.push( payload );
             }
         },
-        onDeleteProductsSelected: ( state, { payload } ) => {
-            state.productsSelected = state.productsSelected.filter( event => event !== payload );
+        onDeleteCategoriesSelected: ( state, { payload } ) => {
+            state.categoriesSelected = state.categoriesSelected.filter( event => event !== payload );
         },
-        onCleanProductsSelected: ( state ) => {
-            state.productsSelected = []
+        oncleanCategoriesSelected: ( state ) => {
+            state.categoriesSelected = []
         }
         
     }
@@ -30,4 +30,4 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onOpenAttributeModal, onCloseAttributeModal, onAddProductsSelected, onDeleteProductsSelected, onCleanProductsSelected } = uiSlice.actions;
+export const { onOpenAttributeModal, onCloseAttributeModal, onAddCategoriesSelected, onDeleteCategoriesSelected, oncleanCategoriesSelected } = uiSlice.actions;
