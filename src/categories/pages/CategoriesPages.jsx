@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useCategoriesStore, useUiStore } from "../../hooks";
-import { Category, CategoryFilters, CategoryModal } from "../";
+import { CategoryFilters, CategoryModal } from "../";
 import { useEffect } from "react";
 
 

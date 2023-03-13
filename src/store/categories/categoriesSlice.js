@@ -9,6 +9,7 @@ export const categoriesSlice = createSlice({
             success: ''
         },
         productsUploaded: [],
+        numberCategories: 0,
         categories: [],
         activeCategory: null, 
     },
@@ -30,7 +31,6 @@ export const categoriesSlice = createSlice({
                 },
                 date: new Date().getTime(),
             }
-            state.categories.push( newCategory );
             state.activeCategory = newCategory;
         },
         onSetActiveCategory: ( state, { payload } ) => {
@@ -55,6 +55,13 @@ export const categoriesSlice = createSlice({
         onChargeProductsUploaded: ( state, { payload } ) => {
             state.productsUploaded.push( payload );
         },
+        onChargeCategoriesUploaded: ( state, { payload } ) => {
+            state.categories.push( payload );
+        },
+        onSetNumberCategories: ( state, { payload } ) => {
+            state.numberCategories = payload
+        },
+
         onAddImage: ( state, { payload } ) => {
             state.activeCategory.image.name = payload[0];
             state.activeCategory.image.url = payload[1];
@@ -73,7 +80,7 @@ export const categoriesSlice = createSlice({
             state.message.success = payload;
         },
         onCleanCategories: ( state ) => {
-            state.categories = [];
+            state.categories = []
             state.activeCategory = null;
         },
         onCleanProductsUploaded: ( state ) => {
@@ -90,7 +97,9 @@ export const {
     onSetActiveCategory, 
     onUpdateCategory, 
     onDeleteCategory,
-    onChargeProductsUploaded, 
+    onChargeProductsUploaded,
+    onChargeCategoriesUploaded,
+    onSetNumberCategories, 
     onAddImage, 
     onAddIcon, 
     onAddProducts, 

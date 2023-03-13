@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, query, setDoc } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, onChargeProductsUploaded } from "./categoriesSlice";
+import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, onChargeProductsUploaded, onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded } from "./categoriesSlice";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -58,12 +58,50 @@ export const onStarGetProductsUploaded = () => {
 
     const collectionRef = collection(FirebaseDB, `/products`);
     const q = query( collectionRef );
+
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         dispatch(onChargeProductsUploaded( doc ));
     });
   }
 }
 
-//TODO: onStartLoadingCategories
+export const onStarCountCategories = () => {
+  return async (dispatch) => {
+    const collectionRef = collection(FirebaseDB, `/categories`);
+    const q = query( collectionRef );
+    const querySnapshot = await getDocs(q);
+    dispatch(onSetNumberCategories(querySnapshot._docs.length))
+  }
+}
+
+//TODO: onStartGetCategories
+export const onStartGetCategories = (page = 1) => {
+  return async (dispatch, getState) => {
+    let number = page * 5;
+    let counter = 0;
+    let getCategory = false
+    if(getState().categories === [] ){
+      dispatch(onCleanCategories());
+    }
+    const collectionRef = collection(FirebaseDB, `/categories`);
+    const q = query( collectionRef );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if(number - 5 === counter && !getCategory){
+        getCategory = !getCategory;
+      }
+      if(getCategory){
+        dispatch(onChargeCategoriesUploaded( doc.data() ));
+      }
+      counter++;
+    });
+
+  }
+}
+
+//TODO: onStartGetCategoriesByName
+//TODO: onStartGetCategoriesByDate
 //TODO: onStartSaveCategory
 //TODO: onStartDeletingCategory
