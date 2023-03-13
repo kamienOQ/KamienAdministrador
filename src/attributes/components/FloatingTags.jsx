@@ -7,7 +7,6 @@ export const FloatingTags = () => {
     const onDeleteTag = (event) => {
         event.preventDefault();
         deleteCategoriesSelected( event.target.parentNode.id )
-        // console.log(document.getElementById(event.target.parentNode.id))
     }
 
     const categories = categoriesSelected.map((category) => {

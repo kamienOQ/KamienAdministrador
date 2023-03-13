@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent } from "@mui/material"
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import AddReactionIcon from '@mui/icons-material/AddReaction';
-import { useUiStore } from "../../hooks"
+import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid  } from "@mui/material"
+import {  useAttributesForm, useAttributesState, useAttributesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from ".";
+import { deleteFileUpload } from "../../helpers/deleteFileUpload";
 
 const categories = [
   {
@@ -19,54 +18,57 @@ const categories = [
 
 export const AttributeModal = () => {
 
-  const { closeAttributeModal, isAttributeModalOpen, categoriesSelected, addCategoriesSelected, cleanCategoriesSelected } = useUiStore();
-  const [imageLoad, setImageLoad] = useState(false);
-  const [iconLoad, setIconLoad] = useState(false);
-  const [selected, setSelected] = useState(false);
-  // const [selectedProducts, setSelectedProducts] = useState([]);
+  const { closeAttributeModal, isAttributeModalOpen, categoriesSelected } = useUiStore();
+  const { activeAttribute, message, addCategories, setActiveAttribute, addErrorMessage, addSuccessMessage, startUploadNewAttribute} = useAttributesStore();
+  const { selected, onSelectCategory } = useAttributesState();
+  const { attributeName, onInputChange, formState } = useAttributesForm(activeAttribute);
+  const [emptyName, setEmptyName] = useState(false);
 
-  const ImageInputRef = useRef();
-  const IconInputRef = useRef();
+
 
   useEffect(() => {
-    setImageLoad(false);
-    setIconLoad(false);
-    setSelected(false);
-    cleanCategoriesSelected();
+    setActiveAttribute(formState);
+    setEmptyName(false);
+  }, [formState]);
 
-  }, [isAttributeModalOpen])
+  useEffect(() => {
+    addErrorMessage('');
+    addSuccessMessage('');
+  }, [formState, categoriesSelected]);
+  
 
-
-  const onUploadImage = ({ target }) => {
-    setImageLoad(true);
-    ImageInputRef.current.value = target.files[0].name;
-  }
-
-  const onUploadIcon = ({ target }) => {
-    setIconLoad(true);
-    IconInputRef.current.value = target.files[0].name;
-  }
-
-  const onSelectCategory = ({ target }) => {
-    addCategoriesSelected(target.value);
-    setSelected(true);
-  }
-
-  const onCloseModa = () => {
-    cleanCategoriesSelected();
+  const onCloseModal = () => {
     closeAttributeModal();
+  }
+  const onSave = () => {
+    if (activeAttribute.attributeName === '') {
+      setEmptyName(true);
+    } else {
+      addCategories(categoriesSelected);
+      startUploadNewAttribute();
+    }
   }
 
   return (
     <Dialog
       className="modal-container-attributes"
       open={isAttributeModalOpen}
-      onClose={closeAttributeModal}
     >
       <DialogContent sx={{maxHeight: 600, pl:.1, pr:.1 }}>
         <DialogTitle>Nuevo Atributo</DialogTitle>
         <form className="attribute-form">
-          <TextField fullWidth label="Nombre del Atributo" variant="outlined"></TextField>
+        <TextField
+            type="text"
+            fullWidth
+            label="Nombre del Atributo"
+            variant="outlined"
+            name="attributeName"
+            value={attributeName || ''}
+            onChange={onInputChange}
+            error={emptyName}
+            helperText={emptyName ? 'Campo vacío' : ''}
+          />
+          
           <TextField
             fullWidth
             id="outlined-select-currency"
@@ -85,29 +87,16 @@ export const AttributeModal = () => {
 
           {selected && <FloatingTags/>}
           <div className="attributes-modal-buttons">
-            <div className="upload-files-container">
-              <div className="files-name-container">
-                <input
-                  type="text"
-                  ref={ImageInputRef}
-                  style={{
-                    visibility: imageLoad ? '' : 'hidden'
-                  }}
-                />
-                <input
-                  type="text"
-                  ref={IconInputRef}
-                  style={{
-                    visibility: iconLoad ? '' : 'hidden'
-                  }}
-                />
-              </div>
-              
-            </div>
+            <Grid item
+              xs={12}
+              display={!!message.error ? '' : 'none'}
+            >
+              <Alert severity='error'>{ message.error }</Alert>
+            </Grid>
             <div className="action-buttons">
               <Button
                 className="cancelAttribute-button"
-                onClick={onCloseModa}
+                onClick={onCloseModal}
                 variant="contained"
                 sx={{ backgroundColor: "error.main" }}
               >

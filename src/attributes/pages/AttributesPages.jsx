@@ -1,13 +1,26 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useUiStore } from "../../hooks";
+import { useAttributesStore, useUiStore } from "../../hooks";
 import { AttributeModal } from "..";
-
+import { useEffect } from "react";
 
 export const AttributesPages = () => {
 
-  const { openAttributeModal } = useUiStore();
+  const { openAttributeModal, closeAttributeModal} = useUiStore();
+  const { isSaving, message, addNewAttribute } = useAttributesStore();
 
+  useEffect(() => {
+    if (!!message.success) {
+      closeAttributeModal();
+    }
+  }, [message.success]);
+
+  const onOpenModal = () => {
+    addNewAttribute();
+    // TODO: (starGetProductsUploaded)cargar al estado todo los productos que se han subido a la base de datos
+    openAttributeModal();
+  }
+  
   return (
     <Grid
       className="attributes-container"
@@ -48,10 +61,11 @@ export const AttributesPages = () => {
         >
           <Button
             className="addAttribute-button"
-            onClick={openAttributeModal}
+            onClick={onOpenModal }
             startIcon={<AddCircleIcon />}
             sx={{ backgroundColor: 'golden.main', minWidth: 0 }}
             variant='contained'
+            disabled={ isSaving }
           >
             Añadir Atributo
           </Button>

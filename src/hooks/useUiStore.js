@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { onAddCategoriesSelected, oncleanCategoriesSelected, onCloseAttributeModal, onDeleteCategoriesSelected, onOpenAttributeModal } from '../store/ui/uiSlice'
+import { onCleanAttributes, onCleanCategoriesUploaded } from '../store';
+import { onAddCategoriesSelected, onCleanCategoriesSelected, onCloseAttributeModal, onDeleteCategoriesSelected, onOpenAttributeModal } from '../store/ui/uiSlice'
 
 export const useUiStore = () => {
 
@@ -15,19 +16,18 @@ export const useUiStore = () => {
     }
 
     const closeAttributeModal = () => {
-        dispatch( onCloseAttributeModal() )
+        dispatch( onCloseAttributeModal() );
+        dispatch( onCleanAttributes() );
+        dispatch( onCleanCategoriesSelected() );
+        dispatch( onCleanCategoriesUploaded() );
     }
 
-    const addCategoriesSelected = ( categorieselected ) => {
+    const addCategoriesSelected = ( categorySelected ) => {
         dispatch( onAddCategoriesSelected( categorySelected ) )
     }
 
     const deleteCategoriesSelected = ( categorySelected ) => {
         dispatch( onDeleteCategoriesSelected( categorySelected ) )
-    }
-
-    const cleanCategoriesSelected = () => {
-        dispatch( oncleanCategoriesSelected() )
     }
     
 
@@ -40,8 +40,7 @@ export const useUiStore = () => {
         openAttributeModal,
         closeAttributeModal,
         addCategoriesSelected,
-        deleteCategoriesSelected,
-        cleanCategoriesSelected
+        deleteCategoriesSelected
     }
 
 }

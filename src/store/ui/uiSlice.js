@@ -21,7 +21,7 @@ export const uiSlice = createSlice({
         onDeleteCategoriesSelected: ( state, { payload } ) => {
             state.categoriesSelected = state.categoriesSelected.filter( event => event !== payload );
         },
-        oncleanCategoriesSelected: ( state ) => {
+        onCleanCategoriesSelected: ( state ) => {
             state.categoriesSelected = []
         }
         
@@ -30,4 +30,4 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onOpenAttributeModal, onCloseAttributeModal, onAddCategoriesSelected, onDeleteCategoriesSelected, oncleanCategoriesSelected } = uiSlice.actions;
+export const { onOpenAttributeModal, onCloseAttributeModal, onAddCategoriesSelected, onDeleteCategoriesSelected, onCleanCategoriesSelected } = uiSlice.actions;

@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, query, setDoc } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewAttribute, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, onChargeCategoriesUploaded } from "./attributesSlice";
+import { onChangeSavingNewAttribute, onAddSuccessMessage, onAddErrorMessage, onChargeCategoriesUploaded } from "./attributesSlice";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {

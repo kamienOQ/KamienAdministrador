@@ -20,14 +20,6 @@ export const attributesSlice = createSlice({
             const newAttribute = {
                 attributeName: '',
                 categories: [],
-                image: {
-                    name: null,
-                    url: null
-                },
-                icon: {
-                    name: null,
-                    url: null
-                },
                 date: new Date().getTime(),
             }
             state.attributes.push( newAttribute );
@@ -55,14 +47,6 @@ export const attributesSlice = createSlice({
         onChargeCategoriesUploaded: ( state, { payload } ) => {
             state.categoriesUploaded.push( payload );
         },
-        onAddImage: ( state, { payload } ) => {
-            state.activeAttribute.image.name = payload[0];
-            state.activeAttribute.image.url = payload[1];
-        },
-        onAddIcon: ( state, { payload } ) => {
-            state.activeAttribute.icon.name = payload[0];
-            state.activeAttribute.icon.url = payload[1];
-        },
         onAddCategories: ( state, { payload } ) => {
             state.activeAttribute.categories = payload;
         },
@@ -72,7 +56,7 @@ export const attributesSlice = createSlice({
         onAddSuccessMessage: ( state, { payload } ) => {
             state.message.success = payload;
         },
-        onCleanattributes: ( state ) => {
+        onCleanAttributes: ( state ) => {
             state.attributes = [];
             state.activeAttribute = null;
         },
@@ -90,12 +74,10 @@ export const {
     onSetActiveAttribute, 
     onUpdateAttribute, 
     onDeleteAttribute,
-    onChargeCategoriesUploaded, 
-    onAddImage, 
-    onAddIcon, 
+    onChargeCategoriesUploaded,
     onAddCategories, 
     onAddErrorMessage,
     onAddSuccessMessage,
-    onCleanattributes ,
+    onCleanAttributes ,
     onCleanCategoriesUploaded
 } = attributesSlice.actions;
