@@ -1,3 +1,4 @@
+export * from './atrributes';
 export * from './ui/uiSlice';
 
 
