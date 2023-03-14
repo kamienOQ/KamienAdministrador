@@ -7,14 +7,23 @@ import { useEffect } from "react";
 
 export const CategoriesPages = () => {
 
-  const { openCategoryModal, closeCategoryModal} = useUiStore();
-  const { isSaving, message, addNewCategory } = useCategoriesStore();
+  const { isCategoryModalOpen, openCategoryModal, closeCategoryModal } = useUiStore();
+  const { isSaving, message, addNewCategory, starCountCategories, startGetCategories } = useCategoriesStore();
 
   useEffect(() => {
     if (!!message.success) {
       closeCategoryModal();
     }
   }, [message.success]);
+
+  useEffect(() => {
+    if(!isCategoryModalOpen){
+      starCountCategories();
+      //TODO: Pasar el número de pagina del estado 
+      startGetCategories(1);
+    }
+  }, [isCategoryModalOpen])
+  
 
   const onOpenModal = () => {
     addNewCategory();
@@ -31,10 +40,9 @@ export const CategoriesPages = () => {
       sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main', mb: 0 }}
     >
       <Grid container>
-        <Grid
+        <Grid container
           alignItems="center"
           className="secundary-categories-container"
-          container
           direction="column"
           justifyContent="center"
           spacing={2}
@@ -42,9 +50,8 @@ export const CategoriesPages = () => {
 
         >
           {/* TODO: justify-content: space-between */}
-          <Grid
+          <Grid item
             alignItems="center"
-            item
             justifyContent="center"
             sx={{ p: 2 }}
             xs={12}
@@ -53,9 +60,8 @@ export const CategoriesPages = () => {
             <Typography variant='h4'>Gestión de Categorías</Typography>
           </Grid>
 
-          <Grid
+          <Grid item
             alignItems="center"
-            item
             justifyContent="center"
             sx={{ p: 2 }}
             xs={12}

@@ -56,7 +56,18 @@ export const categoriesSlice = createSlice({
             state.productsUploaded.push( payload );
         },
         onChargeCategoriesUploaded: ( state, { payload } ) => {
-            state.categories.push( payload );
+            let duplicate = false
+            if(state.categories){
+                state.categories.forEach(category => {
+                    if(category.categoryName === payload.categoryName)
+                        duplicate = true
+                });
+                if(!duplicate){
+                    state.categories.push( payload );
+                }
+            }else{
+                state.categories.push( payload );
+            }
         },
         onSetNumberCategories: ( state, { payload } ) => {
             state.numberCategories = payload

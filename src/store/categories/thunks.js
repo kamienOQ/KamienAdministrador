@@ -75,13 +75,12 @@ export const onStarCountCategories = () => {
   }
 }
 
-//TODO: onStartGetCategories
 export const onStartGetCategories = (page = 1) => {
   return async (dispatch, getState) => {
     let number = page * 5;
     let counter = 0;
     let getCategory = false
-    if(getState().categories === [] ){
+    if(getState().categories !== [] ){
       dispatch(onCleanCategories());
     }
     const collectionRef = collection(FirebaseDB, `/categories`);
@@ -89,7 +88,7 @@ export const onStartGetCategories = (page = 1) => {
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      if(number - 5 === counter && !getCategory){
+      if((number - 5 === counter && !getCategory) || (number === counter)){
         getCategory = !getCategory;
       }
       if(getCategory){

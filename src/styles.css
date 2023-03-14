@@ -141,6 +141,14 @@
     color: var(--white);
 }
 
+.table-img{
+    max-width: 80%;
+}
+
+.table-icon{
+    max-width: 40%;
+}
+
 @media (max-width: 680px) {
     .categories-container div{
         margin: 4px;

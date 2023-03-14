@@ -6,18 +6,10 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { Category } from "./Category";
 import { useCategoriesStore } from "../../hooks";
-import { useMemo } from "react";
-
 
 export const CategoryFilters = () => {
 
-  const { categories, starCountCategories, startGetCategories } = useCategoriesStore();
-
-  useMemo(() =>{
-    starCountCategories();
-    //TODO: Pasar el número de pagina del estado 
-    startGetCategories(1);
-  }, [])
+  const { numberCategories, categories } = useCategoriesStore();
 
   return (
     <Grid container
@@ -71,7 +63,7 @@ export const CategoryFilters = () => {
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Nombre
               <IconButton sx={{ color: 'secondary.main' }}>
-                <UnfoldMoreIcon/>
+                <UnfoldMoreIcon />
               </IconButton>
             </Grid>
           </Grid>
@@ -80,7 +72,7 @@ export const CategoryFilters = () => {
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Fecha
               <IconButton sx={{ color: 'secondary.main' }}>
-                <CalendarMonthIcon/>
+                <CalendarMonthIcon />
               </IconButton>
             </Grid>
           </Grid>
@@ -102,17 +94,17 @@ export const CategoryFilters = () => {
           </Grid>
         </Grid>
         {
-          
+          categories.map((category, index) => (
+            <Category key={category.categoryName} id={index+1} category={category}/>
+          ))
         }
-        <Category />
-        <Category />
       </Grid>
       <Grid container
         sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', p: 1 }}
       >
         <Grid item>
           <Typography>
-            Mostrando 5 de 10 categorias
+            {`Mostrando ${categories.length} de ${numberCategories} categorias`}
           </Typography>
         </Grid>
         <Grid item
