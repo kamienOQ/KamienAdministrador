@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Grid, IconButton, TextField, Box, Typography } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
@@ -7,6 +8,8 @@ import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { Order } from "./order";
 
 export const OrdersManagementFilters = () => {
+  const { orders } = useSelector((state) => state.orders);
+
   return (
     <Grid container
       alignItems="center"
@@ -94,8 +97,11 @@ export const OrdersManagementFilters = () => {
             Acciones
           </Grid>
         </Grid>
-        <Order />
-        <Order />
+        {
+          orders.map((order) => (
+            <Order key={order.id} {...order}/>
+          ))
+        }
       </Grid>
       <Grid container
         sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', p: 1 }}

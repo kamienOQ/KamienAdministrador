@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { Link as RouterLink } from "react-router-dom";
 import "./Navbar.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { onSetTheme } from '../../store/ui/uiSlice';
+import { setTheme } from '../../store/ui/uiSlice';
 //import SideList from './SideList';
 
 const drawerWidth = 240;
@@ -47,8 +47,8 @@ export const Navbar = () => {
     setOpen(true);
   };
 
-  const setTheme = () => {
-    dispatch(onSetTheme());
+  const onSetTheme = () => {
+    dispatch(setTheme());
   }
 
   return (
@@ -80,7 +80,7 @@ export const Navbar = () => {
         >
           Dashboard
         </Typography>   
-        <IconButton onClick={setTheme}>
+        <IconButton onClick={onSetTheme}>
           {theme ? <Brightness7 /> : <Brightness4 />}
         </IconButton>
       </Toolbar>       

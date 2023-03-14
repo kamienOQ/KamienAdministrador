@@ -1,8 +1,16 @@
 import { Grid, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useMemo } from "react";
 
-export const Order = () => {
+export const Order = ({id, name, date, wayToPay, cellphone, address, status}) => {
+  const dateString = useMemo(() => {
+    const newDate = new Date(date);
+    const formatDate = new Intl.DateTimeFormat("es-ES").format(newDate);
+
+    return formatDate;
+  }, [date]);
+
   return (
     <Grid
       container
@@ -25,7 +33,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        1
+        {id}
       </Grid>
       <Grid
         item
@@ -39,7 +47,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        Pancracio
+        {name}
       </Grid>
       <Grid
         item
@@ -53,7 +61,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        10/03/2023
+        {dateString}
       </Grid>
       <Grid
         item
@@ -67,7 +75,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        Sinpe
+        {wayToPay}
       </Grid>
       <Grid
         item
@@ -81,7 +89,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        88888888
+        {cellphone}
       </Grid>
       <Grid
         item
@@ -95,7 +103,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        San José
+        {address}
       </Grid>
       <Grid
         item
@@ -109,7 +117,7 @@ export const Order = () => {
           pb: 0.5,
         }}
       >
-        Pendiente
+        {status}
       </Grid>
       <Grid
         item

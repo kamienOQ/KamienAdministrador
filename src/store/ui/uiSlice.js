@@ -6,10 +6,10 @@ export const uiSlice = createSlice({
     theme: true
   },
   reducers: {
-    onSetTheme: (state) => {
+    setTheme: (state) => {
       state.theme = !state.theme;
     },
   }
 });
 
-export const { onSetTheme } = uiSlice.actions;
+export const { setTheme } = uiSlice.actions;

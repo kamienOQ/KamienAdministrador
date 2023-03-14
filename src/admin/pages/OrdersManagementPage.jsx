@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Grid, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
 import { OrdersManagementFilters } from "../components/OrdersManagementFilters";
-import { useState } from "react";
+import { startGetOrders } from "../../store/orders";
 
 export const OrdersManagementPage = () => {
+  const dispatch = useDispatch();
+
   const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    dispatch(startGetOrders(1));
+  }, []);
 
   const onToggleButton = (event, newValues) => {
     setValue(newValues);
