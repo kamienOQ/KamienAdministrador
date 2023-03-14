@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+  padding: 10px;
+}
+
+.box-border{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.category-form{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  margin: 2rem 1rem 2rem 1rem !important;
+}
+
+.addCategory-button:hover{
+  background-color: #643A07 !important;
+}
+
+.cancelCategory-button:hover{
+  background-color: #800c0c !important;
+  
+}
+
+.closeTag-button:hover{
+  background-color: #643A07;
+  cursor: pointer;
+}
+
+.tags-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  width: 300px;
+}
+
+.tag-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #ca995f;
+  border-radius: 30px;
+  color: white;
+  width: auto;
+  font-size: 14px;
+  padding: 0 10px 0 10px;
+  gap: 5px;
+}
+
+.closeTag-button{
+  background-color: #ca995f;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 50px;
+}
+
+.categories-modal-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-files-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
+
+.files-name-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 319px;
+}
+
+.files-name-container input{
+  width: 100px;
+  height: 30px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.iconImage-buttons {
+  display: flex;
+  justify-content: space-between !important;
+  width: 270px;
+  font-size: 4rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between !important;
+  width: 318px;
+}
+
+
+
+@media (max-width: 680px) {
+  .categories-container div{
+      margin: 4px;
+      padding-right: 1px;
+      padding-left: 1px !important;
+  }
+  .categories-container h4{
+      font-size: 24px;
+  }
+  .categories-container button{
+      font-size: 12px;
+  }
+  .tags-container{
+      grid-template-columns: repeat(1, 1fr);
+      width: 240px;
+  }
+  .category-form{
+      width: 270px;
+      margin: 1rem 2rem 1rem 2rem;
+  }
+  .files-name-container{
+      width: 275px;
+  }
+  .iconImage-buttons{
+      width: 228px;
+  } 
+  .action-buttons{
+      width: 270px;
+  }
+}
+
+@media (max-width: 410px) {
+  .secundary-categories-container{
+      max-height: 180px !important;
+      flex-direction: row !important;
+  }
+  .secundary-categories-container div{
+      display: flex;
+      justify-content: center;
+      padding: 1px;
+  }
+  .category-form{
+      width: 230px;
+      margin: 1rem .4rem 1rem .4rem !important;
+  }
+  .files-name-container{
+      width: 215px;
+  }
+  .iconImage-buttons{
+      width: 160px;
+  } 
+  .action-buttons{
+      width: 220px;
+  }
+  .MuiPaper-elevation{
+      margin: 13px !important;
+  }    
+}

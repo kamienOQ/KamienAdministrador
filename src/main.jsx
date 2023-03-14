@@ -1,13 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import { HelloWorldApp } from './HelloWorldApp'
-import './index.css'
+import { Provider } from 'react-redux';
+import { BrowserRouter } from "react-router-dom";
 
-<App />
+//import Navbar from './Components/Navbar';
+import { AdminApp } from './AdminApp';
+import { store } from './store'
+import "./styles.css";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelloWorldApp></HelloWorldApp>
+    <Provider store={ store }>
+      <BrowserRouter>
+        <AdminApp />
+      </BrowserRouter>     
+    </Provider>
   </React.StrictMode>,
 )
