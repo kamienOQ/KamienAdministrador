@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { deleteFileUpload } from "../helpers/deleteFileUpload";
+import { deleteFileUpload } from "../helpers";
 import { useCategoriesStore, useUiStore } from "./";
 
 export const useCategoriesState = () => {

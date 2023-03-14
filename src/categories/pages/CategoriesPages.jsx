@@ -7,8 +7,8 @@ import { useEffect } from "react";
 
 export const CategoriesPages = () => {
 
-  const { isCategoryModalOpen, openCategoryModal, closeCategoryModal } = useUiStore();
-  const { isSaving, message, addNewCategory, starCountCategories, startGetCategories } = useCategoriesStore();
+  const { isCategoryModalOpen, page, searching, openCategoryModal, closeCategoryModal } = useUiStore();
+  const { isSaving, message, addNewCategory, startGetCategories, startGetCategoriesByName } = useCategoriesStore();
 
   useEffect(() => {
     if (!!message.success) {
@@ -18,11 +18,13 @@ export const CategoriesPages = () => {
 
   useEffect(() => {
     if(!isCategoryModalOpen){
-      starCountCategories();
-      //TODO: Pasar el número de pagina del estado 
-      startGetCategories(1);
+      if(!!searching){
+        startGetCategoriesByName(searching, page)
+      }else{
+        startGetCategories(page);
+      }
     }
-  }, [isCategoryModalOpen])
+  }, [isCategoryModalOpen, page, searching])
   
 
   const onOpenModal = () => {

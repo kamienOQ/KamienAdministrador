@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddProducts, onAddSuccessMessage, onCleanCategories, 
-    onSetActiveCategory, onStarCountCategories, onStarGetProductsUploaded, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory } from "../store";
+    onSetActiveCategory, onStarGetProductsUploaded, onStartGetCategories, onStartGetCategoriesByName, onStartUploadFile, onStartUploadNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -62,13 +62,14 @@ export const useCategoriesStore = () => {
         dispatch( onStarGetProductsUploaded() );
     }
 
-    const starCountCategories = () => {
-        dispatch( onStarCountCategories() );
-    }
-
     const startGetCategories = ( page = 1 ) => {
         dispatch( onStartGetCategories( page ) );
     }
+
+    const startGetCategoriesByName = ( name, page = 1 ) => {
+        dispatch( onStartGetCategoriesByName( name ) );
+    }
+    
     
 
     return {
@@ -92,8 +93,8 @@ export const useCategoriesStore = () => {
         startUploadFile,
         startUploadNewCategory,
         starGetProductsUploaded,
-        starCountCategories,
         startGetCategories,
+        startGetCategoriesByName,
 
     }
 }

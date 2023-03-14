@@ -5,7 +5,7 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
 import { FloatingTags } from "./";
-import { deleteFileUpload } from "../../helpers/deleteFileUpload";
+import { deleteFileUpload } from "../../helpers";
 
 const products = [
   {

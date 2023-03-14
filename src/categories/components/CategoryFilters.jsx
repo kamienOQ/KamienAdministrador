@@ -1,15 +1,35 @@
-import { Grid, IconButton, TextField, Box, Typography, Button } from "@mui/material"
+import { Grid, IconButton, TextField, Box, Typography } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import { Category } from "./Category";
-import { useCategoriesStore } from "../../hooks";
+import { Category, PageButtons } from "./";
+import { useCategoriesStore, useUiStore } from "../../hooks";
+import { useState } from "react";
 
 export const CategoryFilters = () => {
 
   const { numberCategories, categories } = useCategoriesStore();
+  const { upPage, downPage, searchingName } = useUiStore();
+
+  const [inputValue, setInputValue] = useState('')
+
+  const onInputChange = ( {target} ) => {
+      setInputValue( target.value );
+  }
+
+  const onHadleUp = () => {
+    upPage()
+  }
+
+  const onHadleDown = () => {
+    downPage()
+  }
+
+  const onSearchName = () => {
+    searchingName(inputValue);
+  }
 
   return (
     <Grid container
@@ -37,6 +57,9 @@ export const CategoryFilters = () => {
             label="Buscar por nombre..."
             variant="outlined"
             className="custom-input"
+            name="search"
+            value={ inputValue }
+            onChange={ onInputChange }
             InputLabelProps={{
               style: { color: 'white' },
             }}
@@ -45,6 +68,7 @@ export const CategoryFilters = () => {
 
         <IconButton
           className="addCategory-button"
+          onClick={onSearchName}
           sx={{ backgroundColor: 'golden.main' }}
         >
           <SearchIcon sx={{ color: 'secondary.main' }} />
@@ -95,7 +119,7 @@ export const CategoryFilters = () => {
         </Grid>
         {
           categories.map((category, index) => (
-            <Category key={category.categoryName} id={index+1} category={category}/>
+            <Category key={category.categoryName} id={index + 1} category={category} />
           ))
         }
       </Grid>
@@ -108,13 +132,11 @@ export const CategoryFilters = () => {
           </Typography>
         </Grid>
         <Grid item
-          sx={{ color: 'secondary.main' }}
+          sx={{ color: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
-          <IconButton sx={{ color: 'secondary.main' }}><KeyboardDoubleArrowLeftIcon /></IconButton>
-          <button className="page-button-selected">1</button>
-          <button className="page-button">2</button>
-          <button className="page-button">3</button>
-          <IconButton sx={{ color: 'secondary.main' }}><KeyboardDoubleArrowRightIcon /></IconButton>
+          <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleDown}><KeyboardDoubleArrowLeftIcon /></IconButton>
+          <PageButtons />
+          <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleUp}><KeyboardDoubleArrowRightIcon /></IconButton>
         </Grid>
       </Grid>
     </Grid>

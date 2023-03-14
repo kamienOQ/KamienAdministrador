@@ -6,6 +6,7 @@ export const uiSlice = createSlice({
         isCategoryModalOpen: false,
         totalPages: 1,
         page: 1,
+        searching: '',
         productsSelected: []
     },
     reducers: {
@@ -13,13 +14,20 @@ export const uiSlice = createSlice({
             state.totalPages = payload;
         },
         onUpPage: ( state ) => {
-            state.page++;
+            if(state.page < state.totalPages){
+                state.page++;
+            }
         },
         onDownPage: ( state ) => {
-            state.page--;
+            if(state.page > 1){
+                state.page--;
+            }
         },
         onChangePage: ( state, { payload } ) => {
             state.page = payload;
+        },
+        onSearchingName: (state, { payload }) => {
+            state.searching = payload;
         },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;
@@ -49,6 +57,7 @@ export const {
     onUpPage,
     onDownPage,
     onChangePage,
+    onSearchingName,
     onOpenCategoryModal, 
     onCloseCategoryModal, 
     onAddProductsSelected, 

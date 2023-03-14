@@ -1,6 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+//Kategories
 import { onCleanCategories, onCleanProductsUploaded } from '../store';
-import { onAddProductsSelected, onCleanProductsSelected, onCloseCategoryModal, onDeleteProductsSelected, onOpenCategoryModal } from '../store/ui/uiSlice'
+// Ui
+import { onAddProductsSelected, onChangePage, onCleanProductsSelected, onCloseCategoryModal, 
+    onDeleteProductsSelected, onDownPage, onOpenCategoryModal, onUpPage, onSearchingName} from '../store';
 
 export const useUiStore = () => {
 
@@ -8,8 +11,26 @@ export const useUiStore = () => {
 
     const { 
         isCategoryModalOpen,
-        productsSelected
+        totalPages,
+        page,
+        searching,
+        productsSelected,
     } = useSelector( state => state.ui );
+
+    const upPage = () => {
+        dispatch( onUpPage() );
+    }
+    const downPage = () => {
+        dispatch( onDownPage() );
+    }
+
+    const changePage = ( total ) => {
+        dispatch( onChangePage( total ) );
+    }
+
+    const searchingName = ( search ) => {
+        dispatch( onSearchingName( search ) );
+    }
 
     const openCategoryModal = () => {
         dispatch( onOpenCategoryModal() );
@@ -35,9 +56,16 @@ export const useUiStore = () => {
     return {
         //*Propiedades
         isCategoryModalOpen,
+        totalPages,
+        page,
+        searching,
         productsSelected,
 
         //*Métodos
+        upPage,
+        downPage,
+        changePage,
+        searchingName,
         openCategoryModal,
         closeCategoryModal,
         addProductsSelected,
