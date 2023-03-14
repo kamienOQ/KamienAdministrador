@@ -4,9 +4,23 @@ export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         isCategoryModalOpen: false,
+        totalPages: 1,
+        page: 1,
         productsSelected: []
     },
     reducers: {
+        onSetTotalPages: ( state, { payload } ) => {
+            state.totalPages = payload;
+        },
+        onUpPage: ( state ) => {
+            state.page++;
+        },
+        onDownPage: ( state ) => {
+            state.page--;
+        },
+        onChangePage: ( state, { payload } ) => {
+            state.page = payload;
+        },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;
         },
@@ -30,4 +44,14 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onOpenCategoryModal, onCloseCategoryModal, onAddProductsSelected, onDeleteProductsSelected, onCleanProductsSelected } = uiSlice.actions;
+export const { 
+    onSetTotalPages,
+    onUpPage,
+    onDownPage,
+    onChangePage,
+    onOpenCategoryModal, 
+    onCloseCategoryModal, 
+    onAddProductsSelected, 
+    onDeleteProductsSelected, 
+    onCleanProductsSelected 
+} = uiSlice.actions;
