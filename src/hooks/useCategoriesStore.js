@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanCategories, 
-    onSetActiveCategory, onStarGetProductsUploaded, onStartGetCategories, onStartGetCategoriesByName, onStartUploadFile, onStartUploadNewCategory } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeAscending, onCleanCategories, 
+    onSetActiveCategory, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
 
-    //*Slice
     const { 
         isSaving,
         message,
@@ -15,7 +14,8 @@ export const useCategoriesStore = () => {
         categories,
         activeCategory
     } = useSelector( state => state.categories );
-
+    
+    //*Slice
     const addNewCategory = () => {
         dispatch( onAddNewCategory() );
     }
@@ -36,10 +36,6 @@ export const useCategoriesStore = () => {
         dispatch( onAddIcon( images ) );
     }
 
-    const addProducts = ( products ) => {
-        dispatch( onAddProducts( products ) );
-    }
-
     const addErrorMessage = ( message ) => {
         dispatch( onAddErrorMessage( message ) );
     }
@@ -54,7 +50,6 @@ export const useCategoriesStore = () => {
     
 
     //*Thunks
-
     const startUploadFile = ( file, type, collectionName ) => {
         dispatch( onStartUploadFile( file, type, collectionName ) )
     }
@@ -63,19 +58,9 @@ export const useCategoriesStore = () => {
         dispatch( onStartUploadNewCategory() );
     }
 
-    const starGetProductsUploaded = () => {
-        dispatch( onStarGetProductsUploaded() );
-    }
-
-    const startGetCategories = ( page = 1 ) => {
+    const startGetCategories = () => {
         dispatch( onStartGetCategories( page ) );
-    }
-
-    const startGetCategoriesByName = ( name, page = 1 ) => {
-        dispatch( onStartGetCategoriesByName( name, page ) );
-    }
-    
-    
+    }    
 
     return {
         //*Propiedades
@@ -93,15 +78,11 @@ export const useCategoriesStore = () => {
         changeAscending,
         addImage,
         addIcon,
-        addProducts,
         addErrorMessage,
         addSuccessMessage,
         cleanCategories,
         startUploadFile,
         startUploadNewCategory,
-        starGetProductsUploaded,
         startGetCategories,
-        startGetCategoriesByName,
-
     }
 }

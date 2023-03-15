@@ -29,7 +29,6 @@ export const CategoriesPages = () => {
 
   const onOpenModal = () => {
     addNewCategory();
-    // TODO: (starGetProductsUploaded)cargar al estado todo los productos que se han subido a la base de datos
     openCategoryModal();
   }
 

@@ -125,10 +125,6 @@ export const CategoryFilters = () => {
             </Grid>
           </Grid>
           <Grid item
-            sx={{ width: '30%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
-            Productos relacionados
-          </Grid>
-          <Grid item
             sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             Imagen
           </Grid>

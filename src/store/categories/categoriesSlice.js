@@ -8,7 +8,6 @@ export const categoriesSlice = createSlice({
             error: '',
             success: ''
         },
-        productsUploaded: [],
         ascending: '',
         numberCategories: 0,
         categories: [],
@@ -54,22 +53,8 @@ export const categoriesSlice = createSlice({
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
             
         },
-        onChargeProductsUploaded: ( state, { payload } ) => {
-            state.productsUploaded.push( payload );
-        },
         onChargeCategoriesUploaded: ( state, { payload } ) => {
-            let duplicate = false
-            if(state.categories){
-                state.categories.forEach(category => {
-                    if(category.categoryName === payload.categoryName)
-                        duplicate = true
-                });
-                if(!duplicate){
-                    state.categories.push( payload );
-                }
-            }else{
-                state.categories.push( payload );
-            }
+            state.categories.push( payload );
         },
         onChangeAscending: ( state, { payload } ) => {
             state.ascending = payload
@@ -87,9 +72,6 @@ export const categoriesSlice = createSlice({
         onAddIcon: ( state, { payload } ) => {
             state.activeCategory.icon.name = payload[0];
             state.activeCategory.icon.url = payload[1];
-        },
-        onAddProducts: ( state, { payload } ) => {
-            state.activeCategory.products = payload;
         },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
@@ -115,14 +97,12 @@ export const {
     onSetActiveCategory, 
     onUpdateCategory, 
     onDeleteCategory,
-    onChargeProductsUploaded,
     onChargeCategoriesUploaded,
     onChangeAscending,
     onSetNumberCategories,
     onAddLowerCase, 
     onAddImage, 
     onAddIcon, 
-    onAddProducts, 
     onAddErrorMessage,
     onAddSuccessMessage,
     onCleanCategories ,

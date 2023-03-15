@@ -6,8 +6,7 @@ export const uiSlice = createSlice({
         isCategoryModalOpen: false,
         totalPages: 1,
         page: 1,
-        searching: '',
-        productsSelected: []
+        searching: ''
     },
     reducers: {
         onSetTotalPages: ( state, { payload } ) => {
@@ -37,17 +36,6 @@ export const uiSlice = createSlice({
         },
         onCloseCategoryModal: ( state ) => {
             state.isCategoryModalOpen = false;
-        },
-        onAddProductsSelected: ( state, { payload } ) => {
-            if (!state.productsSelected.some((product) => product.toLowerCase() === payload.toLowerCase())) {
-                state.productsSelected.push( payload );
-            }
-        },
-        onDeleteProductsSelected: ( state, { payload } ) => {
-            state.productsSelected = state.productsSelected.filter( event => event !== payload );
-        },
-        onCleanProductsSelected: ( state ) => {
-            state.productsSelected = []
         }
         
     }
@@ -64,7 +52,4 @@ export const {
     onSearchingName,
     onOpenCategoryModal, 
     onCloseCategoryModal, 
-    onAddProductsSelected, 
-    onDeleteProductsSelected, 
-    onCleanProductsSelected 
 } = uiSlice.actions;

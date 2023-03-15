@@ -32,19 +32,6 @@ export const Category = ({ id, category }) => {
         }
       </Grid>
       <Grid item
-        sx={{ width: '30%', borderRight: 1, borderColor: 'secondary.main', 
-        display: 'flex', flexDirection: 'column', justifyContent: 'center', 
-        alignItems: 'center', pt: .5, pb: .5 }}
-      >
-        {category.products.map((product, index, array) => {
-          if(index === array.length - 1) {
-            return <Typography key={index}>{product}</Typography>
-          }else{
-            return <Typography style={{ whiteSpace: "pre-wrap" }} key={index}>{`${product}, `}</Typography>
-          }
-        })}
-      </Grid>
-      <Grid item
         sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
               justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
       >

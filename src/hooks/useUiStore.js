@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 //Kategories
-import { onCleanCategories, onCleanProductsUploaded, onRestorePage } from '../store';
+import { onCleanCategories, onRestorePage } from '../store';
 // Ui
-import { onAddProductsSelected, onChangePage, onCleanProductsSelected, onCloseCategoryModal, 
-    onDeleteProductsSelected, onDownPage, onOpenCategoryModal, onUpPage, onSearchingName} from '../store';
+import { onChangePage, onCloseCategoryModal, onDownPage, 
+    onOpenCategoryModal, onUpPage, onSearchingName} from '../store';
 
 export const useUiStore = () => {
 
@@ -14,7 +14,6 @@ export const useUiStore = () => {
         totalPages,
         page,
         searching,
-        productsSelected,
     } = useSelector( state => state.ui );
 
     const upPage = () => {
@@ -40,16 +39,6 @@ export const useUiStore = () => {
     const closeCategoryModal = () => {
         dispatch( onCloseCategoryModal() );
         dispatch( onCleanCategories() );
-        dispatch( onCleanProductsSelected() );
-        dispatch( onCleanProductsUploaded() );
-    }
-
-    const addProductsSelected = ( productSelected ) => {
-        dispatch( onAddProductsSelected( productSelected ) );
-    }
-
-    const deleteProductsSelected = ( productSelected ) => {
-        dispatch( onDeleteProductsSelected( productSelected ) );
     }
 
     
@@ -60,7 +49,6 @@ export const useUiStore = () => {
         totalPages,
         page,
         searching,
-        productsSelected,
 
         //*Métodos
         upPage,
@@ -69,8 +57,6 @@ export const useUiStore = () => {
         searchingName,
         openCategoryModal,
         closeCategoryModal,
-        addProductsSelected,
-        deleteProductsSelected,
     }
 
 }
