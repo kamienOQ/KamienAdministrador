@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onChargeProductsUploaded, onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded } from "./";
+    onChargeProductsUploaded, onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -29,6 +29,7 @@ export const onStartUploadNewCategory = () => {
   return async (dispatch, getState) => {
 
     dispatch(onChangeSavingNewCategory(true));
+    dispatch(onAddLowerCase());
 
     const { activeCategory } = getState().categories;
     let duplicateCategory = false;
@@ -69,23 +70,24 @@ export const onStarGetProductsUploaded = () => {
 }
 
 export const onStartGetCategories = (page = 1) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     let number = page * 5;
     let counter = 0;
-    let getCategory = false
-    if(getState().categories !== [] ){
-      dispatch(onCleanCategories());
-    }
+    let getCategory = false;
+    dispatch(onCleanCategories());
+    
     const collectionRef = collection(FirebaseDB, `/categories`);
     const q = query( collectionRef, orderBy("date", "desc"), );
     const querySnapshot = await getDocs(q);
 
-    dispatch(onSetNumberCategories(querySnapshot._docs.length))
+    dispatch(onSetNumberCategories(querySnapshot._docs.length));
     if(querySnapshot._docs.length % 5 > 0){
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1))
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
     }else{
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)))
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
     }
+
+    
 
     querySnapshot.forEach((doc) => {
       if((number - 5 === counter && !getCategory) || (number === counter)){
@@ -101,24 +103,20 @@ export const onStartGetCategories = (page = 1) => {
 }
 
 export const onStartGetCategoriesByName = (name, page = 1) => {
-  return async (dispatch, getState) => {
-    console.log(name)
+  return async (dispatch) => {
     let number = page * 5;
     let counter = 0;
-    let getCategory = false
-    if(getState().categories !== [] ){
-      dispatch(onCleanCategories());
-    }
-    const collectionRef = collection(FirebaseDB, `/categories`);
-    const q = query( collectionRef, where('categoryName', 'array-contains', name), orderBy("date", "desc"), );
-    console.log(q)
-    const querySnapshot = await getDocs(q);
+    let getCategory = false;
+    dispatch(onCleanCategories());
 
-    dispatch(onSetNumberCategories(querySnapshot._docs.length))
+    const collectionRef = collection(FirebaseDB, `/categories`);
+    const q = query( collectionRef, where('categoryNameLowerCase', '>=', name), where('categoryNameLowerCase', '<', name + '\uf8ff') );
+    const querySnapshot = await getDocs(q);
+    dispatch(onSetNumberCategories(querySnapshot._docs.length));
     if(querySnapshot._docs.length % 5 > 0){
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1))
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
     }else{
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)))
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
     }
 
     querySnapshot.forEach((doc) => {

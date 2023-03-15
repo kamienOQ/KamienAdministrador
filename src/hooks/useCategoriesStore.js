@@ -67,7 +67,7 @@ export const useCategoriesStore = () => {
     }
 
     const startGetCategoriesByName = ( name, page = 1 ) => {
-        dispatch( onStartGetCategoriesByName( name ) );
+        dispatch( onStartGetCategoriesByName( name, page ) );
     }
     
     

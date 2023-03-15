@@ -127,6 +127,7 @@
     background-color: var(--backgroud);
     color: var(--white);
     font-family: var(--roboto);
+    cursor: pointer;
 }
 
 .page-button-selected{
@@ -139,6 +140,7 @@
     font-family: var(--roboto);
     background-color: var(--main-color);
     color: var(--white);
+    cursor: pointer;
 }
 
 .table-img{

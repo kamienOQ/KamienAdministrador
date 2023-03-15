@@ -6,17 +6,25 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { Category, PageButtons } from "./";
 import { useCategoriesStore, useUiStore } from "../../hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const CategoryFilters = () => {
 
   const { numberCategories, categories } = useCategoriesStore();
-  const { upPage, downPage, searchingName } = useUiStore();
+  const { searchingName, page, upPage, downPage } = useUiStore();
 
   const [inputValue, setInputValue] = useState('')
 
+  useEffect(() => {
+    if(inputValue === ''){
+      searchingName(inputValue);
+    }
+  }, [inputValue])
+  
+
   const onInputChange = ( {target} ) => {
       setInputValue( target.value );
+      
   }
 
   const onHadleUp = () => {
@@ -28,6 +36,7 @@ export const CategoryFilters = () => {
   }
 
   const onSearchName = () => {
+    console.log('hola')
     searchingName(inputValue);
   }
 
@@ -119,7 +128,19 @@ export const CategoryFilters = () => {
         </Grid>
         {
           categories.map((category, index) => (
-            <Category key={category.categoryName} id={index + 1} category={category} />
+            index === 0 ?
+              <Category key={category.categoryName} id={(page * 5)-4} category={category} />
+            :
+            index === 1 ?
+              <Category key={category.categoryName} id={(page * 5)-3} category={category} />
+            :
+            index === 2 ?
+              <Category key={category.categoryName} id={(page * 5)-2} category={category} />
+            :
+            index === 3 ?
+              <Category key={category.categoryName} id={(page * 5)-1} category={category} />
+            :
+              <Category key={category.categoryName} id={page * 5} category={category} />
           ))
         }
       </Grid>

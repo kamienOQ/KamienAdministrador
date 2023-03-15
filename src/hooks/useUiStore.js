@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 //Kategories
-import { onCleanCategories, onCleanProductsUploaded } from '../store';
+import { onCleanCategories, onCleanProductsUploaded, onRestorePage } from '../store';
 // Ui
 import { onAddProductsSelected, onChangePage, onCleanProductsSelected, onCloseCategoryModal, 
     onDeleteProductsSelected, onDownPage, onOpenCategoryModal, onUpPage, onSearchingName} from '../store';
@@ -29,6 +29,7 @@ export const useUiStore = () => {
     }
 
     const searchingName = ( search ) => {
+        dispatch( onRestorePage() );
         dispatch( onSearchingName( search ) );
     }
 

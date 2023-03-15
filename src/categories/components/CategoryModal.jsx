@@ -30,10 +30,10 @@ const products = [
     label: 'Perfume D'
   },
   {
-    label: 'Reloj E'
+    label: 'Lente E'
   },
   {
-    label: 'Reloj F'
+    label: 'Lente F'
   }
 ];
 

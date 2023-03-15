@@ -26,6 +26,9 @@ export const uiSlice = createSlice({
         onChangePage: ( state, { payload } ) => {
             state.page = payload;
         },
+        onRestorePage: ( state ) => {
+            state.page = 1;
+        },
         onSearchingName: (state, { payload }) => {
             state.searching = payload;
         },
@@ -57,6 +60,7 @@ export const {
     onUpPage,
     onDownPage,
     onChangePage,
+    onRestorePage,
     onSearchingName,
     onOpenCategoryModal, 
     onCloseCategoryModal, 
