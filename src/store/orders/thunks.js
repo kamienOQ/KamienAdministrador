@@ -7,7 +7,7 @@ export const startGetOrders = (page = 1) => {
     let number = page * 5;
     let counter = 0;
     let getOrders = false;
-    const orders = [];
+    let orders = [];
   
     if (getState().orders !== []) {
       dispatch(cleanOrders());
