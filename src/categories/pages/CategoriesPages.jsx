@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export const CategoriesPages = () => {
 
   const { isCategoryModalOpen, page, searching, openCategoryModal, closeCategoryModal } = useUiStore();
-  const { isSaving, message, addNewCategory, startGetCategories, startGetCategoriesByName } = useCategoriesStore();
+  const { isSaving, message, ascending, addNewCategory, startGetCategories, startGetCategoriesByName } = useCategoriesStore();
 
   useEffect(() => {
     if (!!message.success) {
@@ -24,7 +24,7 @@ export const CategoriesPages = () => {
         startGetCategories(page);
       }
     }
-  }, [isCategoryModalOpen, page, searching])
+  }, [isCategoryModalOpen, page, ascending, searching])
   
 
   const onOpenModal = () => {

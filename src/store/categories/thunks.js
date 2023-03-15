@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onChargeProductsUploaded, onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase } from "./";
+    onChargeProductsUploaded, onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase, onChangeAscending } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -70,14 +70,26 @@ export const onStarGetProductsUploaded = () => {
 }
 
 export const onStartGetCategories = (page = 1) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+   const { ascending } =  getState().categories;
     let number = page * 5;
     let counter = 0;
     let getCategory = false;
     dispatch(onCleanCategories());
-    
     const collectionRef = collection(FirebaseDB, `/categories`);
-    const q = query( collectionRef, orderBy("date", "desc"), );
+    let q = null
+    if(ascending===''){
+      q = query( collectionRef, orderBy("date", "desc") );
+    }
+    if(ascending==='dateAscending'){
+      q = query( collectionRef, orderBy("date", "asc") );
+    }
+    if(ascending==='ascending'){
+      q = query( collectionRef, orderBy("categoryNameLowerCase", "asc") );
+    }
+    if(ascending==='descending'){
+      q = query( collectionRef, orderBy("categoryNameLowerCase", "desc") );
+    }
     const querySnapshot = await getDocs(q);
 
     dispatch(onSetNumberCategories(querySnapshot._docs.length));
@@ -108,6 +120,7 @@ export const onStartGetCategoriesByName = (name, page = 1) => {
     let counter = 0;
     let getCategory = false;
     dispatch(onCleanCategories());
+    dispatch(onChangeAscending(''));
 
     const collectionRef = collection(FirebaseDB, `/categories`);
     const q = query( collectionRef, where('categoryNameLowerCase', '>=', name), where('categoryNameLowerCase', '<', name + '\uf8ff') );

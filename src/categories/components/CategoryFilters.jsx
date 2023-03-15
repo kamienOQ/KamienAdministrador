@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 export const CategoryFilters = () => {
 
-  const { numberCategories, categories } = useCategoriesStore();
+  const { ascending, numberCategories, categories, changeAscending } = useCategoriesStore();
   const { searchingName, page, upPage, downPage } = useUiStore();
 
   const [inputValue, setInputValue] = useState('')
@@ -36,8 +36,23 @@ export const CategoryFilters = () => {
   }
 
   const onSearchName = () => {
-    console.log('hola')
     searchingName(inputValue);
+  }
+
+  const onAscendingFilter = () => {
+    if(ascending === '' || ascending === 'descending' || ascending === 'dateAscending'){
+      changeAscending('ascending');
+    }else{
+      changeAscending('descending');
+    }
+  }
+
+  const onDate = () => {
+    if(ascending === ''){
+      changeAscending('dateAscending');
+    }else{
+      changeAscending('');
+    }
   }
 
   return (
@@ -95,7 +110,7 @@ export const CategoryFilters = () => {
             sx={{ width: '20%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Nombre
-              <IconButton sx={{ color: 'secondary.main' }}>
+              <IconButton sx={{ color: 'secondary.main' }} onClick={onAscendingFilter}>
                 <UnfoldMoreIcon />
               </IconButton>
             </Grid>
@@ -104,7 +119,7 @@ export const CategoryFilters = () => {
             sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Fecha
-              <IconButton sx={{ color: 'secondary.main' }}>
+              <IconButton sx={{ color: 'secondary.main' }} onClick={onDate}>
                 <CalendarMonthIcon />
               </IconButton>
             </Grid>

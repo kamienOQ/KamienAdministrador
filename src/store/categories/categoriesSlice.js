@@ -9,6 +9,7 @@ export const categoriesSlice = createSlice({
             success: ''
         },
         productsUploaded: [],
+        ascending: '',
         numberCategories: 0,
         categories: [],
         activeCategory: null, 
@@ -70,10 +71,12 @@ export const categoriesSlice = createSlice({
                 state.categories.push( payload );
             }
         },
+        onChangeAscending: ( state, { payload } ) => {
+            state.ascending = payload
+        },
         onSetNumberCategories: ( state, { payload } ) => {
             state.numberCategories = payload
         },
-
         onAddLowerCase: ( state ) => {
             state.activeCategory.categoryNameLowerCase = state.activeCategory.categoryName.toLowerCase();
         },
@@ -114,6 +117,7 @@ export const {
     onDeleteCategory,
     onChargeProductsUploaded,
     onChargeCategoriesUploaded,
+    onChangeAscending,
     onSetNumberCategories,
     onAddLowerCase, 
     onAddImage, 
