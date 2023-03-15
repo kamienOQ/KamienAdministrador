@@ -9,6 +9,7 @@ export const productsSlice = createSlice({
             success: ''
         },
         productsUploaded: [],
+        numberCategories: 0,
         products: [],
         activeProduct: null, 
     },
@@ -30,7 +31,6 @@ export const productsSlice = createSlice({
                 },
                 date: new Date().getTime(),
             }
-            state.products.push( newProduct );
             state.activeProduct = newProduct;
         },
         onSetActiveProduct: ( state, { payload } ) => {
@@ -52,8 +52,28 @@ export const productsSlice = createSlice({
             state.products =  state.products.filter( (product) => product.productName !== payload );
             
         },
-        onChargeProductsUploaded: ( state, { payload } ) => {
+        onChargeProductUploaded: ( state, { payload } ) => {
             state.productsUploaded.push( payload );
+        },
+        onChargeProductsUploaded: ( state, { payload } ) => {
+            let duplicate = false
+            if(state.products){
+                state.products.forEach(product => {
+                    if(product.productName === payload.productName)
+                        duplicate = true
+                });
+                if(!duplicate){
+                    state.products.push( payload );
+                }
+            }else{
+                state.products.push( payload );
+            }
+        },
+        onSetNumberProducts: ( state, { payload } ) => {
+            state.numberProducts = payload
+        },
+        onAddLowerCase: ( state ) => {
+            state.activeProduct.productNameLowerCase = state.activeProduct.productName.toLowerCase();
         },
         onAddImage: ( state, { payload } ) => {
             state.activeProduct.image.name = payload[0];
@@ -76,7 +96,7 @@ export const productsSlice = createSlice({
             state.products = [];
             state.activeProduct = null;
         },
-        onCleanProductsUploaded: ( state ) => {
+        onCleanProductUploaded: ( state ) => {
             state.productsUploaded = [];
         }
     }
@@ -91,11 +111,14 @@ export const {
     onUpdateProduct, 
     onDeleteProduct,
     onChargeProductsUploaded, 
+    onChargeProductUploaded,
+    onSetNumberProducts,
+    onAddLowerCase,
     onAddImage, 
     onAddIcon, 
     onAddProducts, 
     onAddErrorMessage,
     onAddSuccessMessage,
     onCleanProducts,
-    onCleanProductsUploaded
+    onCleanProductUploaded
 } = productsSlice.actions;

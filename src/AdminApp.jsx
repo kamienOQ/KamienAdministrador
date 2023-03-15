@@ -6,7 +6,7 @@ import { AppTheme } from './theme'
 export const AdminApp = () => {
     return (
       <AppTheme>
-          <ProductPages />
+          <ProductPages/>
       </AppTheme>
     );
 }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddProducts, onAddSuccessMessage, onCleanProducts, 
-    onSetActiveProduct, onStarGetProductsUploaded, onStartUploadFile, onStartUploadNewProduct } from "../store";
+    onSetActiveProduct, onStarGetProductsUploaded, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct } from "../store";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -61,6 +61,14 @@ export const useProductsStore = () => {
         dispatch( onStarGetProductsUploaded() );
     }
 
+    const startGetProducts = ( page = 1 ) => {
+        dispatch( onStartGetProducts( page ) );
+    }
+
+    const startGetProductsByName = ( name, page = 1 ) => {
+        dispatch( onStartGetProductsByName( name, page ) );
+    }
+
     return {
         //*Propiedades
         message,
@@ -81,6 +89,7 @@ export const useProductsStore = () => {
         startUploadFile,
         startUploadNewProduct,
         starGetProductsUploaded,
-
+        startGetProducts,
+        startGetProductsByName,
     }
 }

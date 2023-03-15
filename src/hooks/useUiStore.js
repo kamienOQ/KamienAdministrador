@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { onCleanProducts, onCleanProductUploaded } from '../store';
 import { onAddProductsSelected, onCleanProductsSelected, onCloseProductModal, onDeleteProductsSelected, onOpenProductModal } from '../store/ui/uiSlice'
 
 export const useUiStore = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const { 
         isProductModalOpen,
@@ -11,19 +12,22 @@ export const useUiStore = () => {
     } = useSelector( state => state.ui );
 
     const openProductModal = () => {
-        dispatch( onOpenProductModal() )
+        dispatch( onOpenProductModal() );
     }
 
     const closeProductModal = () => {
-        dispatch( onCloseProductModal() )
+        dispatch( onCloseProductModal() );
+        dispatch( onCleanProducts() );
+        dispatch( onCleanProductsSelected() );
+        dispatch( onCleanProductUploaded() );
     }
 
     const addProductsSelected = ( productSelected ) => {
-        dispatch( onAddProductsSelected( productSelected ) )
+        dispatch( onAddProductsSelected( productSelected ) );
     }
 
     const deleteProductsSelected = ( productSelected ) => {
-        dispatch( onDeleteProductsSelected( productSelected ) )
+        dispatch( onDeleteProductsSelected( productSelected ) );
     }
 
     const cleanProductsSelected = () => {

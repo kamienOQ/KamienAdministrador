@@ -5,7 +5,7 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../hooks"
 import { FloatingTags } from ".";
-import { deleteFileUpload } from "../../helpers/deleteFileUpload";
+import { deleteFileUpload } from "../../helpers";
 
 const products = [
   {
@@ -77,13 +77,14 @@ export const ProductModal = () => {
 
   return (
     <Dialog
-      className="modal-container-categories"
+      className="modal-container-products"
       open={isProductModalOpen}
     >
       <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
-        <DialogTitle >Agregar Producto</DialogTitle>
+        <DialogTitle>Agregar Producto</DialogTitle>
         <form className="product-form">
           <TextField
+            sx={{ p: 1 }}
             type="text"
             fullWidth
             label="Nombre del Producto"
@@ -95,6 +96,7 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
+            sx={{ p: 1 }}
             type="number"
             fullWidth
             label="Precio del Producto"
@@ -106,6 +108,7 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
+            sx={{ p: 1}}
             type="text"
             fullWidth
             label="Atributos del Producto"
@@ -117,13 +120,14 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
+            sx={{ p: 1}}
             fullWidth
             id="outlined-select-currency"
             select
             label="Categoría del producto"
             defaultValue=""
             onChange={onSelectCategory}
-            helperText="Por favor seleccione los productos"
+            helperText="Por favor seleccione la categoría del producto"
           >
             {/* importar y recorrer productsUploaded opteniendo el nombre */}
             {products.map((option) => (
@@ -192,7 +196,7 @@ export const ProductModal = () => {
                 className="cancelProduct-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ backgroundColor: "error.main" }}
+                sx={{ backgroundColor: "error.main", m: 5 }}
               >
                 Cancelar
               </Button>
@@ -200,7 +204,7 @@ export const ProductModal = () => {
                 className="addProduct-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ backgroundColor: "golden.main" }}
+                sx={{ backgroundColor: "golden.main", m: 5  }}
               >
                 Agregar
               </Button>
