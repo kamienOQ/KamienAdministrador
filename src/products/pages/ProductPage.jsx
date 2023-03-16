@@ -1,14 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useProductsStore, useUiStore } from "../../hooks";
+import { useLoadDataPage, useProductsStore, useUiStore } from "../../hooks";
 import { ProductFilters, ProductModal } from "../";
 import { useEffect } from "react";
 
 
 export const ProductPages = () => {
 
-  const { isProductModalOpen, page, searching, openProductModal, closeProductModal } = useUiStore();
-  const { isSaving, message, addNewProduct, startGetProducts, startGetProductsByName } = useProductsStore();
+  const { isProductModalOpen, page, openProductModal, closeProductModal } = useUiStore();
+  const { products, isSaving, message, ascending, addNewProduct, startGetProducts } = useProductsStore();
+  const { loadData } = useLoadDataPage();
 
   useEffect(() => {
     if (!!message.success) {
@@ -17,21 +18,18 @@ export const ProductPages = () => {
   }, [message.success]);
 
   useEffect(() => {
-    if(!isProductModalOpen){
-      if(!!searching){
-        startGetProductsByName(searching, page)
-      }else{
-        startGetProducts(page);
-      }
-    }
-  }, [isProductModalOpen, page, searching])
-  
+    startGetProducts();
+  }, [])
 
-  const onOpenModal = () => {
-    addNewProduct();
-    // TODO: (starGetProductsUploaded)cargar al estado todo los productos que se han subido a la base de datos
-    openProductModal();
-  }
+  useEffect(() => {
+    loadData();
+}, [isProductModalOpen, page, ascending, products])
+
+
+const onOpenModal = () => {
+  addNewProduct();
+  openProductModal();
+}
 
   return (
     <Grid

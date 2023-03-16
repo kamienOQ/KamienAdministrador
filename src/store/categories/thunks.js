@@ -1,7 +1,9 @@
-import { collection, doc, getDocs, query, setDoc } from "firebase/firestore/lite";
+import { collection, doc, getDocs, orderBy, query, setDoc, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewCategory, onAddImage1, onAddIcon1, onAddSuccessMessage1, onAddErrorMessage1, onChargeProductsUploaded } from "./categoriesSlice";
+import { onSetTotalPages } from "../";
+import { onChangeSavingNewCategory, onAddImage1, onAddIcon1, onAddSuccessMessage1, onAddErrorMessage1, 
+    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase1, onAddCategoryAtStart } from "./";
 
 
 export const onStartUploadFile1 = (file, type, collectionName) => {
@@ -14,9 +16,9 @@ export const onStartUploadFile1 = (file, type, collectionName) => {
       const downloadURL = await getDownloadURL(storageRef);
 
       if(type === 'image'){
-        dispatch( onAddImage1( [imgId, downloadURL] ) );
+        dispatch( onAddImage( [imgId, downloadURL] ) );
       }else{
-        dispatch( onAddIcon1( [imgId, downloadURL] ) );
+        dispatch( onAddIcon( [imgId, downloadURL] ) );
       }
     }
   }
@@ -25,45 +27,91 @@ export const onStartUploadFile1 = (file, type, collectionName) => {
 
 export const onStartUploadNewCategory = () => {
   return async (dispatch, getState) => {
+    
+    let duplicateCategory = false;
+    const { activeCategory } = getState().categories;
 
     dispatch(onChangeSavingNewCategory(true));
-
-    const { activeCategory } = getState().categories;
-    let duplicateCategory = false;
+    dispatch(onAddLowerCase1());
 
     const collectionRef = collection(FirebaseDB, `/categories`);
     const q = query( collectionRef );
-
     const querySnapshot = await getDocs(q);
+
     querySnapshot.forEach((doc) => {
       const { categoryName } = doc.data();
       if( categoryName.toLowerCase() === activeCategory.categoryName.toLowerCase() ){
         duplicateCategory = true;
         dispatch(onAddErrorMessage1( 'Ya existe una categoría con este nombre' ));
-        dispatch(onAddSuccessMessage1( '' ));
+        dispatch(onAddSuccessMessage( '' ));
       }
     });
     if(!duplicateCategory){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeCategory);
+        dispatch(onAddCategoryAtStart( activeCategory ));
         dispatch(onAddSuccessMessage1( 'Agregado correctamente' ));
-        dispatch(onAddErrorMessage( '' ));
+        dispatch(onAddErrorMessage1( '' ));
     }
     dispatch(onChangeSavingNewCategory(false));
   }
 }
 
-export const onStarGetProductsUploaded1 = () => {
-  return async (dispatch) => {
+export const onStartGetCategories = () => {
+  return async (dispatch, getState) => {
+    let repetido = false
+    dispatch(onCleanCategories());
 
-    const collectionRef = collection(FirebaseDB, `/products`);
-    const q = query( collectionRef );
-    querySnapshot.forEach((doc) => {
-        dispatch(onChargeProductsUploaded( doc ));
+    const collectionRef = collection(FirebaseDB, `/categories`);
+    const q = query( collectionRef, orderBy("date", "desc") );
+    const querySnapshot = await getDocs(q);
+
+    dispatch(onSetNumberCategories(querySnapshot._docs.length));
+    if(querySnapshot._docs.length % 5 > 0){
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
+    }else{
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
+    }
+
+    querySnapshot.forEach((doc, index) => {
+      dispatch(onChargeCategoriesUploaded( doc.data() ));
     });
+    
+  
   }
 }
 
-//TODO: onStartLoadingCategories
+// export const onStartGetCategoriesByName = (name, page = 1) => {
+//   return async (dispatch) => {
+//     let number = page * 5;
+//     let counter = 0;
+//     let getCategory = false;
+//     dispatch(onCleanCategories());
+//     dispatch(onChangeAscending(''));
+
+//     const collectionRef = collection(FirebaseDB, `/categories`);
+//     const q = query( collectionRef, where('categoryNameLowerCase', '>=', name), where('categoryNameLowerCase', '<', name + '\uf8ff') );
+//     const querySnapshot = await getDocs(q);
+//     dispatch(onSetNumberCategories(querySnapshot._docs.length));
+//     if(querySnapshot._docs.length % 5 > 0){
+//       dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
+//     }else{
+//       dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
+//     }
+
+//     querySnapshot.forEach((doc) => {
+//       if((number - 5 === counter && !getCategory) || (number === counter)){
+//         getCategory = !getCategory;
+//       }
+//       if(getCategory){
+//         dispatch(onChargeCategoriesUploaded( doc.data() ));
+//       }
+//       counter++;
+//     });
+//   }
+// }
+
+
+//TODO: onStartGetCategoriesByDate
 //TODO: onStartSaveCategory
 //TODO: onStartDeletingCategory

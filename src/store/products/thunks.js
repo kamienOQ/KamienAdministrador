@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewProduct, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onChargeProductsUploaded, onCleanProducts, onSetNumberProducts, onChargeProductUploaded, onAddLowerCase } from "./";
+  onCleanProducts, onSetNumberProducts, onChargeProductsUploaded, onAddLowerCase, onAddProductAtStart } from "./";
 
 
 
@@ -29,16 +29,16 @@ export const onStartUploadFile = (file, type, collectionName) => {
 export const onStartUploadNewProduct = () => {
   return async (dispatch, getState) => {
 
-    dispatch(onChangeSavingNewProduct(true));
-    dispatch(onAddLowerCase());
-
     const { activeProduct } = getState().products;
     let duplicateProduct = false;
 
+    dispatch(onChangeSavingNewProduct(true));
+    dispatch(onAddLowerCase());
+
     const collectionRef = collection(FirebaseDB, `/products`);
     const q = query( collectionRef );
-
     const querySnapshot = await getDocs(q);
+
     querySnapshot.forEach((doc) => {
       const { productName } = doc.data();
       if( productName.toLowerCase() === activeProduct.productName.toLowerCase() ){
@@ -50,6 +50,7 @@ export const onStartUploadNewProduct = () => {
     if(!duplicateProduct){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeProduct);
+        dispatch(onAddProductAtStart( activeProduct ));
         dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
         dispatch(onAddErrorMessage( '' ));
     }
@@ -57,6 +58,30 @@ export const onStartUploadNewProduct = () => {
   }
 }
 
+export const onStartGetProducts = () => {
+  return async ( dispatchgetState, getState ) => {
+    let repetido = false
+    dispatch(onCleanProducts());
+
+    const collectionRef = collection(FirebaseDB, `/products`);
+    const q = query( collectionRef, orderBy("date", "desc") );
+    const querySnapshot = await getDocs(q);
+
+    dispatch(onSetNumberProducts(querySnapshot._docs.length));
+    if(querySnapshot._docs.length % 5 > 0){
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
+    }else{
+      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
+    }
+
+    querySnapshot.forEach((doc, index) => {
+      dispatch(onChargeProductsUploaded( doc.data() ));
+    });
+    
+  }
+}
+
+/*
 export const onStarGetProductsUploaded = () => {
   return async (dispatch) => {
 
@@ -67,37 +92,6 @@ export const onStarGetProductsUploaded = () => {
     querySnapshot.forEach((doc) => {
         dispatch(onChargeProductsUploaded( doc ));
     });
-  }
-}
-
-export const onStartGetProducts = (page = 1) => {
-  return async (dispatch) => {
-    let number = page * 5;
-    let counter = 0;
-    let getProduct = false
-    dispatch(onCleanProducts());
-    
-    const collectionRef = collection(FirebaseDB, `/products`);
-    const q = query( collectionRef, orderBy("date", "desc"), );
-    const querySnapshot = await getDocs(q);
-
-    dispatch(onSetNumberProducts(querySnapshot._docs.length));
-    if(querySnapshot._docs.length % 5 > 0){
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
-    }else{
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
-    }
-
-    querySnapshot.forEach((doc) => {
-      if((number - 5 === counter && !getProduct) || (number === counter)){
-        getProduct = !getProduct;
-      }
-      if(getProduct){
-        dispatch(onChargeProductUploaded( doc.data() ));
-      }
-      counter++;
-    });
-
   }
 }
 
@@ -129,6 +123,7 @@ export const onStartGetProductsByName = (name, page = 1) => {
     });
   }
 }
+*/
 
 //TODO: onStartGetProductsByName
 //TODO: onStartGetProductsByDate

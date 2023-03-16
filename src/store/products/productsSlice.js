@@ -8,9 +8,12 @@ export const productsSlice = createSlice({
             error: '',
             success: ''
         },
+        ascending: '',
+        numberProducts: 0,
         productsUploaded: [],
-        numberCategories: 0,
+        numberProducts: 0,
         products: [],
+        productsOnPage: [],
         activeProduct: null, 
     },
     reducers: {
@@ -20,6 +23,7 @@ export const productsSlice = createSlice({
         onAddNewProduct: ( state ) => {
             const newProduct = {
                 productName: '',
+                productNameLowerCase: '',
                 products: [],
                 image: {
                     name: null,
@@ -52,9 +56,6 @@ export const productsSlice = createSlice({
             state.products =  state.products.filter( (product) => product.productName !== payload );
             
         },
-        onChargeProductUploaded: ( state, { payload } ) => {
-            state.productsUploaded.push( payload );
-        },
         onChargeProductsUploaded: ( state, { payload } ) => {
             let duplicate = false
             if(state.products){
@@ -68,6 +69,12 @@ export const productsSlice = createSlice({
             }else{
                 state.products.push( payload );
             }
+        },
+        onAddProductAtStart: ( state, { payload } ) => {
+            state.products.unshift(payload);
+        },  
+        onChargeProductsByPage: ( state, { payload } ) => {
+            state.productsOnPage = payload;
         },
         onSetNumberProducts: ( state, { payload } ) => {
             state.numberProducts = payload
@@ -83,8 +90,8 @@ export const productsSlice = createSlice({
             state.activeProduct.icon.name = payload[0];
             state.activeProduct.icon.url = payload[1];
         },
-        onAddProducts: ( state, { payload } ) => {
-            state.activeProduct.products = payload;
+        onChangeAscending: ( state, { payload } ) => {
+            state.ascending = payload
         },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
@@ -96,6 +103,9 @@ export const productsSlice = createSlice({
             state.products = [];
             state.activeProduct = null;
         },
+        onCleanActiveProduct: ( state ) => {
+            state.activeProduct = null;
+        },
         onCleanProductUploaded: ( state ) => {
             state.productsUploaded = [];
         }
@@ -105,20 +115,22 @@ export const productsSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-    onChangeSavingNewProduct, 
-    onAddNewProduct, 
-    onSetActiveProduct, 
-    onUpdateProduct, 
-    onDeleteProduct,
-    onChargeProductsUploaded, 
-    onChargeProductUploaded,
-    onSetNumberProducts,
-    onAddLowerCase,
-    onAddImage, 
-    onAddIcon, 
-    onAddProducts, 
+    onAddProductAtStart,
     onAddErrorMessage,
+    onAddIcon, 
+    onAddImage, 
+    onAddLowerCase, 
+    onAddNewProduct, 
     onAddSuccessMessage,
+    onChangeAscending,
+    onChangeSavingNewProduct, 
+    onChargeProductsByPage, 
+    onChargeProductsUploaded,
+    onCleanActiveProduct,
     onCleanProducts,
-    onCleanProductUploaded
+    onCleanProductsUploaded,
+    onDeleteProduct,
+    onSetActiveProduct, 
+    onSetNumberProducts,
+    onUpdateProduct,
 } = productsSlice.actions;

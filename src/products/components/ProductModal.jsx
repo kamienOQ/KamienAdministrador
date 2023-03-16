@@ -4,7 +4,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../hooks"
-import { FloatingTags } from ".";
+import { FloatingTags } from "./";
 import { deleteFileUpload } from "../../helpers";
 
 const products = [
@@ -37,7 +37,7 @@ export const ProductModal = () => {
   const { activeProduct, message, addProducts, setActiveProduct, 
           addErrorMessage, addSuccessMessage, startUploadNewProduct 
         } = useProductsStore();
-  const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectCategory } = useProductsState();
+  const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
@@ -126,7 +126,7 @@ export const ProductModal = () => {
             select
             label="Categoría del producto"
             defaultValue=""
-            onChange={onSelectCategory}
+            onChange={onSelectProduct}
             helperText="Por favor seleccione la categoría del producto"
           >
             {/* importar y recorrer productsUploaded opteniendo el nombre */}
@@ -196,7 +196,7 @@ export const ProductModal = () => {
                 className="cancelProduct-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ backgroundColor: "error.main", m: 5 }}
+                sx={{ backgroundColor: "error.main" }}
               >
                 Cancelar
               </Button>

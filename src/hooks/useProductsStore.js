@@ -1,25 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddProducts, onAddSuccessMessage, onCleanProducts, 
-    onSetActiveProduct, onStarGetProductsUploaded, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
+    onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct } from "../store";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
 
-    //*Slice
     const { 
+        activeProduct,
+        ascending,
+        products,
+        productsOnPage,
         isSaving,
         message,
+        numberProducts,
         productsUploaded,
-        products,
-        activeProduct
     } = useSelector( state => state.products );
 
+    //*Slice
     const addNewProduct = () => {
         dispatch( onAddNewProduct() );
     }
 
     const setActiveProduct = ( product ) => {
         dispatch( onSetActiveProduct( product ) );
+    }
+
+    const changeAscending = ( value ) => {
+        dispatch( onChangeAscending( value ) );
     }
 
     const addImage = ( images ) => {
@@ -30,13 +37,9 @@ export const useProductsStore = () => {
         dispatch( onAddIcon( images ) );
     }
 
-    const addProducts = ( products ) => {
-        dispatch( onAddProducts( products ) );
-    }
-
     const addErrorMessage = ( message ) => {
         dispatch( onAddErrorMessage( message ) );
-    }
+    }   
 
     const addSuccessMessage = ( message ) => {
         dispatch( onAddSuccessMessage( message ) );
@@ -61,35 +64,32 @@ export const useProductsStore = () => {
         dispatch( onStarGetProductsUploaded() );
     }
 
-    const startGetProducts = ( page = 1 ) => {
-        dispatch( onStartGetProducts( page ) );
-    }
-
-    const startGetProductsByName = ( name, page = 1 ) => {
-        dispatch( onStartGetProductsByName( name, page ) );
+    const startGetProducts = ( ) => {
+        dispatch( onStartGetProducts( ) );
     }
 
     return {
         //*Propiedades
-        message,
-        isSaving,
-        productsUploaded,
-        products,
         activeProduct,
+        ascending,
+        products,
+        productsOnPage,
+        isSaving,
+        message,
+        numberProducts,
+        productsUploaded,
 
         //*Métodos
-        addNewProduct,
-        setActiveProduct,
-        addImage,
-        addIcon,
-        addProducts,
         addErrorMessage,
+        addIcon,
+        addImage,
+        addNewProduct,
         addSuccessMessage,
+        changeAscending,
         cleanProducts,
+        setActiveProduct,
+        startGetProducts,
         startUploadFile,
         startUploadNewProduct,
-        starGetProductsUploaded,
-        startGetProducts,
-        startGetProductsByName,
     }
 }

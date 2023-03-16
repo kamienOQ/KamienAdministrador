@@ -8,8 +8,10 @@ export const categoriesSlice = createSlice({
             error: '',
             success: ''
         },
-        productsUploaded: [],
+        ascending: '',
+        numberCategories: 0,
         categories: [],
+        categoriesOnPage: [],
         activeCategory: null, 
     },
     reducers: {
@@ -19,6 +21,7 @@ export const categoriesSlice = createSlice({
         onAddNewCategory: ( state ) => {
             const newCategory = {
                 categoryName: '',
+                categoryNameLowerCase: '',
                 products: [],
                 image: {
                     name: null,
@@ -30,7 +33,6 @@ export const categoriesSlice = createSlice({
                 },
                 date: new Date().getTime(),
             }
-            state.categories.push( newCategory );
             state.activeCategory = newCategory;
         },
         onSetActiveCategory: ( state, { payload } ) => {
@@ -50,10 +52,32 @@ export const categoriesSlice = createSlice({
         onDeleteCategory: ( state, { payload } ) => {
             state.activeCategory = null;
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
-            
         },
-        onChargeProductsUploaded: ( state, { payload } ) => {
-            state.productsUploaded.push( payload );
+        onChargeCategoriesUploaded: ( state, { payload } ) => {
+            let duplicate = false
+            if(state.categories){
+                state.categories.forEach(category => {
+                    if(category.categoryName === payload.categoryName)
+                        duplicate = true
+                });
+                if(!duplicate){
+                    state.categories.push( payload );
+                }
+            }else{
+                state.categories.push( payload );
+            }
+        },
+        onAddCategoryAtStart: ( state, { payload } ) => {
+            state.categories.unshift(payload);
+        },
+        onChargeCategoriesByPage: ( state, { payload } ) => {
+            state.categoriesOnPage = payload;
+        },
+        onSetNumberCategories: ( state, { payload } ) => {
+            state.numberCategories = payload
+        },
+        onAddLowerCase1: ( state ) => {
+            state.activeCategory.categoryNameLowerCase = state.activeCategory.categoryName.toLowerCase();
         },
         onAddImage1: ( state, { payload } ) => {
             state.activeCategory.image.name = payload[0];
@@ -63,8 +87,8 @@ export const categoriesSlice = createSlice({
             state.activeCategory.icon.name = payload[0];
             state.activeCategory.icon.url = payload[1];
         },
-        onAddProducts1: ( state, { payload } ) => {
-            state.activeCategory.products = payload;
+        onChangeAscending1: ( state, { payload } ) => {
+            state.ascending = payload
         },
         onAddErrorMessage1: ( state, { payload } ) => {
             state.message.error = payload;
@@ -73,10 +97,13 @@ export const categoriesSlice = createSlice({
             state.message.success = payload;
         },
         onCleanCategories: ( state ) => {
-            state.categories = [];
+            state.categories = []
             state.activeCategory = null;
         },
-        onCleanProductsUploaded: ( state ) => {
+        onCleanActiveCategory: ( state ) => {
+            state.activeCategory = null;
+        },
+        onCleanProductsUploaded1: ( state ) => {
             state.productsUploaded = [];
         }
     }
@@ -85,17 +112,22 @@ export const categoriesSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-    onChangeSavingNewCategory, 
-    onAddNewCategory, 
-    onSetActiveCategory, 
-    onUpdateCategory, 
-    onDeleteCategory,
-    onChargeProductsUploaded, 
-    onAddImage1, 
-    onAddIcon1, 
-    onAddProducts1, 
+    onAddCategoryAtStart,
     onAddErrorMessage1,
+    onAddIcon1, 
+    onAddImage1, 
+    onAddLowerCase1, 
+    onAddNewCategory, 
     onAddSuccessMessage1,
+    onChangeAscending1,
+    onChangeSavingNewCategory, 
+    onChargeCategoriesByPage, 
+    onChargeCategoriesUploaded,
+    onCleanActiveCategory,
     onCleanCategories,
-    onCleanProductsUploaded
+    onCleanProductsUploaded1,
+    onDeleteCategory,
+    onSetActiveCategory, 
+    onSetNumberCategories,
+    onUpdateCategory,
 } = categoriesSlice.actions;

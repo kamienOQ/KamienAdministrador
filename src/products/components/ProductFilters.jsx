@@ -4,12 +4,41 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import { Product } from "./Product";
-import { useProductsStore } from "../../hooks";
+import { Product, PageButtons } from './';
+import { useProductsStore, useUiStore } from '../../hooks';
+import { useEffect, useState } from 'react';
 
 export const ProductFilters = () => {
 
   const { numberProducts, products } = useProductsStore();
+  const { searchingName, page, upPage, downPage } = useUiStore();
+
+  const [inputValue, setInputValue] = useState('')
+
+  useEffect(() => {
+    if(inputValue === ''){
+      searchingName(inputValue);
+    }
+  }, [inputValue])
+  
+
+  const onInputChange = ( {target} ) => {
+      setInputValue( target.value );
+      
+  }
+
+  const onHadleUp = () => {
+    upPage()
+  }
+
+  const onHadleDown = () => {
+    downPage()
+  }
+
+  const onSearchName = () => {
+    console.log('hola')
+    searchingName(inputValue);
+  }
 
   return (
     <Grid container
@@ -37,6 +66,9 @@ export const ProductFilters = () => {
             label="Buscar por nombre..."
             variant="outlined"
             className="custom-input"
+            name="search"
+            value={ inputValue }
+            onChange={ onInputChange }
             InputLabelProps={{
               style: { color: 'white' },
             }}
@@ -45,6 +77,7 @@ export const ProductFilters = () => {
 
         <IconButton
           className="addProduct-button"
+          onClick={onSearchName}
           sx={{ backgroundColor: 'golden.main' }}
         >
           <SearchIcon sx={{ color: 'secondary.main' }} />
@@ -95,7 +128,19 @@ export const ProductFilters = () => {
         </Grid>
         {
           products.map((product, index) => (
-            <Product key={product.productName} id={index+1} product={product}/>
+            index === 0 ?
+              <Product key={product.productName} id={( page * 5 ) - 4 } product={product}/>
+            :
+            index === 1 ?
+              <Product key={product.productName} id={( page * 5 ) - 3 } product={product}/>
+            :
+            index === 2 ?
+              <Product key={product.productName} id={( page * 5 ) - 2 } product={product}/>
+            :
+            index === 3 ?
+              <Product key={product.productName} id={( page * 5 ) - 1 } product={product}/>
+            :
+              <Product key={product.productName} id={( page * 5 ) } product={product}/>
           ))
         }
       </Grid>
@@ -108,14 +153,12 @@ export const ProductFilters = () => {
           </Typography>
         </Grid>
         <Grid item
-          sx={{ color: 'secondary.main' }}
-        >
-          <IconButton sx={{ color: 'secondary.main' }}><KeyboardDoubleArrowLeftIcon /></IconButton>
-          <button className="page-button-selected">1</button>
-          <button className="page-button">2</button>
-          <button className="page-button">3</button>
-          <IconButton sx={{ color: 'secondary.main' }}><KeyboardDoubleArrowRightIcon /></IconButton>
-        </Grid>
+          sx={{ color: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          >
+            <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleDown}><KeyboardDoubleArrowLeftIcon /></IconButton>
+            <PageButtons />
+            <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleUp}><KeyboardDoubleArrowRightIcon /></IconButton>
+          </Grid>
       </Grid>
     </Grid>
   )

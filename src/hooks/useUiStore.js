@@ -1,6 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { onCleanProducts, onCleanProductUploaded } from '../store';
-import { onAddProductsSelected, onCleanProductsSelected, onCloseProductModal, onDeleteProductsSelected, onOpenProductModal } from '../store/ui/uiSlice'
+import { useDispatch, useSelector } from 'react-redux';
+// Product
+import { onCleanActiveProduct, onRestorePage } from '../store';
+// Ui
+import { onChangePage, onCloseProductModal, onDownPage, 
+    onOpenProductModal, onUpPage } from '../store';
 
 export const useUiStore = () => {
 
@@ -8,8 +11,24 @@ export const useUiStore = () => {
 
     const { 
         isProductModalOpen,
-        productsSelected
+        totalPages,
+        page
     } = useSelector( state => state.ui );
+
+    const upPage = () => {
+        dispatch( onUpPage() );
+    }
+    const downPage = () => {
+        dispatch( onDownPage() );
+    }
+
+    const changePage = ( total ) => {
+        dispatch( onChangePage( total ) );
+    }
+
+    const restorePage = () => {
+        dispatch( onRestorePage() );
+    }
 
     const openProductModal = () => {
         dispatch( onOpenProductModal() );
@@ -17,35 +36,24 @@ export const useUiStore = () => {
 
     const closeProductModal = () => {
         dispatch( onCloseProductModal() );
-        dispatch( onCleanProducts() );
-        dispatch( onCleanProductsSelected() );
-        dispatch( onCleanProductUploaded() );
+        dispatch( onCleanActiveProduct() );
     }
 
-    const addProductsSelected = ( productSelected ) => {
-        dispatch( onAddProductsSelected( productSelected ) );
-    }
 
-    const deleteProductsSelected = ( productSelected ) => {
-        dispatch( onDeleteProductsSelected( productSelected ) );
-    }
-
-    const cleanProductsSelected = () => {
-        dispatch( onCleanProductsSelected() )
-    }
-    
 
     return {
         //*Propiedades
         isProductModalOpen,
-        productsSelected,
+        totalPages,
+        page,
 
         //*Métodos
+        upPage,
+        downPage,
+        changePage,
+        restorePage,
         openProductModal,
         closeProductModal,
-        addProductsSelected,
-        deleteProductsSelected,
-        cleanProductsSelected
     }
 
 }

@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage1, onAddIcon1, onAddImage1, onAddNewCategory, onAddProducts1, onAddSuccessMessage1, onCleanCategories, 
-    onSetActiveCategory, onStarGetProductsUploaded1, onStartUploadFile1, onStartUploadNewCategory } from "../store";
+import { onAddErrorMessage1, onAddIcon1, onAddImage1, onAddNewCategory, onAddSuccessMessage1, onChangeAscending1, onCleanCategories, 
+    onSetActiveCategory, onStartGetCategories, onStartUploadFile1, onStartUploadNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
 
-    //*Slice
     const { 
+        activeCategory,
+        ascending,
+        categories,
+        categoriesOnPage,
         isSaving,
         message,
+        numberCategories,
         productsUploaded,
-        categories,
-        activeCategory
     } = useSelector( state => state.categories );
-
+    
+    //*Slice
     const addNewCategory = () => {
         dispatch( onAddNewCategory() );
     }
@@ -22,23 +25,23 @@ export const useCategoriesStore = () => {
         dispatch( onSetActiveCategory( category ) );
     }
 
-    const addImage = ( images ) => {
+    const changeAscending1 = ( value ) => {
+        dispatch( onChangeAscending1( value ) );
+    }
+
+    const addImage1 = ( images ) => {
         dispatch( onAddImage1( images ) );
     }
 
-    const addIcon = ( images ) => {
+    const addIcon1 = ( images ) => {
         dispatch( onAddIcon1( images ) );
     }
 
-    const addProducts = ( products ) => {
-        dispatch( onAddProducts1( products ) );
-    }
-
-    const addErrorMessage = ( message ) => {
+    const addErrorMessage1 = ( message ) => {
         dispatch( onAddErrorMessage1( message ) );
     }
 
-    const addSuccessMessage = ( message ) => {
+    const addSuccessMessage1 = ( message ) => {
         dispatch( onAddSuccessMessage1( message ) );
     }
 
@@ -48,8 +51,7 @@ export const useCategoriesStore = () => {
     
 
     //*Thunks
-
-    const startUploadFile = ( file, type, collectionName ) => {
+    const startUploadFile1 = ( file, type, collectionName ) => {
         dispatch( onStartUploadFile1( file, type, collectionName ) )
     }
 
@@ -57,30 +59,32 @@ export const useCategoriesStore = () => {
         dispatch( onStartUploadNewCategory() );
     }
 
-    const starGetProductsUploaded = () => {
-        dispatch( onStarGetProductsUploaded1() );
-    }
+    const startGetCategories = () => {
+        dispatch( onStartGetCategories() );
+    }    
 
     return {
         //*Propiedades
-        message,
-        isSaving,
-        productsUploaded,
-        categories,
         activeCategory,
+        ascending,
+        categories,
+        categoriesOnPage,
+        isSaving,
+        message,
+        numberCategories,
+        productsUploaded,
 
         //*Métodos
+        addErrorMessage1,
+        addIcon1,
+        addImage1,
         addNewCategory,
-        setActiveCategory,
-        addImage,
-        addIcon,
-        addProducts,
-        addErrorMessage,
-        addSuccessMessage,
+        addSuccessMessage1,
+        changeAscending1,
         cleanCategories,
-        startUploadFile,
+        setActiveCategory,
+        startGetCategories,
+        startUploadFile1,
         startUploadNewCategory,
-        starGetProductsUploaded,
-
     }
 }
