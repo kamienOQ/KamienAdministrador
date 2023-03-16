@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   ChevronLeft,
   Logout
@@ -78,17 +77,17 @@ export const SideList = ({ open, setOpen }) => {
   };
    
   return (
-    <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
+    <Drawer variant="permanent" open={open} sx={{ bgcolor: "primary.main" }}>
+        <DrawerHeader sx={{ bgcolor: "primary.main" }}>
           <IconButton onClick={() => setOpen(false)}>
-            <ChevronLeft />
+            <ChevronLeft sx={{ color: "dark.main" }}/>
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider sx={{ bgcolor: "primary.main" }}/>
         <SideBarList/>
-        <Divider />
+        <Divider sx={{ bgcolor: "primary.main" }}/>
         <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-          <Tooltip title = "Nombre de Admin"> 
+          <Tooltip title = "Nombre de Admin" sx={{ bgcolor: "primary.main" }}> 
             <Avatar                     // title={currentUser?.name || ''}
             src='/src/admin/pages/Empty_pp.jpg'//   src={currentUser?.photoURL}
             {...(open && { sx: { width: 100, height: 100 } })}
@@ -103,7 +102,7 @@ export const SideList = ({ open, setOpen }) => {
           )}
           <Tooltip title="Logout" sx={{ mt: 1 }}>
             <IconButton onClick={onLogout}>
-              <Logout />
+              <Logout sx={{ color: "dark.main" }}/>
             </IconButton>
           </Tooltip>
         </Box>

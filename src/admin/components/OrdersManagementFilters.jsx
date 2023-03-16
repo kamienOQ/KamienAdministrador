@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Grid, IconButton, TextField, Box, Typography } from "@mui/material";
+import { Grid, IconButton, TextField, Box, Typography, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -8,9 +8,12 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Order } from "./order";
 import { useFilters } from "../../hooks/useFilters";
+import { useState } from "react";
 
 export const OrdersManagementFilters = () => {
   const { orders } = useSelector((state) => state.orders);
+
+  const [status, setStatus] = useState('');
 
   const {
     isUpNameActive,
@@ -22,6 +25,10 @@ export const OrdersManagementFilters = () => {
     onUpPayClick,
     onDownPayClick,
   } = useFilters();
+
+  const onChangeStatus = (event) => {
+    setStatus(event.target.value);
+  };
 
   return (
     <Grid
@@ -38,7 +45,7 @@ export const OrdersManagementFilters = () => {
         p: 1,
         maxHeight: "auto",
         borderRadius: 1.2,
-        gap: 2,
+        gap: 2
       }}
     >
       <Grid
@@ -46,9 +53,24 @@ export const OrdersManagementFilters = () => {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
+        <FormControl sx={{ width: "150px" }}>
+          <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={status}
+            label="Estado"
+            onChange={onChangeStatus}
+          >
+            <MenuItem value="pendiente">Pendiente</MenuItem>
+            <MenuItem value="en envio">En envío</MenuItem>
+            <MenuItem value="entregado">Entregado</MenuItem>
+            <MenuItem value="cancelado">Cancelado</MenuItem>
+          </Select>
+        </FormControl>
         <Box
           component="form"
           sx={{
@@ -61,12 +83,11 @@ export const OrdersManagementFilters = () => {
             type="text"
             label="Buscar por nombre..."
             variant="outlined"
-            sx={{ p: 0.5 }}
           />
         </Box>
 
         <IconButton className="addCategory-button">
-          <SearchIcon />
+          <SearchIcon sx={{ color: "dark.main" }}/>
         </IconButton>
       </Grid>
 
@@ -78,6 +99,7 @@ export const OrdersManagementFilters = () => {
             border: 1,
             borderRadius: "5px 5px 0 0",
             fontWeight: "bold",
+            bgcolor: "secondary.main"
           }}
         >
           <Grid
@@ -127,9 +149,7 @@ export const OrdersManagementFilters = () => {
               >
                 <IconButton hover="true" sx={{ p: 0 }} onClick={onUpNameClick}>
                   <KeyboardArrowUpIcon
-                    sx={{
-                      color: isUpNameActive ? "secondary.main" : undefined,
-                    }}
+                    sx={{ color: isUpNameActive ? "info.main" : "dark.main" }}
                   />
                 </IconButton>
                 <IconButton
@@ -138,9 +158,7 @@ export const OrdersManagementFilters = () => {
                   onClick={onDownNameClick}
                 >
                   <KeyboardArrowDownIcon
-                    sx={{
-                      color: isDownNameActive ? "secondary.main" : undefined,
-                    }}
+                    sx={{ color: isDownNameActive ? "info.main" : "dark.main" }}
                   />
                 </IconButton>
               </Grid>
@@ -168,7 +186,7 @@ export const OrdersManagementFilters = () => {
             >
               Fecha
               <IconButton>
-                <CalendarMonthIcon />
+                <CalendarMonthIcon sx={{ color: "dark.main" }}/>
               </IconButton>
             </Grid>
           </Grid>
@@ -205,14 +223,12 @@ export const OrdersManagementFilters = () => {
               >
                 <IconButton hover="true" sx={{ p: 0 }} onClick={onUpPayClick}>
                   <KeyboardArrowUpIcon
-                    sx={{ color: isUpPayActive ? "secondary.main" : undefined }}
+                    sx={{ color: isUpPayActive ? "info.main" : "dark.main" }}
                   />
                 </IconButton>
                 <IconButton sx={{ p: 0 }} onClick={onDownPayClick}>
                   <KeyboardArrowDownIcon
-                    sx={{
-                      color: isDownPayActive ? "secondary.main" : undefined,
-                    }}
+                    sx={{ color: isDownPayActive ? "info.main" : "dark.main" }}
                   />
                 </IconButton>
               </Grid>
@@ -274,8 +290,8 @@ export const OrdersManagementFilters = () => {
             Acciones
           </Grid>
         </Grid>
-        {orders.map((order) => (
-          <Order key={order.id} {...order} />
+        {orders.map((order, index) => (
+          <Order key={index} id={index+1} {...order} />
         ))}
       </Grid>
       <Grid
@@ -293,13 +309,13 @@ export const OrdersManagementFilters = () => {
         </Grid>
         <Grid item>
           <IconButton>
-            <KeyboardDoubleArrowLeftIcon />
+            <KeyboardDoubleArrowLeftIcon sx={{ color: "dark.main" }} />
           </IconButton>
           <button className="page-button-selected">1</button>
           <button className="page-button">2</button>
           <button className="page-button">3</button>
           <IconButton>
-            <KeyboardDoubleArrowRightIcon />
+            <KeyboardDoubleArrowRightIcon sx={{ color: "dark.main" }} />
           </IconButton>
         </Grid>
       </Grid>

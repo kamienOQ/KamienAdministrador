@@ -60,7 +60,7 @@ export const AccountRecoveryPage = () => {
             type="submit"
             variant="contained"
             fullWidth
-            color="secondary"
+            color="primary"
             sx={{
               fontWeight: "bold",
               textTransform: "none",
@@ -73,7 +73,7 @@ export const AccountRecoveryPage = () => {
       </form>
       <Link
         component={RouterLink}
-        color="#777777"
+        color="dark.main"
         sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
         display="block"
         textAlign="center"

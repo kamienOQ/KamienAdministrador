@@ -8,16 +8,20 @@
   box-sizing: border-box;
 }
 
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
+  background-color: #D1B000 !important;
+}
+
 label {
   margin-bottom: 10px;
   font-size: 18px;
 }
 
-input[type="text"],
+/* input[type="text"],
 input[type="password"],
 input[type="submit"] {
   padding: 10px;
-}
+} */
 
 .closeTag-button:hover{
   cursor: pointer;
@@ -116,6 +120,7 @@ input[type="submit"] {
   font-weight: bold;
   border-radius: 50px;
   font-family: var(--roboto);
+  background-color: #B9FAF8;
 }
 
 .page-button-selected{
@@ -126,6 +131,8 @@ input[type="submit"] {
   font-weight: bold;
   border-radius: 50px;
   font-family: var(--roboto);
+  background-color: #256EFF;
+  color: white;
 }
 
 @media (max-width: 680px) {

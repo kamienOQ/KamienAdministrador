@@ -103,7 +103,7 @@ export const LoginPage = () => {
         </Grid>
       </form>
       <Link
-        color="#777777"
+        color="dark.main"
         component={RouterLink}
         sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
         display="block"

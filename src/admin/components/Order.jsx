@@ -14,11 +14,12 @@ export const Order = ({id, name, date, wayToPay, cellphone, address, status}) =>
   return (
     <Grid
       container
+      className="column-container"
       sx={{
         flexWrap: "nowrap",
         bl: 1,
         border: 1,
-        borderTop: 0,
+        borderTop: 0
       }}
     >
       <Grid
@@ -138,11 +139,11 @@ export const Order = ({id, name, date, wayToPay, cellphone, address, status}) =>
             alignItems: "center",
           }}
         >
-          <IconButton sx={{ color: "secondary.main" }}>
-            <EditIcon />
+          <IconButton>
+            <EditIcon sx={{ color: "primary.main" }}/>
           </IconButton>
-          <IconButton sx={{ color: "error.main" }}>
-            <DeleteIcon />
+          <IconButton>
+            <DeleteIcon sx={{ color: "error.main" }}/>
           </IconButton>
         </Grid>
       </Grid>

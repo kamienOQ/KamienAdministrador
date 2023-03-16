@@ -22,7 +22,7 @@ export const startGetOrders = (page = 1) => {
         getOrders = !getOrders;
       }
       if (getOrders) {
-        orders.push({id: counter + 1, ...doc.data()})
+        orders.push({...doc.data()})
       }
       counter++;
     });

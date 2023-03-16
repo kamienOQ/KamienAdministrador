@@ -86,7 +86,7 @@ export const ResetPasswordPage = () => {
             type="submit"
             variant="contained"
             fullWidth
-            color="secondary"
+            color="primary"
             sx={{
               fontWeight: "bold",
               textTransform: "none",
