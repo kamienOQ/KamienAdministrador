@@ -6,13 +6,14 @@ export const useCategoriesStore = () => {
     const dispatch = useDispatch();
 
     const { 
+        activeCategory,
+        ascending,
+        categories,
+        categoriesOnPage,
         isSaving,
         message,
-        productsUploaded,
-        ascending,
         numberCategories,
-        categories,
-        activeCategory
+        productsUploaded,
     } = useSelector( state => state.categories );
     
     //*Slice
@@ -59,30 +60,31 @@ export const useCategoriesStore = () => {
     }
 
     const startGetCategories = () => {
-        dispatch( onStartGetCategories( page ) );
+        dispatch( onStartGetCategories() );
     }    
 
     return {
         //*Propiedades
-        message,
-        isSaving,
-        productsUploaded,
-        ascending,
-        numberCategories,
-        categories,
         activeCategory,
+        ascending,
+        categories,
+        categoriesOnPage,
+        isSaving,
+        message,
+        numberCategories,
+        productsUploaded,
 
         //*Métodos
-        addNewCategory,
-        setActiveCategory,
-        changeAscending,
-        addImage,
-        addIcon,
         addErrorMessage,
+        addIcon,
+        addImage,
+        addNewCategory,
         addSuccessMessage,
+        changeAscending,
         cleanCategories,
+        setActiveCategory,
+        startGetCategories,
         startUploadFile,
         startUploadNewCategory,
-        startGetCategories,
     }
 }

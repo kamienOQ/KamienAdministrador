@@ -11,6 +11,7 @@ export const categoriesSlice = createSlice({
         ascending: '',
         numberCategories: 0,
         categories: [],
+        categoriesOnPage: [],
         activeCategory: null, 
     },
     reducers: {
@@ -51,13 +52,26 @@ export const categoriesSlice = createSlice({
         onDeleteCategory: ( state, { payload } ) => {
             state.activeCategory = null;
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
-            
         },
         onChargeCategoriesUploaded: ( state, { payload } ) => {
-            state.categories.push( payload );
+            let duplicate = false
+            if(state.categories){
+                state.categories.forEach(category => {
+                    if(category.categoryName === payload.categoryName)
+                        duplicate = true
+                });
+                if(!duplicate){
+                    state.categories.push( payload );
+                }
+            }else{
+                state.categories.push( payload );
+            }
         },
-        onChangeAscending: ( state, { payload } ) => {
-            state.ascending = payload
+        onAddCategoryAtStart: ( state, { payload } ) => {
+            state.categories.unshift(payload);
+        },
+        onChargeCategoriesByPage: ( state, { payload } ) => {
+            state.categoriesOnPage = payload;
         },
         onSetNumberCategories: ( state, { payload } ) => {
             state.numberCategories = payload
@@ -73,6 +87,9 @@ export const categoriesSlice = createSlice({
             state.activeCategory.icon.name = payload[0];
             state.activeCategory.icon.url = payload[1];
         },
+        onChangeAscending: ( state, { payload } ) => {
+            state.ascending = payload
+        },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
         },
@@ -81,6 +98,9 @@ export const categoriesSlice = createSlice({
         },
         onCleanCategories: ( state ) => {
             state.categories = []
+            state.activeCategory = null;
+        },
+        onCleanActiveCategory: ( state ) => {
             state.activeCategory = null;
         },
         onCleanProductsUploaded: ( state ) => {
@@ -92,19 +112,22 @@ export const categoriesSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-    onChangeSavingNewCategory, 
-    onAddNewCategory, 
-    onSetActiveCategory, 
-    onUpdateCategory, 
-    onDeleteCategory,
-    onChargeCategoriesUploaded,
-    onChangeAscending,
-    onSetNumberCategories,
-    onAddLowerCase, 
-    onAddImage, 
-    onAddIcon, 
+    onAddCategoryAtStart,
     onAddErrorMessage,
+    onAddIcon, 
+    onAddImage, 
+    onAddLowerCase, 
+    onAddNewCategory, 
     onAddSuccessMessage,
-    onCleanCategories ,
-    onCleanProductsUploaded
+    onChangeAscending,
+    onChangeSavingNewCategory, 
+    onChargeCategoriesByPage, 
+    onChargeCategoriesUploaded,
+    onCleanActiveCategory,
+    onCleanCategories,
+    onCleanProductsUploaded,
+    onDeleteCategory,
+    onSetActiveCategory, 
+    onSetNumberCategories,
+    onUpdateCategory,
 } = categoriesSlice.actions;

@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase, onChangeAscending } from "./";
+    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase, onAddCategoryAtStart } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -49,7 +49,7 @@ export const onStartUploadNewCategory = () => {
     if(!duplicateCategory){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeCategory);
-        dispatch(onChargeCategoriesUploaded( activeCategory ));
+        dispatch(onAddCategoryAtStart( activeCategory ));
         dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
         dispatch(onAddErrorMessage( '' ));
     }
@@ -58,12 +58,12 @@ export const onStartUploadNewCategory = () => {
 }
 
 export const onStartGetCategories = () => {
-  return async (dispatch) => {
-
+  return async (dispatch, getState) => {
+    let repetido = false
     dispatch(onCleanCategories());
 
     const collectionRef = collection(FirebaseDB, `/categories`);
-    q = query( collectionRef, orderBy("date", "desc") );
+    const q = query( collectionRef, orderBy("date", "desc") );
     const querySnapshot = await getDocs(q);
 
     dispatch(onSetNumberCategories(querySnapshot._docs.length));
@@ -72,9 +72,12 @@ export const onStartGetCategories = () => {
     }else{
       dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
     }
-    querySnapshot.forEach((doc) => {
+
+    querySnapshot.forEach((doc, index) => {
       dispatch(onChargeCategoriesUploaded( doc.data() ));
     });
+    
+  
   }
 }
 

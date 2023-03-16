@@ -6,7 +6,6 @@ export const uiSlice = createSlice({
         isCategoryModalOpen: false,
         totalPages: 1,
         page: 1,
-        searching: ''
     },
     reducers: {
         onSetTotalPages: ( state, { payload } ) => {
@@ -28,9 +27,6 @@ export const uiSlice = createSlice({
         onRestorePage: ( state ) => {
             state.page = 1;
         },
-        onSearchingName: (state, { payload }) => {
-            state.searching = payload;
-        },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;
         },
@@ -49,7 +45,6 @@ export const {
     onDownPage,
     onChangePage,
     onRestorePage,
-    onSearchingName,
     onOpenCategoryModal, 
     onCloseCategoryModal, 
 } = uiSlice.actions;

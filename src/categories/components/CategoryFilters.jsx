@@ -5,26 +5,33 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { Category, PageButtons } from "./";
-import { useCategoriesStore, useUiStore } from "../../hooks";
+import { useCategoriesStore, useLoadDataPage, useUiStore } from "../../hooks";
 import { useEffect, useState } from "react";
 
 export const CategoryFilters = () => {
 
-  const { ascending, numberCategories, categories, changeAscending } = useCategoriesStore();
-  const { searchingName, page, upPage, downPage } = useUiStore();
+  const { ascending, numberCategories, categoriesOnPage, changeAscending } = useCategoriesStore();
+  const { isCategoryModalOpen, restorePage, page, upPage, downPage } = useUiStore();
+  const { loadData } = useLoadDataPage();
 
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     if(inputValue === ''){
-      searchingName(inputValue);
+      restorePage();
+      changeAscending(inputValue);
+      loadData();
     }
-  }, [inputValue])
+  }, [inputValue]);
+
+  useEffect(() => {
+    loadData();
+  }, [isCategoryModalOpen])
+  
   
 
   const onInputChange = ( {target} ) => {
       setInputValue( target.value );
-      
   }
 
   const onHadleUp = () => {
@@ -36,7 +43,8 @@ export const CategoryFilters = () => {
   }
 
   const onSearchName = () => {
-    searchingName(inputValue);
+    restorePage();
+    changeAscending(inputValue);
   }
 
   const onAscendingFilter = () => {
@@ -138,20 +146,20 @@ export const CategoryFilters = () => {
           </Grid>
         </Grid>
         {
-          categories.map((category, index) => (
+          categoriesOnPage.map((category, index) => (
             index === 0 ?
-              <Category key={category.categoryName} id={(page * 5)-4} category={category} />
+              <Category key={(page * 5)-4} id={(page * 5)-4} category={category} />
             :
             index === 1 ?
-              <Category key={category.categoryName} id={(page * 5)-3} category={category} />
+              <Category key={(page * 5)-3} id={(page * 5)-3} category={category} />
             :
             index === 2 ?
-              <Category key={category.categoryName} id={(page * 5)-2} category={category} />
+              <Category key={(page * 5)-2} id={(page * 5)-2} category={category} />
             :
             index === 3 ?
-              <Category key={category.categoryName} id={(page * 5)-1} category={category} />
+              <Category key={(page * 5)-1} id={(page * 5)-1} category={category} />
             :
-              <Category key={category.categoryName} id={page * 5} category={category} />
+              <Category key={page * 5} id={page * 5} category={category} />
           ))
         }
       </Grid>
@@ -160,7 +168,7 @@ export const CategoryFilters = () => {
       >
         <Grid item>
           <Typography>
-            {`Mostrando ${categories.length} de ${numberCategories} categorias`}
+            {`Mostrando ${categoriesOnPage.length} de ${numberCategories} categorias`}
           </Typography>
         </Grid>
         <Grid item

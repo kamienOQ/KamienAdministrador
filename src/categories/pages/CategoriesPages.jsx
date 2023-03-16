@@ -1,14 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useCategoriesStore, useUiStore } from "../../hooks";
+import { useLoadDataPage, useCategoriesStore, useUiStore } from "../../hooks";
 import { CategoryFilters, CategoryModal } from "../";
 import { useEffect } from "react";
 
 
 export const CategoriesPages = () => {
 
-  const { isCategoryModalOpen, page, searching, openCategoryModal, closeCategoryModal } = useUiStore();
-  const { isSaving, message, ascending, addNewCategory, startGetCategories, startGetCategoriesByName } = useCategoriesStore();
+  const { isCategoryModalOpen, page, openCategoryModal, closeCategoryModal } = useUiStore();
+  const { categories, isSaving, message, ascending, addNewCategory, startGetCategories } = useCategoriesStore();
+  const { loadData } = useLoadDataPage();
 
   useEffect(() => {
     if (!!message.success) {
@@ -17,14 +18,13 @@ export const CategoriesPages = () => {
   }, [message.success]);
 
   useEffect(() => {
-    if(!isCategoryModalOpen){
-      if(!!searching){
-        startGetCategoriesByName(searching, page)
-      }else{
-        startGetCategories(page);
-      }
-    }
-  }, [isCategoryModalOpen, page, ascending, searching])
+    startGetCategories();
+  }, [])
+  
+
+  useEffect(() => {
+      loadData();
+  }, [isCategoryModalOpen, page, ascending, categories])
   
 
   const onOpenModal = () => {

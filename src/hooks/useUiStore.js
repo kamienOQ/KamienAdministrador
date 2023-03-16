@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 //Kategories
-import { onCleanCategories, onRestorePage } from '../store';
+import { onCleanActiveCategory, onRestorePage } from '../store';
 // Ui
 import { onChangePage, onCloseCategoryModal, onDownPage, 
-    onOpenCategoryModal, onUpPage, onSearchingName} from '../store';
+    onOpenCategoryModal, onUpPage} from '../store';
 
 export const useUiStore = () => {
 
@@ -13,7 +13,6 @@ export const useUiStore = () => {
         isCategoryModalOpen,
         totalPages,
         page,
-        searching,
     } = useSelector( state => state.ui );
 
     const upPage = () => {
@@ -27,9 +26,8 @@ export const useUiStore = () => {
         dispatch( onChangePage( total ) );
     }
 
-    const searchingName = ( search ) => {
+    const restorePage = () => {
         dispatch( onRestorePage() );
-        dispatch( onSearchingName( search ) );
     }
 
     const openCategoryModal = () => {
@@ -38,7 +36,7 @@ export const useUiStore = () => {
 
     const closeCategoryModal = () => {
         dispatch( onCloseCategoryModal() );
-        dispatch( onCleanCategories() );
+        dispatch( onCleanActiveCategory() );
     }
 
     
@@ -48,13 +46,12 @@ export const useUiStore = () => {
         isCategoryModalOpen,
         totalPages,
         page,
-        searching,
 
         //*Métodos
         upPage,
         downPage,
         changePage,
-        searchingName,
+        restorePage,
         openCategoryModal,
         closeCategoryModal,
     }
