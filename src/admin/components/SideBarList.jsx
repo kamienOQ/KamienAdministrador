@@ -14,8 +14,8 @@ import { Link } from 'react-router-dom';
 
 export const SideBarList = () => {
   return (
-    <List>
-        <Link to = "/Administradores" style={{textDecoration:"None",color:"white"}}>
+    <List  sx = {{backgroundColor : "#8D918D"}} >
+        <Link to = "/Administradores" style={{textDecoration:"None",color: 'black' }}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -31,7 +31,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <GroupAddIcon/>
+                  <GroupAddIcon  sx = {{color : "black"}}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Administrador"}
@@ -42,7 +42,7 @@ export const SideBarList = () => {
         </Link>
 
 
-        <Link to = "/Producto" style={{textDecoration:"None",color:"white"}}>
+        <Link to = "/Producto" style={{textDecoration:"None",color:"black"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -58,7 +58,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <AddIcon/>
+                  <AddIcon  sx = {{color : "black"}}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Producto"}
@@ -68,7 +68,7 @@ export const SideBarList = () => {
         </ListItem>
         </Link>
         
-        <Link to = "/Categorias" style={{textDecoration:"None",color:"white"}}>
+        <Link to = "/Categorias" style={{textDecoration:"None",color:"black"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -84,7 +84,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <CategoryIcon/>
+                  <CategoryIcon  sx = {{color : "black"}}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Categoría"}
@@ -95,7 +95,7 @@ export const SideBarList = () => {
         </Link>
                   
 
-        <Link to = "/About" style={{textDecoration:"None",color:"white"}}>
+        <Link to = "/About" style={{textDecoration:"None",color:"black"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -111,17 +111,17 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <InfoIcon/>
+                  <InfoIcon  sx = {{color : "black"}}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Acerca De"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
-              </ListItemButton>
+              </ListItemButton >
         </ListItem>
         </Link>
 
-        <Link to = "/Perfil" style={{textDecoration:"None",color:"white"}}>
+        <Link to = "/Perfil" style={{textDecoration:"None",color:"black"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -137,7 +137,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <ManageAccountsIcon/>
+                  <ManageAccountsIcon  sx = {{color : "black"}}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Configurar Cuenta"}

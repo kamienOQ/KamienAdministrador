@@ -86,7 +86,7 @@ export const SideList = ({ open, setOpen }) => {
   };    
   return (
     <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
+        <DrawerHeader  sx = {{backgroundColor : "#D1B000"}}>
           <IconButton onClick={() => setOpen(false)}>
             <ChevronLeft />
           </IconButton>
@@ -94,7 +94,7 @@ export const SideList = ({ open, setOpen }) => {
         <Divider />
         <SideBarList/>
         <Divider />
-        <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
+        <Box sx={{ mx: 'auto', mt: 3, mb: 1,backgroundColor : "#8D918D"}} >
           <Tooltip title = "Nombre de Admin"> 
             <Avatar                     // title={currentUser?.name || ''}
             src='./Empty_pp.jpg'//   src={currentUser?.photoURL}
@@ -102,7 +102,7 @@ export const SideList = ({ open, setOpen }) => {
             />
           </Tooltip>
         </Box>
-        <Box sx={{ textAlign: 'center' }}>
+        <Box sx={{ textAlign: 'center'   }}>
           {open && <Typography>{"Nombre De usuario"}</Typography>}
           <Typography variant="body2">{"SuperAdmin" || 'role'}</Typography>
           {open && (

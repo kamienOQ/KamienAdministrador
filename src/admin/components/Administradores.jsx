@@ -45,6 +45,584 @@ export const Administradores = () =>{
             role : "admin",
             active : true,
             id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
         }
     ]
 
@@ -116,8 +694,12 @@ export const Administradores = () =>{
                     bottom:  5,
                     })}
                     sx={{      
-                    color: 'white'
-                    }}
+                    color: 'black',
+                    bgcolor: 'white',
+                        [`& .${gridClasses.columnHeaders}`]: {
+                            bgcolor: '#D1B000'
+                        }
+                      }}
                     // onCellEditCommit={() => setRowId("dwqwdqdwqd")}
                 />
             </Box>

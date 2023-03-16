@@ -58,7 +58,7 @@ export const Navbar = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex',backgroundColor: "#D19000  "}} >
             <CssBaseline />
             <AppBar position="fixed" open={open}>
           <Toolbar>

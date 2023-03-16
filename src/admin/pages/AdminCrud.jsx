@@ -8,7 +8,7 @@ export const AdminCrud = () => {
      
     
       <Administradores/>
-      <BottomNav/>
+      {/* <BottomNav/> */}
     </>
   )
 }
