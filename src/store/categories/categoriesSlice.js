@@ -21,7 +21,6 @@ export const categoriesSlice = createSlice({
         onAddNewCategory: ( state ) => {
             const newCategory = {
                 categoryName: '',
-                categoryNameLowerCase: '',
                 products: [],
                 image: {
                     name: null,
@@ -76,9 +75,6 @@ export const categoriesSlice = createSlice({
         onSetNumberCategories: ( state, { payload } ) => {
             state.numberCategories = payload
         },
-        onAddLowerCase: ( state ) => {
-            state.activeCategory.categoryNameLowerCase = state.activeCategory.categoryName.toLowerCase();
-        },
         onAddImage: ( state, { payload } ) => {
             state.activeCategory.image.name = payload[0];
             state.activeCategory.image.url = payload[1];
@@ -116,7 +112,6 @@ export const {
     onAddErrorMessage,
     onAddIcon, 
     onAddImage, 
-    onAddLowerCase, 
     onAddNewCategory, 
     onAddSuccessMessage,
     onChangeAscending,

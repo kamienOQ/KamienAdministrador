@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddLowerCase, onAddCategoryAtStart } from "./";
+    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddCategoryAtStart } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -32,7 +32,6 @@ export const onStartUploadNewCategory = () => {
     const { activeCategory } = getState().categories;
 
     dispatch(onChangeSavingNewCategory(true));
-    dispatch(onAddLowerCase());
 
     const collectionRef = collection(FirebaseDB, `/categories`);
     const q = query( collectionRef );

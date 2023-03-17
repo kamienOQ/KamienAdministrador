@@ -35,7 +35,7 @@ export const useLoadDataPage = () => {
         }
         else{
             const categoriesArray = [...categories];
-            const filteredArray = categoriesArray.filter(object => object.categoryNameLowerCase.includes(ascending));
+            const filteredArray = categoriesArray.filter(object => object.categoryName.toLowerCase().includes(ascending.toLowerCase()));
             if(categories.length % 5 > 0){
                 dispatch(onSetTotalPages(Math.floor(filteredArray.length/5) + 1));
             }else{
