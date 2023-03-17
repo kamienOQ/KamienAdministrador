@@ -6,7 +6,7 @@ import { AppRouter } from "./router/AppRouter";
 export const AdminApp = () => {
   return (
     <AppTheme>
-      <AttributesPages/>
+      <AppRouter/>  
     </AppTheme>
   )
 }
