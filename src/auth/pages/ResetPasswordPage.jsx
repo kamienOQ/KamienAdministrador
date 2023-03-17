@@ -58,14 +58,14 @@ export const ResetPasswordPage = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={onClickShowPassword} sx={{ pr: 0 }}>
+                    <IconButton onClick={onClickShowPassword} sx={{ p: .5 }}>
                       {showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
               fullWidth
-              sx={{ bgcolor: "#f0f0f0", mt: 1, mb: 2 }}
+              sx={{ mt: 1, mb: 2 }}
               name="password"
               value={password}
               onChange={onInputChange}
@@ -86,15 +86,11 @@ export const ResetPasswordPage = () => {
             type="submit"
             variant="contained"
             fullWidth
-            color="secondary"
+            color="primary"
             sx={{
               fontWeight: "bold",
               textTransform: "none",
-              fontSize: "16px",
-              color: "#ffffff",
-              "&:hover": {
-                bgcolor: "#ffe34f",
-              },
+              fontSize: "16px"
             }}
           >
             Guardar
