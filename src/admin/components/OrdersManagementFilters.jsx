@@ -91,15 +91,17 @@ export const OrdersManagementFilters = () => {
         </IconButton>
       </Grid>
 
-      <Grid container>
+      <Grid container className="table-container">
         <Grid
           container
           sx={{
             flexWrap: "nowrap",
             border: 1,
+            borderColor: "dark.main",
             borderRadius: "5px 5px 0 0",
             fontWeight: "bold",
-            bgcolor: "secondary.main"
+            bgcolor: "info.main",
+            color: "white"
           }}
         >
           <Grid
@@ -107,6 +109,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "5%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -121,6 +124,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "20%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -149,7 +153,7 @@ export const OrdersManagementFilters = () => {
               >
                 <IconButton hover="true" sx={{ p: 0 }} onClick={onUpNameClick}>
                   <KeyboardArrowUpIcon
-                    sx={{ color: isUpNameActive ? "info.main" : "dark.main" }}
+                    sx={{ color: isUpNameActive ? "primary.main" : "white" }}
                   />
                 </IconButton>
                 <IconButton
@@ -158,7 +162,7 @@ export const OrdersManagementFilters = () => {
                   onClick={onDownNameClick}
                 >
                   <KeyboardArrowDownIcon
-                    sx={{ color: isDownNameActive ? "info.main" : "dark.main" }}
+                    sx={{ color: isDownNameActive ? "primary.main" : "white" }}
                   />
                 </IconButton>
               </Grid>
@@ -169,6 +173,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "15%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -186,7 +191,7 @@ export const OrdersManagementFilters = () => {
             >
               Fecha
               <IconButton>
-                <CalendarMonthIcon sx={{ color: "dark.main" }}/>
+                <CalendarMonthIcon sx={{ color: "white" }}/>
               </IconButton>
             </Grid>
           </Grid>
@@ -195,6 +200,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "20%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -223,12 +229,12 @@ export const OrdersManagementFilters = () => {
               >
                 <IconButton hover="true" sx={{ p: 0 }} onClick={onUpPayClick}>
                   <KeyboardArrowUpIcon
-                    sx={{ color: isUpPayActive ? "info.main" : "dark.main" }}
+                    sx={{ color: isUpPayActive ? "primary.main" : "white" }}
                   />
                 </IconButton>
                 <IconButton sx={{ p: 0 }} onClick={onDownPayClick}>
                   <KeyboardArrowDownIcon
-                    sx={{ color: isDownPayActive ? "info.main" : "dark.main" }}
+                    sx={{ color: isDownPayActive ? "primary.main" : "white" }}
                   />
                 </IconButton>
               </Grid>
@@ -239,6 +245,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "15%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -253,6 +260,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "15%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -267,6 +275,7 @@ export const OrdersManagementFilters = () => {
             sx={{
               width: "15%",
               borderRight: 1,
+              borderColor: "dark.main",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

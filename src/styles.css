@@ -12,6 +12,10 @@
   background-color: #D1B000 !important;
 }
 
+.column-container:nth-child(odd) {
+  background-color: #c9c9c9;
+}
+
 label {
   margin-bottom: 10px;
   font-size: 18px;
