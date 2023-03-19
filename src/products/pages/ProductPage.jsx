@@ -23,13 +23,13 @@ export const ProductPages = () => {
 
   useEffect(() => {
     loadData();
-}, [isProductModalOpen, page, ascending, products])
+  }, [isProductModalOpen, page, ascending, products])
 
 
-const onOpenModal = () => {
-  addNewProduct();
-  openProductModal();
-}
+  const onOpenModal = () => {
+    addNewProduct();
+    openProductModal();
+  }
 
   return (
     <Grid

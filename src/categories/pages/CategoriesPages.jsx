@@ -1,14 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useCategoriesStore, useUiStore } from "../../hooks";
-import { CategoryModal } from "../";
+import { useLoadDataPage, useCategoriesStore, useUiStore } from "../../hooks";
+import { CategoryFilters, CategoryModal } from "../";
 import { useEffect } from "react";
 
 
 export const CategoriesPages = () => {
 
-  const { openCategoryModal, closeCategoryModal} = useUiStore();
-  const { isSaving, message, addNewCategory } = useCategoriesStore();
+  const { isCategoryModalOpen, page, openCategoryModal, closeCategoryModal } = useUiStore();
+  const { categories, isSaving, message, ascending, addNewCategory, startGetCategories } = useCategoriesStore();
+  const { loadData } = useLoadDataPage();
 
   useEffect(() => {
     if (!!message.success) {
@@ -16,9 +17,18 @@ export const CategoriesPages = () => {
     }
   }, [message.success]);
 
+  useEffect(() => {
+    startGetCategories();
+  }, [])
+  
+
+  useEffect(() => {
+      loadData();
+  }, [isCategoryModalOpen, page, ascending, categories])
+  
+
   const onOpenModal = () => {
     addNewCategory();
-    // TODO: (starGetProductsUploaded)cargar al estado todo los productos que se han subido a la base de datos
     openCategoryModal();
   }
 
@@ -27,52 +37,53 @@ export const CategoriesPages = () => {
       className="categories-container"
       container
       spacing={0}
-      sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main' }}
+      alignContent="start"
+      sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main', mb: 0 }}
     >
-      <Grid
-        alignItems="center"
-        className="box-border secundary-categories-container"
-        container
-        direction="column"
-        justifyContent="center"
-        spacing={2}
-        sx={{ m: 2, padding: 4, maxHeight: 20 }}
-
-      >
-        {/* TODO: justify-content: space-between */}
-        <Grid
+      <Grid container>
+        <Grid container
           alignItems="center"
-          item
+          className="secundary-categories-container"
+          direction="column"
           justifyContent="center"
-          sx={{ p: 2 }}
-          xs={12}
-          sm={4}
-        >
-          <Typography variant='h4'>Gestión de Categorías</Typography>
-        </Grid>
-
-        <Grid
-          alignItems="center"
-          item
-          justifyContent="center"
-          sx={{ p: 2 }}
-          xs={12}
-          sm={4}
+          spacing={2}
+          sx={{ m: 2, padding: 4, maxHeight: 20, backgroundColor: 'darkGray.main', borderRadius: 1.2 }}
 
         >
-          <Button
-            className="addCategory-button"
-            onClick={onOpenModal}
-            startIcon={<AddCircleIcon />}
-            sx={{ backgroundColor: 'golden.main', minWidth: 0 }}
-            variant='contained'
-            disabled={ isSaving }
+          {/* TODO: justify-content: space-between */}
+          <Grid item
+            alignItems="center"
+            justifyContent="center"
+            sx={{ p: 2 }}
+            xs={12}
+            sm={4}
           >
-            Nueva Categoría
-          </Button>
+            <Typography variant='h4'>Gestión de Categorías</Typography>
+          </Grid>
+
+          <Grid item
+            alignItems="center"
+            justifyContent="center"
+            sx={{ p: 2 }}
+            xs={12}
+            sm={4}
+          >
+            <Button
+              className="addCategory-button"
+              onClick={onOpenModal}
+              startIcon={<AddCircleIcon />}
+              sx={{ backgroundColor: 'golden.main', minWidth: 0 }}
+              variant='contained'
+              disabled={ isSaving }
+            >
+              Nueva Categoría
+            </Button>
+          </Grid>
         </Grid>
+        <CategoryModal/>
+        <CategoryFilters/>
       </Grid>
-      <CategoryModal/>
+      
     </Grid>
   )
 }

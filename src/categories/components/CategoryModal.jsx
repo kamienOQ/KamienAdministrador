@@ -4,46 +4,15 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
-import { FloatingTags } from "./";
-import { deleteFileUpload } from "../../helpers/deleteFileUpload";
+import { deleteFileUpload } from "../../helpers";
 
-const products = [
-  {
-    label: 'Reloj Casio'
-  },
-  {
-    label: 'Reloj Rolex'
-  },
-  {
-    label: 'Reloj Omega'
-  },
-  {
-    label: 'Reloj A'
-  },
-  {
-    label: 'Reloj B'
-  },
-  {
-    label: 'Perfume C'
-  },
-  {
-    label: 'Perfume D'
-  },
-  {
-    label: 'Reloj E'
-  },
-  {
-    label: 'Reloj F'
-  }
-];
 
 export const CategoryModal = () => {
 
-  const { closeCategoryModal, isCategoryModalOpen, productsSelected } = useUiStore();
-  const { activeCategory, message, addProducts, setActiveCategory, 
-          addErrorMessage, addSuccessMessage, startUploadNewCategory 
-        } = useCategoriesStore();
-  const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useCategoriesState();
+  const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
+  const { activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage, 
+    startUploadNewCategory } = useCategoriesStore();
+  const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
   const [emptyName, setEmptyName] = useState(false);
@@ -57,7 +26,7 @@ export const CategoryModal = () => {
   useEffect(() => {
     addErrorMessage('');
     addSuccessMessage('');
-  }, [formState, productsSelected, imageLoad, iconLoad ]);
+  }, [formState, imageLoad, iconLoad ]);
   
   
 
@@ -76,7 +45,6 @@ export const CategoryModal = () => {
     if (activeCategory.categoryName === '') {
       setEmptyName(true);
     } else {
-      addProducts(productsSelected);
       startUploadNewCategory();
     }
   }
@@ -100,22 +68,6 @@ export const CategoryModal = () => {
             error={emptyName}
             helperText={emptyName ? 'Campo vacío' : ''}
           />
-          <TextField
-            fullWidth
-            id="outlined-select-currency"
-            select
-            label="Productos relacionados"
-            defaultValue=""
-            onChange={onSelectProduct}
-            helperText="Por favor seleccione los productos"
-          >
-            {/* importar y recorrer productsUploaded opteniendo el nombre */}
-            {products.map((option) => (
-              <MenuItem key={option.label} value={option.label}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
           {selected && <FloatingTags />}
           <div className="categories-modal-buttons">
             <div className="upload-files-container">
@@ -164,8 +116,7 @@ export const CategoryModal = () => {
                 </IconButton>
               </div>
             </div>
-            <Grid
-              item
+            <Grid item
               xs={12}
               display={!!message.error ? '' : 'none'}
             >

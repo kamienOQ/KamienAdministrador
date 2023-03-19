@@ -66,5 +66,5 @@ export const {
     onCloseProductModal, 
     onAddProductsSelected, 
     onDeleteProductsSelected, 
-    onCleanProductsSelected 
+    onCleanProductsSelected, 
 } = uiSlice.actions;

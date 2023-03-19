@@ -4,7 +4,7 @@ import { useCategoriesStore, useUiStore } from ".";
 
 export const useCategoriesState = () => {
     const { isCategoryModalOpen } = useUiStore();
-    const { activeCategory, startUploadFile } = useCategoriesStore();
+    const { activeCategory, startUploadFile1 } = useCategoriesStore();
     const [ imageLoad, setImageLoad ] = useState(false);
     const [ iconLoad, setIconLoad ] = useState(false);
 
@@ -24,7 +24,7 @@ export const useCategoriesState = () => {
             deleteFileUpload(activeCategory.image.name);
           }
           setImageLoad(true);
-          startUploadFile(target.files[0], 'image', 'categories');
+          startUploadFile1(target.files[0], 'image', 'categories');
         } 
       }
     
@@ -34,7 +34,7 @@ export const useCategoriesState = () => {
             deleteFileUpload(activeCategory.icon.name);
           }
           setIconLoad(true);
-          startUploadFile(target.files[0], 'icon', 'categories');
+          startUploadFile1(target.files[0], 'icon', 'categories');
         }
       }
 

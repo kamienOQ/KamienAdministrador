@@ -3,10 +3,11 @@ import { deleteFileUpload } from "../helpers";
 import { useProductsStore, useUiStore } from "./";
 
 export const useProductsState = () => {
-    const { isProductModalOpen } = useUiStore();
+    const { isProductModalOpen, addProductsSelected  } = useUiStore();
     const { activeProduct, startUploadFile } = useProductsStore();
     const [ imageLoad, setImageLoad ] = useState(false);
     const [ iconLoad, setIconLoad ] = useState(false);
+    const [ selected, setSelected ] = useState(false);
 
     const imageInputRef = useRef();
     const iconInputRef = useRef();
@@ -14,6 +15,7 @@ export const useProductsState = () => {
     useEffect(() => {
         setImageLoad(false);
         setIconLoad(false);
+        setSelected(false);
     
     }, [isProductModalOpen])
 
@@ -38,12 +40,19 @@ export const useProductsState = () => {
         }
       }
 
+      const onSelectProduct = ({ target }) => {
+        addProductsSelected(target.value);
+        setSelected(true);
+      }
+
     return {
         imageLoad,
         iconLoad,
+        selected,
         imageInputRef,
         iconInputRef, 
         onUploadImage,
         onUploadIcon,
+        onSelectProduct
     }
 }

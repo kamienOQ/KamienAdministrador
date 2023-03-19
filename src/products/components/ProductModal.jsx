@@ -3,8 +3,8 @@ import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogCon
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
-import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../hooks"
-import { FloatingTags } from "./";
+import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../hooks";
+import { FloatingTags } from "./FloatingTags";
 import { deleteFileUpload } from "../../helpers";
 
 const products = [
@@ -31,13 +31,13 @@ const products = [
   },
 ];
 
-export const ProductModal = () => {
+export const ProductModal = () => { 
 
-  const { closeProductModal, isProductModalOpen, productsSelected } = useUiStore();
-  const { activeProduct, message, addProducts, setActiveProduct, 
-          addErrorMessage, addSuccessMessage, startUploadNewProduct 
-        } = useProductsStore();
-  const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon, onSelectProduct } = useProductsState();
+  const { closeProductModal, isProductModalOpen, productsSelected  } = useUiStore();
+  
+  const { activeProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
+    startUploadNewProduct, addProducts } = useProductsStore();
+  const { imageLoad, iconLoad, selected, onSelectProduct, onUploadImage, onUploadIcon } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);

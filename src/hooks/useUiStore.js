@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 // Product
-import { onCleanActiveProduct, onRestorePage } from '../store';
+import { onAddProductsSelected, onCleanActiveProduct, onRestorePage } from '../store';
 // Ui
-import { onChangePage, onCloseProductModal, onDownPage, 
+import { onChangePage, onCloseProductModal, onDownPage, onCleanProductsSelected, onDeleteProductsSelected,
     onOpenProductModal, onUpPage } from '../store';
 
 export const useUiStore = () => {
@@ -11,6 +11,7 @@ export const useUiStore = () => {
 
     const { 
         isProductModalOpen,
+        productsSelected,
         totalPages,
         page
     } = useSelector( state => state.ui );
@@ -30,6 +31,14 @@ export const useUiStore = () => {
         dispatch( onRestorePage() );
     }
 
+    const addProductsSelected = ( productSelected ) => {
+        dispatch( onAddProductsSelected( productSelected ) )
+    }
+
+    const deleteProductsSelected = ( productSelected ) => {
+        dispatch( onDeleteProductsSelected( productSelected ) )
+    }
+
     const openProductModal = () => {
         dispatch( onOpenProductModal() );
     }
@@ -39,11 +48,16 @@ export const useUiStore = () => {
         dispatch( onCleanActiveProduct() );
     }
 
+    const cleanProductsSelected = () => {
+        dispatch( onCleanProductsSelected() )
+    }
+
 
 
     return {
         //*Propiedades
         isProductModalOpen,
+        productsSelected,
         totalPages,
         page,
 
@@ -52,6 +66,9 @@ export const useUiStore = () => {
         downPage,
         changePage,
         restorePage,
+        addProductsSelected,
+        deleteProductsSelected,
+        cleanProductsSelected,
         openProductModal,
         closeProductModal,
     }

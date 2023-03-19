@@ -1,30 +1,36 @@
-import { Grid, IconButton, TextField, Box, Typography, Button } from "@mui/material"
+import { Grid, IconButton, TextField, Box, Typography } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { Product, PageButtons } from './';
-import { useProductsStore, useUiStore } from '../../hooks';
+import { useProductsStore, useLoadDataPage, useUiStore } from '../../hooks';
 import { useEffect, useState } from 'react';
 
 export const ProductFilters = () => {
 
-  const { numberProducts, products } = useProductsStore();
-  const { searchingName, page, upPage, downPage } = useUiStore();
+  const { ascending, numberProducts, productsOnPage, changeAscending } = useProductsStore();
+  const { isProductModalOpen, restorePage, page, upPage, downPage } = useUiStore();
+  const { loadData } = useLoadDataPage();
 
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     if(inputValue === ''){
-      searchingName(inputValue);
+      restorePage();
+      changeAscending(inputValue);
+      loadData();
     }
-  }, [inputValue])
+  }, [inputValue]);
+
+  useEffect(() => {
+    loadData();
+  }, [isProductModalOpen])
   
 
   const onInputChange = ( {target} ) => {
       setInputValue( target.value );
-      
   }
 
   const onHadleUp = () => {
@@ -36,8 +42,24 @@ export const ProductFilters = () => {
   }
 
   const onSearchName = () => {
-    console.log('hola')
-    searchingName(inputValue);
+    restorePage();
+    changeAscending(inputValue);
+  }
+
+  const onAscendingFilter = () => {
+    if(ascending === '' || ascending === 'descending' || ascending === 'dateAscending'){
+      changeAscending('ascending');
+    }else{
+      changeAscending('descending');
+    }
+  }
+
+  const onDate = () => {
+    if(ascending === ''){
+      changeAscending('dateAscending');
+    }else{
+      changeAscending('');
+    }
   }
 
   return (
@@ -95,7 +117,7 @@ export const ProductFilters = () => {
             sx={{ width: '20%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Nombre
-              <IconButton sx={{ color: 'secondary.main' }}>
+              <IconButton sx={{ color: 'secondary.main' }} onClick={onAscendingFilter}>
                 <UnfoldMoreIcon />
               </IconButton>
             </Grid>
@@ -104,14 +126,10 @@ export const ProductFilters = () => {
             sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Fecha
-              <IconButton sx={{ color: 'secondary.main' }}>
+              <IconButton sx={{ color: 'secondary.main' }} onClick={onDate}>
                 <CalendarMonthIcon />
               </IconButton>
             </Grid>
-          </Grid>
-          <Grid item
-            sx={{ width: '30%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
-            Productos relacionados
           </Grid>
           <Grid item
             sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
@@ -127,20 +145,20 @@ export const ProductFilters = () => {
           </Grid>
         </Grid>
         {
-          products.map((product, index) => (
+          productsOnPage.map((product, index) => (
             index === 0 ?
-              <Product key={product.productName} id={( page * 5 ) - 4 } product={product}/>
+              <Product key={(page * 5)-4} id={(page * 5)-4} product={product} />
             :
             index === 1 ?
-              <Product key={product.productName} id={( page * 5 ) - 3 } product={product}/>
+              <Product key={(page * 5)-3} id={(page * 5)-3} product={product} />
             :
             index === 2 ?
-              <Product key={product.productName} id={( page * 5 ) - 2 } product={product}/>
+              <Product key={(page * 5)-2} id={(page * 5)-2} product={product} />
             :
             index === 3 ?
-              <Product key={product.productName} id={( page * 5 ) - 1 } product={product}/>
+              <Product key={(page * 5)-1} id={(page * 5)-1} product={product} />
             :
-              <Product key={product.productName} id={( page * 5 ) } product={product}/>
+              <Product key={page * 5} id={page * 5} product={product} />
           ))
         }
       </Grid>
@@ -149,16 +167,16 @@ export const ProductFilters = () => {
       >
         <Grid item>
           <Typography>
-            {`Mostrando ${products.length} de ${numberProducts} productos`}
+            {`Mostrando ${productsOnPage.length} de ${numberProducts} products`}
           </Typography>
         </Grid>
         <Grid item
           sx={{ color: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-          >
-            <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleDown}><KeyboardDoubleArrowLeftIcon /></IconButton>
-            <PageButtons />
-            <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleUp}><KeyboardDoubleArrowRightIcon /></IconButton>
-          </Grid>
+        >
+          <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleDown}><KeyboardDoubleArrowLeftIcon /></IconButton>
+          <PageButtons />
+          <IconButton sx={{ color: 'secondary.main' }} onClick={onHadleUp}><KeyboardDoubleArrowRightIcon /></IconButton>
+        </Grid>
       </Grid>
     </Grid>
   )

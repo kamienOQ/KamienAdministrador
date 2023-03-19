@@ -1,22 +1,29 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --main-color: #ca995f;
+  --hover-main:   #643A07;
+  --hover-error:   #800c0c;
+  --border: #b1b1b1;
+  --white: #ffffff;
+  --backgroud: #383838;
+  --roboto: 'Roboto', sans-serif;
 }
 
-label {
-  margin-bottom: 10px;
-  font-size: 18px;
+.addCategory-button:hover{
+  background-color: var(--hover-main) !important;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="submit"] {
-  padding: 10px;
+.cancelCategory-button:hover{
+  background-color: var(--hover-error) !important;
+  
+}
+
+.closeTag-button:hover{
+  background-color: var(--hover-main);
+  cursor: pointer;
 }
 
 .box-border{
-  border: 1px solid lightgray;
+  border: 1px solid var(--border);
   border-radius: 5px;
 }
 
@@ -30,19 +37,6 @@ input[type="submit"] {
   margin: 2rem 1rem 2rem 1rem !important;
 }
 
-.addCategory-button:hover{
-  background-color: #643A07 !important;
-}
-
-.cancelCategory-button:hover{
-  background-color: #800c0c !important;
-  
-}
-
-.closeTag-button:hover{
-  background-color: #643A07;
-  cursor: pointer;
-}
 
 .tags-container{
   display: grid;
@@ -56,9 +50,9 @@ input[type="submit"] {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #ca995f;
+  background-color: var(--main-color);
   border-radius: 30px;
-  color: white;
+  color: var(--white);
   width: auto;
   font-size: 14px;
   padding: 0 10px 0 10px;
@@ -66,8 +60,8 @@ input[type="submit"] {
 }
 
 .closeTag-button{
-  background-color: #ca995f;
-  color: white;
+  background-color: var(--main-color);
+  color: var(--white);
   border: none;
   font-size: 16px;
   border-radius: 50px;
@@ -94,15 +88,15 @@ input[type="submit"] {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 319px;
+  width: 268px !important;
 }
 
 .files-name-container input{
   width: 100px;
   height: 30px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--border);
   border-radius: 5px;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--roboto);
   font-size: 16px;
 }
 
@@ -119,7 +113,43 @@ input[type="submit"] {
   width: 318px;
 }
 
+.custom-input input {
+  color: var(--white) !important;
+}
 
+.page-button{
+  width: 30px;
+  height: 30px;
+  margin: 0px 4px 0px 4px;
+  border: none;
+  font-weight: bold;
+  border-radius: 50px;
+  background-color: var(--backgroud);
+  color: var(--white);
+  font-family: var(--roboto);
+  cursor: pointer;
+}
+
+.page-button-selected{
+  width: 30px;
+  height: 30px;
+  margin: 0px 4px 0px 4px;
+  border: none;
+  font-weight: bold;
+  border-radius: 50px;
+  font-family: var(--roboto);
+  background-color: var(--main-color);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.table-img{
+  max-width: 80%;
+}
+
+.table-icon{
+  max-width: 40%;
+}
 
 @media (max-width: 680px) {
   .categories-container div{
@@ -133,6 +163,15 @@ input[type="submit"] {
   .categories-container button{
       font-size: 12px;
   }
+  .secundary-categories-container{
+      max-height: 180px !important;
+      flex-direction: row !important;
+  }
+  .secundary-categories-container div{
+      display: flex;
+      justify-content: center;
+      padding: 1px;
+  }
   .tags-container{
       grid-template-columns: repeat(1, 1fr);
       width: 240px;
@@ -142,7 +181,7 @@ input[type="submit"] {
       margin: 1rem 2rem 1rem 2rem;
   }
   .files-name-container{
-      width: 275px;
+      width: 225px !important;
   }
   .iconImage-buttons{
       width: 228px;
@@ -153,21 +192,12 @@ input[type="submit"] {
 }
 
 @media (max-width: 410px) {
-  .secundary-categories-container{
-      max-height: 180px !important;
-      flex-direction: row !important;
-  }
-  .secundary-categories-container div{
-      display: flex;
-      justify-content: center;
-      padding: 1px;
-  }
   .category-form{
       width: 230px;
       margin: 1rem .4rem 1rem .4rem !important;
   }
   .files-name-container{
-      width: 215px;
+      width: 160px !important;
   }
   .iconImage-buttons{
       width: 160px;

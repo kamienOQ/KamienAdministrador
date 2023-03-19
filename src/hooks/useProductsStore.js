@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
-    onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
+    onSetActiveProduct, onStarGetProductsUploaded, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct } from "../store";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -35,6 +35,10 @@ export const useProductsStore = () => {
 
     const addIcon = ( images ) => {
         dispatch( onAddIcon( images ) );
+    }
+
+    const addProducts = ( products ) => {
+        dispatch( onAddProducts( products ) );
     }
 
     const addErrorMessage = ( message ) => {
@@ -82,6 +86,7 @@ export const useProductsStore = () => {
         //*Métodos
         addErrorMessage,
         addIcon,
+        addProducts,
         addImage,
         addNewProduct,
         addSuccessMessage,
@@ -91,5 +96,6 @@ export const useProductsStore = () => {
         startGetProducts,
         startUploadFile,
         startUploadNewProduct,
+        starGetProductsUploaded,
     }
 }

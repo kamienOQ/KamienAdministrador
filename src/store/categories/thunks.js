@@ -16,9 +16,9 @@ export const onStartUploadFile1 = (file, type, collectionName) => {
       const downloadURL = await getDownloadURL(storageRef);
 
       if(type === 'image'){
-        dispatch( onAddImage( [imgId, downloadURL] ) );
+        dispatch( onAddImage1( [imgId, downloadURL] ) );
       }else{
-        dispatch( onAddIcon( [imgId, downloadURL] ) );
+        dispatch( onAddIcon1( [imgId, downloadURL] ) );
       }
     }
   }
@@ -43,7 +43,7 @@ export const onStartUploadNewCategory = () => {
       if( categoryName.toLowerCase() === activeCategory.categoryName.toLowerCase() ){
         duplicateCategory = true;
         dispatch(onAddErrorMessage1( 'Ya existe una categoría con este nombre' ));
-        dispatch(onAddSuccessMessage( '' ));
+        dispatch(onAddSuccessMessage1( '' ));
       }
     });
     if(!duplicateCategory){

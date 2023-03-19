@@ -1,10 +1,9 @@
-import { collection, doc, getDocs, query, setDoc } from "firebase/firestore/lite";
+import { collection, doc, getDocs, orderBy, query, setDoc } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewProduct, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
   onCleanProducts, onSetNumberProducts, onChargeProductsUploaded, onAddLowerCase, onAddProductAtStart } from "./";
-
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -29,8 +28,8 @@ export const onStartUploadFile = (file, type, collectionName) => {
 export const onStartUploadNewProduct = () => {
   return async (dispatch, getState) => {
 
-    const { activeProduct } = getState().products;
     let duplicateProduct = false;
+    const { activeProduct } = getState().products;
 
     dispatch(onChangeSavingNewProduct(true));
     dispatch(onAddLowerCase());
@@ -59,7 +58,7 @@ export const onStartUploadNewProduct = () => {
 }
 
 export const onStartGetProducts = () => {
-  return async ( dispatchgetState, getState ) => {
+  return async ( dispatch, getState ) => {
     let repetido = false
     dispatch(onCleanProducts());
 
@@ -81,7 +80,7 @@ export const onStartGetProducts = () => {
   }
 }
 
-/*
+
 export const onStarGetProductsUploaded = () => {
   return async (dispatch) => {
 
@@ -123,7 +122,7 @@ export const onStartGetProductsByName = (name, page = 1) => {
     });
   }
 }
-*/
+
 
 //TODO: onStartGetProductsByName
 //TODO: onStartGetProductsByDate

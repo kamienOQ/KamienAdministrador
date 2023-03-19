@@ -10,8 +10,7 @@ export const productsSlice = createSlice({
         },
         ascending: '',
         numberProducts: 0,
-        productsUploaded: [],
-        numberProducts: 0,
+        productsUploaded: [],           
         products: [],
         productsOnPage: [],
         activeProduct: null, 
@@ -90,6 +89,9 @@ export const productsSlice = createSlice({
             state.activeProduct.icon.name = payload[0];
             state.activeProduct.icon.url = payload[1];
         },
+        onAddProducts: ( state, { payload } ) => {
+            state.activeProduct.products = payload;
+        },
         onChangeAscending: ( state, { payload } ) => {
             state.ascending = payload
         },
@@ -106,7 +108,7 @@ export const productsSlice = createSlice({
         onCleanActiveProduct: ( state ) => {
             state.activeProduct = null;
         },
-        onCleanProductUploaded: ( state ) => {
+        onCleanProductsUploaded: ( state ) => {
             state.productsUploaded = [];
         }
     }
@@ -133,4 +135,5 @@ export const {
     onSetActiveProduct, 
     onSetNumberProducts,
     onUpdateProduct,
+    onAddProducts,
 } = productsSlice.actions;
