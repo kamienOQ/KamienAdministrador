@@ -4,6 +4,7 @@ export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         isProductModalOpen: false,
+        isCategoryModalOpen: false,
         totalPages: 1,
         page: 1,
         searching: '',
@@ -48,6 +49,12 @@ export const uiSlice = createSlice({
         },
         onCleanProductsSelected: ( state ) => {
             state.productsSelected = []
+        },
+        onOpenCategoryModal: ( state ) => {
+            state.isCategoryModalOpen = true;
+        },
+        onCloseCategoryModal: ( state ) => {
+            state.isCategoryModalOpen = false;
         }
         
     }
@@ -67,4 +74,6 @@ export const {
     onAddProductsSelected, 
     onDeleteProductsSelected, 
     onCleanProductsSelected, 
+    onOpenCategoryModal, 
+    onCloseCategoryModal, 
 } = uiSlice.actions;

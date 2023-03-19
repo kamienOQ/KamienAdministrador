@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 // Product
-import { onAddProductsSelected, onCleanActiveProduct, onRestorePage } from '../store';
+import { onAddProductsSelected, onCleanActiveProduct, onCleanActiveCategory, onRestorePage } from '../store';
 // Ui
 import { onChangePage, onCloseProductModal, onDownPage, onCleanProductsSelected, onDeleteProductsSelected,
-    onOpenProductModal, onUpPage } from '../store';
+    onOpenProductModal, onOpenCategoryModal, onUpPage } from '../store';
 
 export const useUiStore = () => {
 
@@ -11,6 +11,7 @@ export const useUiStore = () => {
 
     const { 
         isProductModalOpen,
+        isCategoryModalOpen,
         productsSelected,
         totalPages,
         page
@@ -52,12 +53,22 @@ export const useUiStore = () => {
         dispatch( onCleanProductsSelected() )
     }
 
+    const openCategoryModal = () => {
+        dispatch( onOpenCategoryModal() );
+    }
+
+    const closeCategoryModal = () => {
+        dispatch( onCloseCategoryModal() );
+        dispatch( onCleanActiveCategory() );
+    }
+
 
 
     return {
         //*Propiedades
         isProductModalOpen,
         productsSelected,
+        isCategoryModalOpen,
         totalPages,
         page,
 
@@ -71,6 +82,8 @@ export const useUiStore = () => {
         cleanProductsSelected,
         openProductModal,
         closeProductModal,
+        openCategoryModal,
+        closeCategoryModal,
     }
 
 }
