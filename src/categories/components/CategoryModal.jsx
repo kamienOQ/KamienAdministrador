@@ -10,7 +10,7 @@ import { deleteFileUpload } from "../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage, 
+  const { activeCategory, message, setActiveCategory, addErrorMessage1, addSuccessMessage1, 
     startUploadNewCategory } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon } = useCategoriesState();
 
@@ -24,8 +24,8 @@ export const CategoryModal = () => {
   }, [formState]);
 
   useEffect(() => {
-    addErrorMessage('');
-    addSuccessMessage('');
+    addErrorMessage1('');
+    addSuccessMessage1('');
   }, [formState, imageLoad, iconLoad ]);
   
   

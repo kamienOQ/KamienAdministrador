@@ -4,6 +4,7 @@ import { ProductPages } from '../../products';
 export const ProductsCrud = () => {
   return (
     <>
+      <BottomNav/>
       <ProductPages/>
     </>
   )

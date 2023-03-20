@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 export const CategoryFilters = () => {
 
-  const { ascending, numberCategories, categoriesOnPage, changeAscending } = useCategoriesStore();
+  const { ascending, numberCategories, categoriesOnPage, changeAscending1 } = useCategoriesStore();
   const { isCategoryModalOpen, restorePage, page, upPage, downPage } = useUiStore();
   const { loadData } = useLoadDataPage();
 
@@ -19,7 +19,7 @@ export const CategoryFilters = () => {
   useEffect(() => {
     if(inputValue === ''){
       restorePage();
-      changeAscending(inputValue);
+      changeAscending1(inputValue);
       loadData();
     }
   }, [inputValue]);
@@ -44,22 +44,22 @@ export const CategoryFilters = () => {
 
   const onSearchName = () => {
     restorePage();
-    changeAscending(inputValue);
+    changeAscending1(inputValue);
   }
 
   const onAscendingFilter = () => {
     if(ascending === '' || ascending === 'descending' || ascending === 'dateAscending'){
-      changeAscending('ascending');
+      changeAscending1('ascending');
     }else{
-      changeAscending('descending');
+      changeAscending1('descending');
     }
   }
 
   const onDate = () => {
     if(ascending === ''){
-      changeAscending('dateAscending');
+      changeAscending1('dateAscending');
     }else{
-      changeAscending('');
+      changeAscending1('');
     }
   }
 

@@ -81,7 +81,11 @@ export const ProductModal = () => {
       open={isProductModalOpen} 
     >
       <DialogContent >
-        <DialogTitle variant="h7" align="center" color= "#D1B000">
+        <DialogTitle 
+          variant="h7" 
+          align="center" 
+          color= "#D1B000"
+        >
           Agregar un nuevo Producto
         </DialogTitle >
         <TableRow className="product-form">
