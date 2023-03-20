@@ -22,12 +22,8 @@ export const startGetOrders = (page = 1) => {
         getOrders = !getOrders;
       }
       if (getOrders) {
-        const data = {...doc.data()};
-        const newDate = new Date(data.date);
-        const formatDate = new Intl.DateTimeFormat("es-ES").format(newDate);
-        data.dateString = formatDate;
 
-        orders.push({id: counter+1, ...data})
+        orders.push({id: counter+1, ...doc.data()})
       }
       counter++;
     });

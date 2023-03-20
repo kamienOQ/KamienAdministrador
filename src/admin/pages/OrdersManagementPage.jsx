@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Grid, Typography } from "@mui/material";
-import { OrdersManagementFilters } from "../components/OrdersManagementFilters";
+import { Orders } from "../components";
 import { startGetOrders } from "../../store/orders";
 
 export const OrdersManagementPage = () => {
@@ -38,7 +38,7 @@ export const OrdersManagementPage = () => {
             <Typography variant="h4">Gestión de Pedidos</Typography>
           </Grid>
         </Grid>
-        <OrdersManagementFilters />
+        <Orders />
       </Grid>
     </Grid>
   );
