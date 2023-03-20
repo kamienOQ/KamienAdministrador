@@ -8,7 +8,7 @@ export const OrdersManagementPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(startGetOrders(1));
+    dispatch(startGetOrders());
   }, []);
 
   return (

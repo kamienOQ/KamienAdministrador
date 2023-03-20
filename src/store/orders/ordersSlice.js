@@ -7,7 +7,7 @@ export const ordersSlice = createSlice({
   },
   reducers: {
     setOrders: (state, action) => {
-      state.orders = action.payload.sort((a, b) => b.date - a.date);
+      state.orders = action.payload;
     },
     cleanOrders: ( state ) => {
       state.orders = [];
