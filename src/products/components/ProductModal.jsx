@@ -79,12 +79,13 @@ export const ProductModal = () => {
     <Dialog
       className="modal-container-products"
       open={isProductModalOpen} 
+      align="center"
     >
-      <DialogContent >
+      <DialogContent>
         <DialogTitle 
-          variant="h7" 
-          align="center" 
-          color= "#D1B000"
+          variant="h7"  
+          color= "#ffffff"
+          sx={ { borderRadius: '16px', backgroundColor:"#000000" } }
         >
           Agregar un nuevo Producto
         </DialogTitle >
@@ -199,7 +200,7 @@ export const ProductModal = () => {
                 className="cancelProduct-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ m: 0.1 }}
+                sx={{ borderRadius: '16px', m: 0.1 }}
                 color="error"
               >
                 X
@@ -208,7 +209,7 @@ export const ProductModal = () => {
                 className="addProduct-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ m: 0.1 }}
+                sx={{ borderRadius: '16px', m: 0.1 }}
                 color="success"
               >
                 ✓

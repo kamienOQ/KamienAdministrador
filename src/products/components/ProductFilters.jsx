@@ -69,7 +69,9 @@ export const ProductFilters = () => {
       direction="row"
       justifyContent="flex-end"
       alignContent="start"
-      sx={{ ml: 2, mr: 2, mt: 0, p: 1, maxHeight: 'auto', backgroundColor: 'darkGray.main', borderRadius: 1.2, gap: 2 }}
+      sx={{ ml: 2, mr: 2, mt: 0, p: 1, maxHeight: 'auto', backgroundColor: 'darkGray.main', 
+        borderRadius: 1.2, gap: 2 
+      }}
     >
 
       <Grid container
@@ -104,6 +106,37 @@ export const ProductFilters = () => {
         >
           <SearchIcon sx={{ color: 'secondary.main' }} />
         </IconButton>
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            type="text"
+            label="Buscar por fecha..."
+            variant="outlined"
+            className="custom-input"
+            name="search"
+            value={ inputValue }
+            onChange={ onInputChange }
+            InputLabelProps={{
+              style: { color: 'white' },
+            }}
+          />
+        </Box>
+
+        <IconButton
+          className="addProduct-button"
+          onClick={onSearchName}
+          sx={{ backgroundColor: 'golden.main' }}
+        >
+          <SearchIcon sx={{ color: 'secondary.main' }} />
+        </IconButton>
+
       </Grid>
 
       <Grid container>
@@ -114,7 +147,7 @@ export const ProductFilters = () => {
             #
           </Grid>
           <Grid item
-            sx={{ width: '20%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
+            sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Nombre
               <IconButton sx={{ color: 'secondary.main' }} onClick={onAscendingFilter}>
@@ -123,7 +156,7 @@ export const ProductFilters = () => {
             </Grid>
           </Grid>
           <Grid item
-            sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
+            sx={{ width: '10%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             <Grid item sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               Fecha
               <IconButton sx={{ color: 'secondary.main' }} onClick={onDate}>
@@ -132,15 +165,15 @@ export const ProductFilters = () => {
             </Grid>
           </Grid>
           <Grid item
-            sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
+            sx={{ width: '25%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             Imagen
           </Grid>
           <Grid item
-            sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
+            sx={{ width: '25%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             Icono
           </Grid>
           <Grid item
-            sx={{ width: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
+            sx={{ width: '10%', borderColor: 'secondary.main', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}>
             Acciones
           </Grid>
         </Grid>

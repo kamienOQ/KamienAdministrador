@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
@@ -45,15 +46,6 @@ input[type="submit"] {
   margin: 2rem 1rem 2rem 1rem !important;
 }
 
-.product-form{
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-  width: 320px;
-  margin: 2rem 1rem 2rem 1rem !important;
-}
 
 .tags-container{
   display: grid;
@@ -81,14 +73,6 @@ input[type="submit"] {
 }
 
 .categories-modal-buttons{
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.products-modal-buttons{
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -198,65 +182,6 @@ input[type="submit"] {
 
 @media (max-width: 410px) {
   .category-form{
-      width: 230px;
-      margin: 1rem .4rem 1rem .4rem !important;
-  }
-  .files-name-container{
-      width: 160px !important;
-  }
-  .iconImage-buttons{
-      width: 160px;
-  } 
-  .action-buttons{
-      width: 220px;
-  }
-  .MuiPaper-elevation{
-      margin: 13px !important;
-  }    
-}
-
-@media (max-width: 680px) {
-  .products-container div{
-      margin: 4px;
-      padding-right: 1px;
-      padding-left: 1px !important;
-  }
-  .products-container h4{
-      font-size: 24px;
-  }
-  .products-container button{
-      font-size: 12px;
-  }
-  .secundary-products-container{
-      max-height: 180px !important;
-      flex-direction: row !important;
-  }
-  .secundary-products-container div{
-      display: flex;
-      justify-content: center;
-      padding: 1px;
-  }
-  .tags-container{
-      grid-template-columns: repeat(1, 1fr);
-      width: 240px;
-  }
-  .product-form{
-      width: 270px;
-      margin: 1rem 2rem 1rem 2rem;
-  }
-  .files-name-container{
-      width: 225px !important;
-  }
-  .iconImage-buttons{
-      width: 228px;
-  } 
-  .action-buttons{
-      width: 270px;
-  }
-}
-
-@media (max-width: 410px) {
-  .products-form{
       width: 230px;
       margin: 1rem .4rem 1rem .4rem !important;
   }

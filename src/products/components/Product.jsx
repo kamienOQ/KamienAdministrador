@@ -17,13 +17,13 @@ export const Product = ({ id, product }) => {
         {id}
       </Grid>
       <Grid item
-        sx={{ width: '20%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
+        sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
               justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
       >
         {product.productName}
       </Grid>
       <Grid item
-        sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
+        sx={{ width: '10%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
               justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
       >
         {
@@ -32,19 +32,19 @@ export const Product = ({ id, product }) => {
         }
       </Grid>
       <Grid item
-        sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
+        sx={{ width: '25%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
               justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
       >
         <img className="table-img" src={product.image.url} alt={product.image.name} />
       </Grid>
       <Grid item
-        sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
+        sx={{ width: '25%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
               justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
       >
         <img className="table-icon" src={product.icon.url} alt={product.icon.name} />
       </Grid>
       <Grid item
-        sx={{ width: '15%', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
+        sx={{ width: '10%', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
       >
         <Grid sx={{ display: 'flex', direction: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <IconButton sx={{ color: "secondary.main" }}>

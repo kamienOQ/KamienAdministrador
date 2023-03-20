@@ -1,52 +1,137 @@
+import { useEffect, useMemo, useState } from 'react';
+import { Avatar, Box, Pagination, Typography } from '@mui/material';
+import { DataGrid, gridClasses } from '@mui/x-data-grid';
+// import { useValue } from '../../../context/ContextProvider';
+// import { getUsers } from '../../../actions/user';
+import moment from 'moment';
+import { grey,red} from '@mui/material/colors';
+import { UserActions, AdminEditModal } from './';
+import "./Administradores.css"
+import img from  "./Empty_pp.jpg"
+import { Margin } from '@mui/icons-material';
+import { light } from '@mui/material/styles/createPalette';
 
-import {
-    Avatar,
-    Card,
-    Container,
-    ImageList,
-    ImageListItem,
-    ImageListItemBar,
-    Rating,
-    Tooltip,
-  } from '@mui/material';
-//   import { useValue } from '../../context/ContextProvider';
-  import { StarBorder } from '@mui/icons-material';
-  import image from "../pages/Empty_pp.jpg"
-const Administradores = () =>{
+export const Administradores = () =>{
+    const users = [
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carolina Chavez ",
+            email : "CChavez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "1"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Carlos Pérez",
+            email : "CPerez@gmail.com",
+            role : "admin",
+            active : true,
+            id : "2"
+
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Armando Casas",
+            email : "ArmandoC@gmail.com",
+            role : "admin",
+            active : true,
+            id : "3"
+        },
+        {
+            photoURL:"asdsadsadsa",
+            name : "Juancho Arias",
+            email : "JArias@gmail.com",
+            role : "admin",
+            active : true,
+            id : "4"
+        }
+    ]
+
+    const [pageSize, setPageSize] = useState(5);
+    const [rowId, setRowId] = useState(null);
+        const columns = useMemo(
+            () => [
+                {
+                  field: 'photoURL',
+                  headerName: 'Avatar',
+                  width: 60,
+                  renderCell: () => <Avatar src={img} />, // users.foto
+                  sortable: false,
+                  filterable: false,
+                },
+                { field: 'name', headerName: 'Nombre', width: 300, editable : true },
+                { field: 'email', headerName: 'Correo', width: 200, editable: true },
+                {
+                  field: 'createdAt',
+                  headerName: 'Fecha de Creación',
+                  width: 200,
+                  renderCell: () =>
+                    moment('2023-03-14 12:30:00').format('YYYY-MM-DD HH:MM:SS'),
+                    editable : true
+                },
+                { field: 'id', headerName: 'Id', width: 200 },
+                {
+                  field: 'actions',
+                  headerName: 'Acciones',
+                  type: 'actions',
+                  width: 200,
+                  renderCell: () => (
+                     <UserActions/>  //{...{ params, rowId, setRowId }} 
+                  ),
+                },
+              ],
+              [rowId]
+            );
+        // useEffect(() => {
+        //     setSelectedLink(link);
+        //     if (users.length === 0) getUsers(dispatch);
+        // }, []);
     return(
         <>
-         <Container>
-            <ImageList
-            gap={12}
+            <Box
             sx={{
-            mb: 8,
-            gridTemplateColumns:
-                'repeat(auto-fill, minmax(280px, 1fr))!important',
-            }}
+                height: 400,
+                marginTop: '5%',
+                marginLeft: '5%',
+                maxWidth: '95%'
+                }}
             >
-                <Card key={"1231"}>
-                {/* <Card key={room._id}> */}
-                    <ImageListItem sx={{ height: '100% !important' }}>
-                        <ImageListItemBar
-                        sx={{
-                        background:
-                            'linear-gradient(to bottom, rgba(0,0,0,0.7)0%, rgba(0,0,0,0.3)70%, rgba(0,0,0,0)100%)',
-                        }}
-                        title={"$ 2000"}
-                        actionIcon={
-                            <Tooltip title={"Nombre"} sx={{ mr: '5px' }}>
-                                <Avatar src={image} />              
-                            </Tooltip>
-                            }
-                        position="top"
-                        />    
-                    </ImageListItem>
-                            
-                </Card>
+                <Typography
+                    variant="h3"
+                    component="h3"
+                    sx={{ textAlign: 'center', mt: 3, mb: 3 }}
+                >
+                    Manage Users
+                </Typography>
+                <DataGrid  
+                    columns={columns}
+                    rows={users}
+                    getRowId={(row) => row.id}
+                    rowsPerPageOptions={[5, 10, 20]}
+                    pageSize={pageSize}
+                    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                    getRowSpacing={() => ({
+                    top: 5,
+                    bottom:  5,
+                    })}
+                    sx={{      
+                    color: 'dark.main',
+                    maxWidth: "1162px",
+                    my: "0",
+                    mx: "auto",
+                    ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {bgcolor: "info.main", color: "white"},
+                    ".css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root": {color: "white"},
+                    ".MuiDataGrid-row:nth-of-type(even)": {bgcolor: "secondary.main"},
+                    ".css-wop1k0-MuiDataGrid-footerContainer": {bgcolor: "info.main", color: "white"},
+                    ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar": {color: "white"},
+                    ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {color: "white"},
+                    }}
+                    // onCellEditCommit={() => setRowId("dwqwdqdwqd")}
+                />
+            </Box>
 
-             </ImageList>
-         </Container>
         </>
     )
 }
-export default Administradores;

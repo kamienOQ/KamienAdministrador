@@ -1,11 +1,9 @@
-import BottomNav from "../Components/BottomNav";
-import { CategoriesPages } from '../../categories/pages/CategoriesPages';
 
+import BottomNav from "../Components/BottomNav";
 export const CategoryCrud = () => {
   return (
     <>
       <BottomNav/>
-      <CategoriesPages/>
     </>
   )
 }

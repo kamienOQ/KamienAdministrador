@@ -14,13 +14,13 @@ const BottomNav = () => {
 //     ref.current.ownerDocument.body.scrollTop = 0;
 //   }, [value]);
   return (
-    <Box>
-         <Paper
+    <Box >
+         <Paper 
         elevation={3}
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2 }}
       >
         <BottomNavigation
-        
+
           showLabels
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
