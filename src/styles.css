@@ -1,29 +1,37 @@
 :root {
-  --main-color: #ca995f;
-  --hover-main:   #643A07;
-  --hover-error:   #800c0c;
-  --border: #b1b1b1;
-  --white: #ffffff;
-  --backgroud: #383838;
   --roboto: 'Roboto', sans-serif;
 }
 
-.addCategory-button:hover{
-  background-color: var(--hover-main) !important;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.cancelCategory-button:hover{
-  background-color: var(--hover-error) !important;
-  
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
+  background-color: #D1B000 !important;
 }
+
+.column-container:nth-child(odd) {
+  background-color: #c9c9c9;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* input[type="text"],
+input[type="password"],
+input[type="submit"] {
+  padding: 10px;
+} */
 
 .closeTag-button:hover{
-  background-color: var(--hover-main);
   cursor: pointer;
 }
 
 .box-border{
-  border: 1px solid var(--border);
   border-radius: 5px;
 }
 
@@ -37,6 +45,15 @@
   margin: 2rem 1rem 2rem 1rem !important;
 }
 
+.product-form{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  margin: 2rem 1rem 2rem 1rem !important;
+}
 
 .tags-container{
   display: grid;
@@ -50,9 +67,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: var(--main-color);
   border-radius: 30px;
-  color: var(--white);
   width: auto;
   font-size: 14px;
   padding: 0 10px 0 10px;
@@ -60,14 +75,20 @@
 }
 
 .closeTag-button{
-  background-color: var(--main-color);
-  color: var(--white);
   border: none;
   font-size: 16px;
   border-radius: 50px;
 }
 
 .categories-modal-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.products-modal-buttons{
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -94,7 +115,6 @@
 .files-name-container input{
   width: 100px;
   height: 30px;
-  border: 1px solid var(--border);
   border-radius: 5px;
   font-family: var(--roboto);
   font-size: 16px;
@@ -113,10 +133,6 @@
   width: 318px;
 }
 
-.custom-input input {
-  color: var(--white) !important;
-}
-
 .page-button{
   width: 30px;
   height: 30px;
@@ -124,10 +140,8 @@
   border: none;
   font-weight: bold;
   border-radius: 50px;
-  background-color: var(--backgroud);
-  color: var(--white);
   font-family: var(--roboto);
-  cursor: pointer;
+  background-color: #B9FAF8;
 }
 
 .page-button-selected{
@@ -138,17 +152,8 @@
   font-weight: bold;
   border-radius: 50px;
   font-family: var(--roboto);
-  background-color: var(--main-color);
-  color: var(--white);
-  cursor: pointer;
-}
-
-.table-img{
-  max-width: 80%;
-}
-
-.table-icon{
-  max-width: 40%;
+  background-color: #256EFF;
+  color: white;
 }
 
 @media (max-width: 680px) {
@@ -193,6 +198,65 @@
 
 @media (max-width: 410px) {
   .category-form{
+      width: 230px;
+      margin: 1rem .4rem 1rem .4rem !important;
+  }
+  .files-name-container{
+      width: 160px !important;
+  }
+  .iconImage-buttons{
+      width: 160px;
+  } 
+  .action-buttons{
+      width: 220px;
+  }
+  .MuiPaper-elevation{
+      margin: 13px !important;
+  }    
+}
+
+@media (max-width: 680px) {
+  .products-container div{
+      margin: 4px;
+      padding-right: 1px;
+      padding-left: 1px !important;
+  }
+  .products-container h4{
+      font-size: 24px;
+  }
+  .products-container button{
+      font-size: 12px;
+  }
+  .secundary-products-container{
+      max-height: 180px !important;
+      flex-direction: row !important;
+  }
+  .secundary-products-container div{
+      display: flex;
+      justify-content: center;
+      padding: 1px;
+  }
+  .tags-container{
+      grid-template-columns: repeat(1, 1fr);
+      width: 240px;
+  }
+  .product-form{
+      width: 270px;
+      margin: 1rem 2rem 1rem 2rem;
+  }
+  .files-name-container{
+      width: 225px !important;
+  }
+  .iconImage-buttons{
+      width: 228px;
+  } 
+  .action-buttons{
+      width: 270px;
+  }
+}
+
+@media (max-width: 410px) {
+  .products-form{
       width: 230px;
       margin: 1rem .4rem 1rem .4rem !important;
   }

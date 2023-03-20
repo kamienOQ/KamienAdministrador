@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
+import { TextField, Dialog, DialogTitle, TableRow, TableHead, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
@@ -78,29 +78,29 @@ export const ProductModal = () => {
   return (
     <Dialog
       className="modal-container-products"
-      open={isProductModalOpen}
+      open={isProductModalOpen} 
     >
-      <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
-        <DialogTitle>Agregar Producto</DialogTitle>
-        <form className="product-form">
+      <DialogContent >
+        <DialogTitle variant="h7" align="center" color= "#D1B000">
+          Agregar un nuevo Producto
+        </DialogTitle >
+        <TableRow className="product-form">
           <TextField
             sx={{ p: 1 }}
             type="text"
             fullWidth
-            label="Nombre del Producto"
-            variant="outlined"
+            label="Nombre del Producto" variant="filled" focused
             name="productName"
             value={productName || ''}
             onChange={onInputChange}
             error={emptyName}
-            helperText={emptyName ? 'Campo vacío' : ''}
+            helperText={emptyName ? 'Campo vacío' : ''} 
           />
           <TextField
             sx={{ p: 1 }}
             type="number"
             fullWidth
-            label="Precio del Producto"
-            variant="outlined"
+            label="Precio del Producto" variant="filled" focused
             name="price"
             value={price || ''}
             onChange={onInputChange}
@@ -111,8 +111,7 @@ export const ProductModal = () => {
             sx={{ p: 1}}
             type="text"
             fullWidth
-            label="Atributos del Producto"
-            variant="outlined"
+            label="Atributos del Producto" variant="filled" focused
             name="atributes"
             value={atributes || ''}
             onChange={onInputChange}
@@ -120,11 +119,11 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
-            sx={{ p: 1}}
+            sx={{ p: 1 }}
             fullWidth
             id="outlined-select-currency"
             select
-            label="Categoría del producto"
+            label="Categoría del producto" variant="filled" focused
             defaultValue=""
             onChange={onSelectProduct}
             helperText="Por favor seleccione la categoría del producto"
@@ -140,10 +139,10 @@ export const ProductModal = () => {
           <div className="products-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
-                <Typography>
+                <Typography sx={ { color: "#D1B000" }}>
                   Imagen
                 </Typography>
-                <Typography>
+                <Typography sx={ { color: "#D1B000" }}>
                   Icono
                 </Typography>
               </div>
@@ -191,26 +190,28 @@ export const ProductModal = () => {
             >
               <Alert severity='error'>{ message.error }</Alert>
             </Grid>
-            <div className="action-buttons">
+            <div className="action-buttons" sx={ { borderRadius: '50%' } }>
               <Button
                 className="cancelProduct-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ backgroundColor: "error.main" }}
+                sx={{ m: 0.1 }}
+                color="error"
               >
-                Cancelar
+                X
               </Button>
               <Button
                 className="addProduct-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ backgroundColor: "golden.main", m: 5  }}
+                sx={{ m: 0.1 }}
+                color="success"
               >
-                Agregar
+                ✓
               </Button>
             </div>
           </div>
-        </form>
+        </TableRow>
       </DialogContent>
     </Dialog>
   )

@@ -37,7 +37,11 @@ export const ProductPages = () => {
       container
       spacing={0}
       alignContent="start"
-      sx={{ minHeight: '100vh', backgroundColor: 'primary.main', color: 'secondary.main', mb: 0 }}
+      sx={{ backgroundColor: 'primary.main', color: 'secondary.main' }}
+      marginLeft={"4%"}
+      marginTop={"4%"}
+      marginRight={"4%"}
+      maxWidth={"96%"}
     >
       <Grid container>
         <Grid container
