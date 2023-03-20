@@ -21,7 +21,7 @@ export const OrdersManagementPage = () => {
       <Grid
         container
         sx={{
-          height: 400,
+          height: 450,
           marginLeft: "5%",
           maxWidth: "95%",
         }}
