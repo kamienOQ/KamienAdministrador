@@ -27,8 +27,9 @@ export const UserActions = () => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: grey[500],
-            '&:hover': { bgcolor: grey[700] },
+            bgcolor: "primary.main",
+            color: "white",
+            '&:hover': { bgcolor: "primary.main" },
           }}
         >
             <EditIcon />
@@ -39,8 +40,9 @@ export const UserActions = () => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: red[800],
-            '&:hover': { bgcolor: red[900] },
+            bgcolor: "error.main",
+            color: "white",
+            '&:hover': { bgcolor: "error.main" },
           }}
         >
             <CancelIcon />

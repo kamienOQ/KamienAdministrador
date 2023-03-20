@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Grid, Typography } from "@mui/material"
+import { Grid, Typography } from "@mui/material";
 import { OrdersManagementFilters } from "../components/OrdersManagementFilters";
 import { startGetOrders } from "../../store/orders";
 
@@ -18,7 +18,14 @@ export const OrdersManagementPage = () => {
       spacing={0}
       alignContent="start"
     >
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          height: 400,
+          marginLeft: "5%",
+          maxWidth: "95%",
+        }}
+      >
         <Grid
           alignItems="center"
           className="secundary-categories-container"
@@ -27,16 +34,12 @@ export const OrdersManagementPage = () => {
           spacing={2}
           sx={{ padding: 4, mt: 8, borderRadius: 1.2 }}
         >
-          <Grid
-            item
-            textAlign="center"
-          >
-            <Typography variant='h4'>Gestión de Pedidos</Typography>
+          <Grid item textAlign="center">
+            <Typography variant="h4">Gestión de Pedidos</Typography>
           </Grid>
         </Grid>
-        <OrdersManagementFilters/>
+        <OrdersManagementFilters />
       </Grid>
-      
     </Grid>
   );
 };
