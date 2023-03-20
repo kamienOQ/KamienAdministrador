@@ -8,6 +8,27 @@
     --roboto: 'Roboto', sans-serif;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
+    background-color: #D1B000 !important;
+}
+
+.column-container:nth-child(odd) {
+    background-color: #c9c9c9;
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+
 .addCategory-button:hover{
     background-color: var(--hover-main) !important;
 }
@@ -35,6 +56,20 @@
     align-items: center;
     width: 320px;
     margin: 2rem 1rem 2rem 1rem !important;
+}
+
+.box-border{
+  border-radius: 5px;
+}
+
+.category-form{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  margin: 2rem 1rem 2rem 1rem !important;
 }
 
 
@@ -74,6 +109,7 @@
     align-items: center;
     justify-content: center;
 }
+
 
 .upload-files-container{
     display: flex;
@@ -124,13 +160,12 @@
     border: none;
     font-weight: bold;
     border-radius: 50px;
-    background-color: var(--backgroud);
-    color: var(--white);
     font-family: var(--roboto);
+    background-color: #B9FAF8;
     cursor: pointer;
-}
-
-.page-button-selected{
+  }
+  
+  .page-button-selected{
     width: 30px;
     height: 30px;
     margin: 0px 4px 0px 4px;
@@ -138,10 +173,11 @@
     font-weight: bold;
     border-radius: 50px;
     font-family: var(--roboto);
-    background-color: var(--main-color);
-    color: var(--white);
+    background-color: #256EFF;
+    color: white;
     cursor: pointer;
-}
+  }
+
 
 .table-img{
     max-width: 80%;
@@ -209,3 +245,24 @@
         margin: 13px !important;
     }    
 }
+
+.tag-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  width: auto;
+  font-size: 14px;
+  padding: 0 10px 0 10px;
+  gap: 5px;
+}
+
+
+
+
+
+
+
+
+
