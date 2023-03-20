@@ -3,8 +3,8 @@ import { Button, Modal, TextField,Fab } from '@mui/material';
 import { blue,grey,red } from '@mui/material/colors';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-export const AdminEditModal = ({openModal}) => {
-    const [open, setOpen] = useState(openModal); // estado para abrir o cerrar el modal
+export const AdminEditModal = () => {
+    const [open, setOpen] = useState(false); // estado para abrir o cerrar el modal
     const [data, setData] = useState([]); // estado para almacenar los datos ingresados en el formulario
     const [formValues, setFormValues] = useState({}); // estado para almacenar los valores del formulario
   
