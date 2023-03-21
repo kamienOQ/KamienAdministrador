@@ -1,6 +1,7 @@
 :root {
     --main-color: #D1B000;
     --hover-main:   #643A07;
+    --hover-success: #0e942d;
     --hover-error:   #800c0c;
     --border: #c9c9c9;
     --white: #ffffff;
@@ -33,6 +34,10 @@ label {
     background-color: var(--hover-main) !important;
 }
 
+.addCategory-modal-button:hover{
+    background-color: var(--hover-success) !important;
+}
+
 .cancelCategory-button:hover{
     background-color: var(--hover-error) !important;
     
@@ -48,16 +53,6 @@ label {
     border-radius: 5px;
 } */
 
-.category-form{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    width: 320px;
-    margin: 2rem 1rem 2rem 1rem !important;
-}
-
 .box-border{
   border-radius: 5px;
 }
@@ -68,8 +63,8 @@ label {
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  width: 320px;
-  margin: 2rem 1rem 2rem 1rem !important;
+  width: 420px;
+  margin: .5rem 1rem .5rem 1rem !important;
 }
 
 
@@ -105,7 +100,7 @@ label {
 .categories-modal-buttons{
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
     justify-content: center;
 }
@@ -218,7 +213,6 @@ label {
     } */
     .category-form{
         width: 270px;
-        margin: 1rem 2rem 1rem 2rem;
     }
     .files-name-container{
         width: 225px !important;

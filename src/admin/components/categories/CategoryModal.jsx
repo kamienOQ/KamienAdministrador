@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 
 import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../../hooks";
 import { deleteFileUpload } from "../../../helpers";
@@ -10,7 +12,7 @@ import { deleteFileUpload } from "../../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { categories, activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage, 
+  const { categories, activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage,
     startUploadNewCategory } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon } = useCategoriesState();
 
@@ -26,9 +28,9 @@ export const CategoryModal = () => {
   useEffect(() => {
     addErrorMessage('');
     addSuccessMessage('');
-  }, [formState, imageLoad, iconLoad ]);
-  
-  
+  }, [formState, imageLoad, iconLoad]);
+
+
 
   const onCloseModa = () => {
     if (imageLoad) {
@@ -39,7 +41,7 @@ export const CategoryModal = () => {
           return;
         }
       });
-      if(!usingImage){
+      if (!usingImage) {
         deleteFileUpload(activeCategory.image.name);
       }
     }
@@ -51,7 +53,7 @@ export const CategoryModal = () => {
           return;
         }
       });
-      if(!usingIcon){
+      if (!usingIcon) {
         deleteFileUpload(activeCategory.icon.name);
       }
     }
@@ -71,15 +73,23 @@ export const CategoryModal = () => {
     <Dialog
       className="modal-container-categories"
       open={isCategoryModalOpen}
+      align="center"
     >
-      <DialogContent sx={{ maxHeight: 600, pl: .1, pr: .1 }}>
-        <DialogTitle >Agregar Categoría</DialogTitle>
-        <form className="category-form">
+      <DialogContent>
+        <DialogTitle
+          variant="h7"
+          
+          sx={{ borderRadius: '16px', backgroundColor: "dark.main", color: "tertiary.main" }}
+        >
+          Agregar una nueva Categoría
+        </DialogTitle>
+        <form  className="category-form">
           <TextField
             type="text"
             fullWidth
             label="Nombre de Categoría"
-            variant="outlined"
+            variant="filled" 
+            focused
             name="categoryName"
             value={categoryName || ''}
             onChange={onInputChange}
@@ -90,10 +100,10 @@ export const CategoryModal = () => {
           <div className="categories-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
-                <Typography>
+                <Typography sx={{ color: "primary.main", fontWeight: 'bold' }}>
                   Imagen
                 </Typography>
-                <Typography>
+                <Typography sx={{ color: "primary.main", fontWeight: 'bold' }}>
                   Icono
                 </Typography>
               </div>
@@ -104,7 +114,7 @@ export const CategoryModal = () => {
                   aria-label="cargar imagen"
                   component="label"
                   onChange={onUploadImage}
-                  sx={{ backgroundColor: "primary.main", color: "tertiary.main", padding: imageLoad ? '3px' : '12px' }}
+                  sx={{ color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
                 >
                   <input hidden accept="image/*" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
@@ -121,7 +131,7 @@ export const CategoryModal = () => {
                   aria-label="cargar icono"
                   component="label"
                   onChange={onUploadIcon}
-                  sx={{ backgroundColor: "primary.main", color: "tertiary.main", padding: iconLoad ? '3px' : '12px' }}
+                  sx={{ color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
                 >
                   <input hidden accept=".png" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
@@ -138,24 +148,25 @@ export const CategoryModal = () => {
               xs={12}
               display={!!message.error ? '' : 'none'}
             >
-              <Alert severity='error'>{ message.error }</Alert>
+              <Alert severity='error'>{message.error}</Alert>
             </Grid>
             <div className="action-buttons">
               <Button
                 className="cancelCategory-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ backgroundColor: "error.main" }}
+                sx={{ backgroundColor: "error.main", borderRadius: 20 }}
               >
-                Cancelar
+                <CloseIcon />
               </Button>
+
               <Button
-                className="addCategory-button"
+                className="addCategory-modal-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ backgroundColor: "primary.main", color: "tertiary.main" }}
+                sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 }}
               >
-                Agregar
+                <CheckIcon />
               </Button>
             </div>
           </div>

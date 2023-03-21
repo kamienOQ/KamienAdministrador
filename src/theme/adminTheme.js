@@ -18,6 +18,9 @@ export const adminTheme = createTheme({
     info: {
       main: '#256EFF'
     },
+    success: {
+      main: '#63bf78'
+    },
     error: {
       main: '#BF1A2F'
     },
