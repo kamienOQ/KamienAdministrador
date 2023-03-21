@@ -10,7 +10,7 @@ export const Product = ({ id, product }) => {
     <Grid container sx={{ flexWrap: 'nowrap', bl: 1, border: 1, borderTop: 0, borderColor: 'secondary.main' }}>
       <Grid item
         sx={{
-          width: '5%', borderRight: 1, borderColor: 'secondary.main',
+          width: '5%', borderRight: 1, borderColor: 'secondary.main', 
           display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5
         }}
       >

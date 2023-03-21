@@ -93,9 +93,9 @@ export const Administradores = () =>{
             <Box
             sx={{
                 height: 400,
-                marginTop: '5%',
-                marginLeft: '5%',
-                maxWidth: '95%'
+                    marginTop: '5%',
+                    marginLeft: '5%',
+                    maxWidth: '95%'
                 }}
             >
                 <Typography

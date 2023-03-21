@@ -37,7 +37,7 @@ export const ProductPages = () => {
       container
       spacing={0}
       alignContent="start"
-      sx={{ backgroundColor: 'primary.main', color: 'secondary.main' }}
+      sx={{ backgroundColor: '#ffffff' }}
       marginLeft={"4%"}
       marginTop={"4%"}
       marginRight={"4%"}
@@ -47,42 +47,37 @@ export const ProductPages = () => {
         <Grid container
           alignItems="center"
           className="secundary-products-container"
-          direction="column"
+          //direction="column"
           justifyContent="center"
           spacing={2}
-          sx={{ m: 2, padding: 4, maxHeight: 20, backgroundColor: 'darkGray.main', borderRadius: 1.2 }}
+          sx={{ m: 2, padding: 2, maxHeight: 20, backgroundColor: '#ffffff' }}
 
         >
           {/* TODO: justify-content: space-between */}
           <Grid item
             alignItems="center"
             justifyContent="center"
-            sx={{ p: 2 }}
-            xs={12}
-            sm={4}
           >
             <Typography variant='h4'>Gestión de Productos</Typography>
           </Grid>
-
-          <Grid item
+        </Grid>
+        <Grid item
             alignItems="center"
             justifyContent="center"
-            sx={{ p: 2 }}
-            xs={12}
-            sm={4}
+            marginLeft={"70%"}
+            marginTop={"1%"}
           >
             <Button
               className="addProduct-button"
               onClick={onOpenModal}
               startIcon={<AddCircleIcon />}
-              sx={{ backgroundColor: 'golden.main', minWidth: 0 }}
+              sx={{  borderRadius: '16px', backgroundColor: '#000000', color: '#ffffff',minWidth: 0 }}
               variant='contained'
               disabled={ isSaving }
             >
               Nuevo Producto
             </Button>
           </Grid>
-        </Grid>
         <ProductModal/>
         <ProductFilters/>
       </Grid>

@@ -73,7 +73,7 @@ export const ProductFilters = () => {
         borderRadius: 1.2, gap: 2 
       }}
     >
-
+      
       <Grid container
         sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}
       >
