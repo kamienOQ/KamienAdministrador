@@ -21,6 +21,7 @@ export const useCategoriesState = () => {
      const onUploadImage = ({ target }) => {
         if(target.files.length != 0){
           if(imageLoad){
+            // TODO: Revisar si se está utlizando antes de eliminar
             deleteFileUpload(activeCategory.image.name);
           }
           setImageLoad(true);
@@ -31,6 +32,7 @@ export const useCategoriesState = () => {
       const onUploadIcon = ({ target }) => {
         if(target.files.length != 0){
           if(iconLoad){
+            // TODO: Revisar si se está utlizando antes de eliminar
             deleteFileUpload(activeCategory.icon.name);
           }
           setIconLoad(true);

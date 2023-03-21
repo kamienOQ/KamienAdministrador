@@ -57,7 +57,7 @@ export const onStartUploadNewCategory = () => {
 }
 
 export const onStartGetCategories = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     let repetido = false
     dispatch(onCleanCategories());
 
@@ -73,7 +73,7 @@ export const onStartGetCategories = () => {
     }
 
     querySnapshot.forEach((doc, index) => {
-      dispatch(onChargeCategoriesUploaded( doc.data() ));
+      dispatch(onChargeCategoriesUploaded( {id: index+1, ...doc.data()} ));
     });
     
   

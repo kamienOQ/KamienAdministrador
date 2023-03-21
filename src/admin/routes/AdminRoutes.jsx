@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { CategoriesPages } from "../../categories";
 import { Navbar } from "../components/Navbar";
-import { AboutCrud, AdminCrud, CategoryCrud, OrdersManagementPage, ProductsCrud, ProfilePage } from "../pages/";
+import { AboutCrud, AdminCrud, OrdersManagementPage, ProductsCrud, ProfilePage } from "../pages/";
 
 export const AdminRoutes = () => {
   return (
@@ -13,7 +14,7 @@ export const AdminRoutes = () => {
         <Route path= "/Perfil" element = {<ProfilePage/>}/>
         <Route path= "/About" element = {<AboutCrud/>}/>
         <Route path= "/Producto" element = {<ProductsCrud/>}/>
-        <Route path= "/Categorias" element = {<CategoryCrud/>}/>
+        <Route path= "/Categorias" element = {<CategoriesPages/>}/>
 
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>

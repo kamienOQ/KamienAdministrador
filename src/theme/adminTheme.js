@@ -9,6 +9,9 @@ export const adminTheme = createTheme({
     secondary: {
       main: '#c9c9c9',
     },
+    tertiary: {
+      main: '#ffffff',
+    },
     dark: {
       main: '#0E1116',
     },

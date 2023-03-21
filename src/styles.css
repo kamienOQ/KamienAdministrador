@@ -1,8 +1,8 @@
 :root {
-    --main-color: #ca995f;
+    --main-color: #D1B000;
     --hover-main:   #643A07;
     --hover-error:   #800c0c;
-    --border: #b1b1b1;
+    --border: #c9c9c9;
     --white: #ffffff;
     --backgroud: #383838;
     --roboto: 'Roboto', sans-serif;
@@ -16,11 +16,11 @@
 }
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
-    background-color: #D1B000 !important;
+    background-color: var(--main-color) !important;
 }
 
 .column-container:nth-child(odd) {
-    background-color: #c9c9c9;
+    background-color: var(--border);
 }
 
 label {
@@ -42,11 +42,11 @@ label {
     background-color: var(--hover-main);
     cursor: pointer;
 }
-
+/* 
 .box-border{
     border: 1px solid var(--border);
     border-radius: 5px;
-}
+} */
 
 .category-form{
     display: flex;
@@ -73,7 +73,7 @@ label {
 }
 
 
-.tags-container{
+/* .tags-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
@@ -100,7 +100,7 @@ label {
     border: none;
     font-size: 16px;
     border-radius: 50px;
-}
+} */
 
 .categories-modal-buttons{
     display: flex;
@@ -143,6 +143,10 @@ label {
     font-size: 4rem;
 }
 
+.cancelCategory-button{
+    color: var(--white) !important;
+}
+
 .action-buttons {
     display: flex;
     justify-content: space-between !important;
@@ -153,7 +157,7 @@ label {
     color: var(--white) !important;
 }
 
-.page-button{
+/* .page-button{
     width: 30px;
     height: 30px;
     margin: 0px 4px 0px 4px;
@@ -163,9 +167,9 @@ label {
     font-family: var(--roboto);
     background-color: #B9FAF8;
     cursor: pointer;
-  }
+  } */
   
-  .page-button-selected{
+/* .page-button-selected{
     width: 30px;
     height: 30px;
     margin: 0px 4px 0px 4px;
@@ -176,16 +180,16 @@ label {
     background-color: #256EFF;
     color: white;
     cursor: pointer;
-  }
+} */
 
 
-.table-img{
+/* .table-img{
     max-width: 80%;
-}
+} */
 
-.table-icon{
+/* .table-icon{
     max-width: 40%;
-}
+} */
 
 @media (max-width: 680px) {
     .categories-container div{
@@ -208,10 +212,10 @@ label {
         justify-content: center;
         padding: 1px;
     }
-    .tags-container{
+    /* .tags-container{
         grid-template-columns: repeat(1, 1fr);
         width: 240px;
-    }
+    } */
     .category-form{
         width: 270px;
         margin: 1rem 2rem 1rem 2rem;
@@ -246,7 +250,7 @@ label {
     }    
 }
 
-.tag-container{
+/* .tag-container{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -256,7 +260,7 @@ label {
   font-size: 14px;
   padding: 0 10px 0 10px;
   gap: 5px;
-}
+} */
 
 
 

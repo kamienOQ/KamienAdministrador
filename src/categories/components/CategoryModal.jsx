@@ -32,9 +32,11 @@ export const CategoryModal = () => {
 
   const onCloseModa = () => {
     if (imageLoad) {
+      // TODO: Revisar si se está utlizando antes de eliminar
       deleteFileUpload(activeCategory.image.name);
     }
     if (iconLoad) {
+      // TODO: Revisar si se está utlizando antes de eliminar
       deleteFileUpload(activeCategory.icon.name);
     }
 
@@ -86,7 +88,7 @@ export const CategoryModal = () => {
                   aria-label="cargar imagen"
                   component="label"
                   onChange={onUploadImage}
-                  sx={{ backgroundColor: "golden.main", color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
+                  sx={{ backgroundColor: "primary.main", color: "tertiary.main", padding: imageLoad ? '3px' : '12px' }}
                 >
                   <input hidden accept="image/*" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
@@ -103,7 +105,7 @@ export const CategoryModal = () => {
                   aria-label="cargar icono"
                   component="label"
                   onChange={onUploadIcon}
-                  sx={{ backgroundColor: "golden.main", color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
+                  sx={{ backgroundColor: "primary.main", color: "tertiary.main", padding: iconLoad ? '3px' : '12px' }}
                 >
                   <input hidden accept=".png" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
@@ -135,7 +137,7 @@ export const CategoryModal = () => {
                 className="addCategory-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ backgroundColor: "golden.main" }}
+                sx={{ backgroundColor: "primary.main", color: "tertiary.main" }}
               >
                 Agregar
               </Button>
