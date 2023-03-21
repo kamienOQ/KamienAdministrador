@@ -185,7 +185,7 @@ export const SideBarList = () => {
                   primary={"Configurar Cuenta"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
-              </ListItemButton>
+              </ListItemButton> 
         </ListItem>
         </Tooltip>
         </Link>

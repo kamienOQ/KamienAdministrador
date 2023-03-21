@@ -1,12 +1,14 @@
 
 import BottomNav from "../Components/BottomNav"
-import Administratores from "../Components/Administradores"
+import { Administradores } from "../components/"
 
 export const AdminCrud = () => {
   return (
     <>
+     
+    
+      <Administradores/>
       <BottomNav/>
-      <Administratores/>
     </>
   )
 }
