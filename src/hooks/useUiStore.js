@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-//Kategories
-import { onCleanActiveCategory, onRestorePage } from '../store';
+//Categories
+import { onCleanActiveCategory } from '../store';
 // Ui
-import { onChangePage, onCloseCategoryModal, onDownPage, 
-    onOpenCategoryModal, onUpPage} from '../store';
+import { onCloseCategoryModal, onOpenCategoryModal} from '../store';
 
 export const useUiStore = () => {
 
@@ -11,24 +10,7 @@ export const useUiStore = () => {
 
     const { 
         isCategoryModalOpen,
-        totalPages,
-        page,
     } = useSelector( state => state.ui );
-
-    const upPage = () => {
-        dispatch( onUpPage() );
-    }
-    const downPage = () => {
-        dispatch( onDownPage() );
-    }
-
-    const changePage = ( total ) => {
-        dispatch( onChangePage( total ) );
-    }
-
-    const restorePage = () => {
-        dispatch( onRestorePage() );
-    }
 
     const openCategoryModal = () => {
         dispatch( onOpenCategoryModal() );
@@ -44,14 +26,8 @@ export const useUiStore = () => {
     return {
         //*Propiedades
         isCategoryModalOpen,
-        totalPages,
-        page,
 
         //*Métodos
-        upPage,
-        downPage,
-        changePage,
-        restorePage,
         openCategoryModal,
         closeCategoryModal,
     }

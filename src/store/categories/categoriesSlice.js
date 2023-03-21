@@ -8,8 +8,6 @@ export const categoriesSlice = createSlice({
             error: '',
             success: ''
         },
-        ascending: '',
-        numberCategories: 0,
         categories: [],
         categoriesOnPage: [],
         activeCategory: null, 
@@ -75,9 +73,6 @@ export const categoriesSlice = createSlice({
         onChargeCategoriesByPage: ( state, { payload } ) => {
             state.categoriesOnPage = payload;
         },
-        onSetNumberCategories: ( state, { payload } ) => {
-            state.numberCategories = payload
-        },
         onAddImage: ( state, { payload } ) => {
             state.activeCategory.image.name = payload[0];
             state.activeCategory.image.url = payload[1];
@@ -85,9 +80,6 @@ export const categoriesSlice = createSlice({
         onAddIcon: ( state, { payload } ) => {
             state.activeCategory.icon.name = payload[0];
             state.activeCategory.icon.url = payload[1];
-        },
-        onChangeAscending: ( state, { payload } ) => {
-            state.ascending = payload
         },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
@@ -117,7 +109,6 @@ export const {
     onAddImage, 
     onAddNewCategory, 
     onAddSuccessMessage,
-    onChangeAscending,
     onChangeSavingNewCategory, 
     onChargeCategoriesByPage, 
     onChargeCategoriesUploaded,
@@ -127,6 +118,5 @@ export const {
     onDeleteCategory,
     onSetActiveCategory, 
     onSetCategories,
-    onSetNumberCategories,
     onUpdateCategory,
 } = categoriesSlice.actions;
