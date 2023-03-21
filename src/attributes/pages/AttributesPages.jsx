@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useAttributesStore, useUiStore } from "../../hooks";
-import {Attribute, AttributeFilters, AttributeModal } from "..";
+import {AttributeFilters, AttributeModal } from "..";
 import { useEffect } from "react";
 
 export const AttributesPages = () => {

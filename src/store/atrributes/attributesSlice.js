@@ -44,8 +44,27 @@ export const attributesSlice = createSlice({
             state.attributes =  state.attributes.filter( (attribute) => attribute.attributeName !== payload );
             
         },
+        
+        onChargeCategoriesByPage: ( state, { payload } ) => {
+            state.categoriesOnPage = payload;
+        },
+        
+        onChargeProductsUploaded: ( state, { payload } ) => {
+            state.productsUploaded.push( payload );
+        },
         onChargeCategoriesUploaded: ( state, { payload } ) => {
-            state.categoriesUploaded.push( payload );
+            let duplicate = false
+            if(state.attributes){
+                state.attributes.forEach(attribute => {
+                    if(attribute.attributeName === payload.attributeName)
+                        duplicate = true
+                });
+                if(!duplicate){
+                    state.attributes.push( payload );
+                }
+            }else{
+                state.attributes.push( payload );
+            }
         },
         onAddCategories: ( state, { payload } ) => {
             state.activeAttribute.categories = payload;
