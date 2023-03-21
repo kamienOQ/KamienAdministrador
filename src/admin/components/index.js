@@ -6,3 +6,4 @@ export * from "./SideBarList";
 export * from "./SideList";
 export * from "./Table";
 export * from "./UserActions";
+export * from "./categories";

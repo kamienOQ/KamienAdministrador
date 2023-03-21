@@ -3,8 +3,8 @@ import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogCon
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
-import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../hooks"
-import { deleteFileUpload } from "../../helpers";
+import { useCategoriesForm, useCategoriesState, useCategoriesStore, useUiStore } from "../../../hooks";
+import { deleteFileUpload } from "../../../helpers";
 
 
 export const CategoryModal = () => {
@@ -32,7 +32,6 @@ export const CategoryModal = () => {
 
   const onCloseModa = () => {
     if (imageLoad) {
-      // TODO: Revisar si se está utlizando antes de eliminar
       let usingImage = false;
       categories.forEach(object => {
         if (object.image.name === activeCategory.image.name) {
@@ -45,7 +44,6 @@ export const CategoryModal = () => {
       }
     }
     if (iconLoad) {
-      // TODO: Revisar si se está utlizando antes de eliminar
       let usingIcon = false;
       categories.forEach(object => {
         if (object.icon.name === activeCategory.icon.name) {

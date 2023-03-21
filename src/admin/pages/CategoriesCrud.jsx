@@ -1,12 +1,11 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useCategoriesStore, useUiStore } from "../../hooks";
-import { Categories, CategoryModal } from "../";
 import { useEffect } from "react";
+import { useCategoriesStore, useUiStore } from "../../hooks";
+import { Categories, CategoryModal } from "../components";
 
 
-export const CategoriesPages = () => {
-
+export const CategoriesCrud = () => {
   const { openCategoryModal, closeCategoryModal } = useUiStore();
   const { isSaving, message, addNewCategory, startGetCategories } = useCategoriesStore();
 

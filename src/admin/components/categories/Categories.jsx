@@ -1,5 +1,8 @@
-import { Table, UserActions } from "../../admin/components";
-import { useCategoriesStore } from "../../hooks";
+import { useCategoriesStore } from "../../../hooks";
+import { Table } from "../Table";
+import { UserActions } from "../UserActions";
+
+
 
 export const Categories = () => {
     const { categories } = useCategoriesStore();
