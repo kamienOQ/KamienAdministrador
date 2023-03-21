@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { useLoadDataPage, useCategoriesStore, useUiStore } from "../../hooks";
-import { Categories, CategoryFilters, CategoryModal } from "../";
+import { useCategoriesStore, useUiStore } from "../../hooks";
+import { Categories, CategoryModal } from "../";
 import { useEffect } from "react";
 
 
@@ -19,12 +19,6 @@ export const CategoriesPages = () => {
   useEffect(() => {
     startGetCategories();
   }, [])
-
-
-  // useEffect(() => {
-  //     loadData();
-  // }, [isCategoryModalOpen, page, ascending, categories])
-
 
   const onOpenModal = () => {
     addNewCategory();
@@ -47,10 +41,10 @@ export const CategoriesPages = () => {
         <Grid container
           className="secundary-categories-container"
           spacing={2}
-          sx={{ padding: 4, mt: 8, borderRadius: 1.2 }}
+          sx={{ padding: 4, mt: 8, borderRadius: 1.2, display: 'flex', direction: 'column', alignItems: 'center', justifyContent: 'center' }}
         >
           <Grid item 
-            sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+            sx={{ width: "90%", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
           >
             <Typography variant="h4">Gestión de Categorías</Typography>
             <Button

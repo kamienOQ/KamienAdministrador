@@ -66,6 +66,9 @@ export const categoriesSlice = createSlice({
                 state.categories.push( payload );
             }
         },
+        onSetCategories: ( state, { payload } ) => {
+            state.categories = payload
+        },
         onAddCategoryAtStart: ( state, { payload } ) => {
             state.categories.unshift(payload);
         },
@@ -123,6 +126,7 @@ export const {
     onCleanProductsUploaded,
     onDeleteCategory,
     onSetActiveCategory, 
+    onSetCategories,
     onSetNumberCategories,
     onUpdateCategory,
 } = categoriesSlice.actions;

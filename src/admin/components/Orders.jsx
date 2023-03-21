@@ -7,7 +7,7 @@ export const Orders = () => {
 
   const attributes = [
     {
-      field: "getRowId",
+      field: "id",
       headerName: "#",
       type: "number",
       width: 60,

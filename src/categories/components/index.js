@@ -1,5 +1,3 @@
-export * from './Category';
 export * from './Categories';
-export * from './CategoryFilters';
+export * from './CategoryActions';
 export * from './CategoryModal';
-export * from './PageButtons';

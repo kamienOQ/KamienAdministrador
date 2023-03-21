@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddCategoryAtStart } from "./";
+    onCleanCategories, onSetNumberCategories, onChargeCategoriesUploaded, onAddCategoryAtStart, onSetCategories } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -29,7 +29,7 @@ export const onStartUploadNewCategory = () => {
   return async (dispatch, getState) => {
     
     let duplicateCategory = false;
-    const { activeCategory } = getState().categories;
+    const { activeCategory, categories } = getState().categories;
 
     dispatch(onChangeSavingNewCategory(true));
 
@@ -48,7 +48,12 @@ export const onStartUploadNewCategory = () => {
     if(!duplicateCategory){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeCategory);
-        dispatch(onAddCategoryAtStart( activeCategory ));
+        let categoriesArray = [...categories];
+        categoriesArray = categoriesArray.map((object) => {
+          return { ...object, id: object.id + 1 }
+        });
+        dispatch(onSetCategories(categoriesArray));
+        dispatch(onAddCategoryAtStart( {id: 1, ...activeCategory} ));
         dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
         dispatch(onAddErrorMessage( '' ));
     }

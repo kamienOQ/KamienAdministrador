@@ -10,7 +10,7 @@ import { deleteFileUpload } from "../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage, 
+  const { categories, activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage, 
     startUploadNewCategory } = useCategoriesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon } = useCategoriesState();
 
@@ -33,11 +33,29 @@ export const CategoryModal = () => {
   const onCloseModa = () => {
     if (imageLoad) {
       // TODO: Revisar si se está utlizando antes de eliminar
-      deleteFileUpload(activeCategory.image.name);
+      let usingImage = false;
+      categories.forEach(object => {
+        if (object.image.name === activeCategory.image.name) {
+          usingImage = true;
+          return;
+        }
+      });
+      if(!usingImage){
+        deleteFileUpload(activeCategory.image.name);
+      }
     }
     if (iconLoad) {
       // TODO: Revisar si se está utlizando antes de eliminar
-      deleteFileUpload(activeCategory.icon.name);
+      let usingIcon = false;
+      categories.forEach(object => {
+        if (object.icon.name === activeCategory.icon.name) {
+          usingIcon = true;
+          return;
+        }
+      });
+      if(!usingIcon){
+        deleteFileUpload(activeCategory.icon.name);
+      }
     }
 
     closeCategoryModal();
