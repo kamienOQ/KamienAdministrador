@@ -3,9 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase categories that you want to use
+// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,7 +13,7 @@ const firebaseConfig = {
   projectId: "project-kamien",
   storageBucket: "project-kamien.appspot.com",
   messagingSenderId: "237921208573",
-  appId: "1:237921208573:web:b18d13984139377091d694",
+  appId: "1:237921208573:web:b18d13984139377091d694"
 };
 
 // Initialize Firebase
