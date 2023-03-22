@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore/lite";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { FirebaseDB } from "../../firebase/config";
 import { cleanOrders, setOrders } from "./";
 

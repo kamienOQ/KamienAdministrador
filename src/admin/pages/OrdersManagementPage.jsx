@@ -1,15 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+/* import { useEffect } from "react";
+import { useDispatch } from "react-redux"; */
 import { Grid, Typography } from "@mui/material";
 import { Orders } from "../components";
-import { startGetOrders } from "../../store/orders";
+/* import { startGetOrders } from "../../store/orders"; */
 
 export const OrdersManagementPage = () => {
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch(); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(startGetOrders());
-  }, []);
+  }, []); */
 
   return (
     <Grid

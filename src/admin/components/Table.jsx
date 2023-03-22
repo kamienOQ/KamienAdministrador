@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, esES } from "@mui/x-data-grid";
 
 export const Table = ({ attributes, data }) => {
   const [rowId, setRowId] = useState(null);
@@ -24,6 +24,15 @@ export const Table = ({ attributes, data }) => {
           top: 5,
           bottom: 5,
         })}
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              cellphone: false,
+              address: false,
+            },
+          },
+        }}
+        localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         sx={{
           color: "dark.main",
           maxWidth: "1162px",

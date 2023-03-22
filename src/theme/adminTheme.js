@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material";
-import { esES } from '@mui/material/locale';
 
 export const adminTheme = createTheme({
   palette: {
@@ -19,5 +18,4 @@ export const adminTheme = createTheme({
       main: '#BF1A2F'
     },
   },
-  locale: esES,
 });
