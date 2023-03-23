@@ -10,6 +10,7 @@ export const categoriesSlice = createSlice({
         },
         categories: [],
         categoriesOnPage: [],
+        editing: false,
         activeCategory: null, 
     },
     reducers: {
@@ -87,6 +88,9 @@ export const categoriesSlice = createSlice({
         onAddSuccessMessage: ( state, { payload } ) => {
             state.message.success = payload;
         },
+        onChangeEditing: ( state, { payload } ) => {
+            state.editing = payload;
+        },
         onCleanCategories: ( state ) => {
             state.categories = []
             state.activeCategory = null;
@@ -109,6 +113,7 @@ export const {
     onAddImage, 
     onAddNewCategory, 
     onAddSuccessMessage,
+    onChangeEditing,
     onChangeSavingNewCategory, 
     onChargeCategoriesByPage, 
     onChargeCategoriesUploaded,

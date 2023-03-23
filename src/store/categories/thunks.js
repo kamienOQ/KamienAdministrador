@@ -76,5 +76,28 @@ export const onStartGetCategories = () => {
   }
 }
 
+export const onStartFilterCategories = (filter) => {
+  return async (dispatch) => {
+    dispatch(onCleanCategories());
+    const collectionRef = collection(FirebaseDB, `/categories`);
+
+    if(filter.field.toLowerCase().includes('name')){
+
+    }
+    if(filter.field.toLowerCase().includes('date')){
+      
+    }
+    const q = query( collectionRef, orderBy("date", "desc") );
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc, index) => {
+      dispatch(onChargeCategoriesUploaded( {id: index+1, ...doc.data()} ));
+    });
+    
+  
+  }
+}
+
+
 //TODO: onStartSaveCategory
 //TODO: onStartDeletingCategory

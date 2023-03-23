@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onCleanCategories, 
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onCleanCategories, 
     onSetActiveCategory, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory } from "../store";
 
 export const useCategoriesStore = () => {
@@ -11,6 +11,7 @@ export const useCategoriesStore = () => {
         categoriesOnPage,
         isSaving,
         message,
+        editing,
         productsUploaded,
     } = useSelector( state => state.categories );
     
@@ -39,6 +40,10 @@ export const useCategoriesStore = () => {
         dispatch( onAddSuccessMessage( message ) );
     }
 
+    const changeEditing = ( value ) => {
+        dispatch( onChangeEditing( value ) );
+    }
+
     const cleanCategories = () => {
         dispatch( onCleanCategories() );
     }
@@ -64,6 +69,7 @@ export const useCategoriesStore = () => {
         categoriesOnPage,
         isSaving,
         message,
+        editing,
         productsUploaded,
 
         //*Métodos
@@ -72,6 +78,7 @@ export const useCategoriesStore = () => {
         addImage,
         addNewCategory,
         addSuccessMessage,
+        changeEditing,
         cleanCategories,
         setActiveCategory,
         startGetCategories,

@@ -61,5 +61,7 @@ export const useCategoriesState = () => {
     iconInputRef,
     onUploadImage,
     onUploadIcon,
+    setImageLoad,
+    setIconLoad
   };
 };

@@ -12,13 +12,24 @@ import { deleteFileUpload } from "../../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { categories, activeCategory, message, setActiveCategory, addErrorMessage, addSuccessMessage,
-    startUploadNewCategory } = useCategoriesStore();
-  const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon } = useCategoriesState();
+  const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
+    startUploadNewCategory, changeEditing } = useCategoriesStore();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
   const [emptyName, setEmptyName] = useState(false);
 
+
+  useEffect(() => {
+    if(editing){
+      if(activeCategory.image.url){
+        setImageLoad(true);
+      }
+      if(activeCategory.icon.url){
+        setIconLoad(true);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     setActiveCategory(formState);
@@ -59,6 +70,7 @@ export const CategoryModal = () => {
     }
 
     closeCategoryModal();
+    changeEditing(false);
   }
 
   const onSave = () => {
@@ -81,7 +93,7 @@ export const CategoryModal = () => {
           
           sx={{ borderRadius: '16px', backgroundColor: "dark.main", color: "tertiary.main" }}
         >
-          Agregar una nueva Categoría
+          {editing ? 'Editar una Categoría' : 'Agregar una nueva Categoría'}
         </DialogTitle>
         <form  className="category-form">
           <TextField
@@ -96,7 +108,7 @@ export const CategoryModal = () => {
             error={emptyName}
             helperText={emptyName ? 'Campo vacío' : ''}
           />
-          {selected && <FloatingTags />}
+
           <div className="categories-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
