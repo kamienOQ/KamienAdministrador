@@ -95,13 +95,8 @@ export const SideList = ({ open, setOpen }) => {
           </Tooltip>
         </Box>
         <Box sx={{ textAlign: 'center' }}>
-<<<<<<< HEAD
-          {open && <Typography>{displayName}</Typography>}
-          {open && <Typography variant="body2">{"SuperAdmin" || 'role'}</Typography>}
-=======
           {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
           {open && <Typography variant="body2" sx={{ color: "white" }}>{"SuperAdmin" || 'role'}</Typography>}
->>>>>>> 36f30baae07d34450dc254e439867206efbae53f
           {open && (
             <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
           )}
