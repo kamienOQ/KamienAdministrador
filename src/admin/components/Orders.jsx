@@ -1,10 +1,9 @@
 import { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CloseIcon from "@mui/icons-material/Close";
-import { Table } from "./Table";
+import { OrdersTable } from "./OrdersTable";
 import { Fab, Grid, IconButton, Modal, Typography } from "@mui/material";
 
 export const Orders = () => {
@@ -16,7 +15,7 @@ export const Orders = () => {
       const newDate = new Date(row.date);
       const stringDate = `${newDate.getDate()}/${
         newDate.getMonth() + 1
-      }/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}`;
+      }/${newDate.getFullYear()}`;
       setSelectedOrder({...row, stringDate});
       setOpenModal(true);
     },
@@ -37,7 +36,7 @@ export const Orders = () => {
     {
       field: "date",
       headerName: "Fecha",
-      type: "dateTime",
+      type: "date",
       valueGetter: ({ value }) => value && new Date(value),
       width: 200,
       sortable: false,
@@ -108,25 +107,13 @@ export const Orders = () => {
         >
           <EditIcon />
         </Fab>,
-        <Fab
-          color="primary"
-          sx={{
-            width: 40,
-            height: 40,
-            bgcolor: "error.main",
-            color: "white",
-            "&:hover": { bgcolor: "error.main" },
-          }}
-        >
-          <CancelIcon />
-        </Fab>,
       ],
     },
   ];
 
   return (
     <>
-      <Table attributes={attributes} />
+      <OrdersTable attributes={attributes} />
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}

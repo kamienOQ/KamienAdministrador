@@ -5,6 +5,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
 } from '@mui/material';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import CategoryIcon from '@mui/icons-material/Category';
@@ -32,7 +33,9 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <GroupAddIcon sx={{ color: "white" }}/>
+                  <Tooltip title = "Añadir Administrador" sx={{ bgcolor: "dark.main" }}> 
+                    <GroupAddIcon sx={{ color: "white" }}/>
+                  </Tooltip>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Administrador"}
@@ -59,7 +62,9 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <AddIcon sx={{ color: "white" }}/>
+                  <Tooltip title = "Añadir Producto" sx={{ bgcolor: "dark.main" }}> 
+                    <AddIcon sx={{ color: "white" }}/>
+                  </Tooltip>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Producto"}
@@ -85,7 +90,9 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <CategoryIcon sx={{ color: "white" }}/>
+                  <Tooltip title = "Añadir Categoría" sx={{ bgcolor: "dark.main" }}> 
+                    <CategoryIcon sx={{ color: "white" }}/>
+                  </Tooltip>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Categoría"}
@@ -112,7 +119,9 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <InfoIcon sx={{ color: "white" }}/>
+                  <Tooltip title = "Añadir Acerca De" sx={{ bgcolor: "dark.main" }}> 
+                    <InfoIcon sx={{ color: "white" }}/>
+                  </Tooltip>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Acerca De"}
@@ -138,7 +147,9 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <ManageAccountsIcon sx={{ color: "white" }}/>
+                  <Tooltip title = "Configurar Cuenta" sx={{ bgcolor: "dark.main" }}> 
+                    <ManageAccountsIcon sx={{ color: "white" }}/>
+                  </Tooltip>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Configurar Cuenta"}

@@ -4,7 +4,7 @@ import { DataGrid, esES } from "@mui/x-data-grid";
 import { startGetOrders } from "../../store/orders";
 import { useSelector } from "react-redux";
 
-export const Table = ({ attributes }) => {
+export const OrdersTable = ({ attributes }) => {
   const dispatch = useDispatch();
   const { numberOrders, isLoading, orders } = useSelector((state) => state.orders);
 
