@@ -19,6 +19,7 @@
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
     background-color: var(--main-color) !important;
+  background-color: #0E1116 !important;
 }
 
 .column-container:nth-child(odd) {

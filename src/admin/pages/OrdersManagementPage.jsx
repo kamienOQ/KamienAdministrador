@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Grid, Typography } from "@mui/material";
 import { Orders } from "../components";
-import { startGetOrders } from "../../store/orders";
+import { startGetOrders, startNumberOrders } from "../../store/orders";
 
 export const OrdersManagementPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(startGetOrders());
+    dispatch(startNumberOrders());
   }, []);
 
   return (
