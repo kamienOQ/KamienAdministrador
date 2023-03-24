@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, orderBy, query, setDoc } from "firebase/firestore/lite";
+import { collection, doc, getDocs, orderBy, query, setDoc, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
@@ -76,25 +76,36 @@ export const onStartGetCategories = () => {
   }
 }
 
-export const onStartFilterCategories = (filter) => {
-  return async (dispatch) => {
-    dispatch(onCleanCategories());
-    const collectionRef = collection(FirebaseDB, `/categories`);
-
-    if(filter.field.toLowerCase().includes('name')){
-
-    }
-    if(filter.field.toLowerCase().includes('date')){
-      
-    }
-    const q = query( collectionRef, orderBy("date", "desc") );
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc, index) => {
-      dispatch(onChargeCategoriesUploaded( {id: index+1, ...doc.data()} ));
-    });
-    
+export const onStartFilterCategories = () => {
+  return async (dispatch, getState) => {
+    const { filter } = getState().categories;
+    if(!!filter){
+      const { field, value } = filter;
+      dispatch(onCleanCategories());
+      const collectionRef = collection(FirebaseDB, `/categories`);
+      let q = null
+      // TODO: Limitar las consultas por paginación
+      if(field?.toLowerCase().includes('name')){
+        if(value==='asc'){
+          q = query( collectionRef, orderBy("categoryName", "asc") );
+        }if(value==='desc'){
+          q = query( collectionRef, orderBy("categoryName", "desc") );
+        }if(value!=='asc' && value !== 'desc'){
+          q = query( collectionRef, where('categoryName', '>=', value.toLowerCase()), where('categoryName', '<', value.toLowerCase() + '\uf8ff') );
+        }
+      }
+      if(field?.toLowerCase().includes('date')){
+        if(value!=='asc' && value !== 'desc'){
+          const dateObject = new Date(value)
+          q = query(collectionRef, where("date", ">", dateObject.getTime()));
+        }
+      }
   
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc, index) => {
+        dispatch(onChargeCategoriesUploaded( {id: index+1, ...doc.data()} ));
+      });
+    }
   }
 }
 

@@ -11,6 +11,8 @@ export const categoriesSlice = createSlice({
         categories: [],
         categoriesOnPage: [],
         editing: false,
+        filtering: false,
+        filter: {},
         activeCategory: null, 
     },
     reducers: {
@@ -91,6 +93,12 @@ export const categoriesSlice = createSlice({
         onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
         },
+        onChangeFiltering: ( state, { payload } )=> {
+            state.filtering = payload
+        },
+        onChangeFilter: ( state, { payload } )=> {
+            state.filter = payload
+        },
         onCleanCategories: ( state ) => {
             state.categories = []
             state.activeCategory = null;
@@ -124,4 +132,6 @@ export const {
     onSetActiveCategory, 
     onSetCategories,
     onUpdateCategory,
+    onChangeFiltering,
+    onChangeFilter,
 } = categoriesSlice.actions;

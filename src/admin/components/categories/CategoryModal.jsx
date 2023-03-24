@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
+import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid, makeStyles } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import CloseIcon from '@mui/icons-material/Close';
@@ -107,15 +107,17 @@ export const CategoryModal = () => {
             onChange={onInputChange}
             error={emptyName}
             helperText={emptyName ? 'Campo vacío' : ''}
+            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
 
           <div className="categories-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
-                <Typography sx={{ color: "primary.main", fontWeight: 'bold' }}>
+                <Typography sx={{ color: "quaternary.main", fontWeight: 'bold' }}>
                   Imagen
                 </Typography>
-                <Typography sx={{ color: "primary.main", fontWeight: 'bold' }}>
+                <Typography sx={{ color: "quaternary.main", fontWeight: 'bold' }}>
                   Icono
                 </Typography>
               </div>

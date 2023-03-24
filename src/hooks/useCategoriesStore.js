@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onCleanCategories, 
-    onSetActiveCategory, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -12,6 +12,8 @@ export const useCategoriesStore = () => {
         isSaving,
         message,
         editing,
+        filtering,
+        filter,
         productsUploaded,
     } = useSelector( state => state.categories );
     
@@ -44,6 +46,14 @@ export const useCategoriesStore = () => {
         dispatch( onChangeEditing( value ) );
     }
 
+    const changeFiltering = ( value ) => {
+        dispatch( onChangeFiltering( value ) );
+    }
+
+    const changeFilter = ( value ) => {
+        dispatch( onChangeFilter( value ) );
+    }
+
     const cleanCategories = () => {
         dispatch( onCleanCategories() );
     }
@@ -60,6 +70,10 @@ export const useCategoriesStore = () => {
 
     const startGetCategories = () => {
         dispatch( onStartGetCategories() );
+    }
+
+    const startFilterCategories = () => {
+        dispatch( onStartFilterCategories() );
     }    
 
     return {
@@ -70,6 +84,8 @@ export const useCategoriesStore = () => {
         isSaving,
         message,
         editing,
+        filtering,
+        filter,
         productsUploaded,
 
         //*Métodos
@@ -79,10 +95,13 @@ export const useCategoriesStore = () => {
         addNewCategory,
         addSuccessMessage,
         changeEditing,
+        changeFiltering,
+        changeFilter,
         cleanCategories,
         setActiveCategory,
         startGetCategories,
         startUploadFile,
         startUploadNewCategory,
+        startFilterCategories,
     }
 }

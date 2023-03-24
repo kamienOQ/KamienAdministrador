@@ -47,10 +47,10 @@ export const CategoriesCrud = () => {
           >
             <Typography variant="h4">Gestión de Categorías</Typography>
             <Button
-              className="addCategory-button"
+              className="addCategory-modal-button"
               onClick={onOpenModal}
               startIcon={<AddCircleIcon />}
-              sx={{ backgroundColor: 'golden.main', minWidth: 0, color: "tertiary.main" }}
+              sx={{ backgroundColor: 'success.main', minWidth: 0, color: "tertiary.main" }}
               variant='contained'
               disabled={isSaving}
             >

@@ -1,11 +1,21 @@
+import { getGridDateOperators, getGridStringOperators } from "@mui/x-data-grid";
 import { useCategoriesStore } from "../../../hooks";
-import { Table } from "../Table";
+import { CategoriesTable } from "./CategoriesTable";
 import { CategoryActions } from "./CategoryActions";
-
 
 
 export const Categories = () => {
   const { categories } = useCategoriesStore();
+
+  const filterOperatorsName = getGridStringOperators().filter(({ value }) =>
+    ['contains' /* add more over time */ ].includes(value),
+  );
+
+  // const filterOperatorsDate = getGridDateOperators();
+  // console.log(filterOperatorsDate);
+  const filterOperatorsDate = getGridDateOperators().filter(({ value }) =>
+    ['onOrAfter' /* add more over time */ ].includes(value),
+  );
 
   const attributes = [
     {
@@ -15,13 +25,16 @@ export const Categories = () => {
       width: 60,
       sortable: false,
       filterable: false,
+      hideable: false,
     },
     {
       field: "categoryName",
       headerName: "Nombre",
       width: 300,
       filterable: true,
-      // sortable: false,
+      sortable: true,
+      hideable: false,
+      filterOperators: filterOperatorsName
     },
     {
       field: "date",
@@ -30,33 +43,46 @@ export const Categories = () => {
       // type: "dateTime",
       valueGetter: ({ value }) => value && new Date(value),
       width: 200,
-      // sortable: true,
+      filterable: true,
+      sortable: false,
+      operatorValue: 'greaterThan',
+      hideable: false,
+      filterOperators: filterOperatorsDate
+      // TODO: limitar los operadores a solo mayor
+      // filterOperators: false
     },
     {
       field: "image",
       headerName: "Imagen",
       type: "image",
       width: 200,
+      sortable: false,
       filterable: false,
       renderCell: (params) => (
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
       ),
+      hideable: false,
     },
     {
       field: "icon",
       headerName: "Icono",
       type: "image",
       width: 200,
+      sortable: false,
       filterable: false,
       renderCell: (params) => (
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
       ),
+      hideable: false,
     },
     {
       field: "actions",
       headerName: "Acciones",
       type: "actions",
       width: 200,
+      sortable: false,
+      filterable: false,
+      hideable: false,
       getActions: (params) => [
         <CategoryActions row={params.row}/>
       ]
@@ -64,6 +90,6 @@ export const Categories = () => {
   ];
 
   return (
-    !!categories && <Table attributes={attributes} data={categories} />
+    !!categories && <CategoriesTable attributes={attributes} data={categories} />
   );
 };

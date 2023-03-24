@@ -1,11 +1,12 @@
 :root {
     --main-color: #D1B000;
     --hover-main:   #643A07;
-    --hover-success: #0e942d;
-    --hover-error:   #800c0c;
+    --hover-success: #3aac54;
+    --hover-error:   #b63939;
     --border: #c9c9c9;
     --white: #ffffff;
     --backgroud: #383838;
+    --aa: #4380fa;
     --roboto: 'Roboto', sans-serif;
 }
 
@@ -29,9 +30,16 @@ label {
     font-size: 18px;
 }
 
+.css-q68e8e-MuiFormControl-root-MuiDataGrid-filterFormColumnInput{
+    display: none !important;
+}
+
+.css-17vwkjt-MuiFormControl-root-MuiDataGrid-filterFormOperatorInput{
+    display: none !important;
+}
 
 .addCategory-button:hover{
-    background-color: var(--hover-main) !important;
+    background-color: var(--main-color) !important;
 }
 
 .addCategory-modal-button:hover{
