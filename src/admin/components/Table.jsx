@@ -1,7 +1,13 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import { DataGrid, esES } from "@mui/x-data-grid";
+import { startGetOrders } from "../../store/orders";
+import { useSelector } from "react-redux";
 
-export const Table = ({ attributes, data }) => {
+export const Table = ({ attributes }) => {
+  const dispatch = useDispatch();
+  const { numberOrders, isLoading, orders } = useSelector((state) => state.orders);
+
   const [rowId, setRowId] = useState(null);
 
   const [paginationModel, setPaginationModel] = useState({
@@ -9,21 +15,39 @@ export const Table = ({ attributes, data }) => {
     page: 0,
   });
 
+  const [rowCountState, setRowCountState] = useState(numberOrders || 0);
+
+  const onPaginationChange = useCallback(
+    (newModel) => {
+      setPaginationModel(newModel);
+    },
+    [setPaginationModel]
+  );
+
+  const onGetRowId = useCallback((row) => row.id, []);
+
+  useEffect(() => {
+    dispatch(startGetOrders(paginationModel.page, paginationModel.pageSize));
+  }, [paginationModel]);
+
+  useEffect(() => {
+    setRowCountState(numberOrders !== undefined ? numberOrders : 0);
+  }, [numberOrders, setRowCountState]);
+
   const columns = useMemo(() => attributes, [rowId]);
 
   return (
     <>
       <DataGrid
         columns={columns}
-        rows={data}
-        getRowId={(row) => row.id}
+        rows={orders}
+        loading={isLoading}
+        rowCount={rowCountState}
+        getRowId={onGetRowId}
         pageSizeOptions={[5, 10, 25]}
         paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        getRowSpacing={() => ({
-          top: 5,
-          bottom: 5,
-        })}
+        onPaginationModelChange={onPaginationChange}
+        paginationMode="server"
         initialState={{
           columns: {
             columnVisibilityModel: {
@@ -32,7 +56,7 @@ export const Table = ({ attributes, data }) => {
             },
           },
         }}
-        localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+        localeText={{...esES.components.MuiDataGrid.defaultProps.localeText, columnMenuManageColumns: "Gestionar columnas"}}
         sx={{
           color: "dark.main",
           maxWidth: "1162px",

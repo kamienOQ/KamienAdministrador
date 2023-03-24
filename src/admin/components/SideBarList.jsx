@@ -15,8 +15,8 @@ import { Link as RouterLink } from "react-router-dom";
 
 export const SideBarList = () => {
   return (
-    <List sx={{ bgcolor: "primary.main" }}>
-        <Link color="dark.main" component={RouterLink} to = "/Administradores" sx={{textDecoration: "none"}}>
+    <List sx={{ bgcolor: "dark.main" }}>
+        <Link component={RouterLink} to = "/Administradores" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -32,7 +32,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <GroupAddIcon sx={{ color: "dark.main" }}/>
+                  <GroupAddIcon sx={{ color: "white" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Administrador"}
@@ -43,7 +43,7 @@ export const SideBarList = () => {
         </Link>
 
 
-        <Link color="dark.main" component={RouterLink} to = "/Producto" sx={{textDecoration: "none"}}>
+        <Link component={RouterLink} to = "/Producto" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -59,7 +59,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <AddIcon sx={{ color: "dark.main" }}/>
+                  <AddIcon sx={{ color: "white" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Producto"}
@@ -69,7 +69,7 @@ export const SideBarList = () => {
         </ListItem>
         </Link>
         
-        <Link color="dark.main" component={RouterLink} to = "/Categorias" sx={{textDecoration: "none"}}>
+        <Link component={RouterLink} to = "/Categorias" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -85,7 +85,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <CategoryIcon sx={{ color: "dark.main" }}/>
+                  <CategoryIcon sx={{ color: "white" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Categoría"}
@@ -96,7 +96,7 @@ export const SideBarList = () => {
         </Link>
                   
 
-        <Link color="dark.main" component={RouterLink} to = "/About" sx={{textDecoration: "none"}}>
+        <Link component={RouterLink} to = "/About" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -112,7 +112,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <InfoIcon sx={{ color: "dark.main" }}/>
+                  <InfoIcon sx={{ color: "white" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Acerca De"}
@@ -122,7 +122,7 @@ export const SideBarList = () => {
         </ListItem>
         </Link>
 
-        <Link color="dark.main" component={RouterLink} to = "/Perfil" sx={{textDecoration: "none"}}>
+        <Link component={RouterLink} to = "/Perfil" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -138,7 +138,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <ManageAccountsIcon sx={{ color: "dark.main" }}/>
+                  <ManageAccountsIcon sx={{ color: "white" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Configurar Cuenta"}

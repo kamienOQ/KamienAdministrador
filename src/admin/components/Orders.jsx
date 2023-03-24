@@ -1,49 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
-/* import { useSelector } from "react-redux"; */
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { GridActionsCellItem } from "@mui/x-data-grid";
+import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
 import CloseIcon from "@mui/icons-material/Close";
-import { UserActions } from "./UserActions";
 import { Table } from "./Table";
-import { FirebaseDB } from "../../firebase/config";
 import { Fab, Grid, IconButton, Modal, Typography } from "@mui/material";
 
 export const Orders = () => {
-  // const { orders } = useSelector((state) => state.orders);
-
-  const [orders, setOrders] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  useEffect(() => {
-    const unSub = onSnapshot(
-      query(collection(FirebaseDB, "orders"), orderBy("date", "desc")),
-      (querySnapshot) => {
-        const newOrders = querySnapshot.docs.map((doc, index) => {
-          if (doc.exists()) {
-            return { id: index + 1, ...doc.data() };
-          }
-        });
-        setOrders(newOrders);
-      }
-    );
-
-    return () => {
-      unSub();
-    };
-  }, []);
-
   const viewOrder = useCallback(
     (row) => () => {
-      if (!row.stringDate) {
-        const newDate = new Date(row.date);
-        const stringDate = `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}`;
-        row.stringDate = stringDate;
-      }
-      setSelectedOrder(row);
+      const newDate = new Date(row.date);
+      const stringDate = `${newDate.getDate()}/${
+        newDate.getMonth() + 1
+      }/${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}`;
+      setSelectedOrder({...row, stringDate});
       setOpenModal(true);
     },
     []
@@ -57,8 +31,9 @@ export const Orders = () => {
       width: 60,
       sortable: false,
       filterable: false,
+      hideable: false,
     },
-    { field: "name", headerName: "Nombre", width: 300 },
+    { field: "name", headerName: "Nombre", width: 300, hideable: false },
     {
       field: "date",
       headerName: "Fecha",
@@ -66,6 +41,7 @@ export const Orders = () => {
       valueGetter: ({ value }) => value && new Date(value),
       width: 200,
       sortable: false,
+      hideable: false,
     },
     {
       field: "wayToPay",
@@ -73,6 +49,7 @@ export const Orders = () => {
       type: "string",
       width: 200,
       filterable: false,
+      hideable: false,
     },
     {
       field: "cellphone",
@@ -97,12 +74,14 @@ export const Orders = () => {
       valueOptions: ["Pendiente", "En envío", "Entregado", "Cancelado"],
       width: 200,
       sortable: false,
+      hideable: false,
     },
     {
       field: "actions",
       headerName: "Acciones",
       type: "actions",
       width: 200,
+      hideable: false,
       getActions: (params) => [
         <Fab
           color="primary"
@@ -112,10 +91,10 @@ export const Orders = () => {
             height: 40,
             bgcolor: "info.main",
             color: "white",
-            '&:hover': { bgcolor: "info.main" },
+            "&:hover": { bgcolor: "info.main" },
           }}
         >
-            <VisibilityIcon />
+          <VisibilityIcon />
         </Fab>,
         <Fab
           color="primary"
@@ -124,10 +103,10 @@ export const Orders = () => {
             height: 40,
             bgcolor: "primary.main",
             color: "white",
-            '&:hover': { bgcolor: "primary.main" },
+            "&:hover": { bgcolor: "primary.main" },
           }}
         >
-            <EditIcon />
+          <EditIcon />
         </Fab>,
         <Fab
           color="primary"
@@ -136,10 +115,10 @@ export const Orders = () => {
             height: 40,
             bgcolor: "error.main",
             color: "white",
-            '&:hover': { bgcolor: "error.main" },
+            "&:hover": { bgcolor: "error.main" },
           }}
         >
-            <CancelIcon />
+          <CancelIcon />
         </Fab>,
       ],
     },
@@ -147,7 +126,7 @@ export const Orders = () => {
 
   return (
     <>
-      <Table attributes={attributes} data={orders} />
+      <Table attributes={attributes} />
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
@@ -175,7 +154,20 @@ export const Orders = () => {
           >
             <CloseIcon />
           </IconButton>
-          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: "center", width: "100%", p: 2, fontSize: "24px", bgcolor: "dark.main", color: "white", borderRadius: "10px"}}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{
+              textAlign: "center",
+              width: "100%",
+              p: 2,
+              fontSize: "24px",
+              bgcolor: "dark.main",
+              color: "white",
+              borderRadius: "10px",
+            }}
+          >
             Información del pedido
           </Typography>
           <Grid
@@ -185,28 +177,82 @@ export const Orders = () => {
             alignItems="center"
             sx={{ mt: 2 }}
           >
-            <Grid item sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>Nombre:</Typography>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Nombre:
+              </Typography>
               <Typography>{selectedOrder?.name}</Typography>
             </Grid>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>Fecha:</Typography>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Fecha:
+              </Typography>
               <Typography>{selectedOrder?.stringDate}</Typography>
             </Grid>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>Forma de pago:</Typography>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Forma de pago:
+              </Typography>
               <Typography>{selectedOrder?.wayToPay}</Typography>
             </Grid>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>Celular:</Typography>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Celular:
+              </Typography>
               <Typography>{selectedOrder?.cellphone}</Typography>
             </Grid>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>Dirección:</Typography>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Dirección:
+              </Typography>
               <Typography>{selectedOrder?.address}</Typography>
             </Grid>
-            <Grid item sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>Estado:</Typography>
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Estado:
+              </Typography>
               <Typography>{selectedOrder?.status}</Typography>
             </Grid>
           </Grid>
