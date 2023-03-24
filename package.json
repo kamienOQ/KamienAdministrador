@@ -12,7 +12,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
-    "@mui/material": "^5.11.12",
+    "@mui/material": "^5.11.14",
     "@mui/x-data-grid": "^6.0.2",
     "@reduxjs/toolkit": "^1.9.3",
     "firebase": "^9.17.2",

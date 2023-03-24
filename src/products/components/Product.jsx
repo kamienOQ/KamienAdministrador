@@ -1,61 +1,82 @@
-import { Grid, IconButton, Typography } from "@mui/material"
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useProductsStore } from "../../hooks";
+import { Table } from "../../admin/components/Table";
+import { ProductActions } from "./ProductActions";
 
-export const Product = ({ id, product }) => {
 
-  const date = new Date(product.date);
+
+export const Product = () => {
+  const { products } = useProductsStore();
+
+  const attributes = [
+    {
+      field: "id",
+      headerName: "#",
+      type: "number",
+      width: 60,
+      sortable: false,
+      filterable: false,
+    },
+    {
+      field: "productName",
+      headerName: "Nombre",
+      width: 200,
+      filterable: true,
+      sortable: false,
+    },
+    {
+      field: "price",
+      headerName: "Precio",
+      width: 100,
+      filterable: true,
+      sortable: false,
+    },
+    {
+      field: "atributes",
+      headerName: "Atributos",
+      width: 200,
+      filterable: true,
+      sortable: false,
+    },
+    {
+      field: "date",
+      headerName: "Fecha",
+      type: "dateTime",
+      valueGetter: ({ value }) => value && new Date(value),
+      width: 200,
+      // sortable: true,
+    },
+    {
+      field: "image",
+      headerName: "Imagen",
+      type: "image",
+      width: 200,
+      filterable: false,
+      renderCell: (params) => (
+        !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
+      ),
+    },
+    {
+      field: "icon",
+      headerName: "Icono",
+      type: "image",
+      width: 200,
+      filterable: false,
+      renderCell: (params) => (
+        !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
+      ),
+    },
+    {
+      field: "actions",
+      headerName: "Acciones",
+      type: "actions",
+      width: 200,
+      getActions: (params) => [
+        <ProductActions row={params.row}/>
+      ]
+    },
+  ];
 
   return (
-    <Grid container sx={{ flexWrap: 'nowrap', bl: 1, border: 1, borderTop: 0, borderColor: 'secondary.main' }}>
-      <Grid item
-        sx={{
-          width: '5%', borderRight: 1, borderColor: 'secondary.main', 
-          display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5
-        }}
-      >
-        {id}
-      </Grid>
-      <Grid item
-        sx={{ width: '15%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
-              justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
-      >
-        {product.productName}
-      </Grid>
-      <Grid item
-        sx={{ width: '10%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
-              justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
-      >
-        {
-          
-          `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-        }
-      </Grid>
-      <Grid item
-        sx={{ width: '25%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
-              justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
-      >
-        <img className="table-img" src={product.image.url} alt={product.image.name} />
-      </Grid>
-      <Grid item
-        sx={{ width: '25%', borderRight: 1, borderColor: 'secondary.main', display: 'flex', 
-              justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
-      >
-        <img className="table-icon" src={product.icon.url} alt={product.icon.name} />
-      </Grid>
-      <Grid item
-        sx={{ width: '10%', display: 'flex', justifyContent: 'center', alignItems: 'center', pt: .5, pb: .5 }}
-      >
-        <Grid sx={{ display: 'flex', direction: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <IconButton sx={{ color: "secondary.main" }}>
-            <EditIcon />
-          </IconButton>
-          <IconButton sx={{ color: "error.main" }}>
-            <DeleteIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </Grid>
-  )
-}
-
+    !!products && <Table attributes={attributes} data={products} />
+  );
+};

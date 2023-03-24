@@ -1,9 +1,9 @@
-import { Button, Grid, Typography } from "@mui/material"
+import { Button, Grid, Typography } from "@mui/material";
+import { DataGrid } from '@mui/x-data-grid';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useLoadDataPage, useProductsStore, useUiStore } from "../../hooks";
-import { ProductFilters, ProductModal } from "../";
+import { ProductModal, Product } from "../";
 import { useEffect } from "react";
-
 
 export const ProductPages = () => {
 
@@ -32,56 +32,42 @@ export const ProductPages = () => {
   }
 
   return (
-    <Grid
+    <Grid container
       className="products-container"
-      container
       spacing={0}
       alignContent="start"
-      sx={{ backgroundColor: '#ffffff' }}
-      marginLeft={"4%"}
-      marginTop={"4%"}
-      marginRight={"4%"}
-      maxWidth={"96%"}
     >
-      <Grid container>
+      <Grid container
+        sx={{
+          height: 450,
+          marginLeft: "5%",
+          maxWidth: "95%",
+        }}
+      >
         <Grid container
-          alignItems="center"
           className="secundary-products-container"
-          //direction="column"
-          justifyContent="center"
           spacing={2}
-          sx={{ m: 2, padding: 2, maxHeight: 20, backgroundColor: '#ffffff' }}
-
+          sx={{ padding: 4, mt: 8, borderRadius: 1.2, display: 'flex', direction: 'column', alignItems: 'center', justifyContent: 'center' }}
         >
-          {/* TODO: justify-content: space-between */}
-          <Grid item
-            alignItems="center"
-            justifyContent="center"
+          <Grid item 
+            sx={{ width: "90%", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
           >
-            <Typography variant='h4'>Gestión de Productos</Typography>
-          </Grid>
-        </Grid>
-        <Grid item
-            alignItems="center"
-            justifyContent="center"
-            marginLeft={"70%"}
-            marginTop={"1%"}
-          >
+            <Typography variant="h4">Gestión de Productos</Typography>
             <Button
               className="addProduct-button"
               onClick={onOpenModal}
               startIcon={<AddCircleIcon />}
-              sx={{  borderRadius: '16px', backgroundColor: '#000000', color: '#ffffff',minWidth: 0 }}
+              sx={{ backgroundColor: '#357a38', minWidth: 0, color: "#ffffff" }}
               variant='contained'
-              disabled={ isSaving }
+              disabled={isSaving}
             >
               Nuevo Producto
             </Button>
           </Grid>
-        <ProductModal/>
-        <ProductFilters/>
+        </Grid>
+        <Product />
+        <ProductModal />
       </Grid>
-      
     </Grid>
   )
 }

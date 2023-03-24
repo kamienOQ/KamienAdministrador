@@ -5,7 +5,7 @@ import { DataGrid, gridClasses } from '@mui/x-data-grid';
 // import { getUsers } from '../../../actions/user';
 import moment from 'moment';
 import { grey,red} from '@mui/material/colors';
-import { UserActions, AdminEditModal } from './';
+import { UserActions } from './UserActions';
 import "./Administradores.css"
 import img from  "./Empty_pp.jpg"
 import { Margin } from '@mui/icons-material';

@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onSetTotalPages } from "../";
 import { onChangeSavingNewProduct, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-  onCleanProducts, onSetNumberProducts, onChargeProductsUploaded, onAddLowerCase, onAddProductAtStart } from "./";
+  onCleanProducts, onSetNumberProducts, onChargeProductsUploaded, onAddLowerCase, onAddProductAtStart, onSetProducts } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -29,7 +29,7 @@ export const onStartUploadNewProduct = () => {
   return async (dispatch, getState) => {
 
     let duplicateProduct = false;
-    const { activeProduct } = getState().products;
+    const { activeProduct, products } = getState().products;
 
     dispatch(onChangeSavingNewProduct(true));
     dispatch(onAddLowerCase());
@@ -49,7 +49,12 @@ export const onStartUploadNewProduct = () => {
     if(!duplicateProduct){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeProduct);
-        dispatch(onAddProductAtStart( activeProduct ));
+        let productsArray = [...products];
+        productsArray = productsArray.map((object) => {
+          return { ...object, id: object.id + 1 }
+        });
+        dispatch(onSetProducts(productsArray));
+        dispatch(onAddProductAtStart( { id: 1, ...activeProduct } ));
         dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
         dispatch(onAddErrorMessage( '' ));
     }
@@ -74,7 +79,7 @@ export const onStartGetProducts = () => {
     }
 
     querySnapshot.forEach((doc, index) => {
-      dispatch(onChargeProductsUploaded( doc.data() ));
+      dispatch(onChargeProductsUploaded( {id: index+1, ...doc.data()} ));
     });
     
   }

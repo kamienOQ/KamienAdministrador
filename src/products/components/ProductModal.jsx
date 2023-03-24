@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, TableRow, TableHead, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
+import { TextField, Dialog, DialogTitle, Table, TableHead, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../hooks";
-import { FloatingTags } from "./FloatingTags";
 import { deleteFileUpload } from "../../helpers";
+import { FloatingTags } from "./FloatingTags";
 
 const products = [
   {
@@ -89,9 +91,9 @@ export const ProductModal = () => {
         >
           Agregar un nuevo Producto
         </DialogTitle >
-        <TableRow className="product-form">
+        <form className="product-form">
           <TextField
-            sx={{ p: 1 }}
+            sx={{ p: 1, color: "#000000" }}
             type="text"
             fullWidth
             label="Nombre del Producto" variant="filled" focused
@@ -102,7 +104,7 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''} 
           />
           <TextField
-            sx={{ p: 1 }}
+            sx={{ p: 1, color: "#000000" }}
             type="number"
             fullWidth
             label="Precio del Producto" variant="filled" focused
@@ -113,7 +115,7 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
-            sx={{ p: 1}}
+            sx={{ p: 1, color: "#000000" }}
             type="text"
             fullWidth
             label="Atributos del Producto" variant="filled" focused
@@ -124,7 +126,7 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
-            sx={{ p: 1 }}
+            sx={{ p: 1, color: "#000000" }}
             fullWidth
             id="outlined-select-currency"
             select
@@ -144,10 +146,10 @@ export const ProductModal = () => {
           <div className="products-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
-                <Typography sx={ { color: "#D1B000" }}>
+                <Typography sx={ { color: "#000000" }}>
                   Imagen
                 </Typography>
-                <Typography sx={ { color: "#D1B000" }}>
+                <Typography sx={ { color: "#000000" }}>
                   Icono
                 </Typography>
               </div>
@@ -203,7 +205,7 @@ export const ProductModal = () => {
                 sx={{ borderRadius: '16px', m: 0.1 }}
                 color="error"
               >
-                X
+                <CloseIcon />
               </Button>
               <Button
                 className="addProduct-button"
@@ -212,11 +214,11 @@ export const ProductModal = () => {
                 sx={{ borderRadius: '16px', m: 0.1 }}
                 color="success"
               >
-                ✓
+                <CheckIcon />
               </Button>
             </div>
           </div>
-        </TableRow>
+        </form>
       </DialogContent>
     </Dialog>
   )

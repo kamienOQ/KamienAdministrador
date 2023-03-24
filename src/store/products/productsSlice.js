@@ -110,7 +110,10 @@ export const productsSlice = createSlice({
         },
         onCleanProductsUploaded: ( state ) => {
             state.productsUploaded = [];
-        }
+        },
+        onSetProducts: ( state, { payload } ) => {
+            state.categories = payload
+        },
     }
 });
 
@@ -136,4 +139,5 @@ export const {
     onSetNumberProducts,
     onUpdateProduct,
     onAddProducts,
+    onSetProducts,
 } = productsSlice.actions;
