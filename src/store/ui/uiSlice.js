@@ -3,34 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-<<<<<<< HEAD
         isAttributeModalOpen: false,
-        categoriesSelected: []
-    },
-    reducers: {
-        onOpenAttributeModal: ( state ) => {
-            state.isAttributeModalOpen = true;
-        },
-        onCloseAttributeModal: ( state ) => {
-            state.isAttributeModalOpen = false;
-        },
-        onAddCategoriesSelected: ( state, { payload } ) => {
-            if (!state.categoriesSelected.includes(payload)) {
-                state.categoriesSelected.push( payload );
-            }
-        },
-        onDeleteCategoriesSelected: ( state, { payload } ) => {
-            state.categoriesSelected = state.categoriesSelected.filter( event => event !== payload );
-        },
-        onCleanCategoriesSelected: ( state ) => {
-            state.categoriesSelected = []
-=======
-        isProductModalOpen: false,
-        isCategoryModalOpen: false,
         totalPages: 1,
         page: 1,
-        searching: '',
-        productsSelected: []
     },
     reducers: {
         onSetTotalPages: ( state, { payload } ) => {
@@ -52,32 +27,11 @@ export const uiSlice = createSlice({
         onRestorePage: ( state ) => {
             state.page = 1;
         },
-        onSearchingName: (state, { payload }) => {
-            state.searching = payload;
+        onOpenAttributeModal: ( state ) => {
+            state.isAttributeModalOpen = true;
         },
-        onOpenProductModal: ( state ) => {
-            state.isProductModalOpen = true;
-        },
-        onCloseProductModal: ( state ) => {
-            state.isProductModalOpen = false;
-        },
-        onAddProductsSelected: ( state, { payload } ) => {
-            if (!state.productsSelected.some((product) => product.toLowerCase() === payload.toLowerCase())) {
-                state.productsSelected.push( payload );
-            }
-        },
-        onDeleteProductsSelected: ( state, { payload } ) => {
-            state.productsSelected = state.productsSelected.filter( event => event !== payload );
-        },
-        onCleanProductsSelected: ( state ) => {
-            state.productsSelected = []
-        },
-        onOpenCategoryModal: ( state ) => {
-            state.isCategoryModalOpen = true;
-        },
-        onCloseCategoryModal: ( state ) => {
-            state.isCategoryModalOpen = false;
->>>>>>> origin/salvarado
+        onCloseAttributeModal: ( state ) => {
+            state.isAttributeModalOpen = false;
         }
         
     }
@@ -85,22 +39,12 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-<<<<<<< HEAD
-export const { onOpenAttributeModal, onCloseAttributeModal, onAddCategoriesSelected, onDeleteCategoriesSelected, onCleanCategoriesSelected } = uiSlice.actions;
-=======
 export const { 
     onSetTotalPages,
     onUpPage,
     onDownPage,
     onChangePage,
     onRestorePage,
-    onSearchingName,
-    onOpenProductModal, 
-    onCloseProductModal, 
-    onAddProductsSelected, 
-    onDeleteProductsSelected, 
-    onCleanProductsSelected, 
-    onOpenCategoryModal, 
-    onCloseCategoryModal, 
+    onOpenAttributeModal, 
+    onCloseAttributeModal, 
 } = uiSlice.actions;
->>>>>>> origin/salvarado

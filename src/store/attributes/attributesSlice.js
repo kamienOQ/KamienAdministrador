@@ -8,8 +8,10 @@ export const attributesSlice = createSlice({
             error: '',
             success: ''
         },
-        categoriesUploaded: [],
+        ascending: '',
+        numberAttributes: 0,
         attributes: [],
+        attributesOnPage: [],
         activeAttribute: null, 
     },
     reducers: {
@@ -19,10 +21,17 @@ export const attributesSlice = createSlice({
         onAddNewAttribute: ( state ) => {
             const newAttribute = {
                 attributeName: '',
-                categories: [],
+                products: [],
+                image: {
+                    name: null,
+                    url: null
+                },
+                icon: {
+                    name: null,
+                    url: null
+                },
                 date: new Date().getTime(),
             }
-            state.attributes.push( newAttribute );
             state.activeAttribute = newAttribute;
         },
         onSetActiveAttribute: ( state, { payload } ) => {
@@ -42,17 +51,8 @@ export const attributesSlice = createSlice({
         onDeleteAttribute: ( state, { payload } ) => {
             state.activeAttribute = null;
             state.attributes =  state.attributes.filter( (attribute) => attribute.attributeName !== payload );
-            
         },
-        
-        onChargeCategoriesByPage: ( state, { payload } ) => {
-            state.categoriesOnPage = payload;
-        },
-        
-        onChargeProductsUploaded: ( state, { payload } ) => {
-            state.productsUploaded.push( payload );
-        },
-        onChargeCategoriesUploaded: ( state, { payload } ) => {
+        onChargeAttributesUploaded: ( state, { payload } ) => {
             let duplicate = false
             if(state.attributes){
                 state.attributes.forEach(attribute => {
@@ -60,14 +60,35 @@ export const attributesSlice = createSlice({
                         duplicate = true
                 });
                 if(!duplicate){
+                    console.log("Hola")
                     state.attributes.push( payload );
                 }
             }else{
                 state.attributes.push( payload );
             }
         },
-        onAddCategories: ( state, { payload } ) => {
-            state.activeAttribute.categories = payload;
+        onSetAttributes: ( state, { payload } ) => {
+            state.attributes = payload
+        },
+        onAddAttributeAtStart: ( state, { payload } ) => {
+            state.attributes.unshift(payload);
+        },
+        onChargeAttributesByPage: ( state, { payload } ) => {
+            state.attributesOnPage = payload;
+        },
+        onSetNumberAttributes: ( state, { payload } ) => {
+            state.numberAttributes = payload
+        },
+        onAddImage: ( state, { payload } ) => {
+            state.activeAttribute.image.name = payload[0];
+            state.activeAttribute.image.url = payload[1];
+        },
+        onAddIcon: ( state, { payload } ) => {
+            state.activeAttribute.icon.name = payload[0];
+            state.activeAttribute.icon.url = payload[1];
+        },
+        onChangeAscending: ( state, { payload } ) => {
+            state.ascending = payload
         },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
@@ -76,11 +97,14 @@ export const attributesSlice = createSlice({
             state.message.success = payload;
         },
         onCleanAttributes: ( state ) => {
-            state.attributes = [];
+            state.attributes = []
             state.activeAttribute = null;
         },
-        onCleanCategoriesUploaded: ( state ) => {
-            state.categoriesUploaded = [];
+        onCleanActiveAttribute: ( state ) => {
+            state.activeAttribute = null;
+        },
+        onCleanProductsUploaded: ( state ) => {
+            state.productsUploaded = [];
         }
     }
 });
@@ -88,15 +112,22 @@ export const attributesSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-    onChangeSavingNewAttribute, 
-    onAddNewAttribute, 
-    onSetActiveAttribute, 
-    onUpdateAttribute, 
-    onDeleteAttribute,
-    onChargeCategoriesUploaded,
-    onAddCategories, 
+    onAddAttributeAtStart,
     onAddErrorMessage,
+    onAddIcon, 
+    onAddImage, 
+    onAddNewAttribute, 
     onAddSuccessMessage,
-    onCleanAttributes ,
-    onCleanCategoriesUploaded
+    onChangeAscending,
+    onChangeSavingNewAttribute, 
+    onChargeAttributesByPage, 
+    onChargeAttributesUploaded,
+    onCleanActiveAttribute,
+    onCleanAttributes,
+    onCleanProductsUploaded,
+    onDeleteAttribute,
+    onSetActiveAttribute, 
+    onSetAttributes,
+    onSetNumberAttributes,
+    onUpdateAttribute,
 } = attributesSlice.actions;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-export const useAttributesForm = ( initialForm = {},  ) => {
+export const useAttributesForm = ( initialForm = {}  ) => {
     const [ formState, setFormState ] = useState( initialForm );
 
     useEffect(() => {
         setFormState( initialForm )
-    }, [initialForm])
+      }, [initialForm])
 
     const onInputChange = ({ target }) => {
         const { name, value } = target;

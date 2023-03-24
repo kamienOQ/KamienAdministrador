@@ -1,12 +1,11 @@
 import './styles.css'
-import { AppTheme } from './theme'
 import { AppRouter } from "./router/AppRouter";
-
+import { AppTheme } from "./theme";
 
 export const AdminApp = () => {
   return (
     <AppTheme>
-      <AppRouter/>  
+      <AppRouter />
     </AppTheme>
   )
-}
+};

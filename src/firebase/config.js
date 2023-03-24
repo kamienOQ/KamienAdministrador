@@ -13,7 +13,7 @@ const firebaseConfig = {
   projectId: "project-kamien",
   storageBucket: "project-kamien.appspot.com",
   messagingSenderId: "237921208573",
-  appId: "1:237921208573:web:b18d13984139377091d694"
+  appId: "1:237921208573:web:b18d13984139377091d694",
 };
 
 // Initialize Firebase

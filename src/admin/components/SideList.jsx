@@ -96,7 +96,7 @@ export const SideList = ({ open, setOpen }) => {
         </Box>
         <Box sx={{ textAlign: 'center' }}>
           {open && <Typography>{displayName}</Typography>}
-          <Typography variant="body2">{"SuperAdmin" || 'role'}</Typography>
+          {open && <Typography variant="body2">{"SuperAdmin" || 'role'}</Typography>}
           {open && (
             <Typography variant="body2">{email}</Typography>
           )}

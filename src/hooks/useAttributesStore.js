@@ -1,23 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddNewAttribute, onAddCategories, onAddSuccessMessage, onCleanAttributes, 
-    onSetActiveAttribute, onStarGetCategoriesUploaded, onStartUploadFile, onStartUploadNewAttribute } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewAttribute, onAddSuccessMessage, onChangeAscending, onCleanAttributes, 
+    onSetActiveAttribute, onStartGetAttributes, onStartUploadFile, onstartUploadNewAttribute } from "../store";
 
-
-
-
-    
 export const useAttributesStore = () => {
     const dispatch = useDispatch();
 
-    //*Slice
     const { 
+        activeAttribute,
+        ascending,
+        attributes,
+        attributesOnPage,
         isSaving,
         message,
-        categoriesUploaded,
-        attributes,
-        activeAttribute
+        numberAttributes,
+        productsUploaded,
     } = useSelector( state => state.attributes );
-
+    
+    //*Slice
     const addNewAttribute = () => {
         dispatch( onAddNewAttribute() );
     }
@@ -26,8 +25,16 @@ export const useAttributesStore = () => {
         dispatch( onSetActiveAttribute( attribute ) );
     }
 
-    const addCategories = ( categories ) => {
-        dispatch( onAddCategories( categories ) );
+    const changeAscending = ( value ) => {
+        dispatch( onChangeAscending( value ) );
+    }
+
+    const addImage = ( images ) => {
+        dispatch( onAddImage( images ) );
+    }
+
+    const addIcon = ( images ) => {
+        dispatch( onAddIcon( images ) );
     }
 
     const addErrorMessage = ( message ) => {
@@ -44,37 +51,40 @@ export const useAttributesStore = () => {
     
 
     //*Thunks
-
     const startUploadFile = ( file, type, collectionName ) => {
         dispatch( onStartUploadFile( file, type, collectionName ) )
     }
 
     const startUploadNewAttribute = () => {
-        dispatch(onStartUploadNewAttribute() );
+        dispatch( onstartUploadNewAttribute() );
     }
 
-    const starGetCategoriesUploaded = () => {
-        dispatch( onStarGetCategoriesUploaded() );
-    }
+    const startGetAttributes = () => {
+        dispatch( onStartGetAttributes() );
+    }    
 
     return {
         //*Propiedades
-        message,
-        isSaving,
-        categoriesUploaded,
-        attributes,
         activeAttribute,
+        ascending,
+        attributes,
+        attributesOnPage,
+        isSaving,
+        message,
+        numberAttributes,
+        productsUploaded,
 
         //*Métodos
-        addNewAttribute,
-        setActiveAttribute,
-        addCategories,
         addErrorMessage,
+        addIcon,
+        addImage,
+        addNewAttribute,
         addSuccessMessage,
+        changeAscending,
         cleanAttributes,
+        setActiveAttribute,
+        startGetAttributes,
         startUploadFile,
         startUploadNewAttribute,
-        starGetCategoriesUploaded,
-
     }
 }
