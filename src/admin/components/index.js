@@ -4,4 +4,5 @@ export * from "./SideList";
 export * from "./Administradores";
 export * from "./UserActions";
 export * from "./AdminEditModal";
-export * from "./Orders";
+export * from "./orders/Orders";
+export * from "./orders/OrdersTable";

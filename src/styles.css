@@ -140,12 +140,31 @@ input[type="submit"] {
   color: white;
 }
 
-@media (max-width: 680px) {
-  .categories-container div{
-      margin: 4px;
-      padding-right: 1px;
-      padding-left: 1px !important;
+.MuiDataGrid-columnHeaders {
+  background-color: #256EFF;
+}
+
+@media (max-width: 1250px) {
+  .table{
+    margin-left: 65px !important;
+    margin-right: 35px !important;
   }
+}
+
+@media (max-width: 600px) {
+  .table{
+    margin-left: 40px !important;
+    margin-right: 10px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .table{
+    margin-left: 50px !important;
+  }
+}
+
+@media (max-width: 680px) {
   .categories-container h4{
       font-size: 24px;
   }
@@ -181,6 +200,9 @@ input[type="submit"] {
 }
 
 @media (max-width: 410px) {
+  .categories-container h4{
+    margin-left: 20px;
+  }
   .category-form{
       width: 230px;
       margin: 1rem .4rem 1rem .4rem !important;
@@ -194,7 +216,4 @@ input[type="submit"] {
   .action-buttons{
       width: 220px;
   }
-  .MuiPaper-elevation{
-      margin: 13px !important;
-  }    
 }

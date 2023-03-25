@@ -87,7 +87,7 @@ export const SideList = ({ open, setOpen }) => {
         <SideBarList/>
         <Divider sx={{ bgcolor: "dark.main" }}/>
         <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-          <Tooltip title = "Nombre de Admin" sx={{ bgcolor: "dark.main" }}> 
+          <Tooltip title = {displayName} sx={{ bgcolor: "dark.main" }}> 
             <Avatar                     // title={currentUser?.name || ''}
             src='/src/admin/pages/Empty_pp.jpg'//   src={currentUser?.photoURL}
             {...(open && { sx: { width: 100, height: 100 } })}
@@ -100,7 +100,7 @@ export const SideList = ({ open, setOpen }) => {
           {open && (
             <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
           )}
-          <Tooltip title="Logout" sx={{ mt: 1 }}>
+          <Tooltip title="Cerrar sesión" sx={{ mt: 1 }}>
             <IconButton onClick={onLogout}>
               <Logout sx={{ color: "white" }}/>
             </IconButton>
