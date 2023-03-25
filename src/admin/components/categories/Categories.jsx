@@ -46,8 +46,6 @@ export const Categories = () => {
       operatorValue: 'greaterThan',
       hideable: false,
       filterOperators: filterOperatorsDate
-      // TODO: limitar los operadores a solo mayor
-      // filterOperators: false
     },
     {
       field: "image",

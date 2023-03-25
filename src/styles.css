@@ -6,7 +6,7 @@
     --border: #c9c9c9;
     --white: #ffffff;
     --backgroud: #383838;
-    --aa: #4380fa;
+    --header: #256EFF;
     --roboto: 'Roboto', sans-serif;
 }
 
@@ -19,6 +19,7 @@
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
     background-color: var(--main-color) !important;
+  background-color: #0E1116 !important;
 }
 
 .column-container:nth-child(odd) {
@@ -160,31 +161,9 @@ label {
     color: var(--white) !important;
 }
 
-/* .page-button{
-    width: 30px;
-    height: 30px;
-    margin: 0px 4px 0px 4px;
-    border: none;
-    font-weight: bold;
-    border-radius: 50px;
-    font-family: var(--roboto);
-    background-color: #B9FAF8;
-    cursor: pointer;
-  } */
-  
-/* .page-button-selected{
-    width: 30px;
-    height: 30px;
-    margin: 0px 4px 0px 4px;
-    border: none;
-    font-weight: bold;
-    border-radius: 50px;
-    font-family: var(--roboto);
-    background-color: #256EFF;
-    color: white;
-    cursor: pointer;
-} */
-
+.container-table{
+    flex-direction: column  !important;
+}
 
 /* .table-img{
     max-width: 80%;
@@ -194,7 +173,7 @@ label {
     max-width: 40%;
 } */
 
-@media (max-width: 680px) {
+/* @media (max-width: 680px) {
     .categories-container div{
         margin: 4px;
         padding-right: 1px;
@@ -215,10 +194,7 @@ label {
         justify-content: center;
         padding: 1px;
     }
-    /* .tags-container{
-        grid-template-columns: repeat(1, 1fr);
-        width: 240px;
-    } */
+
     .category-form{
         width: 270px;
     }
@@ -250,18 +226,6 @@ label {
     .MuiPaper-elevation{
         margin: 13px !important;
     }    
-}
-
-/* .tag-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 30px;
-  width: auto;
-  font-size: 14px;
-  padding: 0 10px 0 10px;
-  gap: 5px;
 } */
 
 
@@ -272,3 +236,106 @@ label {
 
 
 
+/* .page-button-selected{
+  width: 30px;
+  height: 30px;
+  margin: 0px 4px 0px 4px;
+  border: none;
+  font-weight: bold;
+  border-radius: 50px;
+  font-family: var(--roboto);
+  background-color: #256EFF;
+  color: white;
+} */
+
+.MuiDataGrid-columnHeaders {
+  background-color: var(--header);
+}
+
+@media (max-width: 1250px) {
+    .container-buttons-filter{
+        width: 1130px !important;
+    }
+    .table{
+        margin-left: 65px !important;
+        margin-right: 35px !important;
+    }
+}
+
+@media (max-width: 710px) {
+    .secundary-categories-container div{
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 600px) {
+  .table{
+    margin-left: 40px !important;
+    margin-right: 10px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .table{
+    margin-left: 50px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .categories-container h4{
+      font-size: 24px;
+  }
+  .categories-container button{
+      font-size: 12px;
+  }
+  .secundary-categories-container{
+      max-height: 180px !important;
+      flex-direction: row !important;
+  }
+  .secundary-categories-container div{
+      display: flex;
+      padding: 1px;
+  }
+  .tags-container{
+      grid-template-columns: repeat(1, 1fr);
+      width: 240px;
+  }
+  .category-form{
+      width: 270px;
+      margin: 1rem 2rem 1rem 2rem;
+  }
+  .files-name-container{
+      width: 225px !important;
+  }
+  .iconImage-buttons{
+      width: 228px;
+  } 
+  .action-buttons{
+      width: 270px;
+  }
+}
+
+@media (max-width: 410px) {
+  .categories-container h4{
+    margin-left: 20px;
+  }
+  .category-form{
+      width: 230px;
+      margin: 1rem .4rem 1rem .4rem !important;
+  }
+  .secundary-categories-container div{
+    flex-direction: column;
+    font-family: 12px;
+    gap: 10px;
+    justify-content: center;
+  }
+  .files-name-container{
+      width: 160px !important;
+  }
+  .iconImage-buttons{
+      width: 160px;
+  } 
+  .action-buttons{
+      width: 220px;
+  }
+}
