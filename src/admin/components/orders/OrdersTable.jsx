@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { DataGrid, esES } from "@mui/x-data-grid";
-import { startGetOrders } from "../../store/orders";
+import { startGetOrders } from "../../../store/orders";
 import { useSelector } from "react-redux";
 
 export const OrdersTable = ({ attributes }) => {
@@ -39,6 +39,7 @@ export const OrdersTable = ({ attributes }) => {
   return (
     <>
       <DataGrid
+        className="table"
         columns={columns}
         rows={orders}
         loading={isLoading}
@@ -59,9 +60,10 @@ export const OrdersTable = ({ attributes }) => {
         localeText={{...esES.components.MuiDataGrid.defaultProps.localeText, columnMenuManageColumns: "Gestionar columnas"}}
         sx={{
           color: "dark.main",
-          maxWidth: "1162px",
+          maxWidth: "1172px",
           my: "0",
           mx: "auto",
+          overflowX: 'auto',
           ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
             bgcolor: "info.main",
             color: "white",
