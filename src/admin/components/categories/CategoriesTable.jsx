@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { DataGrid, esES } from "@mui/x-data-grid";
 import { Button, Grid } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -8,7 +8,7 @@ import { useCategoriesStore } from "../../../hooks";
 
 export const CategoriesTable = ({ attributes, data }) => {
 
-  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories } = useCategoriesStore();
+  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageSize } = useCategoriesStore();
 
   const [rowId, setRowId] = useState(null);
   const [paginationModel, setPaginationModel] = useState({
@@ -18,12 +18,39 @@ export const CategoriesTable = ({ attributes, data }) => {
   const [localFilterValue, setLocalFilterValue] = useState('');
   const [sortModel, setSortModel] = useState([]);
 
+  const [rowCountState, setRowCountState] = useState(numberCategories || 0);
+
+  // * Pagination
+  const onPaginationChange = useCallback(
+    (newModel) => {
+      setPaginationModel(newModel);
+      changePageSize(newModel.pageSize);
+    },
+    [setPaginationModel]
+  );
+
+  const onGetRowId = useCallback((row) => row.id, []);
+
+  useEffect(() => {
+    if(!filtering){
+      startGetCategories(paginationModel.page, paginationModel.pageSize);
+    }if(filtering){
+      startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
+    }
+  }, [paginationModel]);
+
+  useEffect(() => {
+    setRowCountState(numberCategories !== undefined ? numberCategories : 0);
+  }, [numberCategories, setRowCountState]);
+
   const columns = useMemo(() => attributes, [rowId]);
 
+
+  // * Filter
   const handleSearch = () => {
     if (!filtering || filter.value === 'asc' || filter.value === 'desc' || (filter.value !== localFilterValue) ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined && filter.field !== undefined) {
-        startFilterCategories();
+        startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(filter.value);
       }
@@ -31,7 +58,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   };
 
   const handleRemoveFilter = () => {
-    startGetCategories();
+    startGetCategories(paginationModel.page, paginationModel.pageSize);
     changeFiltering(false);
     changeFilter({});
     setSortModel([]);
@@ -42,7 +69,7 @@ export const CategoriesTable = ({ attributes, data }) => {
       changeFilter({ field: items[0]?.field, value: items[0]?.value });
     } if (items.length === 0) {
       if(filtering){
-        startGetCategories();
+        startGetCategories(paginationModel.page, paginationModel.pageSize);
       }
       changeFiltering(false);
       changeFilter({});
@@ -56,10 +83,8 @@ export const CategoriesTable = ({ attributes, data }) => {
 
 
   return (
-    // TODO: Crear boton de quitar filtro
-    // TODO: Llamar a la cunfión que quita el estado de filtrado y limpia el state de filtros
     <Grid container
-      sx={{ display: 'flex', direction: 'column', alignItems: 'center', justifyContent: 'start', maxWidth: "1162px", height: 450, my: "0", mx: "auto", gap: .6 }}
+      sx={{ display: 'flex', direction: 'column', alignItems: 'center', justifyContent: 'start', maxWidth: "1162px", height: 400, my: "0", mx: "auto", gap: .6 }}
     >
       <Grid item>
         <Button
@@ -85,10 +110,13 @@ export const CategoriesTable = ({ attributes, data }) => {
         columns={columns}
         rows={data}
         disableColumnSelector
-        getRowId={(row) => row.id}
+        loading={isLoading}
+        rowCount={rowCountState}
+        getRowId={onGetRowId}
         pageSizeOptions={[5, 10, 25]}
         paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
+        onPaginationModelChange={onPaginationChange}
+        paginationMode="server"
         onFilterModelChange={handleFilterChange}
         sortModel={sortModel}
         onSortModelChange={handleSortModelChange}

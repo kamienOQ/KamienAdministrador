@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering } from "../store";
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -8,13 +8,13 @@ export const useCategoriesStore = () => {
     const { 
         activeCategory,
         categories,
-        categoriesOnPage,
-        isSaving,
-        message,
         editing,
-        filtering,
         filter,
-        productsUploaded,
+        filtering,
+        isSaving,
+        isLoading,
+        message,
+        numberCategories,
     } = useSelector( state => state.categories );
     
     //*Slice
@@ -42,6 +42,10 @@ export const useCategoriesStore = () => {
         dispatch( onAddSuccessMessage( message ) );
     }
 
+    const  setNumberCategories = ( number ) => {
+        dispatch(  onSetNumberCategories( number ) );
+    }
+
     const changeEditing = ( value ) => {
         dispatch( onChangeEditing( value ) );
     }
@@ -52,6 +56,10 @@ export const useCategoriesStore = () => {
 
     const changeFilter = ( value ) => {
         dispatch( onChangeFilter( value ) );
+    }
+
+    const changePageSize = ( pageSize ) => {
+        dispatch( onChangePageSize( pageSize ) );
     }
 
     const cleanCategories = () => {
@@ -68,25 +76,29 @@ export const useCategoriesStore = () => {
         dispatch( onStartUploadNewCategory() );
     }
 
-    const startGetCategories = () => {
-        dispatch( onStartGetCategories() );
+    const startGetCategories = (page, size) => {
+        dispatch( onStartGetCategories(page, size) );
     }
 
-    const startFilterCategories = () => {
-        dispatch( onStartFilterCategories() );
+    const startNumberCategories = () => {
+        dispatch( onStartNumberCategories() );
+    }
+
+    const startFilterCategories = (page, size, preValue) => {
+        dispatch( onStartFilterCategories(page, size, preValue) );
     }    
 
     return {
         //*Propiedades
         activeCategory,
         categories,
-        categoriesOnPage,
+        editing,
+        filter,
+        isLoading,
+        filtering,
         isSaving,
         message,
-        editing,
-        filtering,
-        filter,
-        productsUploaded,
+        numberCategories,
 
         //*Métodos
         addErrorMessage,
@@ -95,13 +107,16 @@ export const useCategoriesStore = () => {
         addNewCategory,
         addSuccessMessage,
         changeEditing,
-        changeFiltering,
         changeFilter,
+        changeFiltering,
+        changePageSize,
         cleanCategories,
+        setNumberCategories,
         setActiveCategory,
+        startNumberCategories,
+        startFilterCategories,
         startGetCategories,
         startUploadFile,
         startUploadNewCategory,
-        startFilterCategories,
     }
 }

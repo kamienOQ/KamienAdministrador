@@ -7,13 +7,20 @@ import { Categories, CategoryModal } from "../components";
 
 export const CategoriesCrud = () => {
   const { openCategoryModal, closeCategoryModal } = useUiStore();
-  const { isSaving, message, addNewCategory, startGetCategories } = useCategoriesStore();
+  const { isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
 
   useEffect(() => {
     if (!!message.success) {
       closeCategoryModal();
     }
   }, [message.success]);
+
+  useEffect(() => {
+    if(!filtering){
+      startNumberCategories();
+    }
+  }, [filtering])
+  
 
   useEffect(() => {
     startGetCategories();
@@ -32,7 +39,7 @@ export const CategoriesCrud = () => {
     >
       <Grid container
         sx={{
-          height: 450,
+          height: 400,
           marginLeft: "5%",
           maxWidth: "95%",
         }}

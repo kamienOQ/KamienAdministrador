@@ -8,13 +8,12 @@ export const Categories = () => {
   const { categories } = useCategoriesStore();
 
   const filterOperatorsName = getGridStringOperators().filter(({ value }) =>
-    ['contains' /* add more over time */ ].includes(value),
+    ['contains'].includes(value),
   );
 
-  // const filterOperatorsDate = getGridDateOperators();
-  // console.log(filterOperatorsDate);
+
   const filterOperatorsDate = getGridDateOperators().filter(({ value }) =>
-    ['onOrAfter' /* add more over time */ ].includes(value),
+    ['onOrAfter'].includes(value),
   );
 
   const attributes = [
@@ -48,8 +47,6 @@ export const Categories = () => {
       operatorValue: 'greaterThan',
       hideable: false,
       filterOperators: filterOperatorsDate
-      // TODO: limitar los operadores a solo mayor
-      // filterOperators: false
     },
     {
       field: "image",
