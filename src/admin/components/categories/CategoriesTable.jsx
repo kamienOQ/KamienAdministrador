@@ -137,10 +137,6 @@ export const CategoriesTable = ({ attributes, data }) => {
             bgcolor: "info.main",
             color: "white",
           },
-          ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
-            bgcolor: "info.main",
-            color: "white",
-          },
           ".css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root": {
             color: "white",
           },
