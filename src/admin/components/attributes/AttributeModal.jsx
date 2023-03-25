@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, DialogContent, Alert, Grid,Autocomplete} from "@mui/material"
+import { TextField, Dialog, DialogTitle, Button, DialogContent, Alert, Grid,Autocomplete,MenuItem} from "@mui/material"
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 import { useAttributesForm, useAttributesState, useAttributesStore, useUiStore } from "../../../hooks";
 import { deleteFileUpload } from "../../../helpers";
@@ -12,7 +14,7 @@ export const AttributeModal = () => {
     startUploadNewAttribute } = useAttributesStore();
   const { imageLoad, iconLoad, selected, onUploadImage, onUploadIcon } = useAttributesState();
 
-  const { attributeName, onInputChange, formState } = useAttributesForm(activeAttribute);
+  const { attributeName,attributeList, onInputChange, formState } = useAttributesForm(activeAttribute);
   const [emptyName, setEmptyName] = useState(false);
 
 
@@ -31,32 +33,7 @@ export const AttributeModal = () => {
   const catt = [{label: "Reloj"}, {label: "Lentes"}, {label: "Perfumes"}];
   
 
-  const onCloseModa = () => {
-    if (imageLoad) {
-      let usingImage = false;
-      attributes.forEach(object => {
-        if (object.image.name === activeAttribute.image.name) {
-          usingImage = true;
-          return;
-        }
-      });
-      if(!usingImage){
-        deleteFileUpload(activeAttribute.image.name);
-      }
-    }
-    if (iconLoad) {
-      let usingIcon = false;
-      attributes.forEach(object => {
-        if (object.icon.name === activeAttribute.icon.name) {
-          usingIcon = true;
-          return;
-        }
-      });
-      if(!usingIcon){
-        deleteFileUpload(activeAttribute.icon.name);
-      }
-    }
-
+  const onCloseModal = () => {
     closeAttributeModal();
   }
 
@@ -84,7 +61,7 @@ export const AttributeModal = () => {
           <TextField
             type="text"
             fullWidth
-            label="Nombre de Atributo"
+            label="Nombre del tipo de Atributo"
             variant="outlined"
             name="attributeName"
             value={attributeName || ''}
@@ -99,13 +76,53 @@ export const AttributeModal = () => {
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Tipo de Atributo" />}
           />
+          <TextField
+            fullWidth
+            id="outlined-select-currency"
+            select
+            label="Categorias a las que pertenece"
+            defaultValue=""
+            onChange={onSelectProduct}
+            helperText="Por favor, seleccione una opción"
+          >
+            {products.map((option) => (
+              <MenuItem key={option.label} value={option.label}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={catt}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Categorias" />}
-          />
+          >
+            {/* importar y recorrer productsUploaded opteniendo el nombre */}
+            {catt.map((option) => (
+                <MenuItem key={option.label} value={option.label}>
+                  {option.label}
+                </MenuItem>
+            ))}
+          </Autocomplete>
+          <TextField
+            type="text"
+            fullWidth
+            label="Agrega nuevos Atributo"
+            variant="outlined"
+            name="attributeList"
+            value={attributeList || ''}
+            onChange={onInputChange}
+            error={emptyName}
+            helperText={emptyName ? 'Ejemplo: Blanco, rojo, azul' : ''}
+          >
+            {/* importar y recorrer productsUploaded opteniendo el nombre */}
+            {catt.map((option) => (
+                <MenuItem key={option.label} value={option.label}>
+                  {option.label}
+                </MenuItem>
+            ))}
+          </TextField>
           
           {selected && <FloatingTags />}
           <div className="attributes-modal-buttons">
@@ -118,21 +135,23 @@ export const AttributeModal = () => {
             </Grid>
             <div className="action-buttons">
               <Button
-                className="cancelAtrribute-button"
-                onClick={onCloseModa}
+                className="cancelProduct-button"
+                onClick={onCloseModal}
                 variant="contained"
-                sx={{ backgroundColor: "error.main" }}
+                sx={{ borderRadius: '16px', m: 0.1 }}
+                color="error.main"
               >
-                Cancelar
+                <CloseIcon />
               </Button>
               <Button
-                className="addAttribute-button"
+                className="addProduct-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ backgroundColor: "primary.main", color: "tertiary.main" }}
+                sx={{ borderRadius: '16px', m: 0.1 }}
+                color="success"
               >
-                Agregar
-              </Button>
+                <CheckIcon />
+              </Button>   
             </div>
           </div>
         </form>

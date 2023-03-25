@@ -10,6 +10,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import CategoryIcon from '@mui/icons-material/Category';
 import AddIcon from '@mui/icons-material/Add';
 import InfoIcon from '@mui/icons-material/Info';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { Link as RouterLink } from "react-router-dom";
 
@@ -89,6 +90,32 @@ export const SideBarList = () => {
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Categoría"}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+        </ListItem>
+        </Link>
+
+        <Link color="dark.main" component={RouterLink} to = "/Attributes" sx={{textDecoration: "none"}}>
+        <ListItem key= "Añadir Atributo" disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <LocalOfferOutlinedIcon sx={{ color: "dark.main" }}/>
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Añadir Atributo"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
