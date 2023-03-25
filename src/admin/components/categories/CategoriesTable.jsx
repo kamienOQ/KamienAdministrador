@@ -84,9 +84,13 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   return (
     <Grid container
-      sx={{ display: 'flex', direction: 'column', alignItems: 'center', justifyContent: 'start', maxWidth: "1162px", height: 400, my: "0", mx: "auto", gap: .6 }}
+      className="container-table"
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto', }}
     >
-      <Grid item>
+      <Grid
+        className="container-buttons-filter"
+        sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: "1160px"}}
+      >
         <Button
           sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
           onClick={handleSearch}
@@ -107,6 +111,7 @@ export const CategoriesTable = ({ attributes, data }) => {
         }
       </Grid>
       <DataGrid
+        className="table"
         columns={columns}
         rows={data}
         disableColumnSelector
@@ -124,9 +129,14 @@ export const CategoriesTable = ({ attributes, data }) => {
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         sx={{
           color: "dark.main",
-          maxWidth: "1162px",
+          maxWidth: "1172px",
           my: "0",
           mx: "auto",
+          overflowX: 'auto',
+          ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
+            bgcolor: "info.main",
+            color: "white",
+          },
           ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
             bgcolor: "info.main",
             color: "white",
