@@ -14,6 +14,10 @@ export const categoriesSlice = createSlice({
         editing: false,
         filtering: false,
         filter: {},
+        preCategory: {
+            name: '',
+            updatedName: false
+        },
         pageSize: 5,
         activeCategory: null, 
     },
@@ -53,6 +57,7 @@ export const categoriesSlice = createSlice({
 
                 return category;
             });
+            state.preCategory.updatedName = false;
         },
         onDeleteCategory: ( state, { payload } ) => {
             state.activeCategory = null;
@@ -103,6 +108,12 @@ export const categoriesSlice = createSlice({
         onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
         },
+        onChangePreCategoryName: ( state, { payload } ) => {
+            state.preCategory.name = payload;
+        },
+        onChangePreCategoryUpdated: ( state, { payload } ) => {
+            state.preCategory.updatedName = payload;
+        },
         onChangeFiltering: ( state, { payload } )=> {
             state.filtering = payload
         },
@@ -126,6 +137,7 @@ export const categoriesSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
+    // onChargeCategoriesUploaded,
     onAddCategoryAtStart,
     onAddCategoryNameLowerCase, 
     onAddErrorMessage,
@@ -137,8 +149,9 @@ export const {
     onChangeFilter,
     onChangeFiltering,
     onChangePageSize,
+    onChangePreCategoryName,
+    onChangePreCategoryUpdated,
     onChangeSavingNewCategory, 
-    // onChargeCategoriesUploaded,
     onCleanActiveCategory,
     onCleanCategories,
     onDeleteCategory,

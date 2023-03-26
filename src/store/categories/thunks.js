@@ -2,7 +2,7 @@ import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, wh
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanCategories, onAddCategoryAtStart, onSetCategories, onSetNumberCategories, onAddCategoryNameLowerCase } from "./";
+    onCleanCategories, onAddCategoryAtStart, onSetCategories, onSetNumberCategories, onAddCategoryNameLowerCase, onUpdateCategory } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -66,6 +66,7 @@ export const onStartUploadNewCategory = () => {
   }
 }
 
+
 export const onStartGetCategories = (page = 0, size = 5) => {
   return async (dispatch) => {
     dispatch(onCleanCategories());
@@ -87,11 +88,12 @@ export const onStartGetCategories = (page = 0, size = 5) => {
     const newCategories = querySnapshot.docs.map((doc, index) => {
       return { id: index + 1 + page * size, ...doc.data() };
     });
-    
+    console.log(newCategories)
     dispatch(onSetCategories(newCategories));
     
   }
 }
+
 
 export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
   return async (dispatch, getState) => {
@@ -172,7 +174,49 @@ export const onStartNumberCategories = () => {
   }
 }
 
+export const onStartUpdateCategory = () => {
+  return async( dispatch, getState ) => {
+
+      let duplicateCategory = false;
+      dispatch(onChangeSavingNewCategory(true));
+      const { activeCategory, preCategory } = getState().categories;
+
+    let q;  
+    const collectionRef = collection(FirebaseDB, `/categories`);
+    q = query( collectionRef );
+    const querySnapshot = await getDocs(q);
+
+    if(preCategory.updatedName && activeCategory.categoryName !== preCategory.name){
+      querySnapshot.forEach((doc) => {
+        const { categoryName } = doc.data();
+        if( categoryName.toLowerCase() === activeCategory.categoryName.toLowerCase() ){
+          duplicateCategory = true;
+          dispatch(onAddErrorMessage( 'Ya existe una categoría con este nombre' ));
+          dispatch(onAddSuccessMessage( '' ));
+        }
+      });
+    }
+
+    if(!duplicateCategory){
+      q = query(collectionRef, where('categoryName', '==', preCategory.name));
+      const querySnapshot = await getDocs(q);
+      let docRef;
+
+      const categoryToFireStore = { ...activeCategory };
+      delete categoryToFireStore.id;
+
+      if (querySnapshot.size === 1) {
+        docRef = querySnapshot.docs[0].ref;
+      }
+  
+      await setDoc( docRef, categoryToFireStore, { merge: true } )
+      dispatch( onUpdateCategory( activeCategory ) );
+      dispatch(onAddSuccessMessage( 'Editado correctamente' ));
+      dispatch(onAddErrorMessage( '' ));
+    }
+      
+  }
+}
 
 
-//TODO: onStartSaveCategory
 //TODO: onStartDeletingCategory

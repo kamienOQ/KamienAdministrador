@@ -9,7 +9,6 @@ import { useCategoriesStore } from "../../../hooks";
 export const CategoriesTable = ({ attributes, data }) => {
 
   const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageSize } = useCategoriesStore();
-
   const [rowId, setRowId] = useState(null);
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,

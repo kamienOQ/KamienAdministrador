@@ -7,10 +7,11 @@ import { useCategoriesStore, useUiStore } from '../../../hooks';
 export const CategoryActions = ({ row }) => {
 
   const { openCategoryModal, openModalView } = useUiStore();
-  const { changeEditing, setActiveCategory } = useCategoriesStore();
+  const { changeEditing, setActiveCategory, changePreCategoryName } = useCategoriesStore();
 
   const handleOpenEdit = () => {
     setActiveCategory(row);
+    changePreCategoryName(row.categoryName);
     changeEditing(true);
     openCategoryModal();
   };

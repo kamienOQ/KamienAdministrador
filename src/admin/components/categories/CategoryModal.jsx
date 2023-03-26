@@ -13,7 +13,7 @@ export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
   const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
-    startUploadNewCategory, changeEditing } = useCategoriesStore();
+    startUploadNewCategory, changeEditing, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -68,16 +68,22 @@ export const CategoryModal = () => {
         deleteFileUpload(activeCategory.icon.name);
       }
     }
-
+    
     closeCategoryModal();
     changeEditing(false);
+    changePreCategoryUpdated(false);
   }
 
   const onSave = () => {
     if (activeCategory.categoryName === '') {
       setEmptyName(true);
     } else {
-      startUploadNewCategory();
+      if(!editing){
+        startUploadNewCategory();
+        changePreCategoryUpdated(false);
+      }if(editing){
+        startUpdateCategory();
+      }
     }
   }
 

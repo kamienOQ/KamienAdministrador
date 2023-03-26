@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize } from "../store";
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -50,6 +50,14 @@ export const useCategoriesStore = () => {
         dispatch( onChangeEditing( value ) );
     }
 
+    const changePreCategoryName = ( value ) => {
+        dispatch( onChangePreCategoryName( value ) );
+    }
+
+    const changePreCategoryUpdated = ( value ) => {
+        dispatch( onChangePreCategoryUpdated( value ) );
+    }
+
     const changeFiltering = ( value ) => {
         dispatch( onChangeFiltering( value ) );
     }
@@ -86,6 +94,10 @@ export const useCategoriesStore = () => {
 
     const startFilterCategories = (page, size, preValue) => {
         dispatch( onStartFilterCategories(page, size, preValue) );
+    }
+
+    const startUpdateCategory = () => {
+        dispatch( onStartUpdateCategory() );
     }    
 
     return {
@@ -110,13 +122,16 @@ export const useCategoriesStore = () => {
         changeFilter,
         changeFiltering,
         changePageSize,
+        changePreCategoryName,
+        changePreCategoryUpdated,
         cleanCategories,
-        setNumberCategories,
         setActiveCategory,
-        startNumberCategories,
+        setNumberCategories,
         startFilterCategories,
         startGetCategories,
+        startNumberCategories,
         startUploadFile,
         startUploadNewCategory,
+        startUpdateCategory,
     }
 }
