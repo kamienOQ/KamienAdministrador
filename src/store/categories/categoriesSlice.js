@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const categoriesSlice = createSlice({
     name: 'categories',
-    initialState: {
-        active: true,
+    initialState: {  
         isSaving: false,
         message: {
             error: '',
@@ -11,8 +10,6 @@ export const categoriesSlice = createSlice({
         },
         numberCategories: undefined,
         categories: [],
-        relatedProducts: [],
-        relatedAttributes: [],
         isLoading: false,
         editing: false,
         filtering: false,
@@ -28,6 +25,9 @@ export const categoriesSlice = createSlice({
             const newCategory = {
                 categoryName: '',
                 categoryNameLowerCase: '',
+                active: true,
+                relatedProducts: [],
+                relatedAttributes: [],
                 image: {
                     name: null,
                     url: null

@@ -4,6 +4,7 @@ export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         isCategoryModalOpen: false,
+        isModalViewOpen: false,
     },
     reducers: {
         onOpenCategoryModal: ( state ) => {
@@ -11,6 +12,12 @@ export const uiSlice = createSlice({
         },
         onCloseCategoryModal: ( state ) => {
             state.isCategoryModalOpen = false;
+        },
+        onOpenModalView: ( state ) => {
+            state.isModalViewOpen = true;
+        },
+        onCloseModalView: ( state ) => {
+            state.isModalViewOpen = false;
         }
         
     }
@@ -25,5 +32,7 @@ export const {
     onChangePage,
     onRestorePage,
     onOpenCategoryModal, 
-    onCloseCategoryModal, 
+    onCloseCategoryModal,
+    onOpenModalView,
+    onCloseModalView, 
 } = uiSlice.actions;

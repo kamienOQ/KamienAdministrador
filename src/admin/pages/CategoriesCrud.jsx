@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect } from "react";
 import { useCategoriesStore, useUiStore } from "../../hooks";
-import { Categories, CategoryModal } from "../components";
+import { Categories, CategoryModal, CategoryView } from "../components";
 
 
 export const CategoriesCrud = () => {
@@ -67,6 +67,7 @@ export const CategoriesCrud = () => {
         </Grid>
         <Categories />
         <CategoryModal />
+        <CategoryView/>
       </Grid>
     </Grid>
   )
