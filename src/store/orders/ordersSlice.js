@@ -5,21 +5,55 @@ export const ordersSlice = createSlice({
   initialState: {
     numberOrders: undefined,
     orders: [],
-    isLoading: false
+    isLoading: false,
+    openViewModal: false,
+    activeOrder: null,
+    filtering: false,
+    filter: {},
+    pageSize: 5,
   },
   reducers: {
-    setOrders: (state, action) => {
+    onSetOrders: (state, action) => {
       state.orders = action.payload;
       state.isLoading = false;
     },
-    setNumberOrders: ( state, action ) => {
+    onSetNumberOrders: (state, action) => {
       state.numberOrders = action.payload;
     },
-    cleanOrders: ( state ) => {
+    onCleanOrders: (state) => {
       state.orders = [];
       state.isLoading = true;
+    },
+    onOpenViewModal: (state) => {
+      state.openViewModal = true;
+    },
+    onCloseViewModal: (state) => {
+      state.openViewModal = false;
+      state.activeOrder = null;
+    },
+    onSetActiveOrder: (state, action) => {
+      state.activeOrder = action.payload;
+    },
+    onChangeFiltering: (state, action) => {
+      state.filtering = action.payload;
+    },
+    onChangeFilter: (state, action) => {
+      state.filter = action.payload;
+    },
+    onChangePageSize: (state, action) => {
+      state.pageSize = action.payload;
     },
   },
 });
 
-export const { setOrders, setNumberOrders, cleanOrders } = ordersSlice.actions;
+export const {
+  onSetOrders,
+  onSetNumberOrders,
+  onCleanOrders,
+  onOpenViewModal,
+  onCloseViewModal,
+  onSetActiveOrder,
+  onChangeFiltering,
+  onChangeFilter,
+  onChangePageSize,
+} = ordersSlice.actions;

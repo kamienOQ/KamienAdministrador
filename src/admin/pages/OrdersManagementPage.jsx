@@ -1,15 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Grid, Typography } from "@mui/material";
-import { Orders } from "../components";
-import { startNumberOrders } from "../../store/orders";
+import { Orders, OrdersView } from "../components";
+import { useOrdersStore } from "../../hooks";
 
 export const OrdersManagementPage = () => {
-  const dispatch = useDispatch();
+  const { filtering, startNumberOrders } = useOrdersStore();
 
   useEffect(() => {
-    dispatch(startNumberOrders());
-  }, []);
+    if(!filtering){
+      startNumberOrders();
+    }
+  }, [filtering]);
 
   return (
     <Grid
@@ -40,6 +41,7 @@ export const OrdersManagementPage = () => {
           </Grid>
         </Grid>
         <Orders />
+        <OrdersView />
       </Grid>
     </Grid>
   );
