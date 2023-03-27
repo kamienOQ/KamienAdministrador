@@ -2,7 +2,7 @@ import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, wh
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanCategories, onAddCategoryAtStart, onSetCategories, onSetNumberCategories, onAddCategoryNameLowerCase, onUpdateCategory } from "./";
+    onCleanCategories, onAddCategoryAtStart, onSetCategories, onSetNumberCategories, onAddCategoryNameLowerCase, onUpdateCategory, onChangeActive } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -88,7 +88,6 @@ export const onStartGetCategories = (page = 0, size = 5) => {
     const newCategories = querySnapshot.docs.map((doc, index) => {
       return { id: index + 1 + page * size, ...doc.data() };
     });
-    console.log(newCategories)
     dispatch(onSetCategories(newCategories));
     
   }
@@ -218,5 +217,27 @@ export const onStartUpdateCategory = () => {
   }
 }
 
+export const onStartChangeActiveCategory = () => {
+  return async( dispatch, getState ) => {
 
-//TODO: onStartDeletingCategory
+    dispatch(onChangeSavingNewCategory(true));
+    const { activeCategory } = getState().categories;
+
+    let q;  
+    const collectionRef = collection(FirebaseDB, `/categories`);
+
+    q = query(collectionRef, where('categoryName', '==', activeCategory.categoryName));
+    const querySnapshot = await getDocs(q);
+    let docRef;
+
+    const categoryToFireStore = { ...activeCategory };
+    delete categoryToFireStore.id;
+
+    if (querySnapshot.size === 1) {
+      docRef = querySnapshot.docs[0].ref;
+    }
+
+    await setDoc( docRef, categoryToFireStore, { merge: true } );
+    dispatch(onChangeSavingNewCategory(false));   
+  }
+}

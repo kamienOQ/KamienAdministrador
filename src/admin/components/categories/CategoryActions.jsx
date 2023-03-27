@@ -1,14 +1,19 @@
 import EditIcon from '@mui/icons-material/Edit';
-import CancelIcon from '@mui/icons-material/Cancel';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Box, Fab } from '@mui/material';
+import { Box, Fab, Switch } from '@mui/material';
 import { useCategoriesStore, useUiStore } from '../../../hooks';
 
 export const CategoryActions = ({ row }) => {
 
   const { openCategoryModal, openModalView } = useUiStore();
-  const { changeEditing, setActiveCategory, changePreCategoryName } = useCategoriesStore();
+  const { changeEditing, setActiveCategory, changePreCategoryName, changeActive, startChangeActiveCategory } = useCategoriesStore();
 
+  const handleActive = () => {
+    setActiveCategory(row);
+    changeActive();
+    startChangeActiveCategory();
+  }
+  
   const handleOpenEdit = () => {
     setActiveCategory(row);
     changePreCategoryName(row.categoryName);
@@ -59,18 +64,12 @@ export const CategoryActions = ({ row }) => {
           <EditIcon />
         </Fab>
 
-        <Fab
-          color="primary"
-          sx={{
-            width: 40,
-            height: 40,
-            bgcolor: "error.main",
-            color: "white",
-            '&:hover': { bgcolor: "error.main" },
-          }}
-        >
-          <CancelIcon />
-        </Fab> 
+        <Switch
+            checked={!!row?.active ? row?.active : false}
+            onChange={handleActive}
+            name="Activa"
+            color="lightSuccess"
+          />
       </Box>
     </>
   )

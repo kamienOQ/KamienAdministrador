@@ -80,7 +80,7 @@ export const CategoriesTable = ({ attributes, data }) => {
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
   };
 
-
+  
   return (
     <Grid container
       className="container-table"

@@ -13,7 +13,7 @@ export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
   const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
-    startUploadNewCategory, changeEditing, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
+    startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -80,6 +80,7 @@ export const CategoryModal = () => {
     } else {
       if(!editing){
         startUploadNewCategory();
+        startNumberCategories();
         changePreCategoryUpdated(false);
       }if(editing){
         startUpdateCategory();

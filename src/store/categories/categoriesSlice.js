@@ -105,6 +105,16 @@ export const categoriesSlice = createSlice({
             let formattedName = state.activeCategory.categoryName.toLowerCase();
             state.activeCategory.categoryNameLowerCase = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         },
+        onChangeActive: ( state ) => {
+            state.activeCategory.active = !state.activeCategory.active
+
+            state.categories = state.categories.map( category => {
+                if (category.categoryName === state.activeCategory.categoryName ){
+                    return state.activeCategory;
+                }
+                return category;
+            });
+        },
         onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
         },
@@ -145,6 +155,7 @@ export const {
     onAddImage, 
     onAddNewCategory, 
     onAddSuccessMessage,
+    onChangeActive,
     onChangeEditing,
     onChangeFilter,
     onChangeFiltering,

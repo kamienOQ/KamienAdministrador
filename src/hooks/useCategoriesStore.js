@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory } from "../store";
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, onStartChangeActiveCategory, onChangeActive } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -66,6 +66,10 @@ export const useCategoriesStore = () => {
         dispatch( onChangeFilter( value ) );
     }
 
+    const changeActive = () => {
+        dispatch( onChangeActive() );
+    }
+
     const changePageSize = ( pageSize ) => {
         dispatch( onChangePageSize( pageSize ) );
     }
@@ -98,6 +102,10 @@ export const useCategoriesStore = () => {
 
     const startUpdateCategory = () => {
         dispatch( onStartUpdateCategory() );
+    }
+
+    const startChangeActiveCategory = () => {
+        dispatch( onStartChangeActiveCategory() );
     }    
 
     return {
@@ -118,6 +126,7 @@ export const useCategoriesStore = () => {
         addImage,
         addNewCategory,
         addSuccessMessage,
+        changeActive,
         changeEditing,
         changeFilter,
         changeFiltering,
@@ -133,5 +142,6 @@ export const useCategoriesStore = () => {
         startUploadFile,
         startUploadNewCategory,
         startUpdateCategory,
+        startChangeActiveCategory,
     }
 }
