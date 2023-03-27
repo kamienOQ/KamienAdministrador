@@ -191,9 +191,12 @@ label {
     .container-buttons-filter{
         width: 1130px !important;
     }
-    .table{
+    .container-table{
         margin-left: 65px !important;
         margin-right: 35px !important;
+    }
+    .button-filter{
+        margin-left: -10px !important;
     }
 }
 
@@ -208,14 +211,14 @@ label {
 }
 
 @media (max-width: 600px) {
-    .table{
+    .container-table{
         margin-left: 40px !important;
         margin-right: 10px !important;
     }
 }
 
 @media (max-width: 400px) {
-    .table{
+    .container-table{
         margin-left: 50px !important;
     }
 }

@@ -6,5 +6,4 @@ export * from "./Table";
 export * from "./UserActions";
 export * from "./categories";
 export * from "./AdminEditModal";
-export * from "./orders/Orders";
-export * from "./orders/OrdersTable";
+export * from "./orders";
