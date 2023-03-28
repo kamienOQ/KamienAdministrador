@@ -81,6 +81,8 @@ export const OrdersTable = ({ attributes, data }) => {
         );
         changeFiltering(true);
         setLocalFilterValue(filter.value);
+      } else if (localFilterValue === "asc" || localFilterValue === "desc") {
+        handleRemoveFilter();
       }
     }
   };
