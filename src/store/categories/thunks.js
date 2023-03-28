@@ -28,7 +28,7 @@ export const onStartUploadNewCategory = () => {
     
     let duplicateCategory = false;
     dispatch(onAddCategoryNameLowerCase());
-    const { activeCategory, categories, pageSize } = getState().categories;
+    const { activeCategory, categories, pageSize, page } = getState().categories;
 
     dispatch(onChangeSavingNewCategory(true));
 
@@ -47,17 +47,19 @@ export const onStartUploadNewCategory = () => {
     if(!duplicateCategory){
         const newDoc = doc(collectionRef);
         const setDocResp = await setDoc(newDoc, activeCategory);
-        let categoriesArray = [...categories];
-        categoriesArray = categoriesArray.map((object) => {
-          return { ...object, id: object.id + 1 }
-        });
-        if(categories.length < pageSize){
-          dispatch(onSetCategories(categoriesArray));
-        }if(categories.length === pageSize){
-          categoriesArray.pop();
-          dispatch(onSetCategories(categoriesArray));
+        if(page === 0){
+          let categoriesArray = [...categories];
+          categoriesArray = categoriesArray.map((object) => {
+            return { ...object, id: object.id + 1 }
+          });
+          if(categories.length < pageSize){
+            dispatch(onSetCategories(categoriesArray));
+          }if(categories.length === pageSize){
+            categoriesArray.pop();
+            dispatch(onSetCategories(categoriesArray));
+          }
+          dispatch(onAddCategoryAtStart( {id: 1, ...activeCategory} ));
         }
-        dispatch(onAddCategoryAtStart( {id: 1, ...activeCategory} ));
         
         dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
         dispatch(onAddErrorMessage( '' ));
@@ -102,7 +104,7 @@ export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
       const { field, value } = filter;
       dispatch(onCleanCategories());
       const collectionRef = collection(FirebaseDB, `/categories`);
-      let q;
+      let q, undersized = false;
       if(field?.toLowerCase().includes('name')){
         if(value==='asc'){
           if (page === 0) {
@@ -126,8 +128,9 @@ export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
           if(preValue !== value){
             q = query( collectionRef, where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'));
             const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
             dispatch(onSetNumberCategories(querySnapshot.size));
-          } if (page === 0) {
+          } if (page === 0 || undersized) {
             q = query( collectionRef, where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'), limit(size) );
           } else {
             const lastVisibleDoc = query( collectionRef,  where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'), limit(page * size) );
@@ -142,8 +145,9 @@ export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
         if(preValue !== value){
           q = query( collectionRef, where("date", ">=", dateObject.getTime()));
           const querySnapshot = await getDocs(q);
+          undersized = (querySnapshot.size <= size) ? true : false;
           dispatch(onSetNumberCategories(querySnapshot.size));
-        } if (page === 0) {
+        } if (page === 0 || undersized) {
           q = query( collectionRef, where("date", ">=", dateObject.getTime()), limit(size) );
         } else {
           const lastVisibleDoc = query( collectionRef,  where("date", ">=", dateObject.getTime()), limit(page * size) );

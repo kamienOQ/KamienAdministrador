@@ -8,12 +8,15 @@ import { useCategoriesStore } from "../../../hooks";
 
 export const CategoriesTable = ({ attributes, data }) => {
 
-  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageSize } = useCategoriesStore();
+  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSize } = useCategoriesStore();
   const [rowId, setRowId] = useState(null);
+
+  const [filterModel, setFilterModel] = useState({items: []});
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,
     page: 0,
   });
+
   const [localFilterValue, setLocalFilterValue] = useState('');
   const [sortModel, setSortModel] = useState([]);
 
@@ -23,7 +26,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   const onPaginationChange = useCallback(
     (newModel) => {
       setPaginationModel(newModel);
-      changePageSize(newModel.pageSize);
+      changePageAndSize(newModel);
     },
     [setPaginationModel]
   );
@@ -47,7 +50,7 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   // * Filter
   const handleSearch = () => {
-    if (!filtering || filter.value === 'asc' || filter.value === 'desc' || (filter.value !== localFilterValue) ) {
+    if (!filtering || filter.value === 'asc' || filter.value === 'desc' || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined && filter.field !== undefined) {
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
@@ -61,23 +64,30 @@ export const CategoriesTable = ({ attributes, data }) => {
     changeFiltering(false);
     changeFilter({});
     setSortModel([]);
+    setLocalFilterValue('');
+    setFilterModel({items: []});
   };
 
   const handleFilterChange = ({ items }) => {
     if (items[0]?.value) {
       changeFilter({ field: items[0]?.field, value: items[0]?.value });
-    } if (items.length === 0) {
+      setSortModel([]);
+      changeFiltering(false);
+    }if (items.length === 0) {
       if(filtering){
         startGetCategories(paginationModel.page, paginationModel.pageSize);
       }
       changeFiltering(false);
       changeFilter({});
     }
+    setFilterModel({ items });
   };
 
   const handleSortModelChange = (event) => {
     setSortModel(event);
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
+    setFilterModel({items: []});
+    changeFiltering(false);
   };
 
   
@@ -91,23 +101,28 @@ export const CategoriesTable = ({ attributes, data }) => {
         sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: "1160px"}}
       >
         <Button
+          className="button-filter"
           sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
           onClick={handleSearch}
           startIcon={<FilterAltIcon />}
         >
           Filtrar
         </Button>
-        {
-          filter.value === 'asc' || filter.value === 'desc' ? (
-            <Button
-              sx={{ height: 40, backgroundColor: 'error.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightError.main" }, ml: 1 }}
-              onClick={handleRemoveFilter}
-              startIcon={<CloseIcon />}
-            >
-              Quitar filtro
-            </Button>
-          ) : null
-        }
+        {filtering ? (
+          <Button
+            sx={{
+              height: 40,
+              backgroundColor: "error.main",
+              color: "tertiary.main",
+              "&:hover": { bgcolor: "lightError.main" },
+              ml: 1,
+            }}
+            onClick={handleRemoveFilter}
+            startIcon={<CloseIcon />}
+          >
+            Quitar filtro
+          </Button>
+        ) : null}
       </Grid>
       <DataGrid
         className="table"
@@ -121,9 +136,12 @@ export const CategoriesTable = ({ attributes, data }) => {
         paginationModel={paginationModel}
         onPaginationModelChange={onPaginationChange}
         paginationMode="server"
+        filterModel={filterModel}
         onFilterModelChange={handleFilterChange}
+        filterMode="server"
         sortModel={sortModel}
         onSortModelChange={handleSortModelChange}
+        sortingMode="server"
         filterOperators={{ date: [{ label: '>', value: 'gt' }] }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         sx={{

@@ -18,6 +18,7 @@ export const categoriesSlice = createSlice({
             name: '',
             updatedName: false
         },
+        page: 0,
         pageSize: 5,
         activeCategory: null, 
     },
@@ -130,8 +131,9 @@ export const categoriesSlice = createSlice({
         onChangeFilter: ( state, { payload } )=> {
             state.filter = payload
         },
-        onChangePageSize: ( state, { payload } )=> {
-            state.pageSize = payload
+        onChangePageAndSize: ( state, { payload } )=> {
+            state.page = payload.page;
+            state.pageSize = payload.pageSize;
         },
         onCleanCategories: ( state ) => {
             state.categories = []
@@ -159,7 +161,7 @@ export const {
     onChangeEditing,
     onChangeFilter,
     onChangeFiltering,
-    onChangePageSize,
+    onChangePageAndSize,
     onChangePreCategoryName,
     onChangePreCategoryUpdated,
     onChangeSavingNewCategory, 

@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, onStartChangeActiveCategory, onChangeActive } from "../store";
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, 
+    onSetNumberCategories, onStartNumberCategories, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, 
+    onStartChangeActiveCategory, onChangeActive, onChangePageAndSize } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -70,8 +72,8 @@ export const useCategoriesStore = () => {
         dispatch( onChangeActive() );
     }
 
-    const changePageSize = ( pageSize ) => {
-        dispatch( onChangePageSize( pageSize ) );
+    const changePageAndSize = ( value ) => {
+        dispatch( onChangePageAndSize( value ) );
     }
 
     const cleanCategories = () => {
@@ -130,7 +132,7 @@ export const useCategoriesStore = () => {
         changeEditing,
         changeFilter,
         changeFiltering,
-        changePageSize,
+        changePageAndSize,
         changePreCategoryName,
         changePreCategoryUpdated,
         cleanCategories,
