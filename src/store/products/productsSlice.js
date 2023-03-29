@@ -8,11 +8,18 @@ export const productsSlice = createSlice({
             error: '',
             success: ''
         },
-        ascending: '',
-        numberProducts: 0,
-        productsUploaded: [],           
+        numberProducts: undefined,
         products: [],
-        productsOnPage: [],
+        isLoading: false,
+        editing: false,
+        filtering: false,
+        filter: {},
+        preProduct: {
+            name: '',
+            updatedName: false
+        },
+        page: 0,
+        pageSize: 5,
         activeProduct: null, 
     },
     reducers: {
@@ -24,6 +31,9 @@ export const productsSlice = createSlice({
                 productName: '',
                 productNameLowerCase: '',
                 products: [],
+                active: true,
+                relatedProducts: [],
+                relatedAttributes: [],
                 image: {
                     name: null,
                     url: null
@@ -49,6 +59,7 @@ export const productsSlice = createSlice({
 
                 return product;
             });
+            state.preProduct.updatedName = false;
         },
         onDeleteProduct: ( state, { payload } ) => {
             state.activeProduct = null;
@@ -69,18 +80,16 @@ export const productsSlice = createSlice({
                 state.products.push( payload );
             }
         },
-        onAddProductAtStart: ( state, { payload } ) => {
-            state.products.unshift(payload);
-        },  
-        onChargeProductsByPage: ( state, { payload } ) => {
-            state.productsOnPage = payload;
+        onSetProducts: ( state, { payload } ) => {
+            state.products = payload;
+            state.isLoading = false;
         },
         onSetNumberProducts: ( state, { payload } ) => {
             state.numberProducts = payload
         },
-        onAddLowerCase: ( state ) => {
-            state.activeProduct.productNameLowerCase = state.activeProduct.productName.toLowerCase();
-        },
+        onAddProductAtStart: ( state, { payload } ) => {
+            state.products.unshift(payload);
+        },  
         onAddImage: ( state, { payload } ) => {
             state.activeProduct.image.name = payload[0];
             state.activeProduct.image.url = payload[1];
@@ -89,11 +98,14 @@ export const productsSlice = createSlice({
             state.activeProduct.icon.name = payload[0];
             state.activeProduct.icon.url = payload[1];
         },
+        onChargeProductsByPage: ( state, { payload } ) => {
+            state.productsOnPage = payload;
+        },  
+        onAddLowerCase: ( state ) => {
+            state.activeProduct.productNameLowerCase = state.activeProduct.productName.toLowerCase();
+        },
         onAddProducts: ( state, { payload } ) => {
             state.activeProduct.products = payload;
-        },
-        onChangeAscending: ( state, { payload } ) => {
-            state.ascending = payload
         },
         onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
@@ -101,18 +113,49 @@ export const productsSlice = createSlice({
         onAddSuccessMessage: ( state, { payload } ) => {
             state.message.success = payload;
         },
+        onAddProductNameLowerCase: ( state ) => {
+            let formattedName = state.activeProduct.productName.toLowerCase();
+            state.activeProduct.productNameLowerCase = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        },
+        onChangeActive: ( state ) => {
+            state.activeProduct.active = !state.activeProduct.active
+
+            state.products = state.products.map( product => {
+                if (product.productName === state.activeProduct.productName ){
+                    return state.activeProduct;
+                }
+                return product;
+            });
+        },
+        onChangeEditing: ( state, { payload } ) => {
+            state.editing = payload;
+        },
+        onChangePreProductName: ( state, { payload } ) => {
+            state.preProduct.name = payload;
+        },
+        onChangePreProductUpdated: ( state, { payload } ) => {
+            state.preProduct.updatedName = payload;
+        },
+        onChangeFilterings: ( state, { payload } )=> {
+            state.filtering = payload
+        },
+        onChangeFilters: ( state, { payload } )=> {
+            state.filter = payload
+        },
+        onChangePageAndSize: ( state, { payload } )=> {
+            state.page = payload.page;
+            state.pageSize = payload.pageSize;
+        },
         onCleanProducts: ( state ) => {
             state.products = [];
             state.activeProduct = null;
+            state.isLoading = true;
         },
         onCleanActiveProduct: ( state ) => {
             state.activeProduct = null;
         },
         onCleanProductsUploaded: ( state ) => {
             state.productsUploaded = [];
-        },
-        onSetProducts: ( state, { payload } ) => {
-            state.categories = payload
         },
     }
 });
@@ -140,4 +183,12 @@ export const {
     onUpdateProduct,
     onAddProducts,
     onSetProducts,
+    onAddProductNameLowerCase, 
+    onChangeActive,
+    onChangeEditing,
+    onChangeFilters,
+    onChangeFilterings,
+    onChangePageAndSize,
+    onChangePreProductName,
+    onChangePreProductUpdated
 } = productsSlice.actions;

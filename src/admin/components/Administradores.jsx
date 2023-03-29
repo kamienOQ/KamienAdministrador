@@ -5,12 +5,11 @@ import { DataGrid, gridClasses } from '@mui/x-data-grid';
 // import { getUsers } from '../../../actions/user';
 import moment from 'moment';
 import { grey,red} from '@mui/material/colors';
-import { UserActions } from './UserActions';
+import { UserActions, AdminEditModal } from './';
 import "./Administradores.css"
 import img from  "./Empty_pp.jpg"
 import { Margin } from '@mui/icons-material';
 import { light } from '@mui/material/styles/createPalette';
-
 export const Administradores = () =>{
     const users = [
         {
@@ -93,9 +92,9 @@ export const Administradores = () =>{
             <Box
             sx={{
                 height: 400,
-                    marginTop: '5%',
-                    marginLeft: '5%',
-                    maxWidth: '95%'
+                marginTop: '5%',
+                marginLeft: '5%',
+                maxWidth: '95%'
                 }}
             >
                 <Typography

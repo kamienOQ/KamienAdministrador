@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
-    onSetActiveProduct, onStarGetProductsUploaded, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct } from "../store";
+    onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
+    onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
+    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters } from "../store";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
 
     const { 
         activeProduct,
-        ascending,
         products,
-        productsOnPage,
+        editing,
+        filter,
+        filtering,
         isSaving,
+        isLoadingProduct,
         message,
         numberProducts,
-        productsUploaded,
     } = useSelector( state => state.products );
 
     //*Slice
@@ -23,10 +26,6 @@ export const useProductsStore = () => {
 
     const setActiveProduct = ( product ) => {
         dispatch( onSetActiveProduct( product ) );
-    }
-
-    const changeAscending = ( value ) => {
-        dispatch( onChangeAscending( value ) );
     }
 
     const addImage = ( images ) => {
@@ -49,6 +48,38 @@ export const useProductsStore = () => {
         dispatch( onAddSuccessMessage( message ) );
     }
 
+    const setNumberProducts = ( number ) => {
+        dispatch( onSetNumberProducts( number ) );
+    }
+
+    const changeEditing = ( value ) => {
+        dispatch( onChangeEditing( value ) );
+    }
+
+    const changePreProductName = ( value ) => {
+        dispatch( onChangePreProductName( value ) );
+    }
+
+    const changePreProductUpdated = ( value ) => {
+        dispatch( onChangePreProductUpdated( value ) );
+    }
+
+    const changeFiltering = ( value ) => {
+        dispatch( onChangeFilterings( value ) );
+    }
+
+    const changeFilter = ( value ) => {
+        dispatch( onChangeFilters( value ) );
+    }
+
+    const changeActive = () => {
+        dispatch( onChangeActive() );
+    }
+
+    const changePageAndSize = ( value ) => {
+        dispatch( onChangePageAndSize( value ) );
+    }
+
     const cleanProducts = () => {
         dispatch( onCleanProducts() );
     }
@@ -68,34 +99,61 @@ export const useProductsStore = () => {
         dispatch( onStarGetProductsUploaded() );
     }
 
-    const startGetProducts = ( ) => {
-        dispatch( onStartGetProducts( ) );
+    const startGetProducts = ( page, size ) => {
+        dispatch( onStartGetProducts( page, size ) );
     }
+
+    const startNumberProducts = () => {
+        dispatch( onStartNumberProducts() );
+    }
+
+    const startFilterProducts = (page, size, preValue) => {
+        dispatch( onStartFilterProducts(page, size, preValue) );
+    }
+
+    const startUpdateProduct     = () => {
+        dispatch( onStartUpdateProduct  () );
+    }
+
+    const startChangeActiveProduct   = () => {
+        dispatch( onStartChangeActiveProduct    () );
+    }       
 
     return {
         //*Propiedades
         activeProduct,
-        ascending,
         products,
-        productsOnPage,
+        editing,
+        filter,
+        isLoadingProduct,
+        filtering,
         isSaving,
         message,
         numberProducts,
-        productsUploaded,
 
         //*Métodos
         addErrorMessage,
         addIcon,
-        addProducts,
         addImage,
         addNewProduct,
+        addProducts, 
         addSuccessMessage,
-        changeAscending,
+        changeActive,
+        changeEditing,
+        changeFilter,
+        changeFiltering,
+        changePageAndSize,
+        changePreProductName,
+        changePreProductUpdated,
         cleanProducts,
         setActiveProduct,
+        setNumberProducts,
+        startChangeActiveProduct,
+        startFilterProducts,
         startGetProducts,
+        startNumberProducts,
+        startUpdateProduct,
         startUploadFile,
         startUploadNewProduct,
-        starGetProductsUploaded,
     }
 }

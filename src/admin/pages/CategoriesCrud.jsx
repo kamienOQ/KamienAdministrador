@@ -2,18 +2,25 @@ import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect } from "react";
 import { useCategoriesStore, useUiStore } from "../../hooks";
-import { Categories, CategoryModal } from "../components/categories";
+import { Categories, CategoryModal, CategoryView } from "../components";
 
 
-export const CategoryCrud = () => {
-  const { openCategoryModal, closeCategoryModal } = useUiStore();
-  const { isSaving, message, addNewCategory, startGetCategories } = useCategoriesStore();
+export const CategoriesCrud = () => {
+  const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useUiStore();
+  const { isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
 
   useEffect(() => {
     if (!!message.success) {
       closeCategoryModal();
     }
   }, [message.success]);
+
+  useEffect(() => {
+    if(!filtering){
+      startNumberCategories();
+    }
+  }, [filtering])
+  
 
   useEffect(() => {
     startGetCategories();
@@ -32,7 +39,7 @@ export const CategoryCrud = () => {
     >
       <Grid container
         sx={{
-          height: 450,
+          height: 400,
           marginLeft: "5%",
           maxWidth: "95%",
         }}
@@ -47,10 +54,10 @@ export const CategoryCrud = () => {
           >
             <Typography variant="h4">Gestión de Categorías</Typography>
             <Button
-              className="addCategory-button"
+              className="addCategory-modal-button"
               onClick={onOpenModal}
               startIcon={<AddCircleIcon />}
-              sx={{ backgroundColor: 'golden.main', minWidth: 0, color: "tertiary.main" }}
+              sx={{ backgroundColor: 'success.main', minWidth: 0, color: "tertiary.main" }}
               variant='contained'
               disabled={isSaving}
             >
@@ -59,7 +66,10 @@ export const CategoryCrud = () => {
           </Grid>
         </Grid>
         <Categories />
-        <CategoryModal />
+        {isCategoryModalOpen && 
+          <CategoryModal />
+        }
+        <CategoryView/>
       </Grid>
     </Grid>
   )

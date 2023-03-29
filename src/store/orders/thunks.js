@@ -1,36 +1,113 @@
-import { collection, getDocs, query } from "firebase/firestore/lite";
+import { collection, getDocs, limit, orderBy, query, startAfter, where } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { cleanOrders, setOrders } from "./";
+import { onCleanOrders, onSetNumberOrders, onSetOrders } from "./";
 
-export const startGetOrders = (page = 1) => {
-  return async (dispatch, getState) => {
-    let number = page * 5;
-    let counter = 0;
-    let getOrders = false;
-    let orders = [];
-  
-    if (getState().orders !== []) {
-      dispatch(cleanOrders());
+export const onStartGetOrders = (page = 0, size = 5) => {
+  return async (dispatch) => {
+    dispatch(onCleanOrders());
+
+    const collectionRef = collection(FirebaseDB, "orders");
+    let q;
+
+    if (page === 0) {
+      q = query( collectionRef, orderBy("date", "desc"), limit(size) );
+    } else {
+      const lastVisibleDoc = query( collectionRef,  orderBy("date", "desc"), limit(page * size) );
+      const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+      const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+      q = query( collectionRef,  orderBy("date", "desc"), startAfter(lastVisible), limit(size) );
     }
 
-    const collectionRef = collection(FirebaseDB, `/orders`);
-    const q = query(collectionRef);
-
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      if ((number - 5 === counter && !getOrders) || number === counter) {
-        getOrders = !getOrders;
-      }
-      if (getOrders) {
-        const data = {...doc.data()};
-        const newDate = new Date(data.date);
-        const formatDate = new Intl.DateTimeFormat("es-ES").format(newDate);
-        data.dateString = formatDate;
 
-        orders.push({id: counter+1, ...data})
-      }
-      counter++;
+    const newOrders = querySnapshot.docs.map((doc, index) => {
+      return { id: index + 1 + page * size, ...doc.data() };
     });
-    dispatch(setOrders(orders));
+
+    dispatch(onSetOrders(newOrders));
+  };
+};
+
+export const onStartFilterOrders = (page = 0, size = 5, preValue) => {
+  return async (dispatch, getState) => {
+    const { filter } = getState().orders;
+    if(!!filter){
+      const { field, value } = filter;
+      dispatch(onCleanOrders());
+      const collectionRef = collection(FirebaseDB, 'orders');
+      let q, undersized = false;
+      if(field?.toLowerCase().includes('name')){
+        if(value==='asc'){
+          if (page === 0) {
+            q = query( collectionRef, orderBy("nameLowerCase", "asc"), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  orderBy("nameLowerCase", "asc"), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  orderBy("nameLowerCase", "asc"), startAfter(lastVisible), limit(size) );
+          }
+        }if(value==='desc'){
+          if (page === 0) {
+            q = query( collectionRef, orderBy("nameLowerCase", "desc"), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  orderBy("nameLowerCase", "desc"), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  orderBy("nameLowerCase", "desc"), startAfter(lastVisible), limit(size) );
+          }
+        }if(value!=='asc' && value !== 'desc'){
+          let formattedName = value.toLowerCase();
+          formattedName = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          if(preValue !== value){
+            q = query( collectionRef, where('nameLowerCase', '==', formattedName));
+            const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
+            dispatch(onSetNumberOrders(querySnapshot.size));
+          } if (page === 0 || undersized) {
+            page = 0;
+            q = query( collectionRef, where('nameLowerCase', '==', formattedName), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  where('nameLowerCase', '==', formattedName), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  where('nameLowerCase', '==', formattedName), startAfter(lastVisible), limit(size) );
+          }
+        }
+      }
+      if(field?.toLowerCase().includes('date')){
+        const dateObject = new Date(value)
+        if(preValue !== value){
+          q = query( collectionRef, where("date", ">=", dateObject.getTime()));
+          const querySnapshot = await getDocs(q);
+          undersized = (querySnapshot.size <= size) ? true : false;
+          dispatch(onSetNumberOrders(querySnapshot.size));
+        } if (page === 0 || undersized) {
+          page = 0;
+          q = query( collectionRef, where("date", ">=", dateObject.getTime()), limit(size) );
+        } else {
+          const lastVisibleDoc = query( collectionRef,  where("date", ">=", dateObject.getTime()), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  where("date", ">=", dateObject.getTime()), startAfter(lastVisible), limit(size) );
+        }
+      }
+
+      const querySnapshot = await getDocs(q);
+      const newOrders = querySnapshot.docs.map((doc, index) => {
+        return { id: index + 1 + page * size, ...doc.data() };
+      });
+  
+      dispatch(onSetOrders(newOrders));
+    }
+  }
+}
+
+export const onStartNumberOrders = () => {
+  return async (dispatch) => {
+    const ordersCollection = collection(FirebaseDB, 'orders');
+    const ordersSnapshot = await getDocs(ordersCollection);
+
+    const numOrders = ordersSnapshot.size;
+    dispatch(onSetNumberOrders(numOrders));
   };
 };

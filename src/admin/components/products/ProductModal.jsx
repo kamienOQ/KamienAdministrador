@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, Table, TableHead, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
+import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../hooks";
-import { deleteFileUpload } from "../../helpers";
-import { FloatingTags } from "./FloatingTags";
+import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
+import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
 
-const products = [
+const productsCategoriesPrueba = [
   {
     label: 'Reloj'
   },
@@ -37,13 +36,23 @@ export const ProductModal = () => {
 
   const { closeProductModal, isProductModalOpen, productsSelected  } = useUiStore();
   
-  const { activeProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
-    startUploadNewProduct, addProducts } = useProductsStore();
-  const { imageLoad, iconLoad, selected, onSelectProduct, onUploadImage, onUploadIcon } = useProductsState();
+  const { products, activeProduct, editing, selected, onSelectProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
+      startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, startUpdateProduct } = useProductsStore();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
 
+  useEffect(() => {
+    if(editing){
+      if(activeCategory.image.url){
+        setImageLoad(true);
+      }
+      if(activeCategory.icon.url){
+        setIconLoad(true);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     setActiveProduct(formState);
@@ -59,21 +68,46 @@ export const ProductModal = () => {
 
   const onCloseModa = () => {
     if (imageLoad) {
-      deleteFileUpload(activeProduct.image.name);
+      let usingImage = false;
+      categories.forEach(object => {
+        if (object.image.name === activeProduct.image.name) {
+          usingImage = true;
+          return;
+        }
+      });
+      if (!usingImage) {
+        deleteFileUpload(activeProduct.image.name);
+      }
     }
     if (iconLoad) {
-      deleteFileUpload(activeProduct.icon.name);
+      let usingIcon = false;
+      categories.forEach(object => {
+        if (object.icon.name === activeProduct.icon.name) {
+          usingIcon = true;
+          return;
+        }
+      });
+      if (!usingIcon) {
+        deleteFileUpload(activeProduct.icon.name);
+      }
     }
 
     closeProductModal();
+    changeEditing(false);
+    changePreProductUpdated(false);
   }
 
   const onSave = () => {
     if (activeProduct.productName === '') {
       setEmptyName(true);
     } else {
-      addProducts(productsSelected);
-      startUploadNewProduct();
+      if(!editing){
+        startUploadNewProduct();
+        startNumberProducts();
+        changePreProductUpdated(false);
+      }if(editing){
+        startUpdateProduct();
+      }
     }
   }
 
@@ -86,10 +120,9 @@ export const ProductModal = () => {
       <DialogContent>
         <DialogTitle 
           variant="h7"  
-          color= "#ffffff"
-          sx={ { borderRadius: '16px', backgroundColor:"#000000" } }
+          sx={ { borderRadius: '16px', backgroundColor: "dark.main", color: "tertiary.main" } }
         >
-          Agregar un nuevo Producto
+          {editing ? 'Editar un Producto' : 'Agregar un nuevo Producto'}
         </DialogTitle >
         <form className="product-form">
           <TextField
@@ -136,7 +169,7 @@ export const ProductModal = () => {
             helperText="Por favor seleccione la categoría del producto"
           >
             {/* importar y recorrer productsUploaded opteniendo el nombre */}
-            {products.map((option) => (
+            {productsCategoriesPrueba.map((option) => (
               <MenuItem key={option.label} value={option.label}>
                 {option.label}
               </MenuItem>
@@ -146,10 +179,10 @@ export const ProductModal = () => {
           <div className="products-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
-                <Typography sx={ { color: "#000000" }}>
+                <Typography sx={ { color: "quaternary.main", fontWeight: 'bold' }}>
                   Imagen
                 </Typography>
-                <Typography sx={ { color: "#000000" }}>
+                <Typography sx={ { color: "quaternary.main", fontWeight: 'bold' }}>
                   Icono
                 </Typography>
               </div>
@@ -160,7 +193,7 @@ export const ProductModal = () => {
                   aria-label="cargar imagen"
                   component="label"
                   onChange={onUploadImage}
-                  sx={{ backgroundColor: "golden.main", color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
+                  sx={{ color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
                 >
                   <input hidden accept="image/*" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
@@ -177,7 +210,7 @@ export const ProductModal = () => {
                   aria-label="cargar icono"
                   component="label"
                   onChange={onUploadIcon}
-                  sx={{ backgroundColor: "golden.main", color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
+                  sx={{ color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
                 >
                   <input hidden accept=".png" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
@@ -202,17 +235,16 @@ export const ProductModal = () => {
                 className="cancelProduct-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ borderRadius: '16px', m: 0.1 }}
-                color="error"
+                sx={{ backgroundColor: "error.main", borderRadius: 20 }}
               >
                 <CloseIcon />
               </Button>
+
               <Button
-                className="addProduct-button"
+                className="addProduct-modal-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ borderRadius: '16px', m: 0.1 }}
-                color="success"
+                sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 }}
               >
                 <CheckIcon />
               </Button>

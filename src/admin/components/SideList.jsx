@@ -77,17 +77,17 @@ export const SideList = ({ open, setOpen }) => {
   };
    
   return (
-    <Drawer variant="permanent" open={open} sx={{ bgcolor: "primary.main" }}>
-        <DrawerHeader sx={{ bgcolor: "primary.main" }}>
+    <Drawer variant="permanent" open={open} sx={{ bgcolor: "dark.main" }}>
+        <DrawerHeader sx={{ bgcolor: "dark.main" }}>
           <IconButton onClick={() => setOpen(false)}>
-            <ChevronLeft sx={{ color: "dark.main" }}/>
+            <ChevronLeft sx={{ color: "white" }}/>
           </IconButton>
         </DrawerHeader>
-        <Divider sx={{ bgcolor: "primary.main" }}/>
+        <Divider sx={{ bgcolor: "dark.main" }}/>
         <SideBarList/>
-        <Divider sx={{ bgcolor: "primary.main" }}/>
+        <Divider sx={{ bgcolor: "dark.main" }}/>
         <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-          <Tooltip title = "Nombre de Admin" sx={{ bgcolor: "primary.main" }}> 
+          <Tooltip title = {displayName} sx={{ bgcolor: "dark.main" }}> 
             <Avatar                     // title={currentUser?.name || ''}
             src='/src/admin/pages/Empty_pp.jpg'//   src={currentUser?.photoURL}
             {...(open && { sx: { width: 100, height: 100 } })}
@@ -95,14 +95,14 @@ export const SideList = ({ open, setOpen }) => {
           </Tooltip>
         </Box>
         <Box sx={{ textAlign: 'center' }}>
-          {open && <Typography>{displayName}</Typography>}
-          <Typography variant="body2">{"SuperAdmin" || 'role'}</Typography>
+          {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
+          {open && <Typography variant="body2" sx={{ color: "white" }}>{"SuperAdmin" || 'role'}</Typography>}
           {open && (
-            <Typography variant="body2">{email}</Typography>
+            <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
           )}
-          <Tooltip title="Logout" sx={{ mt: 1 }}>
+          <Tooltip title="Cerrar sesión" sx={{ mt: 1 }}>
             <IconButton onClick={onLogout}>
-              <Logout sx={{ color: "dark.main" }}/>
+              <Logout sx={{ color: "white" }}/>
             </IconButton>
           </Tooltip>
         </Box>

@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 // Product
-import { onAddProductsSelected, onCleanActiveProduct, onCleanActiveCategory, onRestorePage } from '../store';
+import { onCleanActiveProduct, onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
+//Categories
+import { onCleanActiveCategory } from '../store';
 // Ui
-import { onChangePage, onCloseProductModal, onDownPage, onCleanProductsSelected, onDeleteProductsSelected,
-    onOpenProductModal, onOpenCategoryModal, onUpPage } from '../store';
+import { onAddProductsSelected, onCloseProductModal, onOpenProductModal, onDeleteProductsSelected, onCloseCategoryModal, onOpenCategoryModal } from '../store';
 
 export const useUiStore = () => {
 
@@ -14,31 +15,9 @@ export const useUiStore = () => {
         isCategoryModalOpen,
         productsSelected,
         totalPages,
-        page
+        page,
+        isModalViewOpenProduct, 
     } = useSelector( state => state.ui );
-
-    const upPage = () => {
-        dispatch( onUpPage() );
-    }
-    const downPage = () => {
-        dispatch( onDownPage() );
-    }
-
-    const changePage = ( total ) => {
-        dispatch( onChangePage( total ) );
-    }
-
-    const restorePage = () => {
-        dispatch( onRestorePage() );
-    }
-
-    const addProductsSelected = ( productSelected ) => {
-        dispatch( onAddProductsSelected( productSelected ) )
-    }
-
-    const deleteProductsSelected = ( productSelected ) => {
-        dispatch( onDeleteProductsSelected( productSelected ) )
-    }
 
     const openProductModal = () => {
         dispatch( onOpenProductModal() );
@@ -47,10 +26,6 @@ export const useUiStore = () => {
     const closeProductModal = () => {
         dispatch( onCloseProductModal() );
         dispatch( onCleanActiveProduct() );
-    }
-
-    const cleanProductsSelected = () => {
-        dispatch( onCleanProductsSelected() )
     }
 
     const openCategoryModal = () => {
@@ -62,21 +37,34 @@ export const useUiStore = () => {
         dispatch( onCleanActiveCategory() );
     }
 
+    const addProductsSelected = ( productSelected ) => {
+        dispatch( onAddProductsSelected( productSelected ) )
+    }
 
+    const deleteProductsSelected = ( productSelected ) => {
+        dispatch( onDeleteProductsSelected( productSelected ) )
+    }
+
+    const cleanProductsSelected = () => {
+        dispatch( onCleanProductsSelected() )
+    }
+
+    const openModalViewProduct = () => {
+        dispatch( onOpenModalViewProduct() )
+    }
+
+    const closeModalViewProduct = () => {
+        dispatch( onCloseModalViewProduct() )
+    }
 
     return {
         //*Propiedades
         isProductModalOpen,
-        productsSelected,
         isCategoryModalOpen,
-        totalPages,
-        page,
+        productsSelected,
+        isModalViewOpenProduct,
 
         //*Métodos
-        upPage,
-        downPage,
-        changePage,
-        restorePage,
         addProductsSelected,
         deleteProductsSelected,
         cleanProductsSelected,
@@ -84,6 +72,8 @@ export const useUiStore = () => {
         closeProductModal,
         openCategoryModal,
         closeCategoryModal,
+        openModalViewProduct,
+        closeModalViewProduct
     }
 
 }

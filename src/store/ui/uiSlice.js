@@ -5,6 +5,7 @@ export const uiSlice = createSlice({
     initialState: {
         isProductModalOpen: false,
         isCategoryModalOpen: false,
+        isModalViewOpenProduct: false,
         totalPages: 1,
         page: 1,
         searching: '',
@@ -55,8 +56,13 @@ export const uiSlice = createSlice({
         },
         onCloseCategoryModal: ( state ) => {
             state.isCategoryModalOpen = false;
+        },
+        onOpenModalViewProduct: ( state ) => {
+            state.isModalViewOpenProduct = true;
+        },
+        onCloseModalViewProduct: ( state ) => {
+            state.isModalViewOpenProduct = false;
         }
-        
     }
 });
 
@@ -76,4 +82,6 @@ export const {
     onCleanProductsSelected, 
     onOpenCategoryModal, 
     onCloseCategoryModal, 
+    onOpenModalViewProduct,
+    onCloseModalViewProduct
 } = uiSlice.actions;

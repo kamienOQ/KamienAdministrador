@@ -1,18 +1,30 @@
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Box, Fab } from '@mui/material';
-import { useProductsStore, useUiStore } from '../../hooks';
+import { Box, Fab, Switch } from '@mui/material';
+import { useProductsStore, useUiStore } from '../../../hooks';
 
 export const ProductActions = ({ row }) => {
 
-  const { openProductModal } = useUiStore();
-  const { changeEditing, setActiveProduct } = useProductsStore();
+  const { openProductModal, openModalViewProduct } = useUiStore();
+  const { changeEditing, setActiveProduct, changePreProductName, changeActive, startChangeActiveProduct } = useProductsStore();
 
-  const handleOpen = () => {
+  const handleActive = () => {
     setActiveProduct(row);
+    changeActive();
+    startChangeActiveProduct();
+  }
+  
+  const handleOpenEdit = () => {
+    setActiveProduct(row);
+    changePreProductName(row.productName);
     changeEditing(true);
     openProductModal();
+  };
+
+  const handleOpenView = () => {
+    setActiveProduct(row);
+    openModalViewProduct();
   };
 
   return (
@@ -35,6 +47,7 @@ export const ProductActions = ({ row }) => {
             color: "white",
             '&:hover': { bgcolor: "info.main" },
           }}
+          onClick={handleOpenView}
         >
           <VisibilityIcon />
         </Fab>
@@ -47,23 +60,17 @@ export const ProductActions = ({ row }) => {
             color: "#ffffff",
             '&:hover': { bgcolor: "primary.main" },
           }}
-          onClick={handleOpen}
+          onClick={handleOpenEdit}
         >
           <EditIcon />
         </Fab>
 
-        <Fab
-          color="primary"
-          sx={{
-            width: 40,
-            height: 40,
-            bgcolor: "error.main",
-            color: "white",
-            '&:hover': { bgcolor: "error.main" },
-          }}
-        >
-          <CancelIcon />
-        </Fab> 
+        <Switch
+            checked={!!row?.active ? row?.active : false}
+            onChange={handleActive}
+            name="Activa"
+            color="lightSuccess"
+          /> 
       </Box>
     </>
   )

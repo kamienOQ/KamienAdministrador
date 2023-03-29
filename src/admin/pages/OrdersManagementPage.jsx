@@ -1,15 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Grid, Typography } from "@mui/material";
-import { OrdersManagementFilters } from "../components/OrdersManagementFilters";
-import { startGetOrders } from "../../store/orders";
+import { Orders, OrdersView } from "../components";
+import { useOrdersStore } from "../../hooks";
 
 export const OrdersManagementPage = () => {
-  const dispatch = useDispatch();
+  const { filtering, startNumberOrders } = useOrdersStore();
 
   useEffect(() => {
-    dispatch(startGetOrders(1));
-  }, []);
+    if(!filtering){
+      startNumberOrders();
+    }
+  }, [filtering]);
 
   return (
     <Grid
@@ -20,6 +21,7 @@ export const OrdersManagementPage = () => {
     >
       <Grid
         container
+        className="table-container"
         sx={{
           height: 400,
           marginLeft: "5%",
@@ -38,7 +40,8 @@ export const OrdersManagementPage = () => {
             <Typography variant="h4">Gestión de Pedidos</Typography>
           </Grid>
         </Grid>
-        <OrdersManagementFilters />
+        <Orders />
+        <OrdersView />
       </Grid>
     </Grid>
   );
