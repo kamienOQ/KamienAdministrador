@@ -27,11 +27,11 @@ export const ProductView = () => {
                 }}
             >
                 <img className='view-product-image' src={activeProduct?.image?.url} alt="" />
+                <img className='view-product-icon' src={activeProduct?.icon?.url} alt="" />
                 <Typography variant="h6" sx={{marginTop: 3 }}>
                     {activeProduct?.productName}
                 </Typography>
             </DialogContent>
-            <img className='view-product-icon' src={activeProduct?.icon?.url} alt="" />
         </Dialog>
     );
 }

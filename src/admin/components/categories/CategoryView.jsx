@@ -23,15 +23,15 @@ export const CategoryView = () => {
                     outline: 'none',
                     textAlign: 'center',
                     width: 600,
-                    height: 630,
+                    height: 630,    
                 }}
             >
                 <img className='view-category-image' src={activeCategory?.image?.url} alt="" />
+                <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
                 <Typography variant="h6" sx={{marginTop: 3 }}>
                     {activeCategory?.categoryName}
                 </Typography>
             </DialogContent>
-            <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
         </Dialog>
     );
 }

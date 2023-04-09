@@ -1,5 +1,6 @@
 import {
   loginWithEmailPassword,
+  signUpWithNameEmailPassword,
   logoutFirebase,
   resetPassword,
   resetPasswordEmail,
@@ -21,6 +22,18 @@ export const startLoginWithEmailPassword = ( email, password ) => {
     if (!result.ok) return dispatch(logout(result));
     
     dispatch(login(result.user));
+  };
+};
+
+export const startSignUp = ( nameUser, email, password ) => {
+  return async (dispatch) => {
+    dispatch(checkingCredentials());
+
+    const result = await signUpWithNameEmailPassword( nameUser, email, password );
+
+    if (!result.ok) return dispatch(logout(result));
+    
+    dispatch(signUp(result.user));
   };
 };
 

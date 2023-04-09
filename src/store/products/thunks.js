@@ -70,7 +70,6 @@ export const onStartUploadNewProduct = () => {
 }
 
 export const onStartGetProducts = (page = 0, size = 5) => {
-  console.log(page)
   return async ( dispatch ) => {
     dispatch(onCleanProducts());
 

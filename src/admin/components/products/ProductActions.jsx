@@ -57,8 +57,8 @@ export const ProductActions = ({ row }) => {
             width: 40,
             height: 40,
             bgcolor: "#357a38",
-            color: "#ffffff",
-            '&:hover': { bgcolor: "primary.main" },
+            color: "white",
+            '&:hover': { bgcolor: "#357a38" },
           }}
           onClick={handleOpenEdit}
         >

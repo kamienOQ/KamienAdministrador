@@ -1,6 +1,6 @@
 import { getGridDateOperators, getGridStringOperators } from "@mui/x-data-grid";
 import { useCategoriesStore } from "../../../hooks";
-import { CategoriesTable, CategoryActions } from ".";
+import { CategoriesTable, CategoryActions } from "./";
 
 
 export const Categories = () => {

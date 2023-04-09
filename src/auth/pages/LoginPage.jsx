@@ -113,6 +113,17 @@ export const LoginPage = () => {
       >
         ¿Olvidaste tu contraseña?
       </Link>
+      <Link
+        color="dark.main"
+        component={RouterLink}
+        sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
+        display="block"
+        textAlign="center"
+        underline="none"
+        to="/auth/sign-up"
+      >
+        Crear Cuenta nueva
+      </Link>
     </AuthLayout>
   );
 };

@@ -12,8 +12,8 @@ import { deleteFileUpload } from "../../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
-    startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
+  const { categories, activeCategory, message, editing1, setActiveCategory, addErrorMessage1, addSuccessMessage1,
+    startUploadNewCategory, startNumberCategories, changeEditing1, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -21,7 +21,7 @@ export const CategoryModal = () => {
 
 
   useEffect(() => {
-    if(editing){
+    if(editing1){
       if(activeCategory.image.url){
         setImageLoad(true);
       }
@@ -37,8 +37,8 @@ export const CategoryModal = () => {
   }, [formState]);
 
   useEffect(() => {
-    addErrorMessage('');
-    addSuccessMessage('');
+    addErrorMessage1('');
+    addSuccessMessage1('');
   }, [formState, imageLoad, iconLoad]);
 
 
@@ -70,7 +70,7 @@ export const CategoryModal = () => {
     }
     
     closeCategoryModal();
-    changeEditing(false);
+    changeEditing1(false);
     changePreCategoryUpdated(false);
   }
 
@@ -78,11 +78,11 @@ export const CategoryModal = () => {
     if (activeCategory.categoryName === '') {
       setEmptyName(true);
     } else {
-      if(!editing){
+      if(!editing1){
         startUploadNewCategory();
         startNumberCategories();
         changePreCategoryUpdated(false);
-      }if(editing){
+      }if(editing1){
         startUpdateCategory();
       }
     }
@@ -100,7 +100,7 @@ export const CategoryModal = () => {
           
           sx={{ borderRadius: '16px', backgroundColor: "dark.main", color: "tertiary.main" }}
         >
-          {editing ? 'Editar una Categoría' : 'Agregar una nueva Categoría'}
+          {editing1 ? 'Editar una Categoría' : 'Agregar una nueva Categoría'}
         </DialogTitle>
         <form  className="category-form">
           <TextField

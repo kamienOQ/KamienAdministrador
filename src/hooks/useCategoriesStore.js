@@ -82,8 +82,8 @@ export const useCategoriesStore = () => {
     
 
     //*Thunks
-    const startUploadFile1 = ( file, type, collectionName ) => {
-        dispatch( onStartUploadFile1( file, type, collectionName ) )
+    const startUploadFile = ( file, type, collectionName ) => {
+        dispatch( onStartUploadFile( file, type, collectionName ) )
     }
 
     const startUploadNewCategory = () => {
@@ -141,7 +141,7 @@ export const useCategoriesStore = () => {
         startFilterCategories,
         startGetCategories,
         startNumberCategories,
-        startUploadFile1,
+        startUploadFile,
         startUploadNewCategory,
         startUpdateCategory,
         startChangeActiveCategory,

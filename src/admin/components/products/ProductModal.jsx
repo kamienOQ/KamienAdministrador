@@ -7,6 +7,11 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
 import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
+import { useCategoriesStore } from "../../../hooks";
+
+//const { startGetCategories } = useCategoriesStore();
+
+
 
 const productsCategoriesPrueba = [
   {
@@ -42,6 +47,8 @@ export const ProductModal = () => {
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
+
+  const { startGetCategories } = useCategoriesStore();
 
   useEffect(() => {
     if(editing){
@@ -126,10 +133,13 @@ export const ProductModal = () => {
         </DialogTitle >
         <form className="product-form">
           <TextField
-            sx={{ p: 1, color: "#000000" }}
+            sx={{ p: 1 }}
+            InputLabelProps={{
+              style: { color: '#000000' },
+            }}
             type="text"
             fullWidth
-            label="Nombre del Producto" variant="filled" focused
+            label="Nombre del Producto" variant="filled" focused 
             name="productName"
             value={productName || ''}
             onChange={onInputChange}
@@ -137,7 +147,10 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''} 
           />
           <TextField
-            sx={{ p: 1, color: "#000000" }}
+            sx={{ p: 1 }}
+            InputLabelProps={{
+              style: { color: '#000000' },
+            }}
             type="number"
             fullWidth
             label="Precio del Producto" variant="filled" focused
@@ -148,7 +161,10 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
-            sx={{ p: 1, color: "#000000" }}
+            sx={{ p: 1 }}
+            InputLabelProps={{
+              style: { color: '#000000' },
+            }}
             type="text"
             fullWidth
             label="Atributos del Producto" variant="filled" focused
@@ -159,12 +175,16 @@ export const ProductModal = () => {
             helperText={emptyName ? 'Campo vacío' : ''}
           />
           <TextField
-            sx={{ p: 1, color: "#000000" }}
+            sx={{ p: 1 }}
+            InputLabelProps={{
+              style: { color: '#000000' },
+            }}
             fullWidth
             id="outlined-select-currency"
             select
             label="Categoría del producto" variant="filled" focused
             defaultValue=""
+            //onChange={startGetCategories}
             onChange={onSelectProduct}
             helperText="Por favor seleccione la categoría del producto"
           >
@@ -188,7 +208,7 @@ export const ProductModal = () => {
               </div>
               <div className="iconImage-buttons">
                 <IconButton
-                  className="addProduct-button"
+                  className="addIcon-button"
                   color="primary"
                   aria-label="cargar imagen"
                   component="label"
@@ -205,7 +225,7 @@ export const ProductModal = () => {
                   }
                 </IconButton>
                 <IconButton
-                  className="addProduct-button"
+                  className="addIcon-button"
                   color="primary"
                   aria-label="cargar icono"
                   component="label"

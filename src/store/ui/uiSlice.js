@@ -62,6 +62,12 @@ export const uiSlice = createSlice({
         },
         onCloseModalViewProduct: ( state ) => {
             state.isModalViewOpenProduct = false;
+        },
+        onOpenModalViewCategory: ( state ) => {
+            state.isModalViewOpenCategory = true;
+        },
+        onCloseModalViewCategory: ( state ) => {
+            state.isModalViewOpenCategory = false;
         }
     }
 });
@@ -83,5 +89,7 @@ export const {
     onOpenCategoryModal, 
     onCloseCategoryModal, 
     onOpenModalViewProduct,
-    onCloseModalViewProduct
+    onCloseModalViewProduct,
+    onOpenModalViewCategory,
+    onCloseModalViewCategory,
 } = uiSlice.actions;

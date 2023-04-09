@@ -74,6 +74,7 @@ export const Products = () => {
       headerName: "Icono",
       type: "image",
       width: 200,
+      sortable: false,
       filterable: false,
       renderCell: (params) => (
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />

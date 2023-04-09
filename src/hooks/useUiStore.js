@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Product
 import { onCleanActiveProduct, onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
 //Categories
-import { onCleanActiveCategory } from '../store';
+import { onCleanActiveCategory, onOpenModalViewCategory, onCloseModalViewCategory } from '../store';
 // Ui
 import { onAddProductsSelected, onCloseProductModal, onOpenProductModal, onDeleteProductsSelected, onCloseCategoryModal, onOpenCategoryModal } from '../store';
 
@@ -57,6 +57,14 @@ export const useUiStore = () => {
         dispatch( onCloseModalViewProduct() )
     }
 
+    const openModalViewCategory = () => {
+        dispatch( onOpenModalViewCategory() )
+    }
+
+    const closeModalViewCategory = () => {
+        dispatch( onCloseModalViewCategory() )
+    }
+
     return {
         //*Propiedades
         isProductModalOpen,
@@ -73,7 +81,9 @@ export const useUiStore = () => {
         openCategoryModal,
         closeCategoryModal,
         openModalViewProduct,
-        closeModalViewProduct
+        closeModalViewProduct,
+        openModalViewCategory,
+        closeModalViewCategory,
     }
 
 }
