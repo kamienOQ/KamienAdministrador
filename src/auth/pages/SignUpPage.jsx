@@ -6,26 +6,41 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks/useForm";
-import { logout, startSignUp } from "../../store/auth";
+import { logout, startCreatingUserWithEmailPassword } from "../../store/auth";
+
+const formData = {
+    email: '',
+    password: '',
+    displayName: ''
+}
+
+const formValidations = {
+    email: [ (value) => value.includes('@'), 'El correo debe de tener una @'],
+    password: [ (value) => value.length >= 6, 'El password debe de tener más de 6 letras.'],
+    displayName: [ (value) => value.length >= 1, 'El nombre es obligatorio.'],
+}
 
 export const SignUpPage = () => {
+
     const dispatch = useDispatch();
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
     const { status, errorMessage } = useSelector((state) => state.auth);
   
     const [showPassword, setShowPassword] = useState(false);
   
-    const { nameUser, email, password, onInputChange } = useForm({
-        nameUser: "",
-        email: "",
-        password: "",
-    });
+    const { 
+        formState, displayName, email, password, onInputChange,
+        isFormValid, displayNameValid, emailValid, passwordValid, 
+    } = useForm( formData, formValidations );
   
     const isAuthenticating = useMemo(() => status === "checking", [status]);
   
     const onSubmit = async (event) => {
       event.preventDefault();
+      setFormSubmitted(true);
   
-      if (nameUser.trim() === "") {
+      if (displayName.trim() === "") {
         dispatch(logout({ errorMessage: "El nombre de usuario es obligatorio"}));
       } else if (email.trim() === "") {
         dispatch(logout({ errorMessage: "El correo es obligatorio"}));
@@ -33,7 +48,7 @@ export const SignUpPage = () => {
         else if (password.trim() === "") {
         dispatch(logout({ errorMessage: "La contraseña es obligatoria"}));
       } else {
-        dispatch(startSignUp(nameUser, email, password));
+        dispatch(startCreatingUserWithEmailPassword(email, password, displayName));
       }
     };
   
@@ -46,16 +61,19 @@ export const SignUpPage = () => {
         <form onSubmit={ onSubmit }>
           <Grid container>
             <Grid item xs={12} sx={{ mt: 2 }}>
-              <label htmlFor="nameUser">Nombre de Usuario</label>
+              <label htmlFor="displayName">Nombre completo</label>
               <TextField
                 hiddenLabel
-                id="nameUser"
+                id="displayName"
                 fullWidth
                 variant="outlined"
+                placeholder='Nombre completo' 
                 sx={{ mt: 1 }}
-                name="nameUser"
-                value={nameUser}
+                name="displayName"
+                value={displayName}
                 onChange={onInputChange}
+                error={ !!displayNameValid && formSubmitted }
+                helperText={ displayNameValid }
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: 2 }}>
@@ -66,9 +84,12 @@ export const SignUpPage = () => {
                 fullWidth
                 variant="outlined"
                 sx={{ mt: 1 }}
+                placeholder='correo@gmail.com' 
                 name="email"
                 value={email}
                 onChange={onInputChange}
+                error={ !!emailValid && formSubmitted }
+                helperText={ emailValid }
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: 2 }}>
@@ -91,6 +112,8 @@ export const SignUpPage = () => {
                 name="password"
                 value={password}
                 onChange={onInputChange}
+                error={ !!passwordValid && formSubmitted  }
+                helperText={ passwordValid }
               />
             </Grid>
             <Grid 
@@ -115,7 +138,7 @@ export const SignUpPage = () => {
                 fontSize: "16px"
               }}
             >
-              Registrarse
+              Crear cuenta
             </Button>
           </Grid>
         </form>

@@ -1,6 +1,7 @@
 import {
   loginWithEmailPassword,
-  signUpWithNameEmailPassword,
+  singInWithGoogle,
+  registerUserWithEmailPassword,
   logoutFirebase,
   resetPassword,
   resetPasswordEmail,
@@ -12,6 +13,19 @@ export const checkingAuthentication = () => {
     dispatch(checkingCredentials());
   };
 };
+
+export const startGoogleSignIn = () => {
+  return async( dispatch ) => {
+
+      dispatch( checkingCredentials() );
+
+      const result = await singInWithGoogle();
+      if ( !result.ok ) return dispatch( logout( result.errorMessage ) );
+
+      dispatch( login( result ))
+
+  }
+}
 
 export const startLoginWithEmailPassword = ( email, password ) => {
   return async (dispatch) => {
@@ -25,15 +39,16 @@ export const startLoginWithEmailPassword = ( email, password ) => {
   };
 };
 
-export const startSignUp = ( nameUser, email, password ) => {
+export const startCreatingUserWithEmailPassword = ( email, password, displayName ) => {
   return async (dispatch) => {
+
     dispatch(checkingCredentials());
 
-    const result = await signUpWithNameEmailPassword( nameUser, email, password );
+    const result = await registerUserWithEmailPassword( email, password, displayName );
 
     if (!result.ok) return dispatch(logout(result));
     
-    dispatch(signUp(result.user));
+    dispatch(login(result.user));
   };
 };
 
