@@ -1,9 +1,8 @@
-import BottomNav from "../Components/BottomNav"
+import { UserProfile } from "../components"
 export const ProfilePage = () => {
   return (
     <>
-
-      <BottomNav/>
+      <UserProfile/>
     </>
   )
 }

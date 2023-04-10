@@ -192,4 +192,10 @@ input[type="submit"] {
   .MuiPaper-elevation{
       margin: 13px !important;
   }    
+  .MuiDataGrid-columnHeaderTitleContainer{
+    background-color: #000000;
+  }
+  .MuiDataGrid-columnHeaderTitle{
+    color: #FFFFFF;
+  }
 }

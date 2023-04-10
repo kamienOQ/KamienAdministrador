@@ -1,6 +1,11 @@
-import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { async } from "@firebase/util";
+import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, updateEmail,updatePassword } from "firebase/auth";
+import { collection, doc, getDoc,getDocs,updateDoc } from 'firebase/firestore'
 import { FirebaseAuth } from "./config";
-
+import { FirebaseDB } from "./config";
+import { FirebaseApp } from "./config";
+import { getFirestore } from "firebase/firestore";
+const db = getFirestore(FirebaseApp)
 export const loginWithEmailPassword = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(
@@ -90,4 +95,73 @@ export const resetPassword = async (oobCode, password) => {
 
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut();
+}
+
+
+export const getCurrentUser = async() => {
+  try{
+    const currentUserId = FirebaseAuth.currentUser.uid;
+    const userRef = doc(FirebaseDB, "users", currentUserId);
+    const userSnapshot = await getDoc(userRef)
+    const userData = userSnapshot.data()
+    return userData
+  }catch(error){
+    console.log(error)
+    return 0
+  }
+}
+export const getAllUsers = async() =>{
+  const users = await getDocs(collection(db, "users"))
+  return users.docs.filter(doc => doc.data().habilitado === true).map(doc =>({id: doc.id, ...doc.data()}))
+};
+
+export const updateUser = async(uid,newData) => {
+  try{
+    const usersRef = doc(db, "users" , uid)
+    await updateDoc(usersRef,newData)
+  }catch(error){
+    console.log("Error a la hora de actualizar el usuario : " ,error)
+  }
+};
+
+export const eliminateUser = async(uid,newData) => {
+  try{
+    const usersRef = doc(db, "users" , uid)
+    await updateDoc(usersRef,newData)
+  }catch(error){
+    console.log("Error a la hora de eliminar el usuario : " ,error)
+  }
+};
+export const getUserInfo = async() =>{
+  try{
+    const usersRef = doc(db, "users" , FirebaseAuth.currentUser.uid)
+    const docSnap = await getDoc(usersRef)
+    return docSnap.data()
+  }catch(error){
+    console.log("Error a la hora de obtener información del usuario : " ,error)
+  }
+}
+export const updateLoggedUser = async(newData) =>{
+  try{
+    const usersRef = doc(db, "users" , FirebaseAuth.currentUser.uid)
+    await updateDoc(usersRef,newData)
+  }catch(error){
+    console.log("Error a la hora de Editar el usuario : " ,error)
+  }
+}
+export const updateUserPassword = async(password) => {
+  try {
+    await updatePassword(FirebaseAuth.currentUser,password);
+    console.log("Email changed successfully!");
+  } catch (error) {
+    console.error(error);
+  }
+  }
+export const updateUserEmail = async(email) => {
+  try {
+    await updateEmail(FirebaseAuth.currentUser,email);
+    console.log("Email changed successfully!");
+  } catch (error) {
+    console.error(error);
+  }
 }

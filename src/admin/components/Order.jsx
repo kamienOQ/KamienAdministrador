@@ -7,10 +7,8 @@ export const Order = ({id, name, date, wayToPay, cellphone, address, status}) =>
   const dateString = useMemo(() => {
     const newDate = new Date(date);
     const formatDate = new Intl.DateTimeFormat("es-ES").format(newDate);
-
     return formatDate;
   }, [date]);
-
   return (
     <Grid
       container
