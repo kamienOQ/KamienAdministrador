@@ -15,8 +15,8 @@ export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { email, password, onInputChange } = useForm({
-    email: "",
-    password: "",
+    email: "kamienoriginalquality@gmail.com",
+    password: "kamien@cr.2023?#$",
   });
 
   const isAuthenticating = useMemo(() => status === "checking", [status]);
@@ -48,7 +48,7 @@ export const LoginPage = () => {
               id="email"
               fullWidth
               variant="outlined"
-              sx={{ mt: 1 }}
+              sx={{ bgcolor: "#f0f0f0", mt: 1 }}
               name="email"
               value={email}
               onChange={onInputChange}
@@ -63,14 +63,14 @@ export const LoginPage = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={onClickShowPassword} sx={{ p: .5 }}>
+                    <IconButton onClick={onClickShowPassword} sx={{ pr: 0 }}>
                       {showPassword ? <Visibility fontSize="small" /> : <VisibilityOff fontSize="small" />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
               fullWidth
-              sx={{ mt: 1, mb: 2 }}
+              sx={{ bgcolor: "#f0f0f0", mt: 1, mb: 2 }}
               name="password"
               value={password}
               onChange={onInputChange}
@@ -92,10 +92,15 @@ export const LoginPage = () => {
             variant="contained"
             disabled={ isAuthenticating }
             fullWidth
+            color="secondary"
             sx={{
               fontWeight: "bold",
               textTransform: "none",
-              fontSize: "16px"
+              fontSize: "16px",
+              color: "#ffffff",
+              "&:hover": {
+                bgcolor: "#ffe34f",
+              },
             }}
           >
             Iniciar Sesión
@@ -103,8 +108,8 @@ export const LoginPage = () => {
         </Grid>
       </form>
       <Link
-        color="dark.main"
         component={RouterLink}
+        color="#333333"
         sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
         display="block"
         textAlign="center"

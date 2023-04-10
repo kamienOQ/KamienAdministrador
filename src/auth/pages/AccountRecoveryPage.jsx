@@ -39,7 +39,7 @@ export const AccountRecoveryPage = () => {
               id="email"
               fullWidth
               variant="outlined"
-              sx={{ mt: 1 }}
+              sx={{ bgcolor: "#f0f0f0", mt: 1 }}
               name="email"
               value={email}
               onChange={onInputChange}
@@ -60,11 +60,15 @@ export const AccountRecoveryPage = () => {
             type="submit"
             variant="contained"
             fullWidth
-            color="primary"
+            color="secondary"
             sx={{
               fontWeight: "bold",
               textTransform: "none",
-              fontSize: "16px"
+              fontSize: "16px",
+              color: "#ffffff",
+              "&:hover": {
+                bgcolor: "#ffe34f",
+              },
             }}
           >
             Enviar
@@ -73,7 +77,7 @@ export const AccountRecoveryPage = () => {
       </form>
       <Link
         component={RouterLink}
-        color="dark.main"
+        color="#333333"
         sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
         display="block"
         textAlign="center"

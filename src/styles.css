@@ -1,15 +1,11 @@
-:root {
-  --roboto: 'Roboto', sans-serif;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
 
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
-  background-color: #D1B000 !important;
+}
+p{
+  color: black;
 }
 
 label {
@@ -17,7 +13,7 @@ label {
   font-size: 18px;
 }
 
-/* input[type="text"],
+input[type="text"],
 input[type="password"],
 input[type="submit"] {
   padding: 10px;
@@ -192,10 +188,4 @@ input[type="submit"] {
   .MuiPaper-elevation{
       margin: 13px !important;
   }    
-  .MuiDataGrid-columnHeaderTitleContainer{
-    background-color: #000000;
-  }
-  .MuiDataGrid-columnHeaderTitle{
-    color: #FFFFFF;
-  }
 }

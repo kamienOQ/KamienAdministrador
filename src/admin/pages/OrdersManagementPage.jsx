@@ -1,42 +1,61 @@
-import { useEffect } from "react";
+import { Button, Grid, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { Grid, Typography } from "@mui/material"
-import { OrdersManagementFilters } from "../components/OrdersManagementFilters";
-import { startGetOrders } from "../../store/orders";
+
+import { startLogout } from "../../store/auth";
 
 export const OrdersManagementPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(startGetOrders(1));
-  }, []);
+  const onLogout = () => {
+    dispatch(startLogout());
+  };
 
   return (
     <Grid
-      className="categories-container"
       container
       spacing={0}
-      alignContent="start"
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ minHeight: "100vh", backgroundColor: "primary.main", padding: 4 }}
     >
-      <Grid container>
-        <Grid
-          alignItems="center"
-          className="secundary-categories-container"
-          container
-          justifyContent="space-around"
-          spacing={2}
-          sx={{ padding: 4, mt: 8, borderRadius: 1.2 }}
+      <Grid
+        item
+        className="box-shadow"
+        xs={3}
+        sx={{
+          width: { sm: 360 },
+          backgroundColor: "white",
+          padding: 5,
+          borderRadius: 2,
+        }}
+      >
+        <Typography
+          variant="h1"
+          fontSize="32px"
+          textAlign="center"
+          sx={{ mb: 1 }}
         >
-          <Grid
-            item
-            textAlign="center"
-          >
-            <Typography variant='h4'>Gestión de Pedidos</Typography>
-          </Grid>
-        </Grid>
-        <OrdersManagementFilters/>
+          Gestión de pedidos
+        </Typography>
+        <Button
+          onClick={onLogout}
+          variant="contained"
+          fullWidth
+          color="secondary"
+          sx={{
+            fontWeight: "bold",
+            textTransform: "none",
+            fontSize: "16px",
+            color: "#ffffff",
+            "&:hover": {
+              bgcolor: "#ffe34f",
+            },
+          }}
+        >
+          Cerrar Sesión
+        </Button>
       </Grid>
-      
     </Grid>
   );
 };

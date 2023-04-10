@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   ChevronLeft,
   Logout
@@ -61,39 +62,40 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export const SideList = ({ open, setOpen }) => {
-  const { displayName, email } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
-  const onLogout = () => {
-    dispatch(startLogout());
-  };
-   
+  const [selectedLink, setSelectedLink] = useState('');
+  const handleLogout = () => {
+
+    console.log("Manejar Salir Sesión")
+    // dispatch({ type: 'UPDATE_USER', payload: null });
+    // navigate('/');
+  };    
   return (
-    <Drawer variant="permanent" open={open} sx={{ bgcolor: "primary.main" }}>
-        <DrawerHeader sx={{ bgcolor: "primary.main" }}>
+    <Drawer variant="permanent" open={open}>
+        <DrawerHeader  sx = {{backgroundColor : "#D1B000"}}>
           <IconButton onClick={() => setOpen(false)}>
-            <ChevronLeft sx={{ color: "dark.main" }}/>
+            <ChevronLeft />
           </IconButton>
         </DrawerHeader>
-        <Divider sx={{ bgcolor: "primary.main" }}/>
+        <Divider />
         <SideBarList/>
-        <Divider sx={{ bgcolor: "primary.main" }}/>
-        <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-          <Tooltip title = "Nombre de Admin" sx={{ bgcolor: "primary.main" }}> 
+        <Divider />
+        <Box sx={{ mx: 'auto', mt: 3, mb: 1,backgroundColor : "#8D918D"}} >
+          <Tooltip title = "Nombre de Admin"> 
             <Avatar                     // title={currentUser?.name || ''}
             {...(open && { sx: { width: 100, height: 100 } })}
             />
           </Tooltip>
         </Box>
-        <Box sx={{ textAlign: 'center' }}>
-          {open && <Typography>{displayName}</Typography>}
+        <Box sx={{ textAlign: 'center'   }}>
+          {open && <Typography>{"Nombre De usuario"}</Typography>}
           <Typography variant="body2">{"SuperAdmin" || 'role'}</Typography>
           {open && (
-            <Typography variant="body2">{email}</Typography>
+            <Typography variant="body2">{"Administrador123@gmail.com"}</Typography>
           )}
           <Tooltip title="Logout" sx={{ mt: 1 }}>
-            <IconButton onClick={onLogout}>
-              <Logout sx={{ color: "dark.main" }}/>
+            <IconButton onClick={handleLogout}>
+              <Logout />
             </IconButton>
           </Tooltip>
         </Box>

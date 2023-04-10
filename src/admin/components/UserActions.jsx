@@ -36,7 +36,6 @@ export const UserActions = ({rowParams}) => {
             bgcolor: grey[500],
             '&:hover': { bgcolor: grey[700] },
           }}
-          onClick = {handleOpen}
         >
             <EditIcon />
         </Fab>
