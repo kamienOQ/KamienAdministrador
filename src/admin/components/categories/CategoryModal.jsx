@@ -12,7 +12,7 @@ import { deleteFileUpload } from "../../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { categories, activeCategory, message, editing1, setActiveCategory, addErrorMessage1, addSuccessMessage1,
+  const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessage1, addSuccessMessage1,
     startUploadNewCategory, startNumberCategories, changeEditing1, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
@@ -21,7 +21,7 @@ export const CategoryModal = () => {
 
 
   useEffect(() => {
-    if(editing1){
+    if(editing){
       if(activeCategory.image.url){
         setImageLoad(true);
       }
@@ -78,11 +78,11 @@ export const CategoryModal = () => {
     if (activeCategory.categoryName === '') {
       setEmptyName(true);
     } else {
-      if(!editing1){
+      if(!editing){
         startUploadNewCategory();
         startNumberCategories();
         changePreCategoryUpdated(false);
-      }if(editing1){
+      }if(editing){
         startUpdateCategory();
       }
     }
@@ -100,7 +100,7 @@ export const CategoryModal = () => {
           
           sx={{ borderRadius: '16px', backgroundColor: "dark.main", color: "tertiary.main" }}
         >
-          {editing1 ? 'Editar una Categoría' : 'Agregar una nueva Categoría'}
+          {editing ? 'Editar una Categoría' : 'Agregar una nueva Categoría'}
         </DialogTitle>
         <form  className="category-form">
           <TextField

@@ -6,11 +6,11 @@ import { useCategoriesStore, useUiStore } from '../../../hooks';
 export const CategoryActions = ({ row }) => {
 
   const { openCategoryModal, openModalViewCategory } = useUiStore();
-  const { changeEditing1, setActiveCategory, changePreCategoryName, changeActive, startChangeActiveCategory } = useCategoriesStore();
+  const { changeEditing1, setActiveCategory, changePreCategoryName, changeActive1, startChangeActiveCategory } = useCategoriesStore();
 
   const handleActive = () => {
     setActiveCategory(row);
-    changeActive();
+    changeActive1();
     startChangeActiveCategory();
   }
   
@@ -55,9 +55,9 @@ export const CategoryActions = ({ row }) => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: "primary.main",
+            bgcolor: "#357a38",
             color: "white",
-            '&:hover': { bgcolor: "primary.main" },
+            '&:hover': { bgcolor: "#357a38" },
           }}
           onClick={handleOpenEdit}
         >

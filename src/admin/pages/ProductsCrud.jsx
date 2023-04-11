@@ -66,7 +66,9 @@ export const ProductsCrud = () => {
           </Grid>
         </Grid>
         <Products />
-        <ProductModal />
+        {isProductModalOpen && 
+          <ProductModal />
+        }
         <ProductView/>
       </Grid>
     </Grid>

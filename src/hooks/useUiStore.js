@@ -17,6 +17,7 @@ export const useUiStore = () => {
         totalPages,
         page,
         isModalViewOpenProduct, 
+        isModalViewOpenCategory, 
     } = useSelector( state => state.ui );
 
     const openProductModal = () => {
@@ -71,6 +72,7 @@ export const useUiStore = () => {
         isCategoryModalOpen,
         productsSelected,
         isModalViewOpenProduct,
+        isModalViewOpenCategory,
 
         //*Métodos
         addProductsSelected,
