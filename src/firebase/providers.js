@@ -157,6 +157,7 @@ export const updateUserPassword = async(password) => {
     console.error(error);
   }
   }
+
 export const updateUserEmail = async(email) => {
   try {
     await updateEmail(FirebaseAuth.currentUser,email);

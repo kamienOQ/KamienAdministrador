@@ -1,21 +1,22 @@
 import {
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-  } from '@mui/material';
+  Link,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import CategoryIcon from '@mui/icons-material/Category';
 import AddIcon from '@mui/icons-material/Add';
 import InfoIcon from '@mui/icons-material/Info';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from "react-router-dom";
 
 export const SideBarList = () => {
   return (
-    <List  sx = {{backgroundColor : "#8D918D"}} >
-        <Link to = "/Administradores" style={{textDecoration:"None",color: 'black' }}>
+    <List sx={{ bgcolor: "primary.main" }}>
+        <Link color="dark.main" component={RouterLink} to = "/Administradores" sx={{textDecoration: "none"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -31,7 +32,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <GroupAddIcon  sx = {{color : "black"}}/>
+                  <GroupAddIcon sx={{ color: "dark.main" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Administrador"}
@@ -42,7 +43,7 @@ export const SideBarList = () => {
         </Link>
 
 
-        <Link to = "/Producto" style={{textDecoration:"None",color:"black"}}>
+        <Link color="dark.main" component={RouterLink} to = "/Producto" sx={{textDecoration: "none"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -58,7 +59,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <AddIcon  sx = {{color : "black"}}/>
+                  <AddIcon sx={{ color: "dark.main" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Producto"}
@@ -68,7 +69,7 @@ export const SideBarList = () => {
         </ListItem>
         </Link>
         
-        <Link to = "/Categorias" style={{textDecoration:"None",color:"black"}}>
+        <Link color="dark.main" component={RouterLink} to = "/Categorias" sx={{textDecoration: "none"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -84,7 +85,7 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <CategoryIcon  sx = {{color : "black"}}/>
+                  <CategoryIcon sx={{ color: "dark.main" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Categoría"}
@@ -95,7 +96,7 @@ export const SideBarList = () => {
         </Link>
                   
 
-        <Link to = "/About" style={{textDecoration:"None",color:"black"}}>
+        <Link color="dark.main" component={RouterLink} to = "/About" sx={{textDecoration: "none"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -111,17 +112,17 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <InfoIcon  sx = {{color : "black"}}/>
+                  <InfoIcon sx={{ color: "dark.main" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Añadir Acerca De"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
-              </ListItemButton >
+              </ListItemButton>
         </ListItem>
         </Link>
 
-        <Link to = "/Perfil" style={{textDecoration:"None",color:"black"}}>
+        <Link color="dark.main" component={RouterLink} to = "/Perfil" sx={{textDecoration: "none"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -137,13 +138,13 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <ManageAccountsIcon  sx = {{color : "black"}}/>
+                  <ManageAccountsIcon sx={{ color: "dark.main" }}/>
                 </ListItemIcon>
                 <ListItemText
                   primary={"Configurar Cuenta"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
-              </ListItemButton> 
+              </ListItemButton>
         </ListItem>
         </Link>
     </List>

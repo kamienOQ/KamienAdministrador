@@ -1,16 +1,21 @@
 import { createTheme } from "@mui/material";
-import { red } from "@mui/material/colors";
 
 export const adminTheme = createTheme({
   palette: {
     primary: {
-      main: "#333333",
+      main: '#D1B000',
     },
     secondary: {
-      main: "#D4AF37",
+      main: '#0000CC',
+    },
+    dark: {
+      main: '#0E1116',
+    },
+    info: {
+      main: '#256EFF'
     },
     error: {
-      main: red.A400,
+      main: '#BF1A2F'
     },
   },
 });
