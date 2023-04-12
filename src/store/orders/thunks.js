@@ -36,26 +36,8 @@ export const onStartFilterOrders = (page = 0, size = 5, preValue) => {
       dispatch(onCleanOrders());
       const collectionRef = collection(FirebaseDB, 'orders');
       let q, undersized = false;
-      if(field?.toLowerCase().includes('name')){
-        if(value==='asc'){
-          if (page === 0) {
-            q = query( collectionRef, orderBy("nameLowerCase", "asc"), limit(size) );
-          } else {
-            const lastVisibleDoc = query( collectionRef,  orderBy("nameLowerCase", "asc"), limit(page * size) );
-            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
-            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  orderBy("nameLowerCase", "asc"), startAfter(lastVisible), limit(size) );
-          }
-        }if(value==='desc'){
-          if (page === 0) {
-            q = query( collectionRef, orderBy("nameLowerCase", "desc"), limit(size) );
-          } else {
-            const lastVisibleDoc = query( collectionRef,  orderBy("nameLowerCase", "desc"), limit(page * size) );
-            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
-            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  orderBy("nameLowerCase", "desc"), startAfter(lastVisible), limit(size) );
-          }
-        }if(value!=='asc' && value !== 'desc'){
+      if(field?.includes('name')){
+        if(value!=='asc' && value !== 'desc'){
           let formattedName = value.toLowerCase();
           formattedName = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
           if(preValue !== value){
@@ -72,9 +54,18 @@ export const onStartFilterOrders = (page = 0, size = 5, preValue) => {
             const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
             q = query( collectionRef,  where('nameLowerCase', '==', formattedName), startAfter(lastVisible), limit(size) );
           }
+        } else {
+          if (page === 0) {
+            q = query( collectionRef, orderBy("nameLowerCase", value), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  orderBy("nameLowerCase", value), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  orderBy("nameLowerCase", value), startAfter(lastVisible), limit(size) );
+          }
         }
       }
-      if(field?.toLowerCase().includes('date')){
+      if(field?.includes('date')){
         const dateObject = new Date(value)
         if(preValue !== value){
           q = query( collectionRef, where("date", ">=", dateObject.getTime()));
@@ -89,6 +80,32 @@ export const onStartFilterOrders = (page = 0, size = 5, preValue) => {
           const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
           const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
           q = query( collectionRef,  where("date", ">=", dateObject.getTime()), startAfter(lastVisible), limit(size) );
+        }
+      }
+      if(field?.includes('wayToPay')){
+        if (page === 0) {
+          q = query( collectionRef, orderBy("wayToPay", value), limit(size) );
+        } else {
+          const lastVisibleDoc = query( collectionRef,  orderBy("wayToPay", value), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  orderBy("wayToPay", value), startAfter(lastVisible), limit(size) );
+        }
+      }
+      if(field?.includes('status')){
+        if(preValue !== value){
+          q = query( collectionRef, where('status', '==', value));
+          const querySnapshot = await getDocs(q);
+          undersized = (querySnapshot.size <= size) ? true : false;
+          dispatch(onSetNumberOrders(querySnapshot.size));
+        } if (page === 0 || undersized) {
+          page = 0;
+          q = query( collectionRef, where('status', '==', value), limit(size) );
+        } else {
+          const lastVisibleDoc = query( collectionRef,  where('status', '==', value), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  where('status', '==', value), startAfter(lastVisible), limit(size) );
         }
       }
 
