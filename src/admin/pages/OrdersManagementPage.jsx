@@ -14,7 +14,7 @@ export const OrdersManagementPage = () => {
 
   return (
     <Grid
-      className="categories-container"
+      className="attributes-container"
       container
       spacing={0}
       alignContent="start"
@@ -30,7 +30,7 @@ export const OrdersManagementPage = () => {
       >
         <Grid
           alignItems="center"
-          className="secundary-categories-container"
+          className="secundary-attributes-container"
           container
           justifyContent="space-around"
           spacing={2}

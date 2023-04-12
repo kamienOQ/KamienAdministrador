@@ -14,6 +14,9 @@ export const adminTheme = createTheme({
     quaternary: {
       main: '#000000'
     },
+    tertiary: {
+      main: '#ffffff',
+    },
     dark: {
       main: '#0E1116'
     },
