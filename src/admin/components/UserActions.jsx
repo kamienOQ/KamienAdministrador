@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { ConfirmationModal } from './confirmationModal';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { grey,red } from '@mui/material/colors';
 import { EditUserModal } from './EditUserModal';
 export const UserActions = ({rowParams}) => {
   const [openEditModal,setEditModal] = useState(false)
@@ -33,10 +32,12 @@ export const UserActions = ({rowParams}) => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: grey[500],
-            '&:hover': { bgcolor: grey[700] },
+            bgcolor: "primary.main",
+            color: "white",
+            '&:hover': { bgcolor: "primary.main" },
           }}
           onClick = {handleOpen}
+           
         >
             <EditIcon />
         </Fab>
@@ -46,8 +47,9 @@ export const UserActions = ({rowParams}) => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: red[800],
-            '&:hover': { bgcolor: red[900] },
+            bgcolor: "error.main",
+            color: "white",
+            '&:hover': { bgcolor: "error.main" },
           }}
           onClick = {handleConfirmationModalOpen}
         >

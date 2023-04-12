@@ -3,29 +3,57 @@ import { createSlice } from "@reduxjs/toolkit";
 export const ordersSlice = createSlice({
   name: "orders",
   initialState: {
+    numberOrders: undefined,
     orders: [],
-    numberOrders: 0,
+    isLoading: false,
+    openViewModal: false,
+    activeOrder: null,
+    filtering: false,
+    filter: {},
+    pageSize: 5,
   },
   reducers: {
-    setOrders: (state, action) => {
-      state.orders = action.payload.sort((a, b) => b.date - a.date);
+    onSetOrders: (state, action) => {
+      state.orders = action.payload;
+      state.isLoading = false;
     },
-    sortNamesAscending: (state) => {
-      state.orders = state.orders.sort((a, b) => a.name.localeCompare(b.name));
+    onSetNumberOrders: (state, action) => {
+      state.numberOrders = action.payload;
     },
-    sortNamesDescending: (state) => {
-      state.orders = state.orders.sort((a, b) => b.name.localeCompare(a.name));
-    },
-    sortWayToPayAscending: (state) => {
-      state.orders = state.orders.sort((a, b) => a.wayToPay.localeCompare(b.wayToPay));
-    },
-    sortWayToPayDescending: (state) => {
-      state.orders = state.orders.sort((a, b) => b.wayToPay.localeCompare(a.wayToPay));
-    },
-    cleanOrders: ( state ) => {
+    onCleanOrders: (state) => {
       state.orders = [];
+      state.isLoading = true;
+    },
+    onOpenViewModal: (state) => {
+      state.openViewModal = true;
+    },
+    onCloseViewModal: (state) => {
+      state.openViewModal = false;
+      state.activeOrder = null;
+    },
+    onSetActiveOrder: (state, action) => {
+      state.activeOrder = action.payload;
+    },
+    onChangeFiltering: (state, action) => {
+      state.filtering = action.payload;
+    },
+    onChangeFilter: (state, action) => {
+      state.filter = action.payload;
+    },
+    onChangePageSize: (state, action) => {
+      state.pageSize = action.payload;
     },
   },
 });
 
-export const { setOrders, sortNamesAscending, sortNamesDescending, sortWayToPayAscending, sortWayToPayDescending, cleanOrders } = ordersSlice.actions;
+export const {
+  onSetOrders,
+  onSetNumberOrders,
+  onCleanOrders,
+  onOpenViewModal,
+  onCloseViewModal,
+  onSetActiveOrder,
+  onChangeFiltering,
+  onChangeFilter,
+  onChangePageSize,
+} = ordersSlice.actions;

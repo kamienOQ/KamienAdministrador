@@ -1,19 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage1, onAddIcon1, onAddImage1, onAddNewCategory, onAddSuccessMessage1, onChangeAscending1, onCleanCategories, 
-    onSetActiveCategory, onStartGetCategories, onStartUploadFile1, onStartUploadNewCategory } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, onSetNumberCategories, onStartNumberCategories, onChangePageSize } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
 
     const { 
         activeCategory,
-        ascending,
         categories,
-        categoriesOnPage,
+        editing,
+        filter,
+        filtering,
         isSaving,
+        isLoading,
         message,
         numberCategories,
-        productsUploaded,
     } = useSelector( state => state.categories );
     
     //*Slice
@@ -25,24 +26,40 @@ export const useCategoriesStore = () => {
         dispatch( onSetActiveCategory( category ) );
     }
 
-    const changeAscending1 = ( value ) => {
-        dispatch( onChangeAscending1( value ) );
+    const addImage = ( images ) => {
+        dispatch( onAddImage( images ) );
     }
 
-    const addImage1 = ( images ) => {
-        dispatch( onAddImage1( images ) );
+    const addIcon = ( images ) => {
+        dispatch( onAddIcon( images ) );
     }
 
-    const addIcon1 = ( images ) => {
-        dispatch( onAddIcon1( images ) );
+    const addErrorMessage = ( message ) => {
+        dispatch( onAddErrorMessage( message ) );
     }
 
-    const addErrorMessage1 = ( message ) => {
-        dispatch( onAddErrorMessage1( message ) );
+    const addSuccessMessage = ( message ) => {
+        dispatch( onAddSuccessMessage( message ) );
     }
 
-    const addSuccessMessage1 = ( message ) => {
-        dispatch( onAddSuccessMessage1( message ) );
+    const  setNumberCategories = ( number ) => {
+        dispatch(  onSetNumberCategories( number ) );
+    }
+
+    const changeEditing = ( value ) => {
+        dispatch( onChangeEditing( value ) );
+    }
+
+    const changeFiltering = ( value ) => {
+        dispatch( onChangeFiltering( value ) );
+    }
+
+    const changeFilter = ( value ) => {
+        dispatch( onChangeFilter( value ) );
+    }
+
+    const changePageSize = ( pageSize ) => {
+        dispatch( onChangePageSize( pageSize ) );
     }
 
     const cleanCategories = () => {
@@ -51,40 +68,55 @@ export const useCategoriesStore = () => {
     
 
     //*Thunks
-    const startUploadFile1 = ( file, type, collectionName ) => {
-        dispatch( onStartUploadFile1( file, type, collectionName ) )
+    const startUploadFile = ( file, type, collectionName ) => {
+        dispatch( onStartUploadFile( file, type, collectionName ) )
     }
 
     const startUploadNewCategory = () => {
         dispatch( onStartUploadNewCategory() );
     }
 
-    const startGetCategories = () => {
-        dispatch( onStartGetCategories() );
+    const startGetCategories = (page, size) => {
+        dispatch( onStartGetCategories(page, size) );
+    }
+
+    const startNumberCategories = () => {
+        dispatch( onStartNumberCategories() );
+    }
+
+    const startFilterCategories = (page, size, preValue) => {
+        dispatch( onStartFilterCategories(page, size, preValue) );
     }    
 
     return {
         //*Propiedades
         activeCategory,
-        ascending,
         categories,
-        categoriesOnPage,
+        editing,
+        filter,
+        isLoading,
+        filtering,
         isSaving,
         message,
         numberCategories,
-        productsUploaded,
 
         //*Métodos
-        addErrorMessage1,
-        addIcon1,
-        addImage1,
+        addErrorMessage,
+        addIcon,
+        addImage,
         addNewCategory,
-        addSuccessMessage1,
-        changeAscending1,
+        addSuccessMessage,
+        changeEditing,
+        changeFilter,
+        changeFiltering,
+        changePageSize,
         cleanCategories,
+        setNumberCategories,
         setActiveCategory,
+        startNumberCategories,
+        startFilterCategories,
         startGetCategories,
-        startUploadFile1,
+        startUploadFile,
         startUploadNewCategory,
     }
 }

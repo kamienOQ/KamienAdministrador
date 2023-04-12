@@ -35,8 +35,9 @@ export const AdminEditModal = ({openModal}) => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: blue[500],
-            '&:hover': { bgcolor: blue[700] },
+            bgcolor: "info.main",
+            color: "white",
+            '&:hover': { bgcolor: "info.main" },
           }}
           onClick = {handleOpen}
         >
