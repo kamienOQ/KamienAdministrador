@@ -1,5 +1,4 @@
 import EditIcon from '@mui/icons-material/Edit';
-import CancelIcon from '@mui/icons-material/Cancel';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Fab, Switch } from '@mui/material';
 import { useProductsStore, useUiStore } from '../../../hooks';

@@ -12,8 +12,8 @@ import { deleteFileUpload } from "../../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessage1, addSuccessMessage1,
-    startUploadNewCategory, startNumberCategories, changeEditing1, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
+  const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessageCategory, addSuccessMessageCategory,
+    startUploadNewCategory, startNumberCategories, changeEditingCategory, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -37,8 +37,8 @@ export const CategoryModal = () => {
   }, [formState]);
 
   useEffect(() => {
-    addErrorMessage1('');
-    addSuccessMessage1('');
+    addErrorMessageCategory('');
+    addSuccessMessageCategory('');
   }, [formState, imageLoad, iconLoad]);
 
 
@@ -70,7 +70,7 @@ export const CategoryModal = () => {
     }
     
     closeCategoryModal();
-    changeEditing1(false);
+    changeEditingCategory(false);
     changePreCategoryUpdated(false);
   }
 

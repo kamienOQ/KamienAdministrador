@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
+import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
     onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
     onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
     onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters } from "../store";
@@ -28,12 +28,12 @@ export const useProductsStore = () => {
         dispatch( onSetActiveProduct( product ) );
     }
 
-    const addImage = ( images ) => {
-        dispatch( onAddImage( images ) );
+    const addImageProduct = ( images ) => {
+        dispatch( onAddImageProduct( images ) );
     }
 
-    const addIcon = ( images ) => {
-        dispatch( onAddIcon( images ) );
+    const addIconProduct = ( images ) => {
+        dispatch( onAddIconProduct( images ) );
     }
 
     const addProducts = ( products ) => {
@@ -133,8 +133,8 @@ export const useProductsStore = () => {
 
         //*Métodos
         addErrorMessage,
-        addIcon,
-        addImage,
+        addIconProduct,
+        addImageProduct,
         addNewProduct,
         addProducts, 
         addSuccessMessage,

@@ -51,6 +51,8 @@ export const useProductsState = () => {
         selected,
         imageInputRef,
         iconInputRef, 
+        setImageLoad,
+        setIconLoad,
         onUploadImage,
         onUploadIcon,
         onSelectProduct

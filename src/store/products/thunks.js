@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewProduct, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
+import { onChangeSavingNewProduct, onAddImageProduct, onAddIconProduct, onAddSuccessMessage, onAddErrorMessage, 
     onCleanProducts, onAddProductAtStart, onSetProducts, onSetNumberProducts, onAddProductNameLowerCase, onUpdateProduct, onChangeActive } from "./";
 
 
@@ -15,9 +15,9 @@ export const onStartUploadFile = (file, type, collectionName) => {
       const downloadURL = await getDownloadURL(storageRef);
 
       if(type === 'image'){
-        dispatch( onAddImage( [imgId, downloadURL] ) );
+        dispatch( onAddImageProduct( [imgId, downloadURL] ) );
       }else{
-        dispatch( onAddIcon( [imgId, downloadURL] ) );
+        dispatch( onAddIconProduct( [imgId, downloadURL] ) );
       }
     }
   }

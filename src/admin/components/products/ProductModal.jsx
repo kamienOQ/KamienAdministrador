@@ -7,10 +7,6 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
 import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
-import { useCategoriesStore } from "../../../hooks";
-
-//const { startGetCategories } = useCategoriesStore();
-
 
 
 const productsCategoriesPrueba = [
@@ -48,14 +44,14 @@ export const ProductModal = () => {
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
 
-  const { startGetCategories } = useCategoriesStore();
+  const { startGetProducts } = useProductsStore();
 
   useEffect(() => {
     if(editing){
-      if(activeCategory.image.url){
+      if(activeProduct.image.url){
         setImageLoad(true);
       }
-      if(activeCategory.icon.url){
+      if(activeProduct.icon.url){
         setIconLoad(true);
       }
     }

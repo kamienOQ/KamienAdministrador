@@ -34,11 +34,11 @@ export const productsSlice = createSlice({
                 active: true,
                 relatedProducts: [],
                 relatedAttributes: [],
-                image: {
+                imageProduct: {
                     name: null,
                     url: null
                 },
-                icon: {
+                iconProduct: {
                     name: null,
                     url: null
                 },
@@ -90,13 +90,13 @@ export const productsSlice = createSlice({
         onAddProductAtStart: ( state, { payload } ) => {
             state.products.unshift(payload);
         },  
-        onAddImage: ( state, { payload } ) => {
-            state.activeProduct.image.name = payload[0];
-            state.activeProduct.image.url = payload[1];
+        onAddImageProduct: ( state, { payload } ) => {
+            state.activeProduct.imageProduct.name = payload[0];
+            state.activeProduct.imageProduct.url = payload[1];
         },
-        onAddIcon: ( state, { payload } ) => {
-            state.activeProduct.icon.name = payload[0];
-            state.activeProduct.icon.url = payload[1];
+        onAddIconProduct: ( state, { payload } ) => {
+            state.activeProduct.iconProduct.name = payload[0];
+            state.activeProduct.iconProduct.url = payload[1];
         },
         onChargeProductsByPage: ( state, { payload } ) => {
             state.productsOnPage = payload;
@@ -165,8 +165,8 @@ export const productsSlice = createSlice({
 export const { 
     onAddProductAtStart,
     onAddErrorMessage,
-    onAddIcon, 
-    onAddImage, 
+    onAddIconProduct, 
+    onAddImageProduct, 
     onAddLowerCase, 
     onAddNewProduct, 
     onAddSuccessMessage,

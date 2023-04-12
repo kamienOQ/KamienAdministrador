@@ -33,11 +33,11 @@ export const categoriesSlice = createSlice({
                 active: true,
                 relatedProducts: [],
                 relatedAttributes: [],
-                image: {
+                imageCategory: {
                     name: null,
                     url: null
                 },
-                icon: {
+                iconCategory: {
                     name: null,
                     url: null
                 },
@@ -88,25 +88,25 @@ export const categoriesSlice = createSlice({
         onAddCategoryAtStart: ( state, { payload } ) => {
             state.categories.unshift(payload);
         },
-        onAddImage1: ( state, { payload } ) => {
-            state.activeCategory.image.name = payload[0];
-            state.activeCategory.image.url = payload[1];
+        onAddImageCategory: ( state, { payload } ) => {
+            state.activeCategory.imageCategory.name = payload[0];
+            state.activeCategory.imageCategory.url = payload[1];
         },
-        onAddIcon1: ( state, { payload } ) => {
-            state.activeCategory.icon.name = payload[0];
-            state.activeCategory.icon.url = payload[1];
+        onAddIconCategory: ( state, { payload } ) => {
+            state.activeCategory.iconCategory.name = payload[0];
+            state.activeCategory.iconCategory.url = payload[1];
         },
-        onAddErrorMessage1: ( state, { payload } ) => {
+        onAddErrorMessageCategory: ( state, { payload } ) => {
             state.message.error = payload;
         },
-        onAddSuccessMessage1: ( state, { payload } ) => {
+        onAddSuccessMessageCategory: ( state, { payload } ) => {
             state.message.success = payload;
         },
         onAddCategoryNameLowerCase: ( state ) => {
             let formattedName = state.activeCategory.categoryName.toLowerCase();
             state.activeCategory.categoryNameLowerCase = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         },
-        onChangeActive1: ( state ) => {
+        onChangeActiveCategory: ( state ) => {
             state.activeCategory.active = !state.activeCategory.active
 
             state.categories = state.categories.map( category => {
@@ -116,7 +116,7 @@ export const categoriesSlice = createSlice({
                 return category;
             });
         },
-        onChangeEditing1: ( state, { payload } ) => {
+        onChangeEditingCategory: ( state, { payload } ) => {
             state.editing = payload;
         },
         onChangePreCategoryName: ( state, { payload } ) => {
@@ -125,13 +125,13 @@ export const categoriesSlice = createSlice({
         onChangePreCategoryUpdated: ( state, { payload } ) => {
             state.preCategory.updatedName = payload;
         },
-        onChangeFiltering1: ( state, { payload } )=> {
+        onChangeFilteringCategory: ( state, { payload } )=> {
             state.filtering = payload
         },
-        onChangeFilter1: ( state, { payload } )=> {
+        onChangeFilterCategory: ( state, { payload } )=> {
             state.filter = payload
         },
-        onChangePageAndSize1: ( state, { payload } )=> {
+        onChangePageAndSizeCategory: ( state, { payload } )=> {
             state.page = payload.page;
             state.pageSize = payload.pageSize;
         },
@@ -152,16 +152,16 @@ export const {
     // onChargeCategoriesUploaded,
     onAddCategoryAtStart,
     onAddCategoryNameLowerCase, 
-    onAddErrorMessage1,
-    onAddIcon1, 
-    onAddImage1, 
+    onAddErrorMessageCategory,
+    onAddIconCategory, 
+    onAddImageCategory, 
     onAddNewCategory, 
-    onAddSuccessMessage1,
-    onChangeActive1,
-    onChangeEditing1,
-    onChangeFilter1,
-    onChangeFiltering1,
-    onChangePageAndSize1,
+    onAddSuccessMessageCategory,
+    onChangeActiveCategory,
+    onChangeEditingCategory,
+    onChangeFilterCategory,
+    onChangeFilteringCategory,
+    onChangePageAndSizeCategory,
     onChangePreCategoryName,
     onChangePreCategoryUpdated,
     onChangeSavingNewCategory, 

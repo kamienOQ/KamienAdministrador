@@ -6,18 +6,18 @@ import { useCategoriesStore, useUiStore } from '../../../hooks';
 export const CategoryActions = ({ row }) => {
 
   const { openCategoryModal, openModalViewCategory } = useUiStore();
-  const { changeEditing1, setActiveCategory, changePreCategoryName, changeActive1, startChangeActiveCategory } = useCategoriesStore();
+  const { changeEditingCategory, setActiveCategory, changePreCategoryName, changeActiveCategory, startChangeActiveCategory } = useCategoriesStore();
 
   const handleActive = () => {
     setActiveCategory(row);
-    changeActive1();
+    changeActiveCategory();
     startChangeActiveCategory();
   }
   
   const handleOpenEdit = () => {
     setActiveCategory(row);
     changePreCategoryName(row.categoryName);
-    changeEditing1(true);
+    changeEditingCategory(true);
     openCategoryModal();
   };
 

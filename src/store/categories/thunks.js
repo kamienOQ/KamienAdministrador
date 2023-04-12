@@ -1,11 +1,11 @@
 import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewCategory, onAddImage1, onAddIcon1, onAddSuccessMessage1, onAddErrorMessage1, 
-    onCleanCategories, onAddCategoryAtStart, onSetCategories, onSetNumberCategories, onAddCategoryNameLowerCase, onUpdateCategory, onChangeActive1 } from "./";
+import { onChangeSavingNewCategory, onAddImageCategory, onAddIconCategory, onAddSuccessMessageCategory, onAddErrorMessageCategory, 
+    onCleanCategories, onAddCategoryAtStart, onSetCategories, onSetNumberCategories, onAddCategoryNameLowerCase, onUpdateCategory, onChangeActiveCategory } from "./";
 
 
-export const onStartUploadFile1 = (file, type, collectionName) => {
+export const onStartUploadFileCategory = (file, type, collectionName) => {
   return async (dispatch) => {
     if ( file ){
       let imgId = collectionName+file.name;
@@ -15,9 +15,9 @@ export const onStartUploadFile1 = (file, type, collectionName) => {
       const downloadURL = await getDownloadURL(storageRef);
 
       if(type === 'image'){
-        dispatch( onAddImage1( [imgId, downloadURL] ) );
+        dispatch( onAddImageCategory( [imgId, downloadURL] ) );
       }else{
-        dispatch( onAddIcon1( [imgId, downloadURL] ) );
+        dispatch( onAddIconCategory( [imgId, downloadURL] ) );
       }
     }
   }
@@ -40,8 +40,8 @@ export const onStartUploadNewCategory = () => {
       const { categoryName } = doc.data();
       if( categoryName.toLowerCase() === activeCategory.categoryName.toLowerCase() ){
         duplicateCategory = true;
-        dispatch(onAddErrorMessage1( 'Ya existe una categoría con este nombre' ));
-        dispatch(onAddSuccessMessage1( '' ));
+        dispatch(onAddErrorMessageCategory( 'Ya existe una categoría con este nombre' ));
+        dispatch(onAddSuccessMessageCategory( '' ));
       }
     });
     if(!duplicateCategory){
@@ -61,8 +61,8 @@ export const onStartUploadNewCategory = () => {
           dispatch(onAddCategoryAtStart( {id: 1, ...activeCategory} ));
         }
         
-        dispatch(onAddSuccessMessage1( 'Agregado correctamente' ));
-        dispatch(onAddErrorMessage1( '' ));
+        dispatch(onAddSuccessMessageCategory( 'Agregado correctamente' ));
+        dispatch(onAddErrorMessageCategory( '' ));
     }
     dispatch(onChangeSavingNewCategory(false));
   }
@@ -193,8 +193,8 @@ export const onStartUpdateCategory = () => {
         const { categoryName } = doc.data();
         if( categoryName.toLowerCase() === activeCategory.categoryName.toLowerCase() ){
           duplicateCategory = true;
-          dispatch(onAddErrorMessage( 'Ya existe una categoría con este nombre' ));
-          dispatch(onAddSuccessMessage( '' ));
+          dispatch(onAddErrorMessageCategory( 'Ya existe una categoría con este nombre' ));
+          dispatch(onAddSuccessMessageCategory( '' ));
         }
       });
     }
@@ -213,8 +213,8 @@ export const onStartUpdateCategory = () => {
   
       await setDoc( docRef, categoryToFireStore, { merge: true } )
       dispatch( onUpdateCategory( activeCategory ) );
-      dispatch(onAddSuccessMessage( 'Editado correctamente' ));
-      dispatch(onAddErrorMessage( '' ));
+      dispatch(onAddSuccessMessageCategory( 'Editado correctamente' ));
+      dispatch(onAddErrorMessageCategory( '' ));
     }
       
   }

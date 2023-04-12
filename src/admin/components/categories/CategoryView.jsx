@@ -26,12 +26,12 @@ export const CategoryView = () => {
                     height: 630,
                 }}
             >
-                <img className='view-category-image' src={activeCategory?.image?.url} alt="" />
+                <img className='view-category-image' src={activeCategory?.imageCategory?.url} alt="" />
                 <Typography variant="h6" sx={{marginTop: 3 }}>
                     {activeCategory?.categoryName}
                 </Typography>
             </DialogContent>
-            <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
+            <img className='view-category-icon' src={activeCategory?.iconCategory?.url} alt="" />
         </Dialog>
     );
 }

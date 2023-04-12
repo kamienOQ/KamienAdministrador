@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage1, onAddIcon1, onAddImage1, onAddNewCategory, onAddSuccessMessage1, onChangeEditing1, onChangeFilter1, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering1, 
+import { onAddErrorMessageCategory, onAddIconCategory, onAddImageCategory, onAddNewCategory, onAddSuccessMessageCategory, onChangeEditingCategory, onChangeFilterCategory, onCleanCategories, 
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFilteringCategory, 
     onSetNumberCategories, onStartNumberCategories, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, 
-    onStartChangeActiveCategory, onChangeActive1, onChangePageAndSize1 } from "../store";
+    onStartChangeActiveCategory, onChangeActiveCategory, onChangePageAndSizeCategory } from "../store";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -28,28 +28,28 @@ export const useCategoriesStore = () => {
         dispatch( onSetActiveCategory( category ) );
     }
 
-    const addImage1 = ( images ) => {
-        dispatch( onAddImage1( images ) );
+    const addImageCategory = ( images ) => {
+        dispatch( onAddImageCategory( images ) );
     }
 
-    const addIcon1 = ( images ) => {
-        dispatch( onAddIcon1( images ) );
+    const addIconCategory = ( images ) => {
+        dispatch( onAddIconCategory( images ) );
     }
 
-    const addErrorMessage1 = ( message ) => {
-        dispatch( onAddErrorMessage1( message ) );
+    const addErrorMessageCategory = ( message ) => {
+        dispatch( onAddErrorMessageCategory( message ) );
     }
 
-    const addSuccessMessage1 = ( message ) => {
-        dispatch( onAddSuccessMessage1( message ) );
+    const addSuccessMessageCategory = ( message ) => {
+        dispatch( onAddSuccessMessageCategory( message ) );
     }
 
     const  setNumberCategories = ( number ) => {
         dispatch(  onSetNumberCategories( number ) );
     }
 
-    const changeEditing1 = ( value ) => {
-        dispatch( onChangeEditing1( value ) );
+    const changeEditingCategory = ( value ) => {
+        dispatch( onChangeEditingCategory( value ) );
     }
 
     const changePreCategoryName = ( value ) => {
@@ -60,20 +60,20 @@ export const useCategoriesStore = () => {
         dispatch( onChangePreCategoryUpdated( value ) );
     }
 
-    const changeFiltering1 = ( value ) => {
-        dispatch( onChangeFiltering1( value ) );
+    const changeFilteringCategory = ( value ) => {
+        dispatch( onChangeFilteringCategory( value ) );
     }
 
-    const changeFilter1 = ( value ) => {
-        dispatch( onChangeFilter1( value ) );
+    const changeFilterCategory = ( value ) => {
+        dispatch( onChangeFilterCategory( value ) );
     }
 
-    const changeActive1 = () => {
-        dispatch( onChangeActive1() );
+    const changeActiveCategory = () => {
+        dispatch( onChangeActiveCategory() );
     }
 
-    const changePageAndSize1 = ( value ) => {
-        dispatch( onChangePageAndSize1( value ) );
+    const changePageAndSizeCategory = ( value ) => {
+        dispatch( onChangePageAndSizeCategory( value ) );
     }
 
     const cleanCategories = () => {
@@ -123,16 +123,16 @@ export const useCategoriesStore = () => {
         numberCategories,
 
         //*Métodos
-        addErrorMessage1,
-        addIcon1,
-        addImage1,
+        addErrorMessageCategory,
+        addIconCategory,
+        addImageCategory,
         addNewCategory,
-        addSuccessMessage1,
-        changeActive1,
-        changeEditing1,
-        changeFilter1,
-        changeFiltering1,
-        changePageAndSize1,
+        addSuccessMessageCategory,
+        changeActiveCategory,
+        changeEditingCategory,
+        changeFilterCategory,
+        changeFilteringCategory,
+        changePageAndSizeCategory,
         changePreCategoryName,
         changePreCategoryUpdated,
         cleanCategories,
