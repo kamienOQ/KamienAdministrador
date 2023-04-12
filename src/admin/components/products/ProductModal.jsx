@@ -72,7 +72,7 @@ export const ProductModal = () => {
   const onCloseModa = () => {
     if (imageLoad) {
       let usingImage = false;
-      categories.forEach(object => {
+      products.forEach(object => {
         if (object.image.name === activeProduct.image.name) {
           usingImage = true;
           return;
@@ -84,7 +84,7 @@ export const ProductModal = () => {
     }
     if (iconLoad) {
       let usingIcon = false;
-      categories.forEach(object => {
+      products.forEach(object => {
         if (object.icon.name === activeProduct.icon.name) {
           usingIcon = true;
           return;
@@ -180,7 +180,7 @@ export const ProductModal = () => {
             select
             label="Categoría del producto" variant="filled" focused
             defaultValue=""
-            //onChange={startGetCategories}
+            //onChange={startGetproducts}
             onChange={onSelectProduct}
             helperText="Por favor seleccione la categoría del producto"
           >
