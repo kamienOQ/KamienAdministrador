@@ -8,7 +8,7 @@ import { useCategoriesStore } from "../../../hooks";
 
 export const CategoriesTable = ({ attributes, data }) => {
 
-  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSize } = useCategoriesStore();
+  const { filter, filtering, changeFilterCategory, changeFilteringCategory, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSizeCategory } = useCategoriesStore();
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
@@ -26,7 +26,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   const onPaginationChange = useCallback(
     (newModel) => {
       setPaginationModel(newModel);
-      changePageAndSize(newModel);
+      changePageAndSizeCategory(newModel);
     },
     [setPaginationModel]
   );
@@ -53,7 +53,7 @@ export const CategoriesTable = ({ attributes, data }) => {
     if (!filtering || filter.value === 'asc' || filter.value === 'desc' || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined && filter.field !== undefined) {
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFiltering(true);
+        changeFilteringCategory(true);
         setLocalFilterValue(filter.value);
       }
     }
@@ -61,8 +61,8 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleRemoveFilter = () => {
     startGetCategories(paginationModel.page, paginationModel.pageSize);
-    changeFiltering(false);
-    changeFilter({});
+    changeFilteringCategory(false);
+    changeFilterCategory({});
     setSortModel([]);
     setLocalFilterValue('');
     setFilterModel({items: []});
@@ -70,24 +70,24 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleFilterChange = ({ items }) => {
     if (items[0]?.value) {
-      changeFilter({ field: items[0]?.field, value: items[0]?.value });
+      changeFilterCategory({ field: items[0]?.field, value: items[0]?.value });
       setSortModel([]);
-      changeFiltering(false);
+      changeFilteringCategory(false);
     }if (items.length === 0) {
       if(filtering){
         startGetCategories(paginationModel.page, paginationModel.pageSize);
       }
-      changeFiltering(false);
-      changeFilter({});
+      changeFilteringCategory(false);
+      changeFilterCategory({});
     }
     setFilterModel({ items });
   };
 
   const handleSortModelChange = (event) => {
     setSortModel(event);
-    changeFilter({ field: event[0]?.field, value: event[0]?.sort });
+    changeFilterCategory({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
-    changeFiltering(false);
+    changeFilteringCategory(false);
   };
 
   

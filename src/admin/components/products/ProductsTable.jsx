@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { DataGrid, esES } from "@mui/x-data-grid";
+import { DataGrid, esES, gridClasses } from "@mui/x-data-grid";
 import { Button, Grid } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CloseIcon from '@mui/icons-material/Close';
@@ -12,6 +12,7 @@ export const ProductsTable = ({ attributes, data }) => {
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
+  
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,
     page: 0,
@@ -94,36 +95,8 @@ export const ProductsTable = ({ attributes, data }) => {
   return (
     <Grid container
       className="container-table"
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto', }}
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
     >
-      <Grid
-        className="container-buttons-filter"
-        sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: "1160px"}}
-      >
-        <Button
-          className="button-filter"
-          sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
-          onClick={handleSearch}
-          startIcon={<FilterAltIcon />}
-        >
-          Filtrar
-        </Button>
-        {filtering ? (
-          <Button
-            sx={{
-              height: 40,
-              backgroundColor: "error.main",
-              color: "tertiary.main",
-              "&:hover": { bgcolor: "lightError.main" },
-              ml: 1,
-            }}
-            onClick={handleRemoveFilter}
-            startIcon={<CloseIcon />}
-          >
-            Quitar filtro
-          </Button>
-        ) : null}
-      </Grid>
       <DataGrid
         className="table"
         columns={columns}
@@ -136,14 +109,12 @@ export const ProductsTable = ({ attributes, data }) => {
         paginationModel={paginationModel}
         onPaginationModelChange={onPaginationChange}
         paginationMode="server"
-        filterModel={filterModel}
-        onFilterModelChange={handleFilterChange}
-        filterMode="server"
-        sortModel={sortModel}
-        onSortModelChange={handleSortModelChange}
-        sortingMode="server"
+        //filterModel={filterModel}
+        //onFilterModelChange={handleFilterChange}
+        //filterMode="server"
         filterOperators={{ date: [{ label: '>', value: 'gt' }] }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+        onCellEditCommit={(params) => setRowId(params.id)}
         sx={{
           color: "dark.main",
           maxWidth: "1172px",

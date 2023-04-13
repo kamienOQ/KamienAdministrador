@@ -115,7 +115,8 @@ export const LoginPage = () => {
               sx={{
                 fontWeight: "bold",
                 textTransform: "none",
-                fontSize: "16px"
+                fontSize: "16px",
+                mt: 1
               }}
               onClick={ onGoogleSignIn }>
             <Google />

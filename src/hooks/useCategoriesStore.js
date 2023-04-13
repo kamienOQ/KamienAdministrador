@@ -44,8 +44,8 @@ export const useCategoriesStore = () => {
         dispatch( onAddSuccessMessageCategory( message ) );
     }
 
-    const  setNumberCategories = ( number ) => {
-        dispatch(  onSetNumberCategories( number ) );
+    const setNumberCategories = ( number ) => {
+        dispatch( onSetNumberCategories( number ) );
     }
 
     const changeEditingCategory = ( value ) => {

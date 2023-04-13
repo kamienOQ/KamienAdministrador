@@ -5,33 +5,8 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
+import { useCategoriesStore, useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
 import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
-
-
-const productsCategoriesPrueba = [
-  {
-    label: 'Reloj'
-  },
-  {
-    label: 'Camisa'
-  },
-  {
-    label: 'Pantalón'
-  },
-  {
-    label: 'Anteojos'
-  },
-  {
-    label: 'Perfumes'
-  },
-  {
-    label: 'Zapatos'
-  },
-  {
-    label: 'Bolsos'
-  },
-];
 
 export const ProductModal = () => { 
 
@@ -44,7 +19,7 @@ export const ProductModal = () => {
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
 
-  const { startGetProducts } = useProductsStore();
+  const { setNumberCategories } = useCategoriesStore();
 
   useEffect(() => {
     if(editing){
@@ -68,7 +43,6 @@ export const ProductModal = () => {
   }, [formState, productsSelected, imageLoad, iconLoad ]);
   
   
-
   const onCloseModa = () => {
     if (imageLoad) {
       let usingImage = false;
@@ -180,16 +154,16 @@ export const ProductModal = () => {
             select
             label="Categoría del producto" variant="filled" focused
             defaultValue=""
-            //onChange={startGetproducts}
-            onChange={onSelectProduct}
+            //onChange={startGetCategories()}
+            onChange={setNumberCategories}
             helperText="Por favor seleccione la categoría del producto"
           >
             {/* importar y recorrer productsUploaded opteniendo el nombre */}
-            {productsCategoriesPrueba.map((option) => (
+            {/*productsCategoriesPrueba.map((option) => (
               <MenuItem key={option.label} value={option.label}>
                 {option.label}
               </MenuItem>
-            ))}
+            ))*/}
           </TextField>
           {selected && <FloatingTags />}
           <div className="products-modal-buttons">

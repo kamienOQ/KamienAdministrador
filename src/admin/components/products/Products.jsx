@@ -26,7 +26,7 @@ export const Products = () => {
     {
       field: "productName",
       headerName: "Nombre",
-      width: 200,
+      width: 300,
       filterable: true,
       sortable: true,
       filterOperators: filterOperatorsName
@@ -37,25 +37,6 @@ export const Products = () => {
       width: 100,
       filterable: true,
       sortable: false,
-    },
-    {
-      field: "atributes",
-      headerName: "Atributos",
-      width: 200,
-      filterable: true,
-      sortable: false,
-    },
-    {
-      field: "date",
-      headerName: "Fecha",
-      type: "date",
-      valueGetter: ({ value }) => value && new Date(value),
-      width: 200,
-      filterable: true,
-      sortable: false,
-      operatorValue: 'greaterThan',
-      hideable: false,
-      filterOperators: filterOperatorsDate
     },
     {
       field: "image",
