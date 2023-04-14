@@ -172,15 +172,19 @@ label {
     border-radius: 5px;
     opacity: 0.7;
 }
-.view-category-icon{
+.container-view-category-icon{
     font-size: 20px;
     position: absolute;
-    width: 40%;
-    height: 35%;
-    top: 45%;
+    width: 70%;
+    height: 65%;
+    top: 55%;
     left: 50%;
     z-index: 1;
     transform: translate(-50%, -50%);
+}
+.view-category-icon{
+    width: 70%;
+    height: 65%;
 }
 
 .MuiDataGrid-columnHeaders {
@@ -195,9 +199,13 @@ label {
         margin-left: 65px !important;
         margin-right: 35px !important;
     }
-    .button-filter{
+    .remove-filter{
         margin-left: -10px !important;
     }
+    .remove-filter-category{
+        margin-left: -15px !important;
+    }
+    
 }
 
 @media (max-width: 710px) {
@@ -286,13 +294,13 @@ label {
         height: 400px !important;
     }
 
-    .view-category-image{
-        width: 100%;
-        height: 65%;
-    }
-    .view-category-icon{
+    /* .container-view-category-icon{
         width: 40%;
         height: 30%;
-    }
-
+    } */
+    /* .view-category-image{
+        width: 100%;
+        height: 65%;
+    } */
+    
 }

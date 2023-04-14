@@ -45,16 +45,44 @@ export const CategoriesTable = ({ attributes, data }) => {
     setRowCountState(numberCategories !== undefined ? numberCategories : 0);
   }, [numberCategories, setRowCountState]);
 
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter" ) {
+        if (!filtering || filter.value !== localFilterValue ) {
+          handleSearch()
+        }
+      }
+    };
+    document.addEventListener("keyup", handleKeyPress);
+    return () => {
+      document.removeEventListener("keyup", handleKeyPress);
+    };
+  }, [filtering, filter.value, localFilterValue]);
+
   const columns = useMemo(() => attributes, [rowId]);
 
 
   // * Filter
   const handleSearch = () => {
-    if (!filtering || filter.value === 'asc' || filter.value === 'desc' || filter.value !== localFilterValue ) {
-      if (Object.keys(filter).length > 0 && filter.field !== undefined && filter.field !== undefined) {
+    if (!filtering || filter.value !== localFilterValue ) {
+      if (Object.keys(filter).length > 0 && filter.field !== undefined) {
+        onPaginationChange({...paginationModel, page: 0});
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(filter.value);
+      }
+    }
+  };
+
+  const handleSort = (value) => {
+    if (!filtering || value.value !== localFilterValue ) {
+      if (Object.keys(value).length > 0 && value.field !== undefined) {
+        onPaginationChange({...paginationModel, page: 0});
+        startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
+        changeFiltering(true);
+        setLocalFilterValue(value.value);
+      }else if (localFilterValue === "asc" || localFilterValue === "desc") {
+        handleRemoveFilter();
       }
     }
   };
@@ -88,6 +116,7 @@ export const CategoriesTable = ({ attributes, data }) => {
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
     changeFiltering(false);
+    handleSort({ field: event[0]?.field, value: event[0]?.sort })
   };
 
   
@@ -98,24 +127,24 @@ export const CategoriesTable = ({ attributes, data }) => {
     >
       <Grid
         className="container-buttons-filter"
-        sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: "1160px"}}
+        sx={{display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px"}}
       >
-        <Button
+        {/* <Button
           className="button-filter"
           sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
           onClick={handleSearch}
           startIcon={<FilterAltIcon />}
         >
           Filtrar
-        </Button>
+        </Button> */}
         {filtering ? (
           <Button
+            className="remove-filter-category"
             sx={{
               height: 40,
               backgroundColor: "error.main",
               color: "tertiary.main",
               "&:hover": { bgcolor: "lightError.main" },
-              ml: 1,
             }}
             onClick={handleRemoveFilter}
             startIcon={<CloseIcon />}
@@ -129,6 +158,8 @@ export const CategoriesTable = ({ attributes, data }) => {
         columns={columns}
         rows={data}
         disableColumnSelector
+        disableColumnHeaderSelection
+        disableSelectionOnClick
         loading={isLoading}
         rowCount={rowCountState}
         getRowId={onGetRowId}
@@ -167,7 +198,11 @@ export const CategoriesTable = ({ attributes, data }) => {
           },
           ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {
             color: "white",
+          }, 
+          ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
+            outline: "none",
           },
+          
         }}
       />
     </Grid>

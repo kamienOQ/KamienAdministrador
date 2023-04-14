@@ -98,74 +98,67 @@ export const onStartGetCategories = (page = 0, size = 5) => {
 
 export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
   return async (dispatch, getState) => {
-
     const { filter } = getState().categories;
-    if(!!filter){
-      const { field, value } = filter;
-      dispatch(onCleanCategories());
-      const collectionRef = collection(FirebaseDB, `/categories`);
-      let q, undersized = false;
-      if(field?.toLowerCase().includes('name')){
-        if(value==='asc'){
-          if (page === 0) {
-            q = query( collectionRef, orderBy("categoryNameLowerCase", "asc"), limit(size) );
-          } else {
-            const lastVisibleDoc = query( collectionRef,  orderBy("categoryNameLowerCase", "asc"), limit(page * size) );
-            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
-            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  orderBy("categoryNameLowerCase", "asc"), startAfter(lastVisible), limit(size) );
-          }
-        }if(value==='desc'){
-          if (page === 0) {
-            q = query( collectionRef, orderBy("categoryNameLowerCase", "desc"), limit(size) );
-          } else {
-            const lastVisibleDoc = query( collectionRef,  orderBy("categoryNameLowerCase", "desc"), limit(page * size) );
-            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
-            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  orderBy("categoryNameLowerCase", "desc"), startAfter(lastVisible), limit(size) );
-          }
-        }if(value!=='asc' && value !== 'desc'){
-          if(preValue !== value){
-            q = query( collectionRef, where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'));
-            const querySnapshot = await getDocs(q);
-            undersized = (querySnapshot.size <= size) ? true : false;
-            dispatch(onSetNumberCategories(querySnapshot.size));
-          } if (page === 0 || undersized) {
-            q = query( collectionRef, where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'), limit(size) );
-          } else {
-            const lastVisibleDoc = query( collectionRef,  where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'), limit(page * size) );
-            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
-            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  where('categoryNameLowerCase', '>=', value.toLowerCase()), where('categoryNameLowerCase', '<', value.toLowerCase() + '\uf8ff'), startAfter(lastVisible), limit(size) );
-          }
-        }
-      }
-      if(field?.toLowerCase().includes('date')){
-        const dateObject = new Date(value)
+    if (!filter) return;
+    const { field, value } = filter;
+    dispatch(onCleanCategories());
+    const collectionRef = collection(FirebaseDB, `/categories`);
+    let q, undersized = false;
+
+    if(field?.toLowerCase().includes('name')){
+      if(value!=='asc' && value !== 'desc'){
+        const formattedName = value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         if(preValue !== value){
-          q = query( collectionRef, where("date", ">=", dateObject.getTime()));
+          q = query( collectionRef, where('categoryNameLowerCase', '>=', formattedName), where('categoryNameLowerCase', '<', formattedName + '\uf8ff'));
           const querySnapshot = await getDocs(q);
           undersized = (querySnapshot.size <= size) ? true : false;
           dispatch(onSetNumberCategories(querySnapshot.size));
         } if (page === 0 || undersized) {
-          q = query( collectionRef, where("date", ">=", dateObject.getTime()), limit(size) );
+          q = query( collectionRef, where('categoryNameLowerCase', '>=', formattedName), where('categoryNameLowerCase', '<', formattedName + '\uf8ff'), limit(size) );
         } else {
-          const lastVisibleDoc = query( collectionRef,  where("date", ">=", dateObject.getTime()), limit(page * size) );
+          const lastVisibleDoc = query( collectionRef,  where('categoryNameLowerCase', '>=', formattedName), where('categoryNameLowerCase', '<', formattedName + '\uf8ff'), limit(page * size) );
           const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
           const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-          q = query( collectionRef,  where("date", ">=", dateObject.getTime()), startAfter(lastVisible), limit(size) );
+          q = query( collectionRef,  where('categoryNameLowerCase', '>=', formattedName), where('categoryNameLowerCase', '<', formattedName + '\uf8ff'), startAfter(lastVisible), limit(size) );
+        }
+      }else{
+        if (page === 0) {
+          q = query( collectionRef, orderBy("categoryNameLowerCase", value), limit(size) );
+          dispatch(onStartNumberCategories());
+        } else {
+          const lastVisibleDoc = query( collectionRef,  orderBy("categoryNameLowerCase", value), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  orderBy("categoryNameLowerCase", value), startAfter(lastVisible), limit(size) );
         }
       }
-
-      const querySnapshot = await getDocs(q);
-      const newCategories = querySnapshot.docs.map((doc, index) => {
-        return { id: index + 1 + page * size, ...doc.data() };
-      });
-  
-      dispatch(onSetCategories(newCategories));
     }
+    if(field?.toLowerCase().includes('date')){
+      const dateObject = new Date(value)
+      if(preValue !== value){
+        q = query( collectionRef, where("date", ">=", dateObject.getTime()));
+        const querySnapshot = await getDocs(q);
+        undersized = (querySnapshot.size <= size) ? true : false;
+        dispatch(onSetNumberCategories(querySnapshot.size));
+      } if (page === 0 || undersized) {
+        q = query( collectionRef, where("date", ">=", dateObject.getTime()), limit(size) );
+      } else {
+        const lastVisibleDoc = query( collectionRef,  where("date", ">=", dateObject.getTime()), limit(page * size) );
+        const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+        const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+        q = query( collectionRef,  where("date", ">=", dateObject.getTime()), startAfter(lastVisible), limit(size) );
+      }
+    }
+
+    const querySnapshot = await getDocs(q);
+    const newCategories = querySnapshot.docs.map((doc, index) => {
+      return { id: index + 1 + page * size, ...doc.data() };
+    });
+
+    dispatch(onSetCategories(newCategories));
   }
 }
+
 
 export const onStartNumberCategories = () => {
   return async (dispatch) => {
