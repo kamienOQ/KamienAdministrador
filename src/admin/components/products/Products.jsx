@@ -1,17 +1,14 @@
-import { getGridDateOperators, getGridStringOperators } from "@mui/x-data-grid";
+import { getGridStringOperators } from "@mui/x-data-grid";
 import { useProductsStore } from "../../../hooks";
 import { ProductsTable, ProductActions } from "./";
 
 
 export const Products = () => {
+
   const { products } = useProductsStore();
 
   const filterOperatorsName = getGridStringOperators().filter(({ value }) =>
     ['contains'].includes(value),
-  );
-
-  const filterOperatorsDate = getGridDateOperators().filter(({ value }) =>
-    ['onOrAfter'].includes(value),
   );
 
   const attributes = [
@@ -91,4 +88,5 @@ export const Products = () => {
   return (
     !!products && <ProductsTable attributes={attributes} data={products} />
   );
+  
 };

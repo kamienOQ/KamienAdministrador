@@ -33,11 +33,11 @@ export const categoriesSlice = createSlice({
                 active: true,
                 relatedProducts: [],
                 relatedAttributes: [],
-                imageCategory: {
+                image: {
                     name: null,
                     url: null
                 },
-                iconCategory: {
+                icon: {
                     name: null,
                     url: null
                 },
@@ -52,7 +52,7 @@ export const categoriesSlice = createSlice({
             state.isSaving = false;
             state.categories = state.categories.map( category => {
 
-                if (category.categoryName === payload.categoryName ){
+                if (category.categoryName === state.preCategory.name ){
                     return payload;
                 }
 
@@ -64,8 +64,9 @@ export const categoriesSlice = createSlice({
             state.activeCategory = null;
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
         },
-        // onChargeCategoriesUploaded: ( state, { payload } ) => {
+        // onChargeCategoriesUploaded: ( state, { payload, prevName } ) => {
         //     let duplicate = false
+        //     if(prevName !== payload.categoryName){}
         //     if(state.categories){
         //         state.categories.forEach(category => {
         //             if(category.categoryName === payload.categoryName)
@@ -88,25 +89,25 @@ export const categoriesSlice = createSlice({
         onAddCategoryAtStart: ( state, { payload } ) => {
             state.categories.unshift(payload);
         },
-        onAddImageCategory: ( state, { payload } ) => {
-            state.activeCategory.imageCategory.name = payload[0];
-            state.activeCategory.imageCategory.url = payload[1];
+        onAddImage: ( state, { payload } ) => {
+            state.activeCategory.image.name = payload[0];
+            state.activeCategory.image.url = payload[1];
         },
-        onAddIconCategory: ( state, { payload } ) => {
-            state.activeCategory.iconCategory.name = payload[0];
-            state.activeCategory.iconCategory.url = payload[1];
+        onAddIcon: ( state, { payload } ) => {
+            state.activeCategory.icon.name = payload[0];
+            state.activeCategory.icon.url = payload[1];
         },
-        onAddErrorMessageCategory: ( state, { payload } ) => {
+        onAddErrorMessage: ( state, { payload } ) => {
             state.message.error = payload;
         },
-        onAddSuccessMessageCategory: ( state, { payload } ) => {
+        onAddSuccessMessage: ( state, { payload } ) => {
             state.message.success = payload;
         },
         onAddCategoryNameLowerCase: ( state ) => {
             let formattedName = state.activeCategory.categoryName.toLowerCase();
             state.activeCategory.categoryNameLowerCase = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         },
-        onChangeActiveCategory: ( state ) => {
+        onChangeActive: ( state ) => {
             state.activeCategory.active = !state.activeCategory.active
 
             state.categories = state.categories.map( category => {
@@ -116,7 +117,7 @@ export const categoriesSlice = createSlice({
                 return category;
             });
         },
-        onChangeEditingCategory: ( state, { payload } ) => {
+        onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
         },
         onChangePreCategoryName: ( state, { payload } ) => {
@@ -125,13 +126,13 @@ export const categoriesSlice = createSlice({
         onChangePreCategoryUpdated: ( state, { payload } ) => {
             state.preCategory.updatedName = payload;
         },
-        onChangeFilteringCategory: ( state, { payload } )=> {
+        onChangeFiltering: ( state, { payload } )=> {
             state.filtering = payload
         },
-        onChangeFilterCategory: ( state, { payload } )=> {
+        onChangeFilter: ( state, { payload } )=> {
             state.filter = payload
         },
-        onChangePageAndSizeCategory: ( state, { payload } )=> {
+        onChangePageAndSize: ( state, { payload } )=> {
             state.page = payload.page;
             state.pageSize = payload.pageSize;
         },
@@ -152,16 +153,16 @@ export const {
     // onChargeCategoriesUploaded,
     onAddCategoryAtStart,
     onAddCategoryNameLowerCase, 
-    onAddErrorMessageCategory,
-    onAddIconCategory, 
-    onAddImageCategory, 
+    onAddErrorMessage,
+    onAddIcon, 
+    onAddImage, 
     onAddNewCategory, 
-    onAddSuccessMessageCategory,
-    onChangeActiveCategory,
-    onChangeEditingCategory,
-    onChangeFilterCategory,
-    onChangeFilteringCategory,
-    onChangePageAndSizeCategory,
+    onAddSuccessMessage,
+    onChangeActive,
+    onChangeEditing,
+    onChangeFilter,
+    onChangeFiltering,
+    onChangePageAndSize,
     onChangePreCategoryName,
     onChangePreCategoryUpdated,
     onChangeSavingNewCategory, 

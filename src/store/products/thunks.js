@@ -255,14 +255,15 @@ export const onStartChangeActiveProduct = () => {
 
 export const onStartGetCategoriesForm = () => {
   return async (dispatch) => {
+    console.log("Entro")
     const collectionRef = collection(FirebaseDB, `/categories`);
-    const querySnapshot = await getDocs(collectionRef);
+    const q = query(collectionRef, where("categoryName", "!=", ""));
+    const querySnapshot = await getDocs(q);
 
-    const actualCategories = querySnapshot.docs.map((doc, index) => {
+    const actualCategories = querySnapshot.docs.map((doc) => {
       console.log(doc.data())
-      return doc.data().categoryName;
+      return doc.data();
     });
     dispatch(onSetCategories(actualCategories));
-
   }
 }
