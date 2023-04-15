@@ -32,7 +32,7 @@ export const CategoryView = () => {
             <DialogContent className='container-view-category-icon'>
                 <DialogContent sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 0.1}}>
                     <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
-                    <Typography variant="h6">
+                    <Typography className='contrast-text' variant="h6" sx={{color: "tertiary.main"}}>
                         {activeCategory?.categoryName}
                     </Typography> 
                 </DialogContent>

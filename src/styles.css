@@ -191,6 +191,10 @@ label {
   background-color: var(--header);
 }
 
+.contrast-text{
+    text-shadow: 1px 1px 1px #000;
+}
+
 @media (max-width: 1250px) {
     .container-buttons-filter{
         width: 1130px !important;
