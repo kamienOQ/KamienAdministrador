@@ -52,7 +52,7 @@ export const categoriesSlice = createSlice({
             state.isSaving = false;
             state.categories = state.categories.map( category => {
 
-                if (category.categoryName === payload.categoryName ){
+                if (category.categoryName === state.preCategory.name ){
                     return payload;
                 }
 
@@ -64,8 +64,9 @@ export const categoriesSlice = createSlice({
             state.activeCategory = null;
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
         },
-        // onChargeCategoriesUploaded: ( state, { payload } ) => {
+        // onChargeCategoriesUploaded: ( state, { payload, prevName } ) => {
         //     let duplicate = false
+        //     if(prevName !== payload.categoryName){}
         //     if(state.categories){
         //         state.categories.forEach(category => {
         //             if(category.categoryName === payload.categoryName)

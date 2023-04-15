@@ -116,7 +116,7 @@ export const CategoriesTable = ({ attributes, data }) => {
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
     changeFiltering(false);
-    handleSort({ field: event[0]?.field, value: event[0]?.sort })
+    handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
   

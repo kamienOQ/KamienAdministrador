@@ -7,7 +7,7 @@ import { Categories, CategoryModal, CategoryView } from "../components";
 
 export const CategoriesCrud = () => {
   const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
+  const { editing, isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
 
   useEffect(() => {
     if (!!message.success) {

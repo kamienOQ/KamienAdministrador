@@ -8,7 +8,9 @@ import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, 
 export const onStartUploadFile = (file, type, collectionName) => {
   return async (dispatch) => {
     if ( file ){
-      let imgId = collectionName+file.name;
+      dispatch(onChangeSavingNewCategory(true));
+      const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      let imgId = id+collectionName+file.name;
       const storageRef = ref(FirebaseStorage, imgId);
 
       await uploadBytes(storageRef, file);
@@ -19,6 +21,7 @@ export const onStartUploadFile = (file, type, collectionName) => {
       }else{
         dispatch( onAddIcon( [imgId, downloadURL] ) );
       }
+      dispatch(onChangeSavingNewCategory(false));
     }
   }
 }
@@ -174,6 +177,7 @@ export const onStartUpdateCategory = () => {
   return async( dispatch, getState ) => {
 
       let duplicateCategory = false;
+      dispatch(onAddCategoryNameLowerCase());
       dispatch(onChangeSavingNewCategory(true));
       const { activeCategory, preCategory } = getState().categories;
 
