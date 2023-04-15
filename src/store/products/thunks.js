@@ -1,8 +1,9 @@
 import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onChangeSavingNewProduct, onAddImageProduct, onAddIconProduct, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanProducts, onAddProductAtStart, onSetProducts, onSetNumberProducts, onAddProductNameLowerCase, onUpdateProduct, onChangeActive, onSetCategories } from "./";
+import { onCleanCategories, onChangeSavingNewProduct, onAddImageProduct, onAddIconProduct, onAddSuccessMessage, onAddErrorMessage, 
+    onCleanProducts, onAddProductAtStart, onSetProducts, onSetNumberProducts, onAddProductNameLowerCase, 
+    onUpdateProduct, onChangeActive, onSetCategories, onSetRelatedCategories } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -33,6 +34,8 @@ export const onStartUploadNewProduct = () => {
     let duplicateProduct = false;
     dispatch(onAddProductNameLowerCase());
     const { activeProduct, products, pageSize, page } = getState().products;
+    const { categoriesSelected } = getState().ui;
+    dispatch(onSetRelatedCategories( categoriesSelected ));
 
     dispatch(onChangeSavingNewProduct(true));
 
@@ -255,14 +258,13 @@ export const onStartChangeActiveProduct = () => {
 
 export const onStartGetCategoriesForm = () => {
   return async (dispatch) => {
-    console.log("Entro")
+    dispatch(onCleanCategories())
     const collectionRef = collection(FirebaseDB, `/categories`);
     const q = query(collectionRef, where("categoryName", "!=", ""));
     const querySnapshot = await getDocs(q);
 
     const actualCategories = querySnapshot.docs.map((doc) => {
-      console.log(doc.data())
-      return doc.data();
+      return doc.data().categoryName;
     });
     dispatch(onSetCategories(actualCategories));
   }

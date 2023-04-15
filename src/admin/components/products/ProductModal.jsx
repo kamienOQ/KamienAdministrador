@@ -7,14 +7,15 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { useCategoriesStore, useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
 import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
+import { FloatingTags } from "./FloatingTags";
 
 export const ProductModal = () => { 
 
-  const { closeProductModal, isProductModalOpen, productsSelected  } = useUiStore();
+  const { closeProductModal, isProductModalOpen, categoriesSelected  } = useUiStore();
   
-  const { products, categories, activeProduct, editing, selected, onSelectProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
+  const { products, categories, activeProduct, editing, onSelectProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
       startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, startUpdateProduct, starGetCategoriesForm, isSaving } = useProductsStore();
-  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useProductsState();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategory, selected } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
@@ -42,7 +43,7 @@ export const ProductModal = () => {
   useEffect(() => {
     addErrorMessage('');
     addSuccessMessage('');
-  }, [formState, productsSelected, imageLoad, iconLoad ]);
+  }, [formState, categoriesSelected, imageLoad, iconLoad ]);
   
   
   const onCloseModa = () => {
@@ -105,10 +106,6 @@ export const ProductModal = () => {
         </DialogTitle >
         <form className="product-form">
           <TextField
-            sx={{ p: 1 }}
-            InputLabelProps={{
-              style: { color: '#000000' },
-            }}
             type="text"
             fullWidth
             label="Nombre del Producto" variant="filled" focused 
@@ -117,12 +114,10 @@ export const ProductModal = () => {
             onChange={onInputChange}
             error={emptyName}
             helperText={emptyName ? 'Campo vacío' : ''} 
+            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
           <TextField
-            sx={{ p: 1 }}
-            InputLabelProps={{
-              style: { color: '#000000' },
-            }}
             type="number"
             fullWidth
             label="Precio del Producto" variant="filled" focused
@@ -131,12 +126,10 @@ export const ProductModal = () => {
             onChange={onInputChange}
             error={emptyName}
             helperText={emptyName ? 'Campo vacío' : ''}
+             sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
           <TextField
-            sx={{ p: 1 }}
-            InputLabelProps={{
-              style: { color: '#000000' },
-            }}
             type="text"
             fullWidth
             label="Atributos del Producto" variant="filled" focused
@@ -145,25 +138,27 @@ export const ProductModal = () => {
             onChange={onInputChange}
             error={emptyName}
             helperText={emptyName ? 'Campo vacío' : ''}
+             sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
           <TextField
-            sx={{ p: 1 }}
-            InputLabelProps={{
-              style: { color: '#000000' },
-            }}
             fullWidth
             id="outlined-select-currency"
             select
             label="Categoría del producto" variant="filled" focused
             defaultValue=""
-            onChange={onInputChange}
+            onChange={onSelectCategory}
             helperText="Por favor seleccione la categoría del producto"
+             sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           >
-            {/* importar y recorrer productsUploaded opteniendo el nombre */}
+            {/* importar y recorrer categoriesUploaded obteniendo el nombre */}
             {categories.map((option) => (
-              <MenuItem key={option.label} value={option.label}>
-                {option.label}
-              </MenuItem>
+              option.map((option1) => (
+                <MenuItem key={option1} value={option1}>
+                  {option1}
+                </MenuItem>
+              ))
             ))}
           </TextField>
           {selected && <FloatingTags />}

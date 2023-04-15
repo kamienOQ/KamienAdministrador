@@ -9,7 +9,7 @@ export const productsSlice = createSlice({
             success: ''
         },
         numberProducts: undefined,
-        products: [],
+        products: '',
         categories: [],
         isLoading: false,
         editing: false,
@@ -31,9 +31,9 @@ export const productsSlice = createSlice({
             const newProduct = {
                 productName: '',
                 productNameLowerCase: '',
-                products: [],
+                products: '',
                 active: true,
-                relatedProducts: [],
+                relatedCategories: [],
                 relatedAttributes: [],
                 image: {
                     name: null,
@@ -50,6 +50,10 @@ export const productsSlice = createSlice({
         onSetActiveProduct: ( state, { payload } ) => {
             state.activeProduct = payload;
         },
+        onSetRelatedCategories: ( state, { payload } ) => {
+            state.activeProduct.relatedCategories = payload;
+        },
+        // hacer esto en los atributos
         onUpdateProduct: ( state, { payload } ) => {
             state.isSaving = false;
             state.products = state.products.map( product => {
@@ -86,8 +90,8 @@ export const productsSlice = createSlice({
             state.isLoading = false;
         },
         onSetCategories: ( state, { payload } ) => {
-            state.categories = payload;
-            state.isLoading = false;
+            state.categories.push( payload );
+            state.isLoading = false;    
         },
         onSetNumberProducts: ( state, { payload } ) => {
             state.numberProducts = payload
@@ -96,6 +100,7 @@ export const productsSlice = createSlice({
             state.products.unshift(payload);
         },  
         onAddImageProduct: ( state, { payload } ) => {
+            console.log(payload)
             state.activeProduct.image.name = payload[0];
             state.activeProduct.image.url = payload[1];
         },
@@ -152,9 +157,13 @@ export const productsSlice = createSlice({
             state.pageSize = payload.pageSize;
         },
         onCleanProducts: ( state ) => {
-            state.products = [];
             state.activeProduct = null;
             state.isLoading = true;
+        },
+        onCleanCategories: ( state ) => {
+            state.categories = [];
+            //state.activeProduct = null;
+            //state.isLoading = true;
         },
         onCleanActiveProduct: ( state ) => {
             state.activeProduct = null;
@@ -181,6 +190,7 @@ export const {
     onChargeProductsUploaded,
     onCleanActiveProduct,
     onCleanProducts,
+    onCleanCategories,
     onCleanProductsUploaded,
     onDeleteProduct,
     onSetActiveProduct, 
@@ -189,6 +199,7 @@ export const {
     onAddProducts,
     onSetProducts,
     onSetCategories,
+    onSetRelatedCategories,
     onAddProductNameLowerCase, 
     onChangeActive,
     onChangeEditing,

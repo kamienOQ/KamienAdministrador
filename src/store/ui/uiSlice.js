@@ -9,7 +9,7 @@ export const uiSlice = createSlice({
         totalPages: 1,
         page: 1,
         searching: '',
-        productsSelected: []
+        categoriesSelected: []
     },
     reducers: {
         onSetTotalPages: ( state, { payload } ) => {
@@ -39,18 +39,19 @@ export const uiSlice = createSlice({
         },
         onCloseProductModal: ( state ) => {
             state.isProductModalOpen = false;
+            state.categoriesSelected = [];
         },
-        onAddProductsSelected: ( state, { payload } ) => {
-            if (!state.productsSelected.some((product) => product.toLowerCase() === payload.toLowerCase())) {
-                state.productsSelected.push( payload );
+        onAddCategoriesSelected: ( state, { payload } ) => {
+            if (!state.categoriesSelected.some((category) => category.toLowerCase() === payload.toLowerCase())) {
+                state.categoriesSelected.push( payload );
             }
         },
-        onDeleteProductsSelected: ( state, { payload } ) => {
-            state.productsSelected = state.productsSelected.filter( event => event !== payload );
+        onDeleteCategoriesSelected: ( state, { payload } ) => {
+            state.categoriesSelected = state.categoriesSelected.filter( event => event !== payload );
         },
-        onCleanProductsSelected: ( state ) => {
-            state.productsSelected = []
-        },
+        // onCleanCategorySelected: ( state ) => {
+        //     state.categoriesSelected = [];
+        // },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;
         },
@@ -83,9 +84,9 @@ export const {
     onSearchingName,
     onOpenProductModal, 
     onCloseProductModal, 
-    onAddProductsSelected, 
-    onDeleteProductsSelected, 
-    onCleanProductsSelected, 
+    onAddCategoriesSelected,
+    onDeleteCategoriesSelected, 
+    // onCleanCategorySelected, 
     onOpenCategoryModal, 
     onCloseCategoryModal, 
     onOpenModalViewProduct,

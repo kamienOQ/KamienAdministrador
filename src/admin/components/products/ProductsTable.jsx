@@ -123,7 +123,7 @@ export const ProductsTable = ({ attributes, data }) => {
   return (
     <Grid container
       className="container-table"
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1200px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
     >
       <Grid
         className="container-buttons-filter"

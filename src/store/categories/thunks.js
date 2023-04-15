@@ -218,7 +218,7 @@ export const onStartUpdateCategory = () => {
   }
 }
 
-export const onStartChangeActiveCategory = () => {
+export const onStartChangeActive = () => {
   return async( dispatch, getState ) => {
 
     dispatch(onChangeSavingNewCategory(true));

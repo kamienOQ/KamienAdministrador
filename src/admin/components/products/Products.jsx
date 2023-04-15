@@ -49,7 +49,7 @@ export const Products = () => {
       field: "image",
       headerName: "Imagen",
       type: "image",
-      width: 200,
+      width: 250,
       sortable: false,
       filterable: false,
       renderCell: (params) => (
@@ -62,7 +62,7 @@ export const Products = () => {
       field: "icon",
       headerName: "Icono",
       type: "image",
-      width: 200,
+      width: 250,
       sortable: false,
       filterable: false,
       renderCell: (params) => (
@@ -75,7 +75,7 @@ export const Products = () => {
       field: "actions",
       headerName: "Acciones",
       type: "actions",
-      width: 360,
+      width: 200,
       sortable: false,
       filterable: false,
       hideable: false,

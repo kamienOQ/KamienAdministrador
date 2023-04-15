@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessageCategory, onAddIconCategory, onAddImageCategory, onAddNewCategory, onAddSuccessMessageCategory, onChangeEditingCategory, onChangeFilterCategory, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFilteringCategory, 
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
+    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, 
     onSetNumberCategories, onStartNumberCategories, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, 
-    onStartChangeActiveCategory, onChangeActiveCategory, onChangePageAndSizeCategory } from "../store";
+    onStartChangeActive, onChangeActive, onChangePageAndSize } from "../store/categories";
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -29,19 +29,19 @@ export const useCategoriesStore = () => {
     }
 
     const addImageCategory = ( images ) => {
-        dispatch( onAddImageCategory( images ) );
+        dispatch( onAddImage( images ) );
     }
 
     const addIconCategory = ( images ) => {
-        dispatch( onAddIconCategory( images ) );
+        dispatch( onAddIcon( images ) );
     }
 
     const addErrorMessageCategory = ( message ) => {
-        dispatch( onAddErrorMessageCategory( message ) );
+        dispatch( onAddErrorMessage( message ) );
     }
 
     const addSuccessMessageCategory = ( message ) => {
-        dispatch( onAddSuccessMessageCategory( message ) );
+        dispatch( onAddSuccessMessage( message ) );
     }
 
     const setNumberCategories = ( number ) => {
@@ -49,7 +49,7 @@ export const useCategoriesStore = () => {
     }
 
     const changeEditingCategory = ( value ) => {
-        dispatch( onChangeEditingCategory( value ) );
+        dispatch( onChangeEditing( value ) );
     }
 
     const changePreCategoryName = ( value ) => {
@@ -61,19 +61,19 @@ export const useCategoriesStore = () => {
     }
 
     const changeFilteringCategory = ( value ) => {
-        dispatch( onChangeFilteringCategory( value ) );
+        dispatch( onChangeFiltering( value ) );
     }
 
     const changeFilterCategory = ( value ) => {
-        dispatch( onChangeFilterCategory( value ) );
+        dispatch( onChangeFilter( value ) );
     }
 
     const changeActiveCategory = () => {
-        dispatch( onChangeActiveCategory() );
+        dispatch( onChangeActive() );
     }
 
     const changePageAndSizeCategory = ( value ) => {
-        dispatch( onChangePageAndSizeCategory( value ) );
+        dispatch( onChangePageAndSize( value ) );
     }
 
     const cleanCategories = () => {
@@ -107,7 +107,7 @@ export const useCategoriesStore = () => {
     }
 
     const startChangeActiveCategory = () => {
-        dispatch( onStartChangeActiveCategory() );
+        dispatch( onStartChangeActive() );
     }    
 
     return {

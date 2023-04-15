@@ -2,18 +2,18 @@ import { useUiStore } from '../../../hooks';
 
 export const FloatingTags = () => {
 
-    const { productsSelected, deleteProductsSelected } = useUiStore();
+    const { categoriesSelected, deleteCategoriesSelected } = useUiStore();
 
     const onDeleteTag = (event) => {
         event.preventDefault();
-        deleteProductsSelected( event.target.parentNode.id )
+        deleteCategoriesSelected( event.target.parentNode.id )
         // console.log(document.getElementById(event.target.parentNode.id))
     }
 
-    const products = productsSelected.map((product) => {
+    const categories = categoriesSelected.map((categories) => {
         return (
-            <div className='tag-container' id={product} key={product}>
-                <p>{product}</p>
+            <div className='tag-container' id={categories} key={categories}>
+                <p>{categories}</p>
                 <button className='closeTag-button' onClick={onDeleteTag}>
                     X
                 </button>
@@ -22,6 +22,6 @@ export const FloatingTags = () => {
     });
 
     return (
-        <div className='tags-container'>{products}</div>
+        <div className='tags-container'>{categories}</div>
     )
 }

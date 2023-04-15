@@ -4,7 +4,7 @@ import { onCleanActiveProduct, onCloseModalViewProduct, onOpenModalViewProduct }
 //Categories
 import { onCleanActiveCategory, onOpenModalViewCategory, onCloseModalViewCategory } from '../store';
 // Ui
-import { onAddProductsSelected, onCloseProductModal, onOpenProductModal, onDeleteProductsSelected, onCloseCategoryModal, onOpenCategoryModal } from '../store';
+import { onAddCategoriesSelected, onCloseProductModal, onOpenProductModal, onDeleteCategoriesSelected, onCloseCategoryModal, onOpenCategoryModal } from '../store';
 
 export const useUiStore = () => {
 
@@ -13,7 +13,7 @@ export const useUiStore = () => {
     const { 
         isProductModalOpen,
         isCategoryModalOpen,
-        productsSelected,
+        categoriesSelected,
         totalPages,
         page,
         isModalViewOpenProduct, 
@@ -38,12 +38,12 @@ export const useUiStore = () => {
         dispatch( onCleanActiveCategory() );
     }
 
-    const addProductsSelected = ( productSelected ) => {
-        dispatch( onAddProductsSelected( productSelected ) )
+    const addCategoriesSelected = ( categoriesSelected ) => {
+        dispatch( onAddCategoriesSelected( categoriesSelected ) )
     }
 
-    const deleteProductsSelected = ( productSelected ) => {
-        dispatch( onDeleteProductsSelected( productSelected ) )
+    const deleteCategoriesSelected = ( categoriesSelected ) => {
+        dispatch( onDeleteCategoriesSelected( categoriesSelected ) )
     }
 
     const cleanProductsSelected = () => {
@@ -70,13 +70,13 @@ export const useUiStore = () => {
         //*Propiedades
         isProductModalOpen,
         isCategoryModalOpen,
-        productsSelected,
+        categoriesSelected,
         isModalViewOpenProduct,
         isModalViewOpenCategory,
 
         //*Métodos
-        addProductsSelected,
-        deleteProductsSelected,
+        addCategoriesSelected,
+        deleteCategoriesSelected,
         cleanProductsSelected,
         openProductModal,
         closeProductModal,
