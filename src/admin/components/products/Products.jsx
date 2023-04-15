@@ -1,6 +1,6 @@
 import { getGridDateOperators, getGridStringOperators } from "@mui/x-data-grid";
 import { useProductsStore } from "../../../hooks";
-import { ProductsTable, ProductActions } from ".";
+import { ProductsTable, ProductActions } from "./";
 
 
 export const Products = () => {
@@ -22,14 +22,22 @@ export const Products = () => {
       width: 60,
       sortable: false,
       filterable: false,
+      hideable: false,
+      disableColumnMenu: true,
     },
     {
       field: "productName",
       headerName: "Nombre",
-      width: 300,
+      width: 250,
       filterable: true,
       sortable: true,
-      filterOperators: filterOperatorsName
+      hideable: false,
+      filterOperators: filterOperatorsName,
+      onKeyDown: (event) => {
+        if (event.key === "Enter") {
+          event.stopPropagation();
+        }
+      },
     },
     {
       field: "price",
@@ -37,6 +45,8 @@ export const Products = () => {
       width: 100,
       filterable: true,
       sortable: false,
+      hideable: false,
+      disableColumnMenu: true
     },
     {
       field: "image",
@@ -49,6 +59,7 @@ export const Products = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
       ),
       hideable: false,
+      disableColumnMenu: true
     },
     {
       field: "icon",
@@ -61,12 +72,13 @@ export const Products = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
       ),
       hideable: false,
+      disableColumnMenu: true
     },
     {
       field: "actions",
       headerName: "Acciones",
       type: "actions",
-      width: 200,
+      width: 360,
       sortable: false,
       filterable: false,
       hideable: false,

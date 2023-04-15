@@ -196,7 +196,7 @@ border-radius: 5px;
 }
 
 .container-table{
-  flex-direction: column  !important;
+  flex-direction: column !important;
 }
 
 .view-category-image{
@@ -239,6 +239,10 @@ border-radius: 5px;
 background-color: var(--header);
 }
 
+.remove-filter-product{
+  margin-left: 50px !important;
+}
+
 @media (max-width: 1250px) {
   .container-buttons-filter{
       width: 1130px !important;
@@ -249,6 +253,9 @@ background-color: var(--header);
   }
   .button-filter{
       margin-left: -10px !important;
+  }
+  .remove-filter-product{
+    margin-left: 35px !important;
   }
 }
 

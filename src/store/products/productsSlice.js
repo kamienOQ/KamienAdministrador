@@ -10,6 +10,7 @@ export const productsSlice = createSlice({
         },
         numberProducts: undefined,
         products: [],
+        categories: [],
         isLoading: false,
         editing: false,
         filtering: false,
@@ -53,7 +54,7 @@ export const productsSlice = createSlice({
             state.isSaving = false;
             state.products = state.products.map( product => {
 
-                if (product.productName === payload.productName ){
+                if (product.productName === state.preProduct.name ){
                     return payload
                 }
 
@@ -82,6 +83,10 @@ export const productsSlice = createSlice({
         },
         onSetProducts: ( state, { payload } ) => {
             state.products = payload;
+            state.isLoading = false;
+        },
+        onSetCategories: ( state, { payload } ) => {
+            state.categories = payload;
             state.isLoading = false;
         },
         onSetNumberProducts: ( state, { payload } ) => {
@@ -183,6 +188,7 @@ export const {
     onUpdateProduct,
     onAddProducts,
     onSetProducts,
+    onSetCategories,
     onAddProductNameLowerCase, 
     onChangeActive,
     onChangeEditing,

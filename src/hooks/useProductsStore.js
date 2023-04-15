@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
     onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
     onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
-    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters } from "../store";
+    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters, onStartGetCategoriesForm } from "../store";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -10,6 +10,7 @@ export const useProductsStore = () => {
     const { 
         activeProduct,
         products,
+        categories,
         editing,
         filter,
         filtering,
@@ -111,18 +112,23 @@ export const useProductsStore = () => {
         dispatch( onStartFilterProducts(page, size, preValue) );
     }
 
-    const startUpdateProduct     = () => {
-        dispatch( onStartUpdateProduct  () );
+    const startUpdateProduct = () => {
+        dispatch( onStartUpdateProduct() );
     }
 
-    const startChangeActiveProduct   = () => {
-        dispatch( onStartChangeActiveProduct    () );
-    }       
+    const startChangeActiveProduct = () => {
+        dispatch( onStartChangeActiveProduct() );
+    }   
+    
+    const starGetCategoriesForm = () => {
+        dispatch ( onStartGetCategoriesForm() );
+    }
 
     return {
         //*Propiedades
         activeProduct,
         products,
+        categories,
         editing,
         filter,
         isLoadingProduct,
@@ -151,6 +157,7 @@ export const useProductsStore = () => {
         startChangeActiveProduct,
         startFilterProducts,
         startGetProducts,
+        starGetCategoriesForm,
         startNumberProducts,
         startUpdateProduct,
         startUploadFile,

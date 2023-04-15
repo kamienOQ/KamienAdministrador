@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { DataGrid, esES, gridClasses } from "@mui/x-data-grid";
+import { DataGrid, esES } from "@mui/x-data-grid";
 import { Button, Grid } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CloseIcon from '@mui/icons-material/Close';
@@ -12,7 +12,6 @@ export const ProductsTable = ({ attributes, data }) => {
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
-  
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,
     page: 0,
@@ -46,16 +45,44 @@ export const ProductsTable = ({ attributes, data }) => {
     setRowCountState(numberProducts !== undefined ? numberProducts : 0);
   }, [numberProducts, setRowCountState]);
 
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter" ) {
+        if (!filtering || filter.value !== localFilterValue ) {
+          handleSearch()
+        }
+      }
+    };
+    document.addEventListener("keyup", handleKeyPress);
+    return () => {
+      document.removeEventListener("keyup", handleKeyPress);
+    };
+  }, [filtering, filter.value, localFilterValue]);
+
   const columns = useMemo(() => attributes, [rowId]);
 
 
   // * Filter
   const handleSearch = () => {
-    if (!filtering || filter.value === 'asc' || filter.value === 'desc' || filter.value !== localFilterValue ) {
-      if (Object.keys(filter).length > 0 && filter.field !== undefined && filter.field !== undefined) {
+    if (!filtering || filter.value !== localFilterValue ) {
+      if (Object.keys(filter).length > 0 && filter.field !== undefined) {
+        onPaginationChange({...paginationModel, page: 0});
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(filter.value);
+      }
+    }
+  };
+
+  const handleSort = (value) => {
+    if (!filtering || value.value !== localFilterValue ) {
+      if (Object.keys(value).length > 0 && value.field !== undefined) {
+        onPaginationChange({...paginationModel, page: 0});
+        startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
+        changeFiltering(true);
+        setLocalFilterValue(value.value);
+      }else if (localFilterValue === "asc" || localFilterValue === "desc") {
+        handleRemoveFilter();
       }
     }
   };
@@ -89,19 +116,50 @@ export const ProductsTable = ({ attributes, data }) => {
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
     changeFiltering(false);
+    handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
   
   return (
     <Grid container
       className="container-table"
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1200px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
     >
+      <Grid
+        className="container-buttons-filter"
+        sx={{display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px"}}
+      >
+        {/* <Button
+          className="button-filter"
+          sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
+          onClick={handleSearch}
+          startIcon={<FilterAltIcon />}
+        >
+          Filtrar
+        </Button> */}
+        {filtering ? (
+          <Button
+            className="remove-filter-product"
+            sx={{
+              height: 40,
+              backgroundColor: "error.main",
+              color: "tertiary.main",
+              "&:hover": { bgcolor: "lightError.main" },
+            }}
+            onClick={handleRemoveFilter}
+            startIcon={<CloseIcon />}
+          >
+            Quitar filtro
+          </Button>
+        ) : null}
+      </Grid>
       <DataGrid
         className="table"
         columns={columns}
         rows={data}
         disableColumnSelector
+        disableColumnHeaderSelection
+        disableSelectionOnClick
         loading={isLoadingProduct}
         rowCount={rowCountState}
         getRowId={onGetRowId}
@@ -109,12 +167,14 @@ export const ProductsTable = ({ attributes, data }) => {
         paginationModel={paginationModel}
         onPaginationModelChange={onPaginationChange}
         paginationMode="server"
-        //filterModel={filterModel}
-        //onFilterModelChange={handleFilterChange}
-        //filterMode="server"
+        filterModel={filterModel}
+        onFilterModelChange={handleFilterChange}
+        filterMode="server"
+        sortModel={sortModel}
+        onSortModelChange={handleSortModelChange}
+        sortingMode="server"
         filterOperators={{ date: [{ label: '>', value: 'gt' }] }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-        onCellEditCommit={(params) => setRowId(params.id)}
         sx={{
           color: "dark.main",
           maxWidth: "1172px",
@@ -138,7 +198,11 @@ export const ProductsTable = ({ attributes, data }) => {
           },
           ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {
             color: "white",
+          }, 
+          ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
+            outline: "none",
           },
+          
         }}
       />
     </Grid>

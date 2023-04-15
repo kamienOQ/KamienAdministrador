@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
@@ -12,14 +12,16 @@ export const ProductModal = () => {
 
   const { closeProductModal, isProductModalOpen, productsSelected  } = useUiStore();
   
-  const { products, activeProduct, editing, selected, onSelectProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
-      startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, startUpdateProduct } = useProductsStore();
+  const { products, categories, activeProduct, editing, selected, onSelectProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
+      startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, startUpdateProduct, starGetCategoriesForm, isSaving } = useProductsStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
 
   const { setNumberCategories } = useCategoriesStore();
+
+  // const test = React.memo(starGetCategoriesForm());
 
   useEffect(() => {
     if(editing){
@@ -154,16 +156,15 @@ export const ProductModal = () => {
             select
             label="Categoría del producto" variant="filled" focused
             defaultValue=""
-            //onChange={startGetCategories()}
-            onChange={setNumberCategories}
+            onChange={onInputChange}
             helperText="Por favor seleccione la categoría del producto"
           >
             {/* importar y recorrer productsUploaded opteniendo el nombre */}
-            {/*productsCategoriesPrueba.map((option) => (
+            {categories.map((option) => (
               <MenuItem key={option.label} value={option.label}>
                 {option.label}
               </MenuItem>
-            ))*/}
+            ))}
           </TextField>
           {selected && <FloatingTags />}
           <div className="products-modal-buttons">
@@ -184,6 +185,7 @@ export const ProductModal = () => {
                   component="label"
                   onChange={onUploadImage}
                   sx={{ color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
+                  disabled={isSaving}
                 >
                   <input hidden accept="image/*" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
@@ -201,6 +203,7 @@ export const ProductModal = () => {
                   component="label"
                   onChange={onUploadIcon}
                   sx={{ color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
+                  disabled={isSaving}
                 >
                   <input hidden accept=".png" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
@@ -226,6 +229,7 @@ export const ProductModal = () => {
                 onClick={onCloseModa}
                 variant="contained"
                 sx={{ backgroundColor: "error.main", borderRadius: 20 }}
+                disabled={isSaving}
               >
                 <CloseIcon />
               </Button>
@@ -235,6 +239,7 @@ export const ProductModal = () => {
                 onClick={onSave}
                 variant="contained"
                 sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 }}
+                disabled={isSaving}
               >
                 <CheckIcon />
               </Button>
