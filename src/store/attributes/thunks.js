@@ -1,9 +1,8 @@
-import { collection, doc, getDocs, orderBy, query, setDoc, where } from "firebase/firestore/lite";
+import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onSetTotalPages } from "..";
 import { onChangeSavingNewAttribute, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanAttributes, onSetNumberAttributes, onChargeAttributesUploaded, onAddAttributeAtStart, onSetAttributes } from ".";
+    onCleanAttributes, onAddAttributeAtStart, onSetAttributes, onSetNumberAttributes, onUpdateAttribute,onAddAttributeNameLowerCase, onChangeActive } from ".";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -25,11 +24,12 @@ export const onStartUploadFile = (file, type, collectionName) => {
 }
 
 
-export const onstartUploadNewAttribute = () => {
+export const onStartUploadNewAttribute = () => {
   return async (dispatch, getState) => {
     
     let duplicateAttribute = false;
-    const { activeAttribute, attributes } = getState().attributes;
+    dispatch(onAddAttributeNameLowerCase());
+    const { activeAttribute, attributes, pageSize, page } = getState().attributes;
 
     dispatch(onChangeSavingNewAttribute(true));
 
@@ -39,21 +39,32 @@ export const onstartUploadNewAttribute = () => {
 
     querySnapshot.forEach((doc) => {
       const { attributeName } = doc.data();
+      //console.log(activeAttribute.attributeName.toLowerCase());
+      console.log(attributeName);
       if( attributeName.toLowerCase() === activeAttribute.attributeName.toLowerCase() ){
         duplicateAttribute = true;
-        dispatch(onAddErrorMessage( 'Ya existe una atributo con este nombre' ));
+        dispatch(onAddErrorMessage( 'Ya existe un Atributo con este nombre' ));
         dispatch(onAddSuccessMessage( '' ));
       }
     });
     if(!duplicateAttribute){
         const newDoc = doc(collectionRef);
+        console.log(activeAttribute);
         const setDocResp = await setDoc(newDoc, activeAttribute);
-        let attributesArray = [...attributes];
-        attributesArray = attributesArray.map((object) => {
-          return { ...object, id: object.id + 1 }
-        });
-        dispatch(onSetAttributes(attributesArray));
-        dispatch(onAddAttributeAtStart( {id: 1, ...activeAttribute} ));
+        if(page === 0){
+          let attributesArray = [...attributes];
+          attributesArray = attributesArray.map((object) => {
+            return { ...object, id: object.id + 1 }
+          });
+          if(attributes.length < pageSize){
+            dispatch(onSetAttributes(attributesArray));
+          }if(attributes.length === pageSize){
+            attributesArray.pop();
+            dispatch(onSetAttributes(attributesArray));
+          }
+          dispatch(onAddAttributeAtStart( {id: 1, ...activeAttribute} ));
+        }
+        
         dispatch(onAddSuccessMessage( 'Agregado correctamente' ));
         dispatch(onAddErrorMessage( '' ));
     }
@@ -61,62 +72,210 @@ export const onstartUploadNewAttribute = () => {
   }
 }
 
-export const onStartGetAttributes = () => {
+
+export const onStartGetAttributes = (page = 0, size = 5) => {
   return async (dispatch) => {
-    let repetido = false
     dispatch(onCleanAttributes());
 
     const collectionRef = collection(FirebaseDB, `/attributes`);
-    const q = query( collectionRef, orderBy("date", "desc") );
-    const querySnapshot = await getDocs(q);
-    console.log(querySnapshot._docs.length)
+    let q;
 
-    dispatch(onSetNumberAttributes(querySnapshot._docs.length));
-    if(querySnapshot._docs.length % 5 > 0){
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
-    }else{
-      dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
+    if (page === 0) {
+      q = query( collectionRef, orderBy("date", "desc"), limit(size) );
+    } else {
+      const lastVisibleDoc = query( collectionRef,  orderBy("date", "desc"), limit(page * size) );
+      const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+      const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+      q = query( collectionRef,  orderBy("date", "desc"), startAfter(lastVisible), limit(size) );
     }
 
-    querySnapshot.forEach((doc, index) => {
-      dispatch(onChargeAttributesUploaded( {id: index+1, ...doc.data()} ));
+    const querySnapshot = await getDocs(q);
+
+    const newAttribute = querySnapshot.docs.map((doc, index) => {
+      return { id: index + 1 + page * size, ...doc.data() };
     });
+    dispatch(onSetAttributes(newAttribute));
     
-  
   }
 }
 
-// export const onStartGetAttributesByName = (name, page = 1) => {
-//   return async (dispatch) => {
-//     let number = page * 5;
-//     let counter = 0;
-//     let getAttribute = false;
-//     dispatch(onCleanAttributes());
-//     dispatch(onChangeAscending(''));
+export const onStartGetAbout = (page = 0, size = 5) => {
+  return async (dispatch) => {
+    dispatch(onCleanAttributes());
 
-//     const collectionRef = collection(FirebaseDB, `/attributes`);
-//     const q = query( collectionRef, where('attributeNameLowerCase', '>=', name), where('attributeNameLowerCase', '<', name + '\uf8ff') );
-//     const querySnapshot = await getDocs(q);
-//     dispatch(onSetNumberAttributes(querySnapshot._docs.length));
-//     if(querySnapshot._docs.length % 5 > 0){
-//       dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5) + 1));
-//     }else{
-//       dispatch(onSetTotalPages(Math.floor(querySnapshot._docs.length/5)));
-//     }
+    const collectionRef = collection(FirebaseDB, `/about`);
+    let q;
 
-//     querySnapshot.forEach((doc) => {
-//       if((number - 5 === counter && !getAttribute) || (number === counter)){
-//         getAttribute = !getAttribute;
-//       }
-//       if(getAttribute){
-//         dispatch(onChargeAttributesUploaded( doc.data() ));
-//       }
-//       counter++;
-//     });
-//   }
-// }
+    if (page === 0) {
+      q = query( collectionRef, orderBy("date", "desc"), limit(size) );
+    } else {
+      const lastVisibleDoc = query( collectionRef,  orderBy("date", "desc"), limit(page * size) );
+      const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+      const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+      q = query( collectionRef,  orderBy("date", "desc"), startAfter(lastVisible), limit(size) );
+    }
+
+    const querySnapshot = await getDocs(q);
+
+    const newAttribute = querySnapshot.docs.map((doc, index) => {
+      return { id: index + 1 + page * size, ...doc.data() };
+    });
+    dispatch(onSetAttributes(newAttribute));
+    
+  }
+}
 
 
-//TODO: onStartGetAttributesByDate
-//TODO: onStartSaveAttribute
-//TODO: onStartDeletingAttribute
+export const onStartFiltersAttributes = (page = 0, size = 5, preValue) => {
+  return async (dispatch, getState) => {
+
+    const { filter } = getState().attributes;
+    if(!!filter){
+      const { field, value } = filter;
+      dispatch(onCleanAttributes());
+      const collectionRef = collection(FirebaseDB, `/attributes`);
+      let q, undersized = false;
+      if(field?.toLowerCase().includes('name')){
+        if(value==='asc'){
+          if (page === 0) {
+            q = query( collectionRef, orderBy("attributeNameLowerCase", "asc"), limit(size) );
+            dispatch(onStartNumberAttributes());
+          } else {
+            const lastVisibleDoc = query( collectionRef,  orderBy("attributeNameLowerCase", "asc"), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  orderBy("attributeNameLowerCase", "asc"), startAfter(lastVisible), limit(size) );
+          }
+        }if(value==='desc'){
+          if (page === 0) {
+            q = query( collectionRef, orderBy("attributeNameLowerCase", "desc"), limit(size) );
+            dispatch(onStartNumberAttributes());
+          } else {
+            const lastVisibleDoc = query( collectionRef,  orderBy("attributeNameLowerCase", "desc"), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  orderBy("attributeNameLowerCase", "desc"), startAfter(lastVisible), limit(size) );
+          }
+        }if(value!=='asc' && value !== 'desc'){
+          const formattedName = value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          if(preValue !== value){
+            q = query( collectionRef, where('attributeNameLowerCase', '>=', formattedName), where('attributeNameLowerCase', '<', formattedName + '\uf8ff'));
+            const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
+            dispatch(onSetNumberAttributes(querySnapshot.size));
+          } if (page === 0 || undersized) {
+            q = query( collectionRef, where('attributeNameLowerCase', '>=', formattedName), where('attributeNameLowerCase', '<', formattedName + '\uf8ff'), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  where('attributeNameLowerCase', '>=', formattedName), where('attributeNameLowerCase', '<', formattedName + '\uf8ff'), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  where('attributeNameLowerCase', '>=', formattedName), where('attributeNameLowerCase', '<', formattedName + '\uf8ff'), startAfter(lastVisible), limit(size) );
+          }
+        }
+      }
+      if(field?.toLowerCase().includes('date')){
+        const dateObject = new Date(value)
+        if(preValue !== value){
+          q = query( collectionRef, where("date", ">=", dateObject.getTime()));
+          const querySnapshot = await getDocs(q);
+          undersized = (querySnapshot.size <= size) ? true : false;
+          dispatch(onSetNumberAttributes(querySnapshot.size));
+        } if (page === 0 || undersized) {
+          q = query( collectionRef, where("date", ">=", dateObject.getTime()), limit(size) );
+        } else {
+          const lastVisibleDoc = query( collectionRef,  where("date", ">=", dateObject.getTime()), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  where("date", ">=", dateObject.getTime()), startAfter(lastVisible), limit(size) );
+        }
+      }
+
+      const querySnapshot = await getDocs(q);
+      const newAttribute = querySnapshot.docs.map((doc, index) => {
+        return { id: index + 1 + page * size, ...doc.data() };
+      });
+  
+      dispatch(onSetAttributes(newAttribute));
+    }
+  }
+}
+
+export const onStartNumberAttributes = () => {
+  return async (dispatch) => {
+    const collectionRef = collection(FirebaseDB, `/attributes`);
+    const querySnapshot = await getDocs(collectionRef);
+
+    const numCategories = querySnapshot.size;
+    dispatch(onSetNumberAttributes(numCategories));
+  }
+}
+
+export const onStartUpdateAttribute = () => {
+  return async( dispatch, getState ) => {
+
+      let duplicateAttribute = false;
+      dispatch(onChangeSavingNewAttribute(true));
+      const { activeAttribute, preCategory } = getState().attributes;
+
+    let q;  
+    const collectionRef = collection(FirebaseDB, `/attributes`);
+    q = query( collectionRef );
+    const querySnapshot = await getDocs(q);
+
+    if(preCategory.updatedName && activeAttribute.attributeName !== preCategory.name){
+      querySnapshot.forEach((doc) => {
+        const { attributeName } = doc.data();
+        console.log(attributeName);
+        if( attributeName.toLowerCase() === activeAttribute.attributeName.toLowerCase() ){
+          duplicateAttribute = true;
+          dispatch(onAddErrorMessage( 'Ya existe un atributo con este nombre' ));
+          dispatch(onAddSuccessMessage( '' ));
+        }
+      });
+    }
+
+    if(!duplicateAttribute){
+      q = query(collectionRef, where('attributeName', '==', preCategory.name));
+      const querySnapshot = await getDocs(q);
+      let docRef;
+
+      const attributeToFireStore = { ...activeAttribute };
+      delete attributeToFireStore.id;
+
+      if (querySnapshot.size === 1) {
+        docRef = querySnapshot.docs[0].ref;
+      }
+  
+      await setDoc( docRef, attributeToFireStore, { merge: true } )
+      dispatch( onUpdateAttribute( activeAttribute ) );
+      dispatch(onAddSuccessMessage( 'Editado correctamente' ));
+      dispatch(onAddErrorMessage( '' ));
+    }
+      
+  }
+}
+
+export const onStartChangeActiveAttribute = () => {
+  return async( dispatch, getState ) => {
+
+    dispatch(onChangeSavingNewAttribute(true));
+    const { activeAttribute } = getState().attributes;
+
+    let q;  
+    const collectionRef = collection(FirebaseDB, `/attributes`);
+
+    q = query(collectionRef, where('attributeName', '==', activeAttribute.attributeName));
+    const querySnapshot = await getDocs(q);
+    let docRef;
+
+    const attributeToFireStore = { ...activeAttribute };
+    delete attributeToFireStore.id;
+
+    if (querySnapshot.size === 1) {
+      docRef = querySnapshot.docs[0].ref;
+    }
+
+    await setDoc( docRef, attributeToFireStore, { merge: true } );
+    dispatch(onChangeSavingNewAttribute(false));   
+  }
+}

@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { useCallback, useMemo, useState } from "react";
+import { DataGrid, esES } from "@mui/x-data-grid";
 
 export const Table = ({ attributes, data }) => {
   const [rowId, setRowId] = useState(null);
@@ -10,6 +10,7 @@ export const Table = ({ attributes, data }) => {
   });
 
   const columns = useMemo(() => attributes, [rowId]);
+
 
   return (
     <>
@@ -24,6 +25,7 @@ export const Table = ({ attributes, data }) => {
           top: 5,
           bottom: 5,
         })}
+        localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         sx={{
           color: "dark.main",
           maxWidth: "1162px",

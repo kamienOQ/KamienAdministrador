@@ -1,2 +1,2 @@
-export * from './attributesSlice';
+export * from './attibutesSlice';
 export * from './thunks';

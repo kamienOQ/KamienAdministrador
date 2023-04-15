@@ -1,32 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewAttribute, onAddSuccessMessage, onChangeAscending, onCleanAttributes, 
-    onSetActiveAttribute, onStartGetAttributes, onStartUploadFile, onstartUploadNewAttribute } from "../store";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanAttributes, 
+    onSetActiveCategory, onStartFiltersAttributes, onStartGetAttributes, onStartUploadFile, onStartUploadNewAttribute, onChangeFiltering, 
+    onSetNumberAttributes, onStartNumberAttributes, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateAttribute, 
+    onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize } from "../store";
 
 export const useAttributesStore = () => {
     const dispatch = useDispatch();
 
     const { 
         activeAttribute,
-        ascending,
         attributes,
-        attributesOnPage,
+        editing,
+        filter,
+        filtering,
         isSaving,
+        isLoading,
         message,
-        numberAttributes,
-        productsUploaded,
+        numberCategories,
     } = useSelector( state => state.attributes );
     
     //*Slice
-    const addNewAttribute = () => {
-        dispatch( onAddNewAttribute() );
+    const addNewCategory = () => {
+        dispatch( onAddNewCategory() );
     }
 
-    const setActiveAttribute = ( attribute ) => {
-        dispatch( onSetActiveAttribute( attribute ) );
-    }
-
-    const changeAscending = ( value ) => {
-        dispatch( onChangeAscending( value ) );
+    const setActiveCategory = ( category ) => {
+        dispatch( onSetActiveCategory( category ) );
     }
 
     const addImage = ( images ) => {
@@ -45,7 +44,39 @@ export const useAttributesStore = () => {
         dispatch( onAddSuccessMessage( message ) );
     }
 
-    const cleanAttributes = () => {
+    const  setNumberCategories = ( number ) => {
+        dispatch(  onSetNumberAttributes( number ) );
+    }
+
+    const changeEditing = ( value ) => {
+        dispatch( onChangeEditing( value ) );
+    }
+
+    const changePreCategoryName = ( value ) => {
+        dispatch( onChangePreCategoryName( value ) );
+    }
+
+    const changePreCategoryUpdated = ( value ) => {
+        dispatch( onChangePreCategoryUpdated( value ) );
+    }
+
+    const changeFiltering = ( value ) => {
+        dispatch( onChangeFiltering( value ) );
+    }
+
+    const changeFilter = ( value ) => {
+        dispatch( onChangeFilter( value ) );
+    }
+
+    const changeActive = () => {
+        dispatch( onChangeActive() );
+    }
+
+    const changePageAndSize = ( value ) => {
+        dispatch( onChangePageAndSize( value ) );
+    }
+
+    const cleanCategories = () => {
         dispatch( onCleanAttributes() );
     }
     
@@ -55,36 +86,64 @@ export const useAttributesStore = () => {
         dispatch( onStartUploadFile( file, type, collectionName ) )
     }
 
-    const startUploadNewAttribute = () => {
-        dispatch( onstartUploadNewAttribute() );
+    const startUploadNewCategory = () => {
+        dispatch( onStartUploadNewAttribute() );
     }
 
-    const startGetAttributes = () => {
-        dispatch( onStartGetAttributes() );
+    const startGetAttributes = (page, size) => {
+        dispatch( onStartGetAttributes(page, size) );
+    }
+
+    const startNumberCategories = () => {
+        dispatch( onStartNumberAttributes() );
+    }
+
+    const startFilterAttributes = (page, size, preValue) => {
+        dispatch( onStartFiltersAttributes(page, size, preValue) );
+    }
+
+    const startUpdateCategory = () => {
+        dispatch( onStartUpdateAttribute() );
+    }
+
+    const startChangeActiveCategory = () => {
+        dispatch( onStartChangeActiveAttribute() );
     }    
 
     return {
         //*Propiedades
         activeAttribute,
-        ascending,
         attributes,
-        attributesOnPage,
+        editing,
+        filter,
+        isLoading,
+        filtering,
         isSaving,
         message,
-        numberAttributes,
-        productsUploaded,
+        numberCategories,
 
         //*Métodos
         addErrorMessage,
         addIcon,
         addImage,
-        addNewAttribute,
+        addNewCategory,
         addSuccessMessage,
-        changeAscending,
-        cleanAttributes,
-        setActiveAttribute,
+        changeActive,
+        changeEditing,
+        changeFilter,
+        changeFiltering,
+        changePageAndSize,
+        changePreCategoryName,
+        changePreCategoryUpdated,
+        cleanCategories,
+        setActiveCategory,
+        setNumberCategories,
+        startFilterAttributes,
         startGetAttributes,
+        startNumberCategories,
         startUploadFile,
-        startUploadNewAttribute,
+        startUploadNewCategory,
+        startUpdateCategory,
+        startChangeActiveCategory,
     }
 }

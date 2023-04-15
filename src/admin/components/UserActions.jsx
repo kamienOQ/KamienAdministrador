@@ -2,7 +2,6 @@
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AdminEditModal } from './AdminEditModal';
-import { AttributeEditModal } from './attributes';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { grey,red } from '@mui/material/colors';
@@ -51,8 +50,6 @@ export const UserActions = () => {
 
           
         <AdminEditModal />
-
-        
 
         </Box>
     </>

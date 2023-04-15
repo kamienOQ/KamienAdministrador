@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { deleteFileUpload } from "../helpers";
-import { useAttributesStore, useUiStore } from ".";
+import { useAttributesStore, useAttUiStore } from ".";
 
 export const useAttributesState = () => {
-  const { isAttributeModalOpen } = useUiStore();
+  const { isCategoryModalOpen, addAttributesSelected} = useAttUiStore();
   const { attributes, activeAttribute, startUploadFile } = useAttributesStore();
   const [imageLoad, setImageLoad] = useState(false);
   const [iconLoad, setIconLoad] = useState(false);
+  const [ selected, setSelected ] = useState(false);
 
   const imageInputRef = useRef();
   const iconInputRef = useRef();
@@ -14,7 +15,8 @@ export const useAttributesState = () => {
   useEffect(() => {
     setImageLoad(false);
     setIconLoad(false);
-  }, [isAttributeModalOpen]);
+    setSelected(false);
+  }, [isCategoryModalOpen]);
 
   const onUploadImage = ({ target }) => {
     if (target.files.length != 0) {
@@ -53,13 +55,22 @@ export const useAttributesState = () => {
       startUploadFile(target.files[0], "icon", "attributes");
     }
   };
+  
+  const onSelectAttribute = ({ target }) => {
+    addAttributesSelected(target.value);
+    setSelected(true);
+  }
 
   return {
     imageLoad,
     iconLoad,
+    selected,
     imageInputRef,
     iconInputRef,
     onUploadImage,
     onUploadIcon,
+    setImageLoad,
+    setIconLoad,
+    onSelectAttribute
   };
 };

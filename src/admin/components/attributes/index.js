@@ -1,4 +1,5 @@
 export * from './Attributes';
-export * from './AttributeActions';
+export * from './AttibutesTable';
+export * from './AttibutesActions';
 export * from './AttributeModal';
-export * from './AttributeEditModal';
+export * from './AttributeView';

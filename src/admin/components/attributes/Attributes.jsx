@@ -1,49 +1,84 @@
+import { getGridDateOperators, getGridStringOperators } from "@mui/x-data-grid";
 import { useAttributesStore } from "../../../hooks";
-import { Table } from "../Table";
-import { UserActions } from "../UserActions";
-
+import { AttibutesTable, AttibutesActions } from ".";
 
 
 export const Attributes = () => {
-    const { attributes } = useAttributesStore();
+  const { attributes } = useAttributesStore();
 
-    const attributesL = [
-      {
-        field: "id",
-        headerName: "#",
-        type: "number",
-        width: 60,
-        sortable: false,
-        filterable: false,
-      },
-      { field: "attributeName", headerName: "Nombre", width: 200, filterable: false },
-      { 
+  const filterOperatorsName = getGridStringOperators().filter(({ value }) =>
+    ['contains'].includes(value),
+  );
+
+  const filterOperatorsDate = getGridDateOperators().filter(({ value }) =>
+    ['onOrAfter'].includes(value),
+  );
+
+  const attributesTable = [
+    {
+      field: "id",
+      headerName: "#",
+      type: "number",
+      width: 60,
+      sortable: false,
+      filterable: false,
+      hideable: false,
+    },
+    {
+      field: "attributeName",
+      headerName: "Nombre",
+      width: 200,
+      filterable: true,
+      sortable: true,
+      hideable: false,
+      filterOperators: filterOperatorsName
+    },
+    {
+      field: "date",
+      headerName: "Fecha",
+      type: "date",
+      valueGetter: ({ value }) => value && new Date(value),
+      width: 200,
+      filterable: true,
+      sortable: false,
+      operatorValue: 'greaterThan',
+      hideable: false,
+      filterOperators: filterOperatorsDate
+    },
+    { 
         field: "attributesList",
         headerName: "Atributos", 
-        width: 250, 
+        width: 250,
+        sortable: false,
+        filterable: false,
+        hideable: false,
+        disableColumnMenu: true,
       },
       {
         field: "categoriesRelated",
         headerName: "Categorias",
         width: 250,
+        sortable: false,
+        filterable: false,
+        hideable: false,
+        disableColumnMenu: true,
       },
-      {
-        field: "date",
-        headerName: "Fecha",
-        type: "dateTime",
-        valueGetter: ({ value }) => value && new Date(value),
-        width: 200,
-      },
-      {
-        field: "actions",
-        headerName: "Acciones",
-        type: "actions",
-        width: 200,
-        renderCell: () => <UserActions />,
-      },
-    ];
-  
-    return (
-        !!attributes && <Table attributes={attributesL} data={attributes} />
-    );
+    
+    {
+      field: "actions",
+      headerName: "Acciones",
+      type: "actions",
+      width: 200,
+      sortable: false,
+      filterable: false,
+      hideable: false,
+      getActions: (params) => [
+        <AttibutesActions row={params.row}/>
+      ]
+    },
+  ];
+
+  return (
+    !!attributes && <AttibutesTable attributes={attributesTable} data={attributes} />
+  );
 };
