@@ -36,27 +36,19 @@ const attributesCategories = [
 
 export const AttributeModal = () => {
 
-  const { closeCategoryModal, isCategoryModalOpen,categoriesSelected } = useAttUiStore();
+  const { closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
   const { attributes, activeAttribute, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
     startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory} = useAttributesStore();
-  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategories,selected,setSelected} = useAttributesState();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategories, selected } = useAttributesState();
 
   const { attributeName,categoriesRelated, attributesList,onInputChange, formState } = useAttributesForm(activeAttribute);
   const [emptyName, setEmptyName] = useState(false);
   
 
-
-
-
   useEffect(() => {
     setActiveCategory(formState);
     setEmptyName(false);
   }, [formState]);
-
-  useEffect(() => {
-    setSelected(true)
-  }, [categoriesSelected]);
-
 
 
   const onCloseModa = () => {   
@@ -142,7 +134,7 @@ export const AttributeModal = () => {
               </MenuItem>
             ))}
           </TextField>
-          {selected && <FloatingTags />}
+          <FloatingTags />
 
           <div className="categories-modal-buttons">
             

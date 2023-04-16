@@ -57,7 +57,6 @@ export const useAttributesState = () => {
   };
   
   const onSelectCategories = ({ target }) => {
-    console.log(target);
     addCategoriesSelected(target.value);
     setSelected(true);
   }

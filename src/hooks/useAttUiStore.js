@@ -41,7 +41,6 @@ export const useAttUiStore = () => {
     }
 
     const setCategoriesSelected = ( categoriesSelected ) => {
-        console.log(categoriesSelected);
         dispatch( onSetCategoriesSelected( categoriesSelected ) )
     }
 

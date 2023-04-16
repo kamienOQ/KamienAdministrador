@@ -10,7 +10,6 @@ export const FloatingTags = () => {
         deleteAttributesSelected( event.target.parentNode.id )
         // console.log(document.getElementById(event.target.parentNode.id))
     }
-    console.log(categoriesSelected);
     const categories = categoriesSelected.map((categories) => {
         return (
             <div className='tag-container' id={categories} key={categories}>
@@ -23,6 +22,7 @@ export const FloatingTags = () => {
     });
 
     return (
+        !!categoriesSelected &&
         <div className='tags-container'>{categories}</div>
     )
 }

@@ -58,7 +58,7 @@ export const AttibutesCrud = () => {
           <Grid item 
             sx={{ width: "90%", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
           >
-            <Typography variant="h4">Gestión de Attributos</Typography>
+            <Typography variant="h4">Gestión de Atributos</Typography>
             <Button
               className="addCategory-modal-button"
               onClick={onOpenModal}

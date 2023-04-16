@@ -28,7 +28,6 @@ export const uiAttSlice = createSlice({
         },
 
         onSetCategoriesSelected: ( state, { payload } ) =>{
-            console.log(payload);
             state.categoriesSelected = payload;
             
         },

@@ -41,7 +41,6 @@ export const onStartUploadNewAttribute = () => {
     querySnapshot.forEach((doc) => {
       const { attributeName } = doc.data();
       //console.log(activeAttribute.attributeName.toLowerCase());
-      console.log(attributeName);
       if( attributeName.toLowerCase() === activeAttribute.attributeName.toLowerCase() ){
         duplicateAttribute = true;
         dispatch(onAddErrorMessage( 'Ya existe un Atributo con este nombre' ));
@@ -50,7 +49,6 @@ export const onStartUploadNewAttribute = () => {
     });
     if(!duplicateAttribute){
         const newDoc = doc(collectionRef);
-        console.log(activeAttribute);
         const setDocResp = await setDoc(newDoc, activeAttribute);
         if(page === 0){
           let attributesArray = [...attributes];
@@ -228,7 +226,6 @@ export const onStartUpdateAttribute = () => {
     if(preCategory.updatedName && activeAttribute.attributeName !== preCategory.name){
       querySnapshot.forEach((doc) => {
         const { attributeName } = doc.data();
-        console.log(attributeName);
         if( attributeName.toLowerCase() === activeAttribute.attributeName.toLowerCase() ){
           duplicateAttribute = true;
           dispatch(onAddErrorMessage( 'Ya existe un atributo con este nombre' ));
