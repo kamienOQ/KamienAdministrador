@@ -38,6 +38,7 @@ export const attibutesSlice = createSlice({
             state.activeAttribute = newAttribute;
         },
         onSetActiveCategory: ( state, { payload } ) => {
+            //console.log(payload);
             state.activeAttribute = payload;
         },
         onUpdateAttribute: ( state, { payload } ) => {
@@ -45,7 +46,7 @@ export const attibutesSlice = createSlice({
 
             state.attributes = state.attributes.map( category => {
 
-                if (category.attributeName === payload.attributeName ){
+                if (category.attributeName === state.preCategory.name ){
                     return payload;
                 }
 
@@ -101,7 +102,7 @@ export const attibutesSlice = createSlice({
         onChangePreCategoryName: ( state, { payload } ) => {
             state.preCategory.name = payload;
         },
-        onChangePreCategoryUpdated: ( state, { payload } ) => {
+        onChangePreAttributeUpdated: ( state, { payload } ) => {
             state.preCategory.updatedName = payload;
         },
         onChangeFiltering: ( state, { payload } )=> {
@@ -122,6 +123,10 @@ export const attibutesSlice = createSlice({
         onCleanActiveCategory: ( state ) => {
             state.activeAttribute = null;
         },
+        onSetCategoriesRelated: ( state, { payload } ) => {
+            state.activeAttribute.categoriesRelated = payload;
+        },
+
     }
 });
 
@@ -142,7 +147,7 @@ export const {
     onChangeFiltering,
     onChangePageAndSize,
     onChangePreCategoryName,
-    onChangePreCategoryUpdated,
+    onChangePreAttributeUpdated,
     onChangeSavingNewAttribute, 
     onCleanActiveCategory,
     onCleanAttributes,
@@ -151,4 +156,5 @@ export const {
     onSetAttributes,
     onSetNumberAttributes,
     onUpdateAttribute,
+    onSetCategoriesRelated
 } = attibutesSlice.actions;

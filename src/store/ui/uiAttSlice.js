@@ -5,7 +5,7 @@ export const uiAttSlice = createSlice({
     initialState: {
         isCategoryModalOpen: false,
         isModalViewOpen: false,
-        attSelected: []
+        categoriesSelected: []
     },
     reducers: {
         onOpenCategoryModal: ( state ) => {
@@ -13,6 +13,7 @@ export const uiAttSlice = createSlice({
         },
         onCloseCategoryModal: ( state ) => {
             state.isCategoryModalOpen = false;
+            state.categoriesSelected = [];
         },
         onOpenModalView: ( state ) => {
             state.isModalViewOpen = true;
@@ -20,13 +21,20 @@ export const uiAttSlice = createSlice({
         onCloseModalView: ( state ) => {
             state.isModalViewOpen = false;
         },
-        onAddAttributesSelected: ( state, { payload } ) => {
-            if (!state.attSelected.some((product) => product.toLowerCase() === payload.toLowerCase())) {
-                state.attSelected.push( payload );
+        onAddCategoriesSelected: ( state, { payload } ) => {
+            if (!state.categoriesSelected.some((category) => category.toLowerCase() === payload.toLowerCase())) {
+                state.categoriesSelected.push( payload );
             }
         },
+
+        onSetCategoriesSelected: ( state, { payload } ) =>{
+            console.log(payload);
+            state.categoriesSelected = payload;
+            
+        },
+
         onDeleteAttributesSelected: ( state, { payload } ) => {
-            state.attSelected = state.attSelected.filter( event => event !== payload );
+            state.categoriesSelected= state.categoriesSelected.filter( event => event !== payload );
         },
         onAddAttributeNameLowerCase: ( state ) => {
             let formattedName = state.activeCategory.categoryName.toLowerCase();
@@ -48,7 +56,8 @@ export const {
     onCloseCategoryModal,
     onOpenModalView,
     onCloseModalView,
-    onAddAttributesSelected,
+    onAddCategoriesSelected,
     onDeleteAttributesSelected,
     onAddAttributeNameLowerCase,
+    onSetCategoriesSelected
 } = uiAttSlice.actions;

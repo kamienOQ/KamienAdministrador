@@ -1,19 +1,20 @@
-import { useAttUiStore } from '../../../hooks';
+import { useAttUiStore } from "../../../hooks";
+
 
 export const FloatingTags = () => {
 
-    const { attributesSelected, deleteAttributesSelected} = useAttUiStore();
+    const { categoriesSelected, deleteAttributesSelected} = useAttUiStore();
 
     const onDeleteTag = (event) => {
         event.preventDefault();
         deleteAttributesSelected( event.target.parentNode.id )
         // console.log(document.getElementById(event.target.parentNode.id))
     }
-
-    const attributes = attributesSelected.map((attribute) => {
+    console.log(categoriesSelected);
+    const categories = categoriesSelected.map((categories) => {
         return (
-            <div className='tag-container' id={attribute} key={attribute}>
-                <p>{attribute}</p>
+            <div className='tag-container' id={categories} key={categories}>
+                <p>{categories}</p>
                 <button className='closeTag-button' onClick={onDeleteTag}>
                     X
                 </button>
@@ -22,6 +23,6 @@ export const FloatingTags = () => {
     });
 
     return (
-        <div className='tags-container'>{attributes}</div>
+        <div className='tags-container'>{categories}</div>
     )
 }

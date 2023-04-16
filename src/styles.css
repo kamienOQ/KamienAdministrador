@@ -78,7 +78,7 @@ label {
 }
 
 
-/* .tags-container{
+.tags-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
@@ -95,7 +95,7 @@ label {
     color: var(--white);
     width: auto;
     font-size: 14px;
-    padding: 0 10px 0 10px;
+    padding: 5px 10px 5px 10px;
     gap: 5px;
 }
 
@@ -105,7 +105,7 @@ label {
     border: none;
     font-size: 16px;
     border-radius: 50px;
-} */
+}
 
 .categories-modal-buttons{
     display: flex;

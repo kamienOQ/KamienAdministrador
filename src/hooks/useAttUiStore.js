@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-//Attributes
-import { onCleanActiveCategory, onCloseModalView, onOpenModalView } from '../store';
 // Ui
-import { onCloseCategoryModal, onOpenCategoryModal, onAddAttributesSelected, onDeleteAttributesSelected} from '../store';
+import {onCloseModalView, onOpenModalView,onOpenCategoryModal, onCloseCategoryModal,onAddCategoriesSelected, onDeleteAttributesSelected, onSetCategoriesSelected} from '../store/ui/uiAttSlice';
+
+import {onCleanActiveCategory,} from '../store/attributes/attibutesSlice'
+
 
 export const useAttUiStore = () => {
 
@@ -11,7 +12,7 @@ export const useAttUiStore = () => {
     const { 
         isCategoryModalOpen,
         isModalViewOpen,
-        attributesSelected,
+        categoriesSelected,
     } = useSelector( state => state.ui );
 
     const openCategoryModal = () => {
@@ -31,29 +32,33 @@ export const useAttUiStore = () => {
         dispatch( onCloseModalView() );
     }
 
-    const addAttributesSelected = ( attributesSelected ) => {
-        dispatch( onAddAttributesSelected( attributesSelected ) )
+    const addCategoriesSelected = ( categoriesSelected ) => {
+        dispatch( onAddCategoriesSelected( categoriesSelected ) )
     }
 
-    const deleteAttributesSelected = ( attributesSelected ) => {
-        dispatch( onDeleteAttributesSelected( attributesSelected ) )
+    const deleteAttributesSelected = ( categoriesSelected ) => {
+        dispatch( onDeleteAttributesSelected( categoriesSelected ) )
     }
 
-    
+    const setCategoriesSelected = ( categoriesSelected ) => {
+        console.log(categoriesSelected);
+        dispatch( onSetCategoriesSelected( categoriesSelected ) )
+    }
 
     return {
         //*Propiedades
         isCategoryModalOpen,
         isModalViewOpen,
-        attributesSelected,
+        categoriesSelected,
 
         //*Métodos
-        addAttributesSelected,
+        addCategoriesSelected,
         openCategoryModal,
         closeCategoryModal,
         openModalView,
         closeModalView,
         deleteAttributesSelected,
+        setCategoriesSelected,
     }
 
 }

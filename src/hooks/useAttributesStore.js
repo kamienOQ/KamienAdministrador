@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanAttributes, 
     onSetActiveCategory, onStartFiltersAttributes, onStartGetAttributes, onStartUploadFile, onStartUploadNewAttribute, onChangeFiltering, 
-    onSetNumberAttributes, onStartNumberAttributes, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateAttribute, 
+    onSetNumberAttributes, onStartNumberAttributes, onChangePreCategoryName, onChangePreAttributeUpdated, onStartUpdateAttribute, 
     onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize } from "../store";
 
 export const useAttributesStore = () => {
@@ -57,7 +57,7 @@ export const useAttributesStore = () => {
     }
 
     const changePreCategoryUpdated = ( value ) => {
-        dispatch( onChangePreCategoryUpdated( value ) );
+        dispatch( onChangePreAttributeUpdated( value ) );
     }
 
     const changeFiltering = ( value ) => {

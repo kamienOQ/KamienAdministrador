@@ -2,10 +2,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Fab, Switch,Tooltip} from '@mui/material';
 import { useAttributesStore, useAttUiStore } from '../../../hooks';
+import { CountertopsOutlined } from '@mui/icons-material';
 
 export const AttibutesActions = ({ row }) => {
 
-  const { openCategoryModal, openModalView } = useAttUiStore();
+  const { openCategoryModal, openModalView, setCategoriesSelected} = useAttUiStore();
   const { changeEditing, setActiveCategory, changePreCategoryName, changeActive, startChangeActiveCategory } = useAttributesStore();
 
   const handleActive = () => {
@@ -16,6 +17,8 @@ export const AttibutesActions = ({ row }) => {
   
   const handleOpenEdit = () => {
     setActiveCategory(row);
+    //console.log(row);
+    setCategoriesSelected(row.categoriesRelated);
     changePreCategoryName(row.attributeName);
     changeEditing(true);
     openCategoryModal();
