@@ -60,6 +60,7 @@ export const useProductsState = () => {
         onUploadImage,
         onUploadIcon,
         onSelectCategory,
+        setSelected,
         onSelectAttribute,
     }
 }

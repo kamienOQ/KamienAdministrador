@@ -55,9 +55,9 @@ export const CategoryActions = ({ row }) => {
           sx={{
             width: 40,
             height: 40,
-            bgcolor: "#357a38",
+            bgcolor: "primary.main",
             color: "white",
-            '&:hover': { bgcolor: "#357a38" },
+            '&:hover': { bgcolor: "primary.main" },
           }}
           onClick={handleOpenEdit}
         >

@@ -46,8 +46,8 @@ export const useUiStore = () => {
         dispatch( onAddAttributesSelected( attributesSelected ) )
     }
 
-    const deleteCategoriesSelected = ( categoriesSelected ) => {
-        dispatch( onDeleteCategoriesSelected( categoriesSelected ) )
+    const deleteCategoriesSelected = () => {
+        dispatch( onDeleteCategoriesSelected() )
     }
 
     const deleteAttributesSelected = ( attributesSelected ) => {

@@ -1,12 +1,13 @@
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Fab, Switch, Tooltip } from '@mui/material';
-import { useProductsStore, useUiStore } from '../../../hooks';
+import { useProductsState, useProductsStore, useUiStore } from '../../../hooks';
 
 export const ProductActions = ({ row }) => {
 
-  const { openProductModal, openModalViewProduct } = useUiStore();
-  const { changeEditing, setActiveProduct, changePreProductName, changeActive, startChangeActiveProduct } = useProductsStore();
+  const { openProductModal, openModalViewProduct, addCategoriesSelected } = useUiStore();
+  const { changeEditing, setActiveProduct, changePreProductName, changeActive, startChangeActiveProduct, startGetAttributesForm, starGetCategoriesForm } = useProductsStore();
+  const { setSelected } = useProductsState();
 
   const handleActive = () => {
     setActiveProduct(row);
@@ -17,7 +18,13 @@ export const ProductActions = ({ row }) => {
   const handleOpenEdit = () => {
     setActiveProduct(row);
     changePreProductName(row.productName);
+    addCategoriesSelected(row.relatedCategories);
+    if(!!row.relatedCategories){
+      setSelected(true);
+    }
     changeEditing(true);
+    startGetAttributesForm();
+    starGetCategoriesForm();
     openProductModal();
   };
 

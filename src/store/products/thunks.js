@@ -34,14 +34,13 @@ export const onStartUploadNewProduct = () => {
 
     let duplicateProduct = false;
     dispatch(onAddProductNameLowerCase());
-    const { activeProduct, products, pageSize, page } = getState().products;
     const { categoriesSelected } = getState().ui;
     const { attributesSelected } = getState().ui;
     dispatch(onSetRelatedCategories( categoriesSelected ));
-    dispatch(onSetRelatedAttributes( attributesSelected ))
+    dispatch(onSetRelatedAttributes( attributesSelected ));
+    const { activeProduct, products, pageSize, page } = getState().products;
 
     dispatch(onChangeSavingNewProduct(true));
-
     const collectionRef = collection(FirebaseDB, `/products`);
     const q = query( collectionRef );
     const querySnapshot = await getDocs(q);
@@ -192,8 +191,12 @@ export const onStartUpdateProduct = () => {
   return async( dispatch, getState ) => {
 
       let duplicateProduct = false;
+      const { categoriesSelected } = getState().ui;
+      const { attributesSelected } = getState().ui;
       dispatch(onAddProductNameLowerCase());
       dispatch(onChangeSavingNewProduct(true));
+      dispatch(onSetRelatedCategories( categoriesSelected ));
+      dispatch(onSetRelatedAttributes( attributesSelected ));
       const { activeProduct, preProduct } = getState().products;
 
     let q;  

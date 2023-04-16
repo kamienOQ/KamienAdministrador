@@ -9,7 +9,7 @@ export const uiSlice = createSlice({
         totalPages: 1,
         page: 1,
         searching: '',
-        categoriesSelected: [],
+        categoriesSelected: '',
         attributesSelected: [],
     },
     reducers: {
@@ -40,16 +40,15 @@ export const uiSlice = createSlice({
         },
         onCloseProductModal: ( state ) => {
             state.isProductModalOpen = false;
-            state.categoriesSelected = [];
+            state.categoriesSelected = '';
             state.attributesSelected= [];
         },
         onAddCategoriesSelected: ( state, { payload } ) => {
-            if (!state.categoriesSelected.some((category) => category.toLowerCase() === payload.toLowerCase())) {
-                state.categoriesSelected.push( payload );
-            }
+            state.categoriesSelected = payload;
+
         },
-        onDeleteCategoriesSelected: ( state, { payload } ) => {
-            state.categoriesSelected = state.categoriesSelected.filter( event => event !== payload );
+        onDeleteCategoriesSelected: ( state ) => {
+            state.categoriesSelected = '';
         },
         onAddAttributesSelected: ( state, { payload } ) => {
             if (!state.attributesSelected.some((attribute) => attribute.toLowerCase() === payload.toLowerCase())) {

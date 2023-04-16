@@ -34,7 +34,7 @@ export const productsSlice = createSlice({
                 productNameLowerCase: '',
                 products: '',
                 active: true,
-                relatedCategories: [],
+                relatedCategories: '',
                 relatedAttributes: [],
                 image: {
                     name: null,

@@ -22,7 +22,7 @@ export const ProductModal = () => {
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
-
+  
   useEffect(() => {
     if(editing){
       if(activeProduct.image.url){
@@ -169,7 +169,7 @@ export const ProductModal = () => {
               ))
             ))}
           </TextField>
-          {selected && <FloatingTags />}
+          <FloatingTags />
           <div className="products-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">
