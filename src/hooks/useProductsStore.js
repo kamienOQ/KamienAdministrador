@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
     onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
     onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
-    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters, onStartGetCategoriesForm } from "../store/products";
+    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters, 
+    onStartGetCategoriesForm, onStartGetAttributesForm } from "../store/products";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -125,6 +126,10 @@ export const useProductsStore = () => {
         dispatch ( onStartGetCategoriesForm() );
     }
 
+    const startGetAttributesForm = () => {
+        dispatch ( onStartGetAttributesForm() );
+    }
+
     return {
         //*Propiedades
         activeProduct,
@@ -160,6 +165,7 @@ export const useProductsStore = () => {
         startFilterProducts,
         startGetProducts,
         starGetCategoriesForm,
+        startGetAttributesForm,
         startNumberProducts,
         startUpdateProduct,
         startUploadFile,

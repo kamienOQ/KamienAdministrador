@@ -16,8 +16,6 @@ export const useUiStore = () => {
         isCategoryModalOpen,
         categoriesSelected,
         attributesSelected,
-        totalPages,
-        page,
         isModalViewOpenProduct, 
         isModalViewOpenCategory, 
     } = useSelector( state => state.ui );

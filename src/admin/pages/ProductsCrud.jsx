@@ -8,8 +8,8 @@ import { ProductModal, Products, ProductView } from "../components/products";
 export const ProductsCrud = () => {
 
   const { openProductModal, closeProductModal, isProductModalOpen } = useUiStore();
-  const { isSaving, message, filtering, addNewProduct, startGetProducts, 
-    startNumberProducts, starGetCategoriesForm } = useProductsStore();
+  const { isSaving, message, filtering, addNewProduct, startGetProducts, startNumberProducts, 
+    starGetCategoriesForm, startGetAttributesForm } = useProductsStore();
 
   useEffect(() => {
     if (!!message.success) {
@@ -31,6 +31,7 @@ export const ProductsCrud = () => {
     addNewProduct();
     openProductModal();
     starGetCategoriesForm();
+    startGetAttributesForm();
   }
 
   return (
@@ -56,10 +57,10 @@ export const ProductsCrud = () => {
           >
             <Typography variant="h4">Gestión de Productos</Typography>
             <Button
-              className="addProduct-button"
+              className="addProduct-modal-button"
               onClick={onOpenModal}
               startIcon={<AddCircleIcon />}
-              sx={{ backgroundColor: '#357a38', minWidth: 0, color: "#ffffff" }}
+              sx={{ backgroundColor: 'success.main', minWidth: 0, color: "tertiary.main" }}
               variant='contained'
               disabled={isSaving}
             >
