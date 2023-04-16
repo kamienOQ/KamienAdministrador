@@ -11,6 +11,7 @@ export const productsSlice = createSlice({
         numberProducts: undefined,
         products: '',
         categories: [],
+        attributes: [],
         isLoading: false,
         editing: false,
         filtering: false,
@@ -53,7 +54,9 @@ export const productsSlice = createSlice({
         onSetRelatedCategories: ( state, { payload } ) => {
             state.activeProduct.relatedCategories = payload;
         },
-        // hacer esto en los atributos
+        onSetRelatedAttributes: ( state, { payload } ) => {
+            state.activeProduct.relatedAttributes = payload;
+        },
         onUpdateProduct: ( state, { payload } ) => {
             state.isSaving = false;
             state.products = state.products.map( product => {
@@ -91,6 +94,10 @@ export const productsSlice = createSlice({
         },
         onSetCategories: ( state, { payload } ) => {
             state.categories.push( payload );
+            state.isLoading = false;    
+        },
+        onSetAttributes: ( state, { payload } ) => {
+            state.attributes.push( payload );
             state.isLoading = false;    
         },
         onSetNumberProducts: ( state, { payload } ) => {
@@ -162,8 +169,9 @@ export const productsSlice = createSlice({
         },
         onCleanCategories: ( state ) => {
             state.categories = [];
-            //state.activeProduct = null;
-            //state.isLoading = true;
+        },
+        onCleanAttributes: ( state ) => {
+            state.attributes = [];
         },
         onCleanActiveProduct: ( state ) => {
             state.activeProduct = null;
@@ -191,6 +199,7 @@ export const {
     onCleanActiveProduct,
     onCleanProducts,
     onCleanCategories,
+    onCleanAttributes,
     onCleanProductsUploaded,
     onDeleteProduct,
     onSetActiveProduct, 
@@ -199,7 +208,9 @@ export const {
     onAddProducts,
     onSetProducts,
     onSetCategories,
+    onSetAttributes,
     onSetRelatedCategories,
+    onSetRelatedAttributes,
     onAddProductNameLowerCase, 
     onChangeActive,
     onChangeEditing,

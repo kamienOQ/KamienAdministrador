@@ -30,7 +30,7 @@ export const ProductsCrud = () => {
   const onOpenModal = () => {
     addNewProduct();
     openProductModal();
-    starGetCategoriesForm()
+    starGetCategoriesForm();
   }
 
   return (

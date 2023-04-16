@@ -1,9 +1,10 @@
 import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore/lite";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
-import { onCleanCategories, onChangeSavingNewProduct, onAddImageProduct, onAddIconProduct, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanProducts, onAddProductAtStart, onSetProducts, onSetNumberProducts, onAddProductNameLowerCase, 
-    onUpdateProduct, onChangeActive, onSetCategories, onSetRelatedCategories } from "./";
+import { onCleanCategories, onCleanAttributes, onChangeSavingNewProduct, onAddImageProduct, onAddIconProduct, 
+  onAddSuccessMessage, onAddErrorMessage, onCleanProducts ,onAddProductAtStart, onSetProducts, onSetAttributes, 
+  onSetNumberProducts, onAddProductNameLowerCase, onUpdateProduct, onSetRelatedAttributes, onSetCategories, 
+  onSetRelatedCategories } from "./";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -35,7 +36,9 @@ export const onStartUploadNewProduct = () => {
     dispatch(onAddProductNameLowerCase());
     const { activeProduct, products, pageSize, page } = getState().products;
     const { categoriesSelected } = getState().ui;
+    const { attributesSelected } = getState().ui;
     dispatch(onSetRelatedCategories( categoriesSelected ));
+    dispatch(onSetRelatedAttributes( attributesSelected ))
 
     dispatch(onChangeSavingNewProduct(true));
 
@@ -267,5 +270,19 @@ export const onStartGetCategoriesForm = () => {
       return doc.data().categoryName;
     });
     dispatch(onSetCategories(actualCategories));
+  }
+}
+
+export const onStartGetAttributesForm = () => {
+  return async (dispatch) => {
+    dispatch(onCleanAttributes())
+    const collectionRef = collection(FirebaseDB, `/attributes`);
+    const q = query(collectionRef, where("attributeName", "!=", ""));
+    const querySnapshot = await getDocs(q);
+
+    const actualAttribute = querySnapshot.docs.map((doc) => {
+      return doc.data().attributeName;
+    });
+    dispatch(onSetAttributes(actualAttribute));
   }
 }

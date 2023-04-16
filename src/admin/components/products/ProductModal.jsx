@@ -8,21 +8,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useCategoriesStore, useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
 import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
 import { FloatingTags } from "./FloatingTags";
+import { FloatingTagsAttributes } from './FloatingTagsAttributes'
 
 export const ProductModal = () => { 
 
-  const { closeProductModal, isProductModalOpen, categoriesSelected  } = useUiStore();
+  const { closeProductModal, isProductModalOpen, categoriesSelected, attributesSelected  } = useUiStore();
   
-  const { products, categories, activeProduct, editing, onSelectProduct, message, setActiveProduct, addErrorMessage, addSuccessMessage, 
-      startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, startUpdateProduct, starGetCategoriesForm, isSaving } = useProductsStore();
-  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategory, selected } = useProductsState();
+  const { products, categories, attributes, activeProduct, editing, message, setActiveProduct, addErrorMessage, 
+    addSuccessMessage, startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, 
+    startUpdateProduct, isSaving } = useProductsStore();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategory, 
+    onSelectAttribute, selected } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
-
-  const { setNumberCategories } = useCategoriesStore();
-
-  // const test = React.memo(starGetCategoriesForm());
 
   useEffect(() => {
     if(editing){
@@ -43,7 +42,7 @@ export const ProductModal = () => {
   useEffect(() => {
     addErrorMessage('');
     addSuccessMessage('');
-  }, [formState, categoriesSelected, imageLoad, iconLoad ]);
+  }, [formState, categoriesSelected, attributesSelected, imageLoad, iconLoad ]);
   
   
   const onCloseModa = () => {
@@ -130,17 +129,26 @@ export const ProductModal = () => {
             '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
           <TextField
-            type="text"
             fullWidth
+            id="outlined-select-currency"
+            select
             label="Atributos del Producto" variant="filled" focused
-            name="atributes"
-            value={atributes || ''}
-            onChange={onInputChange}
-            error={emptyName}
+            defaultValue=""
+            onChange={onSelectAttribute}
             helperText={emptyName ? 'Campo vacío' : ''}
-             sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
             '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
-          />
+          >
+            {/* importar y recorrer attributesUploaded obteniendo el nombre */}
+            {attributes.map((option) => (
+              option.map((option1) => (
+                <MenuItem key={option1} value={option1}>
+                  {option1}
+                </MenuItem>
+              ))
+            ))}
+          </TextField>
+          {selected && <FloatingTagsAttributes />}
           <TextField
             fullWidth
             id="outlined-select-currency"
@@ -149,7 +157,7 @@ export const ProductModal = () => {
             defaultValue=""
             onChange={onSelectCategory}
             helperText="Por favor seleccione la categoría del producto"
-             sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
             '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           >
             {/* importar y recorrer categoriesUploaded obteniendo el nombre */}

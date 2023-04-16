@@ -3,7 +3,7 @@ import { deleteFileUpload } from "../helpers";
 import { useProductsStore, useUiStore } from "./";
 
 export const useProductsState = () => {
-    const { isProductModalOpen, addCategoriesSelected  } = useUiStore();
+    const { isProductModalOpen, addCategoriesSelected, addAttributesSelected  } = useUiStore();
     const { activeProduct, startUploadFile } = useProductsStore();
     const [ imageLoad, setImageLoad ] = useState(false);
     const [ iconLoad, setIconLoad ] = useState(false);
@@ -44,6 +44,11 @@ export const useProductsState = () => {
         setSelected(true);
       }
 
+      const onSelectAttribute = ({ target }) => {
+        addAttributesSelected(target.value);
+        setSelected(true);
+      }
+
     return {
         imageLoad,
         iconLoad,
@@ -54,6 +59,7 @@ export const useProductsState = () => {
         setIconLoad,
         onUploadImage,
         onUploadIcon,
-        onSelectCategory
+        onSelectCategory,
+        onSelectAttribute,
     }
 }
