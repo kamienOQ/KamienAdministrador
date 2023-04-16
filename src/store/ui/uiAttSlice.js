@@ -5,7 +5,8 @@ export const uiAttSlice = createSlice({
     initialState: {
         isCategoryModalOpen: false,
         isModalViewOpen: false,
-        categoriesSelected: []
+        categoriesSelected: [],
+        examplesSelected: []
     },
     reducers: {
         onOpenCategoryModal: ( state ) => {
@@ -24,6 +25,12 @@ export const uiAttSlice = createSlice({
         onAddCategoriesSelected: ( state, { payload } ) => {
             if (!state.categoriesSelected.some((category) => category.toLowerCase() === payload.toLowerCase())) {
                 state.categoriesSelected.push( payload );
+            }
+        },
+
+        onAddExamplesSelected: ( state, { payload } ) => {
+            if (!state.examplesSelected.some((category) => category.toLowerCase() === payload.toLowerCase())) {
+                state.examplesSelected.push( payload );
             }
         },
 

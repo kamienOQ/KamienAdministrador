@@ -60,6 +60,11 @@ export const useAttributesState = () => {
     addCategoriesSelected(target.value);
     setSelected(true);
   }
+  /*****addCategoriesSelected*******/
+  const onSelectExamples = ({ target }) => {
+    addExamplesSelected(target.value);
+    setSelected(true);
+  }
 
   return {
     imageLoad,
@@ -72,6 +77,7 @@ export const useAttributesState = () => {
     onUploadIcon,
     setImageLoad,
     setIconLoad,
-    onSelectCategories
+    onSelectCategories,
+    onSelectExamples
   };
 };

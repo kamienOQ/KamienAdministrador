@@ -2,7 +2,7 @@ import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, wh
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onChangeSavingNewAttribute, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
-    onCleanAttributes, onAddAttributeAtStart, onSetAttributes, onSetNumberAttributes, onUpdateAttribute,onAddAttributeNameLowerCase, onChangeActive, onSetCategoriesRelated} from ".";
+    onCleanAttributes, onAddAttributeAtStart, onSetAttributes, onSetNumberAttributes, onUpdateAttribute,onAddAttributeNameLowerCase, onChangeActive, onSetCategoriesRelated,onSetExamplesRelated} from ".";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -28,6 +28,8 @@ export const onStartUploadNewAttribute = () => {
   return async (dispatch, getState) => {
     const {categoriesSelected} = getState().ui;
     dispatch(onSetCategoriesRelated(categoriesSelected));
+    const {examplesSelected} = getState().ui;
+    dispatch(onSetExamplesRelated(examplesSelected));
     let duplicateAttribute = false;
     dispatch(onAddAttributeNameLowerCase());
     const { activeAttribute, attributes, pageSize, page } = getState().attributes;
@@ -213,6 +215,9 @@ export const onStartUpdateAttribute = () => {
   return async( dispatch, getState ) => {
     const {categoriesSelected} = getState().ui;
     dispatch(onSetCategoriesRelated(categoriesSelected));
+    
+    const {examplesSelected} = getState().ui;
+    dispatch(onSetExamplesRelated(examplesSelected));
 
       let duplicateAttribute = false;
       dispatch(onChangeSavingNewAttribute(true));

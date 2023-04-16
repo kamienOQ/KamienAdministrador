@@ -13,6 +13,7 @@ export const useAttUiStore = () => {
         isCategoryModalOpen,
         isModalViewOpen,
         categoriesSelected,
+        examplesSelected,
     } = useSelector( state => state.ui );
 
     const openCategoryModal = () => {
@@ -44,11 +45,29 @@ export const useAttUiStore = () => {
         dispatch( onSetCategoriesSelected( categoriesSelected ) )
     }
 
+    /******onAddCategoriesSelected****/
+    const addExamplesSelected = ( examplesSelected ) => {
+        dispatch( onAddExamplesSelected( examplesSelected ) )
+    }
+
+    /****onDeleteAttributesSelected****/
+    const deleteExamplesSelected = ( examplesSelected ) => {
+        dispatch( onDeleteExamplesSelected( examplesSelected ) )
+    }
+    /***onSetCategoriesSelected*******/ 
+    const setExamplesSelected = ( examplesSelected ) => {
+        dispatch( onSetExamplesSelected( examplesSelected ) )
+    }
+
+
+    
+
     return {
         //*Propiedades
         isCategoryModalOpen,
         isModalViewOpen,
         categoriesSelected,
+        examplesSelected,
 
         //*Métodos
         addCategoriesSelected,
@@ -58,6 +77,9 @@ export const useAttUiStore = () => {
         closeModalView,
         deleteAttributesSelected,
         setCategoriesSelected,
+        addExamplesSelected,
+        deleteExamplesSelected,
+        setExamplesSelected,
     }
 
 }
