@@ -3,14 +3,14 @@ import { Modal, Box, Typography, Dialog, DialogContent } from '@mui/material';
 import { useCategoriesStore, useUiStore } from '../../../hooks';
 
 export const CategoryView = () => {
-    const { closeModalView, isModalViewOpen } = useUiStore();
+    const { openModalViewCategory, isModalViewOpenCategory } = useUiStore();
     const { activeCategory } = useCategoriesStore();
 
     return (
         <Dialog
             className="modal-container-categories"
-            open={isModalViewOpen}
-            onClose={closeModalView}
+            open={isModalViewOpenCategory}
+            onClose={openModalViewCategory}
             sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
         >
             <DialogContent 
@@ -26,12 +26,12 @@ export const CategoryView = () => {
                     height: 630,
                 }}
             >
-                <img className='view-category-image' src={activeCategory?.imageCategory?.url} alt="" />
+                <img className='view-category-image' src={activeCategory?.image?.url} alt="" />
                 <Typography variant="h6" sx={{marginTop: 3 }}>
                     {activeCategory?.categoryName}
                 </Typography>
             </DialogContent>
-            <img className='view-category-icon' src={activeCategory?.iconCategory?.url} alt="" />
+            <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
         </Dialog>
     );
 }
