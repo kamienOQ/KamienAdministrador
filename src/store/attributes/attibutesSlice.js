@@ -129,6 +129,10 @@ export const attibutesSlice = createSlice({
         onSetCategoriesRelated: ( state, { payload } ) => {
             state.activeAttribute.categoriesRelated = payload;
         },
+        
+        onSetExamplesRelated: ( state, { payload } ) => {
+            state.activeAttribute.attributesList = payload;
+        },
 
     }
 });
