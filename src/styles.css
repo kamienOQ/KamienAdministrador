@@ -7,6 +7,7 @@
     --border: #c9c9c9;
     --white: #ffffff;
     --backgroud: #383838;
+    --hover-info: #457ef0;
     --header: #256EFF;
     --roboto: 'Roboto', sans-serif;
 }
@@ -46,6 +47,10 @@ label {
 
 .addCategory-modal-button:hover{
     background-color: var(--hover-success) !important;
+}
+
+.addAttribute-modal-button:hover{
+    background-color: var(--hover-info) !important;
 }
 
 .cancelCategory-button:hover{
@@ -185,6 +190,15 @@ label {
 
 .MuiDataGrid-columnHeaders {
   background-color: var(--header);
+}
+
+.container-add-attributes{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 1250px) {

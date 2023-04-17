@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 // Ui
-import {onCloseModalView, onOpenModalView,onOpenCategoryModal, onCloseCategoryModal,onAddCategoriesSelected, onDeleteAttributesSelected, onSetCategoriesSelected} from '../store/ui/uiAttSlice';
+import {onCloseModalView, onOpenModalView,onOpenCategoryModal, onCloseCategoryModal,onAddCategoriesSelected, onDeleteCategoriesSelected, onSetCategoriesSelected, onAddAttributesSelected, onDeleteAttributesSelected, onSetAttributesSelected} from '../store/ui/uiAttSlice';
 
 import {onCleanActiveCategory,} from '../store/attributes/attibutesSlice'
 
@@ -13,6 +13,7 @@ export const useAttUiStore = () => {
         isCategoryModalOpen,
         isModalViewOpen,
         categoriesSelected,
+        attributesSelected,
     } = useSelector( state => state.ui );
 
     const openCategoryModal = () => {
@@ -32,31 +33,47 @@ export const useAttUiStore = () => {
         dispatch( onCloseModalView() );
     }
 
+    const addAttributesSelected = ( attributesSelected ) => {
+        dispatch( onAddAttributesSelected( attributesSelected ) )
+    }
+
     const addCategoriesSelected = ( categoriesSelected ) => {
         dispatch( onAddCategoriesSelected( categoriesSelected ) )
     }
 
-    const deleteAttributesSelected = ( categoriesSelected ) => {
-        dispatch( onDeleteAttributesSelected( categoriesSelected ) )
+    const deleteAtributesSelected = ( attributesSelected ) => {
+        dispatch( onDeleteAttributesSelected( attributesSelected ) )
+    }
+
+    const deleteCategoriesSelected = ( categoriesSelected ) => {
+        dispatch( onDeleteCategoriesSelected( categoriesSelected ) )
     }
 
     const setCategoriesSelected = ( categoriesSelected ) => {
         dispatch( onSetCategoriesSelected( categoriesSelected ) )
     }
 
+    const setAttributesSelected = ( attributesSelected ) => {
+        dispatch( onSetAttributesSelected( attributesSelected ) )
+    }
+
     return {
         //*Propiedades
         isCategoryModalOpen,
         isModalViewOpen,
+        attributesSelected,
         categoriesSelected,
 
         //*Métodos
+        addAttributesSelected,
         addCategoriesSelected,
         openCategoryModal,
         closeCategoryModal,
         openModalView,
         closeModalView,
-        deleteAttributesSelected,
+        deleteAtributesSelected,
+        deleteCategoriesSelected,
+        setAttributesSelected,
         setCategoriesSelected,
     }
 

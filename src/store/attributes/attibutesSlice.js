@@ -32,7 +32,7 @@ export const attibutesSlice = createSlice({
                 attributeNameLowerCase: '',
                 active: true,
                 categoriesRelated: [],
-                attributesList: [],
+                attributesRelated: [],
                 date: new Date().getTime(),
             }
             state.activeAttribute = newAttribute;
@@ -123,6 +123,9 @@ export const attibutesSlice = createSlice({
         onCleanActiveCategory: ( state ) => {
             state.activeAttribute = null;
         },
+        onSetAttributesRelated: ( state, { payload } ) => {
+            state.activeAttribute.attributesRelated = payload;
+        },
         onSetCategoriesRelated: ( state, { payload } ) => {
             state.activeAttribute.categoriesRelated = payload;
         },
@@ -156,5 +159,6 @@ export const {
     onSetAttributes,
     onSetNumberAttributes,
     onUpdateAttribute,
+    onSetAttributesRelated,
     onSetCategoriesRelated
 } = attibutesSlice.actions;

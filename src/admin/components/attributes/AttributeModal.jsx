@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { TextField, Dialog, DialogTitle, Button, MenuItem, IconButton, DialogContent, Avatar, Typography, Alert, Grid, makeStyles, Select,Autocomplete } from "@mui/material"
+import { TextField, Dialog, DialogTitle, Button, MenuItem, DialogContent, Avatar, Typography, Alert, Grid, makeStyles, Select,Autocomplete, IconButton } from "@mui/material"
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { useAttributesForm, useAttributesState, useAttributesStore, useAttUiStore } from "../../../hooks";
 
 import { deleteFileUpload } from "../../../helpers";
-import { FloatingTags } from "./";
+import { FloatingTags, FloatingTagsAttributes } from "./";
 
 const attributesCategories = [
   {
@@ -39,9 +40,9 @@ export const AttributeModal = () => {
   const { closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
   const { attributes, activeAttribute, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
     startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory} = useAttributesStore();
-  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategories, selected } = useAttributesState();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategories, onSelectAttributes } = useAttributesState();
 
-  const { attributeName,categoriesRelated, attributesList,onInputChange, formState } = useAttributesForm(activeAttribute);
+  const { attributeName, categoriesRelated, attributesList, onInputChange, formState } = useAttributesForm(activeAttribute);
   const [emptyName, setEmptyName] = useState(false);
   
 
@@ -50,6 +51,11 @@ export const AttributeModal = () => {
     setEmptyName(false);
   }, [formState]);
 
+  const onAddAttribute = () => {
+    if(!!attributesList){
+      onSelectAttributes(attributesList);
+    }
+  } 
 
   const onCloseModa = () => {   
     closeCategoryModal();
@@ -101,21 +107,32 @@ export const AttributeModal = () => {
             '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
 
-          <TextField
-            type="text"
-            fullWidth
-            label="Agrega nuevos Atributo"
-            variant="filled" 
-            focused
-            name="attributesList"
-            value={attributesList || ''}
-            onChange={onInputChange}
-            error={emptyName}
-            helperText={emptyName ? 'Ejemplo: Blanco, rojo, azul' : ''}
-            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
-            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
-          />
-          
+          <div className="container-add-attributes">
+            <TextField
+              type="text"
+              fullWidth
+              label="Agrega nuevos Atributo"
+              variant="filled"
+              focused
+              name="attributesList"
+              value={attributesList || ''}
+              onChange={onInputChange}
+              error={emptyName}
+              helperText={emptyName ? 'Ejemplo: Blanco, rojo, azul' : ''}
+              sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+              '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
+            />
+
+              <Button
+                className="addAttribute-modal-button"
+                variant="contained"
+                onClick={onAddAttribute}
+                sx={{ backgroundColor: "info.main", color: "tertiary.main", borderRadius: 50, height: 40}}
+              >
+                <AddCircleIcon />
+              </Button>
+          </div>
+          <FloatingTagsAttributes></FloatingTagsAttributes>
           <TextField
             fullWidth
             id="outlined-select-currency"

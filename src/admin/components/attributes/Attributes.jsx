@@ -46,7 +46,7 @@ export const Attributes = () => {
       filterOperators: filterOperatorsDate
     },
     { 
-        field: "attributesList",
+        field: "attributesRelated",
         headerName: "Atributos", 
         width: 250,
         sortable: false,

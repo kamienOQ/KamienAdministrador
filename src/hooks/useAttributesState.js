@@ -3,7 +3,7 @@ import { deleteFileUpload } from "../helpers";
 import { useAttributesStore, useAttUiStore } from ".";
 
 export const useAttributesState = () => {
-  const { isCategoryModalOpen, addCategoriesSelected} = useAttUiStore();
+  const { isCategoryModalOpen, addCategoriesSelected, addAttributesSelected} = useAttUiStore();
   const { attributes, activeAttribute, startUploadFile } = useAttributesStore();
   const [imageLoad, setImageLoad] = useState(false);
   const [iconLoad, setIconLoad] = useState(false);
@@ -56,6 +56,11 @@ export const useAttributesState = () => {
     }
   };
   
+  const onSelectAttributes = (value) => {
+    addAttributesSelected(value);
+    setSelected(true);
+  }
+
   const onSelectCategories = ({ target }) => {
     addCategoriesSelected(target.value);
     setSelected(true);
@@ -72,6 +77,7 @@ export const useAttributesState = () => {
     onUploadIcon,
     setImageLoad,
     setIconLoad,
+    onSelectAttributes,
     onSelectCategories
   };
 };

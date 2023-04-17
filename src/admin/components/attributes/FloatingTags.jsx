@@ -3,11 +3,11 @@ import { useAttUiStore } from "../../../hooks";
 
 export const FloatingTags = () => {
 
-    const { categoriesSelected, deleteAttributesSelected} = useAttUiStore();
+    const { categoriesSelected, deleteCategoriesSelected} = useAttUiStore();
 
     const onDeleteTag = (event) => {
         event.preventDefault();
-        deleteAttributesSelected( event.target.parentNode.id )
+        deleteCategoriesSelected( event.target.parentNode.id )
         // console.log(document.getElementById(event.target.parentNode.id))
     }
     const categories = categoriesSelected.map((categories) => {
