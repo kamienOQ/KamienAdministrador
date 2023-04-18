@@ -11,6 +11,7 @@ export const uiSlice = createSlice({
         searching: '',
         categoriesSelected: '',
         attributesSelected: [],
+        listAttributesSelected: [],
     },
     reducers: {
         onSetTotalPages: ( state, { payload } ) => {
@@ -41,7 +42,8 @@ export const uiSlice = createSlice({
         onCloseProductModal: ( state ) => {
             state.isProductModalOpen = false;
             state.categoriesSelected = '';
-            state.attributesSelected= [];
+            state.attributesSelected = [];
+            state.listAttributesSelected = [];
         },
         onAddCategoriesSelected: ( state, { payload } ) => {
             state.categoriesSelected = payload;
@@ -55,8 +57,19 @@ export const uiSlice = createSlice({
                 state.attributesSelected.push( payload );
             }
         },
-        onDeleteAttributesSelected: ( state, { payload } ) => {
+        onDeleteAttributesSelected: ( state, { payload }, getState ) => {
+            let { attributesSelected } = getState().products;
             state.attributesSelected = state.attributesSelected.filter( event => event !== payload );
+            state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload );
+        },
+        onAddListAttributesSelected: ( state, { payload } ) => {
+            console.log(payload)
+            if (!state.listAttributesSelected.some((listAttribute) => listAttribute.toLowerCase() === payload.toLowerCase())) {
+                state.listAttributesSelected.push( payload );
+            }
+        },
+        onDeleteListAttributesSelected: ( state, { payload } ) => {
+            state.listAttributesSelected = state.listAttributesSelected.filter( event => event !== payload );
         },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;
@@ -94,6 +107,8 @@ export const {
     onDeleteCategoriesSelected, 
     onAddAttributesSelected,
     onDeleteAttributesSelected,
+    onAddListAttributesSelected,
+    onDeleteListAttributesSelected,
     onOpenCategoryModal, 
     onCloseCategoryModal, 
     onOpenModalViewProduct,

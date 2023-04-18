@@ -3,8 +3,8 @@ import { deleteFileUpload } from "../helpers";
 import { useProductsStore, useUiStore } from "./";
 
 export const useProductsState = () => {
-    const { isProductModalOpen, addCategoriesSelected, addAttributesSelected  } = useUiStore();
-    const { activeProduct, startUploadFile } = useProductsStore();
+    const { isProductModalOpen, addCategoriesSelected, addAttributesSelected, addListAttributesSelected  } = useUiStore();
+    const { activeProduct, startUploadFile, listAttributes } = useProductsStore();
     const [ imageLoad, setImageLoad ] = useState(false);
     const [ iconLoad, setIconLoad ] = useState(false);
     const [ selected, setSelected ] = useState(false);
@@ -49,18 +49,29 @@ export const useProductsState = () => {
         setSelected(true);
       }
 
+      const onSelectListAttribute = ({ target }) => {
+        console.log(target)
+        const listForAttributes = listAttributes.map( ( valueAttribute ) => {
+          //const listForSecondAttribute
+          //listAttributes.attributeSelected === target.value
+        })
+        addListAttributesSelected(target.value);
+        setSelected(true);
+      }
+
     return {
-        imageLoad,
-        iconLoad,
-        selected,
-        imageInputRef,
-        iconInputRef, 
-        setImageLoad,
-        setIconLoad,
-        onUploadImage,
-        onUploadIcon,
-        onSelectCategory,
-        setSelected,
-        onSelectAttribute,
+      imageLoad,
+      iconLoad,
+      selected,
+      imageInputRef,
+      iconInputRef, 
+      setImageLoad,
+      setIconLoad,
+      onUploadImage,
+      onUploadIcon,
+      onSelectCategory,
+      setSelected,
+      onSelectAttribute,
+      onSelectListAttribute,
     }
 }

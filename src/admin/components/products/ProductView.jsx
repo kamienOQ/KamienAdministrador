@@ -31,6 +31,15 @@ export const ProductView = () => {
                 <Typography variant="h6">
                     {activeProduct?.productName}
                 </Typography>
+                <Typography variant='h6'>
+                    {activeProduct?.relatedCategories}
+                </Typography>
+                <Typography variant='h6'>
+                    {activeProduct?.relatedAttributes + ',' + " "}
+                </Typography>
+                <Typography variant='h6'>
+                    {activeProduct?.relatedListAttributes}
+                </Typography>
             </DialogContent>
         </Dialog>
     );

@@ -5,20 +5,22 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { useCategoriesStore, useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
+import { useProductsForm, useProductsState, useProductsStore, useUiStore } from "../../../hooks/index";
 import { deleteFileUpload } from "../../../helpers/deleteFileUpload";
 import { FloatingTags } from "./FloatingTags";
 import { FloatingTagsAttributes } from './FloatingTagsAttributes'
+import { FloatingTagsListAttributes } from "./FloatingTagsListAttributes";
 
 export const ProductModal = () => { 
 
-  const { closeProductModal, isProductModalOpen, categoriesSelected, attributesSelected  } = useUiStore();
+  const { closeProductModal, isProductModalOpen, categoriesSelected, attributesSelected, 
+    listAttributesSelected  } = useUiStore();
   
-  const { products, categories, attributes, activeProduct, editing, message, setActiveProduct, addErrorMessage, 
-    addSuccessMessage, startUploadNewProduct, startNumberProducts, changeEditing, changePreProductUpdated, 
-    startUpdateProduct, isSaving } = useProductsStore();
+  const { products, categories, attributes, listAttributes, activeProduct, editing, message, setActiveProduct, 
+    addErrorMessage, addSuccessMessage, startUploadNewProduct, startNumberProducts, changeEditing, 
+    changePreProductUpdated, startUpdateProduct, isSaving } = useProductsStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategory, 
-    onSelectAttribute, selected } = useProductsState();
+    onSelectAttribute, onSelectListAttribute, selected } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
@@ -42,7 +44,7 @@ export const ProductModal = () => {
   useEffect(() => {
     addErrorMessage('');
     addSuccessMessage('');
-  }, [formState, categoriesSelected, attributesSelected, imageLoad, iconLoad ]);
+  }, [formState, categoriesSelected, attributesSelected, listAttributesSelected,imageLoad, iconLoad ]);
   
   
   const onCloseModa = () => {
@@ -149,6 +151,28 @@ export const ProductModal = () => {
             ))}
           </TextField>
           {selected && <FloatingTagsAttributes />}
+          <TextField
+            fullWidth
+            id="outlined-select-currency"
+            select
+            label="Características de los atributos del Producto" variant="filled" focused
+            defaultValue=""
+            onChange={onSelectListAttribute}
+            helperText={emptyName ? 'Campo vacío' : ''}
+            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
+          >
+            {/* importar y recorrer attributesUploaded obteniendo el nombre */}
+            {listAttributes.map((option) => (
+              option.feature.map((option1) => (
+                (option1 !== null) && (
+                  <MenuItem key={option1} value={option1}>
+                    {option1}
+                  </MenuItem>
+                )))
+              ))}
+          </TextField>
+          <FloatingTagsListAttributes />
           <TextField
             fullWidth
             id="outlined-select-currency"

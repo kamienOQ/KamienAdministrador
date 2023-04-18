@@ -10,8 +10,9 @@ export const productsSlice = createSlice({
         },
         numberProducts: undefined,
         products: '',
-        categories: [],
+        categories: '',
         attributes: [],
+        listAttributes: [],
         isLoading: false,
         editing: false,
         filtering: false,
@@ -36,6 +37,7 @@ export const productsSlice = createSlice({
                 active: true,
                 relatedCategories: [],
                 relatedAttributes: [],
+                relatedListAttributes: [],
                 image: {
                     name: null,
                     url: null
@@ -56,6 +58,9 @@ export const productsSlice = createSlice({
         },
         onSetRelatedAttributes: ( state, { payload } ) => {
             state.activeProduct.relatedAttributes = payload;
+        },
+        onSetRelatedListAttributes: ( state, { payload } ) => {
+            state.activeProduct.relatedListAttributes = payload;
         },
         onUpdateProduct: ( state, { payload } ) => {
             state.isSaving = false;
@@ -98,6 +103,10 @@ export const productsSlice = createSlice({
         },
         onSetAttributes: ( state, { payload } ) => {
             state.attributes.push( payload );
+            state.isLoading = false;    
+        },
+        onSetListAttributes: ( state, { payload } ) => {
+            state.listAttributes.push( payload );
             state.isLoading = false;    
         },
         onSetNumberProducts: ( state, { payload } ) => {
@@ -172,6 +181,9 @@ export const productsSlice = createSlice({
         onCleanAttributes: ( state ) => {
             state.attributes = [];
         },
+        onCleanListAttributes: ( state ) => {
+            state.listAttributes = [];
+        },
         onCleanActiveProduct: ( state ) => {
             state.activeProduct = null;
         },
@@ -199,6 +211,7 @@ export const {
     onCleanProducts,
     onCleanCategories,
     onCleanAttributes,
+    onCleanListAttributes,
     onCleanProductsUploaded,
     onDeleteProduct,
     onSetActiveProduct, 
@@ -208,8 +221,10 @@ export const {
     onSetProducts,
     onSetCategories,
     onSetAttributes,
+    onSetListAttributes,
     onSetRelatedCategories,
     onSetRelatedAttributes,
+    onSetRelatedListAttributes,
     onAddProductNameLowerCase, 
     onChangeActive,
     onChangeEditing,

@@ -3,7 +3,7 @@ import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct
     onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
     onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
     onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters, 
-    onStartGetCategoriesForm, onStartGetAttributesForm } from "../store/products";
+    onStartGetCategoriesForm, onStartGetAttributesForm, onStartGetListAttributesForm } from "../store/products";
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export const useProductsStore = () => {
         products,
         categories,
         attributes,
+        listAttributes,
         editing,
         filter,
         filtering,
@@ -130,12 +131,17 @@ export const useProductsStore = () => {
         dispatch ( onStartGetAttributesForm() );
     }
 
+    const startGetListAttributesForm = () => {
+        dispatch ( onStartGetListAttributesForm() );
+    }
+
     return {
         //*Propiedades
         activeProduct,
         products,
         categories,
         attributes,
+        listAttributes,
         editing,
         filter,
         isLoadingProduct,
@@ -166,6 +172,7 @@ export const useProductsStore = () => {
         startGetProducts,
         starGetCategoriesForm,
         startGetAttributesForm,
+        startGetListAttributesForm,
         startNumberProducts,
         startUpdateProduct,
         startUploadFile,
