@@ -255,7 +255,7 @@ export const ProductModal = () => {
                 className="cancelProduct-button"
                 onClick={onCloseModa}
                 variant="contained"
-                sx={{ backgroundColor: "error.main", borderRadius: 20 }}
+                sx={{ backgroundColor: "error.main", borderRadius: 20, mt: 5 }}
                 disabled={isSaving}
               >
                 <CloseIcon />
@@ -265,7 +265,7 @@ export const ProductModal = () => {
                 className="addProduct-modal-button"
                 onClick={onSave}
                 variant="contained"
-                sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 }}
+                sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20, mt: 5 }}
                 disabled={isSaving}
               >
                 <CheckIcon />
