@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 //Categories
-import { onCleanActiveCategory, onCloseModalView, onOpenModalView } from '../store';
+import { onCleanActiveCategory } from '../store/categories';
 // Ui
-import { onCloseCategoryModal, onOpenCategoryModal} from '../store';
+import { onCloseCategoryModal, onOpenCategoryModal, onCloseModalView, onOpenModalView } from '../store/ui/uiSlice';
 
 export const useUiStore = () => {
 

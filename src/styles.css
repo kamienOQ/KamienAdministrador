@@ -7,6 +7,7 @@
     --border: #c9c9c9;
     --white: #ffffff;
     --backgroud: #383838;
+    --hover-info: #457ef0;
     --header: #256EFF;
     --roboto: 'Roboto', sans-serif;
 }
@@ -48,6 +49,10 @@ label {
     background-color: var(--hover-success) !important;
 }
 
+.addAttribute-modal-button:hover{
+    background-color: var(--hover-info) !important;
+}
+
 .cancelCategory-button:hover{
     background-color: var(--hover-error) !important;
     
@@ -78,7 +83,7 @@ label {
 }
 
 
-/* .tags-container{
+.tags-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
@@ -95,7 +100,7 @@ label {
     color: var(--white);
     width: auto;
     font-size: 14px;
-    padding: 0 10px 0 10px;
+    padding: 5px 10px 5px 10px;
     gap: 5px;
 }
 
@@ -105,7 +110,7 @@ label {
     border: none;
     font-size: 16px;
     border-radius: 50px;
-} */
+}
 
 .categories-modal-buttons{
     display: flex;
@@ -172,6 +177,14 @@ label {
     border-radius: 5px;
     opacity: 0.7;
 }
+/* .container-view-category-icon{
+    font-size: 20px;
+    position: absolute;
+    width: 70%;
+    height: 65%;
+    top: 55%;
+} */
+
 .container-view-category-icon{
     font-size: 20px;
     position: absolute;
@@ -182,6 +195,16 @@ label {
     z-index: 1;
     transform: translate(-50%, -50%);
 }
+/* .view-category-icon{
+    font-size: 20px;
+    position: absolute;
+    width: 40%;
+    height: 35%;
+    top: 45%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+} */
 .view-category-icon{
     width: 70%;
     height: 65%;
@@ -193,6 +216,14 @@ label {
 
 .contrast-text{
     text-shadow: 1px 1px 1px #000;
+}
+.container-add-attributes{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 1250px) {
@@ -210,6 +241,12 @@ label {
         margin-left: -15px !important;
     }
     
+    .button-filter{
+        margin-left: -10px !important;
+    }
+    .remove-filter-attributes{
+        margin-left: -15px !important;
+    }
 }
 
 @media (max-width: 710px) {
@@ -307,4 +344,13 @@ label {
         height: 65%;
     } */
     
+    .view-category-image{
+        width: 100%;
+        height: 65%;
+    }
+    .view-category-icon{
+        width: 40%;
+        height: 30%;
+    }
+
 }
