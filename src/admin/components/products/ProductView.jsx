@@ -38,7 +38,7 @@ export const ProductView = () => {
                     {activeProduct?.relatedAttributes + ',' + " "}
                 </Typography>
                 <Typography variant='h6'>
-                    {activeProduct?.relatedListAttributes}
+                    {activeProduct?.relatedListAttributes?.feature}
                 </Typography>
             </DialogContent>
         </Dialog>
