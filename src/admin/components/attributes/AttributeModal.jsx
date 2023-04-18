@@ -39,7 +39,7 @@ export const AttributeModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
   const { attributes, activeAttribute, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
-    startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory} = useAttributesStore();
+    startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory,categories} = useAttributesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategories, onSelectAttributes } = useAttributesState();
 
   const { attributeName, categoriesRelated, attributesList, onInputChange, formState } = useAttributesForm(activeAttribute);
@@ -145,10 +145,12 @@ export const AttributeModal = () => {
             '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           >
             {/* importar y recorrer productsUploaded opteniendo el nombre */}
-            {attributesCategories.map((option) => (
-              <MenuItem key={option.label} value={option.label}>
-                {option.label}
+            {categories.map((option) => (
+              option.map((option1) => (
+              <MenuItem key={option1} value={option1}>
+                {option1}
               </MenuItem>
+              ))
             ))}
           </TextField>
           <FloatingTags />

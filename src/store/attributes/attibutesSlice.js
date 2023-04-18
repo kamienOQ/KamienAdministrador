@@ -10,6 +10,7 @@ export const attibutesSlice = createSlice({
         },
         numberCategories: undefined,
         attributes: [],
+        categories: [],
         isLoading: false,
         editing: false,
         filtering: false,
@@ -57,6 +58,10 @@ export const attibutesSlice = createSlice({
         onDeleteCategory: ( state, { payload } ) => {
             state.activeAttribute = null;
             state.attributes =  state.attributes.filter( (category) => category.attributeName !== payload );
+        },
+        onSetCategories: ( state, { payload } ) => {
+            state.categories.push( payload );
+            state.isLoading = false;    
         },
         onSetAttributes: ( state, { payload } ) => {
             state.attributes = payload;
@@ -134,6 +139,10 @@ export const attibutesSlice = createSlice({
             state.activeAttribute.attributesList = payload;
         },
 
+        onCleanCategories: ( state ) => {
+            state.categories = [];
+        },
+
     }
 });
 
@@ -164,5 +173,7 @@ export const {
     onSetNumberAttributes,
     onUpdateAttribute,
     onSetAttributesRelated,
-    onSetCategoriesRelated
+    onSetCategoriesRelated,
+    onSetCategories,
+    onCleanCategories,
 } = attibutesSlice.actions;

@@ -11,7 +11,7 @@ import { Attributes, AttributeModal, AttributeView } from "../components";
 
 export const AttibutesCrud = () => {
   const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
-  const { isSaving, message, filtering, addNewCategory, startGetAttributes, startNumberCategories } = useAttributesStore();
+  const { isSaving, message, filtering, addNewCategory, startGetAttributes, startNumberCategories,starGetCategoriesForm } = useAttributesStore();
 
   
 
@@ -35,6 +35,7 @@ export const AttibutesCrud = () => {
   const onOpenModal = () => {
     addNewCategory();
     openCategoryModal();
+    starGetCategoriesForm();
   }
 
   return (

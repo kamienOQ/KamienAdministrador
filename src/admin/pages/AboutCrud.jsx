@@ -134,7 +134,7 @@ export const AboutCrud = () => {
         margin="normal"
       />
       {editMode ? (
-        <Button variant="contained" color="primary" onClick={handleSave} startIcon={<SaveAltIcon />}>
+        <Button variant="contained" color="success" onClick={handleSave} startIcon={<SaveAltIcon />}>
           Guardar 
         </Button>
       ) : (

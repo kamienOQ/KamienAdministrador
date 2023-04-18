@@ -7,7 +7,7 @@ import { CountertopsOutlined } from '@mui/icons-material';
 export const AttibutesActions = ({ row }) => {
 
   const { openCategoryModal, openModalView, setCategoriesSelected, setAttributesSelected } = useAttUiStore();
-  const { changeEditing, setActiveCategory, changePreCategoryName, changeActive, startChangeActiveCategory } = useAttributesStore();
+  const { changeEditing, setActiveCategory, changePreCategoryName, changeActive, startChangeActiveCategory,starGetCategoriesForm } = useAttributesStore();
 
   const handleActive = () => {
     setActiveCategory(row);
@@ -23,6 +23,7 @@ export const AttibutesActions = ({ row }) => {
     changePreCategoryName(row.attributeName);
     changeEditing(true);
     openCategoryModal();
+    starGetCategoriesForm();
   };
 
   const handleOpenView = () => {

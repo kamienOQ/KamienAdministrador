@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanAttributes, 
     onSetActiveCategory, onStartFiltersAttributes, onStartGetAttributes, onStartUploadFile, onStartUploadNewAttribute, onChangeFiltering, 
     onSetNumberAttributes, onStartNumberAttributes, onChangePreCategoryName, onChangePreAttributeUpdated, onStartUpdateAttribute, 
-    onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize } from "../store";
+    onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize, onStartGetCategoriesForm} from "../store";
 
 export const useAttributesStore = () => {
     const dispatch = useDispatch();
@@ -17,6 +17,7 @@ export const useAttributesStore = () => {
         isLoading,
         message,
         numberCategories,
+        categories,
     } = useSelector( state => state.attributes );
     
     //*Slice
@@ -108,7 +109,11 @@ export const useAttributesStore = () => {
 
     const startChangeActiveCategory = () => {
         dispatch( onStartChangeActiveAttribute() );
-    }    
+    }  
+    
+    const starGetCategoriesForm = () => {
+        dispatch ( onStartGetCategoriesForm() );
+    }
 
     return {
         //*Propiedades
@@ -121,6 +126,7 @@ export const useAttributesStore = () => {
         isSaving,
         message,
         numberCategories,
+        categories,
 
         //*Métodos
         addErrorMessage,
@@ -145,5 +151,6 @@ export const useAttributesStore = () => {
         startUploadNewCategory,
         startUpdateCategory,
         startChangeActiveCategory,
+        starGetCategoriesForm,
     }
 }
