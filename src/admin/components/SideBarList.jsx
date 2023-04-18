@@ -75,6 +75,7 @@ export const SideBarList = () => {
         </ListItem>
         </Link>
 
+<<<<<<< HEAD
         <Link component={RouterLink} to = "/Atributos" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
@@ -103,6 +104,8 @@ export const SideBarList = () => {
         </ListItem>
         </Link>
 
+=======
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
 
         <Link component={RouterLink} to = "/Administradores" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>

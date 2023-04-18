@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { onChangePreAttributeUpdated } from "../store";
+import { onChangePreProductUpdated } from "../store";
 
 export const  useAttributesForm = ( initialForm = {}  ) => {
     const [ formState, setFormState ] = useState( initialForm );
@@ -12,6 +13,7 @@ export const  useAttributesForm = ( initialForm = {}  ) => {
 
     const onInputChange = ({ target }) => {
         dispatch(onChangePreAttributeUpdated(true));
+        dispatch(onChangePreProductUpdated(true));
         const { name, value } = target;
         setFormState({
             ...formState,

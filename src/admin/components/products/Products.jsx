@@ -1,17 +1,14 @@
-import { getGridDateOperators, getGridStringOperators } from "@mui/x-data-grid";
-import { useCategoriesStore } from "../../../hooks";
-import { CategoriesTable, CategoryActions } from "./";
+import { getGridStringOperators } from "@mui/x-data-grid";
+import { useProductsStore } from "../../../hooks";
+import { ProductsTable, ProductActions } from "./";
 
 
-export const Categories = () => {
-  const { categories } = useCategoriesStore();
+export const Products = () => {
+
+  const { products } = useProductsStore();
 
   const filterOperatorsName = getGridStringOperators().filter(({ value }) =>
     ['contains'].includes(value),
-  );
-
-  const filterOperatorsDate = getGridDateOperators().filter(({ value }) =>
-    ['onOrAfter'].includes(value),
   );
 
   const attributes = [
@@ -23,41 +20,30 @@ export const Categories = () => {
       sortable: false,
       filterable: false,
       hideable: false,
-<<<<<<< HEAD
       disableColumnMenu: true,
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
-      field: "categoryName",
+      field: "productName",
       headerName: "Nombre",
       width: 300,
       filterable: true,
       sortable: true,
       hideable: false,
-<<<<<<< HEAD
       filterOperators: filterOperatorsName,
       onKeyDown: (event) => {
         if (event.key === "Enter") {
           event.stopPropagation();
         }
       },
-=======
-      filterOperators: filterOperatorsName
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
-      field: "date",
-      headerName: "Fecha",
-      type: "date",
-      // type: "dateTime",
-      valueGetter: ({ value }) => value && new Date(value),
-      width: 200,
+      field: "price",
+      headerName: "Precio",
+      width: 100,
       filterable: true,
       sortable: false,
-      operatorValue: 'greaterThan',
       hideable: false,
-      filterOperators: filterOperatorsDate
+      disableColumnMenu: true
     },
     {
       field: "image",
@@ -70,10 +56,7 @@ export const Categories = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
       ),
       hideable: false,
-<<<<<<< HEAD
       disableColumnMenu: true
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
       field: "icon",
@@ -86,10 +69,7 @@ export const Categories = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
       ),
       hideable: false,
-<<<<<<< HEAD
       disableColumnMenu: true
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
       field: "actions",
@@ -100,16 +80,13 @@ export const Categories = () => {
       filterable: false,
       hideable: false,
       getActions: (params) => [
-        <CategoryActions row={params.row}/>
+        <ProductActions row={params.row}/>
       ]
     },
   ];
 
   return (
-    !!categories && <CategoriesTable attributes={attributes} data={categories} />
+    !!products && <ProductsTable attributes={attributes} data={products} />
   );
-<<<<<<< HEAD
+  
 };
-=======
-};
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77

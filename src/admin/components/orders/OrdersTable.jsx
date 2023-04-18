@@ -58,6 +58,7 @@ export const OrdersTable = ({ attributes, data }) => {
     setRowCountState(numberOrders !== undefined ? numberOrders : 0);
   }, [numberOrders, setRowCountState]);
 
+<<<<<<< HEAD
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
@@ -72,16 +73,27 @@ export const OrdersTable = ({ attributes, data }) => {
     };
   }, [filtering, filter.value, localFilterValue]);
 
+=======
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
   const columns = useMemo(() => attributes, [rowId]);
 
   // * Filter
   const handleSearch = () => {
     if (
       !filtering ||
+<<<<<<< HEAD
+=======
+      filter.value === "asc" ||
+      filter.value === "desc" ||
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
       filter.value !== localFilterValue
     ) {
       if (
        Object.keys(filter).length > 0 &&
+<<<<<<< HEAD
+=======
+        filter.field !== undefined &&
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
         filter.field !== undefined
       ) {
         onPaginationChange({...paginationModel, page: 0});
@@ -96,6 +108,7 @@ export const OrdersTable = ({ attributes, data }) => {
     }
   };
 
+<<<<<<< HEAD
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
@@ -109,6 +122,8 @@ export const OrdersTable = ({ attributes, data }) => {
     }
   };
 
+=======
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
   const handleRemoveFilter = () => {
     startGetOrders(paginationModel.page, paginationModel.pageSize);
     changeFiltering(false);
@@ -139,7 +154,10 @@ export const OrdersTable = ({ attributes, data }) => {
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
     changeFiltering(false);
+<<<<<<< HEAD
     handleSort({ field: event[0]?.field, value: event[0]?.sort })
+=======
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
   };
 
   return (
@@ -156,15 +174,38 @@ export const OrdersTable = ({ attributes, data }) => {
           width: "1160px",
         }}
       >
+<<<<<<< HEAD
         {filtering ? (
           <Button
           className="remove-filter"
+=======
+        <Button
+          className="button-filter"
+          sx={{
+            height: 40,
+            ml: "5px",
+            backgroundColor: "filter.main",
+            color: "tertiary.main",
+            "&:hover": { bgcolor: "lightInfo.main" },
+          }}
+          onClick={handleSearch}
+          startIcon={<FilterAltIcon />}
+        >
+          Filtrar
+        </Button>
+        {filtering ? (
+          <Button
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
             sx={{
               height: 40,
               backgroundColor: "error.main",
               color: "tertiary.main",
               "&:hover": { bgcolor: "lightError.main" },
+<<<<<<< HEAD
               ml: "5px",
+=======
+              ml: 1,
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
             }}
             onClick={handleRemoveFilter}
             startIcon={<CloseIcon />}
@@ -208,9 +249,12 @@ export const OrdersTable = ({ attributes, data }) => {
           maxWidth: "1172px",
           my: "0",
           mx: "auto",
+<<<<<<< HEAD
           ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
             outline: "none",
           },
+=======
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
           ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
             bgcolor: "info.main",
             color: "white",
@@ -233,4 +277,8 @@ export const OrdersTable = ({ attributes, data }) => {
       />
     </Grid>
   );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77

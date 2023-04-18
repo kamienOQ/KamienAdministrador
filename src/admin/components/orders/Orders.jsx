@@ -86,4 +86,8 @@ export const Orders = () => {
   ];
 
   return <OrdersTable attributes={attributes} data={orders} />;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77

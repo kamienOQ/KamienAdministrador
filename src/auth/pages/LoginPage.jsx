@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Alert, Button, Grid, IconButton, InputAdornment, Link, TextField } from "@mui/material";
+import { Alert, Button, Grid, IconButton, InputAdornment, Link, TextField, Typography } from "@mui/material";
+import { Google } from '@mui/icons-material';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { AuthLayout } from "../layout/AuthLayout";
+
 import { useForm } from "../../hooks/useForm";
-import { logout, startLoginWithEmailPassword } from "../../store/auth";
+import { startGoogleSignIn, logout, startLoginWithEmailPassword } from "../../store/auth";
 
 export const LoginPage = () => {
+
   const dispatch = useDispatch();
   const { status, errorMessage } = useSelector((state) => state.auth);
 
@@ -32,6 +35,11 @@ export const LoginPage = () => {
       dispatch(startLoginWithEmailPassword(email, password));
     }
   };
+
+  const onGoogleSignIn = () => {
+    console.log('onGoogleSignIn');
+    dispatch( startGoogleSignIn() );
+  }
 
   const onClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -100,6 +108,20 @@ export const LoginPage = () => {
           >
             Iniciar Sesión
           </Button>
+          <Button
+              disabled={ isAuthenticating }
+              variant='contained' 
+              fullWidth
+              sx={{
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "16px",
+                mt: 1
+              }}
+              onClick={ onGoogleSignIn }>
+            <Google />
+            <Typography sx={{ ml: 1 }}>Google</Typography>
+          </Button>
         </Grid>
       </form>
       <Link
@@ -112,6 +134,17 @@ export const LoginPage = () => {
         to="/auth/account-recovery"
       >
         ¿Olvidaste tu contraseña?
+      </Link>
+      <Link
+        color="dark.main"
+        component={RouterLink}
+        sx={{ mt: 2, "&:hover": { textDecoration: "underline" } }}
+        display="block"
+        textAlign="center"
+        underline="none"
+        to="/auth/sign-up"
+      >
+        Crear Cuenta nueva
       </Link>
     </AuthLayout>
   );
