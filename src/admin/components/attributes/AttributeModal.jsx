@@ -44,11 +44,14 @@ export const AttributeModal = () => {
 
   const { attributeName, categoriesRelated, attributesList, onInputChange, formState } = useAttributesForm(activeAttribute);
   const [emptyName, setEmptyName] = useState(false);
+  const [emptyAttribute, setEmptyAttribute] = useState(false);
   
 
   useEffect(() => {
     setActiveCategory(formState);
-    setEmptyName(false);
+    if(!!attributeName){
+      setEmptyName(false);
+    }
   }, [formState]);
 
   const onAddAttribute = () => {
@@ -65,8 +68,10 @@ export const AttributeModal = () => {
 
   const onSave = () => {
     if (activeAttribute.attributeName === '') {
+      console.log(activeAttribute.attributeName)
       setEmptyName(true);
-    } else {
+    } 
+    else {
       if(!editing){
         startUploadNewCategory();
         startNumberCategories();
@@ -116,8 +121,6 @@ export const AttributeModal = () => {
               name="attributesList"
               value={attributesList || ''}
               onChange={onInputChange}
-              error={emptyName}
-              helperText={emptyName ? 'Ejemplo: Blanco, rojo, azul' : ''}
               sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
               '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
             />

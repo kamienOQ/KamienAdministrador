@@ -40,6 +40,8 @@ export const onStartGetCategoriesForm = () => {
 
 export const onStartUploadNewAttribute = () => {
   return async (dispatch, getState) => {
+    dispatch(onAddErrorMessage( '' ));
+    dispatch(onAddSuccessMessage( '' ));
     const {categoriesSelected, attributesSelected} = getState().uiAtt;
     console.log(attributesSelected)
     dispatch(onSetCategoriesRelated(categoriesSelected));
@@ -228,6 +230,8 @@ export const onStartNumberAttributes = () => {
 
 export const onStartUpdateAttribute = () => {
   return async( dispatch, getState ) => {
+    dispatch(onAddErrorMessage( '' ));
+    dispatch(onAddSuccessMessage( '' ));
     const {categoriesSelected, attributesSelected} = getState().uiAtt;
     dispatch(onSetCategoriesRelated(categoriesSelected));
     dispatch(onSetAttributesRelated(attributesSelected));
