@@ -52,11 +52,15 @@ export const useProductsState = () => {
       const onSelectListAttribute = ({ target }) => {
         console.log(target)
         const listForAttributes = listAttributes.map( ( valueAttribute ) => {
+          console.log(valueAttribute)
+          if(valueAttribute.feature.includes(target.value)){
+            addListAttributesSelected({ 'attributeSelected': valueAttribute.attributeSelected, 'feature': target.value});
+            setSelected(true);
+          }
           //const listForSecondAttribute
           //listAttributes.attributeSelected === target.value
         })
-        addListAttributesSelected(target.value);
-        setSelected(true);
+        
       }
 
     return {

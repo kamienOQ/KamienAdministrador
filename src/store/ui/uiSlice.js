@@ -57,15 +57,13 @@ export const uiSlice = createSlice({
                 state.attributesSelected.push( payload );
             }
         },
-        onDeleteAttributesSelected: ( state, { payload }, getState ) => {
-            let { attributesSelected } = getState().products;
+        onDeleteAttributesSelected: ( state, { payload } ) => {
             state.attributesSelected = state.attributesSelected.filter( event => event !== payload );
             state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload );
         },
         onAddListAttributesSelected: ( state, { payload } ) => {
-            //console.log(payload)
-            if (!state.listAttributesSelected.some((listAttribute) => listAttribute.toLowerCase() === payload.toLowerCase())) {
-                console.log(state.listAttribute)
+            console.log(payload)
+            if (!state.listAttributesSelected.some((listAttribute) => listAttribute.feature.toLowerCase() === payload.feature.toLowerCase())) {
                 state.listAttributesSelected.push( payload );
             }
         },

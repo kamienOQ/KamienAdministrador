@@ -12,8 +12,8 @@ export const FloatingTagsListAttributes = () => {
 
     const listAttributes = listAttributesSelected.map((listAttributes) => {
         return (
-            <div className='tag-container' id={listAttributes} key={listAttributes}>
-                <p>{listAttributes}</p>
+            <div className='tag-container' id={listAttributes.feature} key={listAttributes.feature}>
+                <p>{listAttributes.feature}</p>
                 <button className='closeTag-button' onClick={onDeleteTag}>
                     X
                 </button>
