@@ -25,7 +25,7 @@ export const Products = () => {
     {
       field: "productName",
       headerName: "Nombre",
-      width: 250,
+      width: 300,
       filterable: true,
       sortable: true,
       hideable: false,
@@ -49,7 +49,7 @@ export const Products = () => {
       field: "image",
       headerName: "Imagen",
       type: "image",
-      width: 250,
+      width: 200,
       sortable: false,
       filterable: false,
       renderCell: (params) => (
@@ -62,7 +62,7 @@ export const Products = () => {
       field: "icon",
       headerName: "Icono",
       type: "image",
-      width: 250,
+      width: 200,
       sortable: false,
       filterable: false,
       renderCell: (params) => (

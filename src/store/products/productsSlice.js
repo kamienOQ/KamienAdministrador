@@ -34,7 +34,7 @@ export const productsSlice = createSlice({
                 productNameLowerCase: '',
                 products: '',
                 active: true,
-                relatedCategories: '',
+                relatedCategories: [],
                 relatedAttributes: [],
                 image: {
                     name: null,
@@ -107,7 +107,6 @@ export const productsSlice = createSlice({
             state.products.unshift(payload);
         },  
         onAddImageProduct: ( state, { payload } ) => {
-            console.log(payload)
             state.activeProduct.image.name = payload[0];
             state.activeProduct.image.url = payload[1];
         },

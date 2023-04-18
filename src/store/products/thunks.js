@@ -34,10 +34,10 @@ export const onStartUploadNewProduct = () => {
 
     let duplicateProduct = false;
     dispatch(onAddProductNameLowerCase());
-    const { categoriesSelected } = getState().ui;
     const { attributesSelected } = getState().ui;
-    dispatch(onSetRelatedCategories( categoriesSelected ));
+    const { categoriesSelected } = getState().ui;
     dispatch(onSetRelatedAttributes( attributesSelected ));
+    dispatch(onSetRelatedCategories( categoriesSelected ));
     const { activeProduct, products, pageSize, page } = getState().products;
 
     dispatch(onChangeSavingNewProduct(true));
@@ -190,14 +190,14 @@ export const onStartNumberProducts = () => {
 export const onStartUpdateProduct = () => {
   return async( dispatch, getState ) => {
 
-      let duplicateProduct = false;
-      const { categoriesSelected } = getState().ui;
-      const { attributesSelected } = getState().ui;
-      dispatch(onAddProductNameLowerCase());
-      dispatch(onChangeSavingNewProduct(true));
-      dispatch(onSetRelatedCategories( categoriesSelected ));
-      dispatch(onSetRelatedAttributes( attributesSelected ));
-      const { activeProduct, preProduct } = getState().products;
+    let duplicateProduct = false;
+    const { categoriesSelected } = getState().ui;
+    const { attributesSelected } = getState().ui;
+    dispatch(onAddProductNameLowerCase());
+    dispatch(onChangeSavingNewProduct(true));
+    dispatch(onSetRelatedCategories( categoriesSelected ));
+    dispatch(onSetRelatedAttributes( attributesSelected ));
+    const { activeProduct, preProduct } = getState().products;
 
     let q;  
     const collectionRef = collection(FirebaseDB, `/products`);
