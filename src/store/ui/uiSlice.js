@@ -63,8 +63,9 @@ export const uiSlice = createSlice({
             state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload );
         },
         onAddListAttributesSelected: ( state, { payload } ) => {
-            console.log(payload)
+            //console.log(payload)
             if (!state.listAttributesSelected.some((listAttribute) => listAttribute.toLowerCase() === payload.toLowerCase())) {
+                console.log(state.listAttribute)
                 state.listAttributesSelected.push( payload );
             }
         },
