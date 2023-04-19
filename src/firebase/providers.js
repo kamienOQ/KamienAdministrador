@@ -1,5 +1,11 @@
 import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FirebaseAuth } from "./config";
+import { FirebaseDB } from "./config";
+import { FirebaseApp } from "./config";
+import { getFirestore } from "firebase/firestore";
+import { collection, doc, getDoc,getDocs,updateDoc } from 'firebase/firestore'
+const db = getFirestore(FirebaseApp)
+
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -172,7 +178,7 @@ export const updateUserEmail = async(email) => {
 export const updateUserPassword = async(password) => {
   try {
     await updatePassword(FirebaseAuth.currentUser,password);
-    console.log("Email changed successfully!");
+    console.log("Password changed successfully!");
   } catch (error) {
     console.error(error);
   }
@@ -181,3 +187,40 @@ export const updateUserPassword = async(password) => {
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut();
 }
+
+
+export const getCurrentUser = async() => {
+  try{
+    const currentUserId = FirebaseAuth.currentUser.uid;
+    const userRef = doc(FirebaseDB, "users", currentUserId);
+    const userSnapshot = await getDoc(userRef)
+    const userData = userSnapshot.data()
+    return userData
+  }catch(error){
+    console.log(error)
+    return 0
+  }
+}
+export const getAllUsers = async() =>{
+  const users = await getDocs(collection(db, "users"))
+  return users.docs.filter(doc => doc.data().habilitado === true).map(doc =>({id: doc.id, ...doc.data()}))
+};
+
+export const updateUser = async(uid,newData) => {
+  try{
+    const usersRef = doc(db, "users" , uid)
+    await updateDoc(usersRef,newData)
+  }catch(error){
+    console.log("Error a la hora de actualizar el usuario : " ,error)
+  }
+};
+
+export const eliminateUser = async(uid,newData) => {
+  try{
+    const usersRef = doc(db, "users" , uid)
+    await updateDoc(usersRef,newData)
+  }catch(error){
+    console.log("Error a la hora de eliminar el usuario : " ,error)
+  }
+};
+

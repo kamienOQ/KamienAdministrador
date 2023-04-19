@@ -1,11 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-// Product
-import { onCleanActiveProduct, onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
-//Categories
-import { onCleanActiveCategory, onOpenModalViewCategory, onCloseModalViewCategory } from '../store';
+// //Categories
+// import { onCleanActiveCategory } from '../store/categories';
 // Ui
-import { onAddCategoriesSelected, onAddAttributesSelected, onCloseProductModal, onOpenProductModal, 
-    onDeleteCategoriesSelected, onDeleteAttributesSelected, onCloseCategoryModal, onOpenCategoryModal } from '../store';
+import { onCloseCategoryModal, onOpenCategoryModal, onCloseModalView, onOpenModalView, onOpenModalViewCategory, 
+    onCloseModalViewCategory, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, onOpenProductModal,  
+    onDeleteAttributesSelected, onDeleteListAttributesSelected, onAddCategoriesSelected, onDeleteCategoriesSelected, } from '../store/ui/uiSlice';
+// Product
+import { onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
+import { onCleanActiveProduct } from '../store/products/productsSlice';
+//Categories
+import { onCleanActiveCategory,  } from '../store/categories';
+
 
 export const useUiStore = () => {
 
@@ -13,10 +18,12 @@ export const useUiStore = () => {
 
     const { 
         isCategoryModalOpen,
+        isProductModalOpen,
+        isModalViewOpen,
         categoriesSelected,
         attributesSelected,
+        listAttributesSelected,
         isModalViewOpenProduct, 
-        isModalViewOpenCategory, 
     } = useSelector( state => state.ui );
 
     const openProductModal = () => {
@@ -37,12 +44,24 @@ export const useUiStore = () => {
         dispatch( onCleanActiveCategory() );
     }
 
+    const openModalView = () => {
+        dispatch( onOpenModalView() );
+    }
+
+    const closeModalView = () => {
+        dispatch( onCloseModalView() );
+    }
+
     const addCategoriesSelected = ( categoriesSelected ) => {
         dispatch( onAddCategoriesSelected( categoriesSelected ) )
     }
 
     const addAttributesSelected = ( attributesSelected ) => {
         dispatch( onAddAttributesSelected( attributesSelected ) )
+    }
+
+    const addListAttributesSelected = ( listAttributesSelected ) => {
+        dispatch( onAddListAttributesSelected( listAttributesSelected ) )
     }
 
     const deleteCategoriesSelected = () => {
@@ -53,8 +72,8 @@ export const useUiStore = () => {
         dispatch( onDeleteAttributesSelected( attributesSelected ) )
     }
 
-    const cleanProductsSelected = () => {
-        dispatch( onCleanProductsSelected() )
+    const deleteListAttributesSelected = ( listAttributesSelected ) => {
+        dispatch( onDeleteListAttributesSelected( listAttributesSelected ) )
     }
 
     const openModalViewProduct = () => {
@@ -73,21 +92,30 @@ export const useUiStore = () => {
         dispatch( onCloseModalViewCategory() )
     }
 
+    
+
     return {
         //*Propiedades
+        isCategoryModalOpen,
+        isModalViewOpen,
         isProductModalOpen,
         isCategoryModalOpen,
         categoriesSelected,
         attributesSelected,
+        listAttributesSelected,
         isModalViewOpenProduct,
-        isModalViewOpenCategory,
 
         //*Métodos
+        openCategoryModal,
+        closeCategoryModal,
+        openModalView,
+        closeModalView,
         addCategoriesSelected,
         addAttributesSelected,
         deleteCategoriesSelected,
         deleteAttributesSelected,
-        cleanProductsSelected,
+        addListAttributesSelected,
+        deleteListAttributesSelected,
         openProductModal,
         closeProductModal,
         openCategoryModal,

@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
-    onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
-    onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
-    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters, 
-    onStartGetCategoriesForm, onStartGetAttributesForm } from "../store/products";
+    onSetActiveProduct,  onChangeEditing, onSetNumberProducts, onChangePreProductName, onChangePreProductUpdated, onChangeActive, onChangePageAndSize, 
+    onChangeFilterings, onChangeFilters} from "../store/products/productsSlice";
+
+import { onStartGetCategoriesForm, onStartGetAttributesForm, onStartGetListAttributesForm, onStartUpdateProduct, 
+    onStartChangeActiveProduct, onStartFilterProducts, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onStartNumberProducts,} from "../store/products/thunks"
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export const useProductsStore = () => {
         products,
         categories,
         attributes,
+        listAttributes,
         editing,
         filter,
         filtering,
@@ -130,12 +132,17 @@ export const useProductsStore = () => {
         dispatch ( onStartGetAttributesForm() );
     }
 
+    const startGetListAttributesForm = () => {
+        dispatch ( onStartGetListAttributesForm() );
+    }
+
     return {
         //*Propiedades
         activeProduct,
         products,
         categories,
         attributes,
+        listAttributes,
         editing,
         filter,
         isLoadingProduct,
@@ -166,6 +173,7 @@ export const useProductsStore = () => {
         startGetProducts,
         starGetCategoriesForm,
         startGetAttributesForm,
+        startGetListAttributesForm,
         startNumberProducts,
         startUpdateProduct,
         startUploadFile,

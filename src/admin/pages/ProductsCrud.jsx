@@ -7,9 +7,9 @@ import { ProductModal, Products, ProductView } from "../components/products";
 
 export const ProductsCrud = () => {
 
-  const { openProductModal, closeProductModal, isProductModalOpen } = useUiStore();
+  const { openProductModal, closeProductModal, isProductModalOpen, attributesSelected } = useUiStore();
   const { isSaving, message, filtering, addNewProduct, startGetProducts, startNumberProducts, 
-    starGetCategoriesForm, startGetAttributesForm } = useProductsStore();
+    starGetCategoriesForm, startGetAttributesForm, startGetListAttributesForm } = useProductsStore();
 
   useEffect(() => {
     if (!!message.success) {
@@ -26,6 +26,11 @@ export const ProductsCrud = () => {
   useEffect(() => {
     startGetProducts();
   }, [])
+
+  useEffect(() => {
+    startGetListAttributesForm();
+  }, [attributesSelected]);
+  
 
   const onOpenModal = () => {
     addNewProduct();

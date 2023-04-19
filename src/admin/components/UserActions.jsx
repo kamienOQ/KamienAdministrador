@@ -1,15 +1,21 @@
 
-import { Box, CircularProgress, Fab } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Fab } from '@mui/material';
+import { useState } from 'react';
 import { AdminEditModal } from './AdminEditModal';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { grey,red } from '@mui/material/colors';
-// import { updateStatus } from '../../../actions/user';
-// import { useValue } from '../../../context/ContextProvider';
-export const UserActions = () => {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+import { EditUserModal } from './EditUserModal';
+import { ConfirmationModal } from './ConfirmationModal';
+export const UserActions = ({rowParams}) => {
+  const [openEditModal,setEditModal] = useState(false)
+  const [openConfirmationModal,setConfirmationModal] = useState(false)
+  const handleOpen = () =>
+  {
+    setEditModal(true)
+  }
+  const handleConfirmationModalOpen = () =>{
+    setConfirmationModal(true)
+  }
   return (
     <>
         <Box
@@ -31,6 +37,8 @@ export const UserActions = () => {
             color: "white",
             '&:hover': { bgcolor: "primary.main" },
           }}
+          onClick = {handleOpen}
+           
         >
             <EditIcon />
         </Fab>
@@ -44,15 +52,19 @@ export const UserActions = () => {
             color: "white",
             '&:hover': { bgcolor: "error.main" },
           }}
+          onClick = {handleConfirmationModalOpen}
         >
             <CancelIcon />
         </Fab>
-
           
-        <AdminEditModal />
-
         </Box>
+        <ConfirmationModal 
+        open = {openConfirmationModal } 
+        setOpen = {setConfirmationModal}
+        msg = {"¿Seguro que quieres eliminar el usuario?"}
+        userParams = {rowParams} 
+        />
+        <EditUserModal open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}/>
     </>
   )
 }
-

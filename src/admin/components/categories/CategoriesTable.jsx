@@ -8,7 +8,7 @@ import { useCategoriesStore } from "../../../hooks";
 
 export const CategoriesTable = ({ attributes, data }) => {
 
-  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSize } = useCategoriesStore();
+  const { filter, filtering, changeFilterCategory, changeFilteringCategory, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSizeCategory } = useCategoriesStore();
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
@@ -26,7 +26,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   const onPaginationChange = useCallback(
     (newModel) => {
       setPaginationModel(newModel);
-      changePageAndSize(newModel);
+      changePageAndSizeCategory(newModel);
     },
     [setPaginationModel]
   );
@@ -35,8 +35,10 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   useEffect(() => {
     if(!filtering){
+      console.log("Filtra1")
       startGetCategories(paginationModel.page, paginationModel.pageSize);
     }if(filtering){
+      console.log("Filtra2")
       startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);
@@ -66,9 +68,9 @@ export const CategoriesTable = ({ attributes, data }) => {
   const handleSearch = () => {
     if (!filtering || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
+        // onPaginationChange({...paginationModel, page: 0});
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFiltering(true);
+        changeFilteringCategory(true);
         setLocalFilterValue(filter.value);
       }
     }
@@ -77,9 +79,8 @@ export const CategoriesTable = ({ attributes, data }) => {
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFiltering(true);
+        changeFilteringCategory(true);
         setLocalFilterValue(value.value);
       }else if (localFilterValue === "asc" || localFilterValue === "desc") {
         handleRemoveFilter();
@@ -89,8 +90,8 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleRemoveFilter = () => {
     startGetCategories(paginationModel.page, paginationModel.pageSize);
-    changeFiltering(false);
-    changeFilter({});
+    changeFilteringCategory(false);
+    changeFilterCategory({});
     setSortModel([]);
     setLocalFilterValue('');
     setFilterModel({items: []});
@@ -98,24 +99,24 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleFilterChange = ({ items }) => {
     if (items[0]?.value) {
-      changeFilter({ field: items[0]?.field, value: items[0]?.value });
+      changeFilterCategory({ field: items[0]?.field, value: items[0]?.value });
       setSortModel([]);
-      changeFiltering(false);
+      changeFilteringCategory(false);
     }if (items.length === 0) {
       if(filtering){
         startGetCategories(paginationModel.page, paginationModel.pageSize);
       }
-      changeFiltering(false);
-      changeFilter({});
+      changeFilteringCategory(false);
+      changeFilterCategory({});
     }
     setFilterModel({ items });
   };
 
   const handleSortModelChange = (event) => {
     setSortModel(event);
-    changeFilter({ field: event[0]?.field, value: event[0]?.sort });
+    changeFilterCategory({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
-    changeFiltering(false);
+    changeFilteringCategory(false);
     handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 

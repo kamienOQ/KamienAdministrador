@@ -1,67 +1,38 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Avatar, Box, Pagination, Typography } from '@mui/material';
-import { DataGrid, gridClasses } from '@mui/x-data-grid';
-// import { useValue } from '../../../context/ContextProvider';
-// import { getUsers } from '../../../actions/user';
+import {Box, Typography } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
 import moment from 'moment';
-import { grey,red} from '@mui/material/colors';
-import { UserActions, AdminEditModal } from './';
-import "./Administradores.css"
-import img from  "./Empty_pp.jpg"
-import { Margin } from '@mui/icons-material';
-import { light } from '@mui/material/styles/createPalette';
-export const Administradores = () =>{
-    const users = [
-        {
-            photoURL:"asdsadsadsa",
-            name : "Carolina Chavez ",
-            email : "CChavez@gmail.com",
-            role : "admin",
-            active : true,
-            id : "1"
+import { UserActions } from './';
+import { getAllUsers } from '../../firebase/providers';
 
-        },
-        {
-            photoURL:"asdsadsadsa",
-            name : "Carlos Pérez",
-            email : "CPerez@gmail.com",
-            role : "admin",
-            active : true,
-            id : "2"
-
-        },
-        {
-            photoURL:"asdsadsadsa",
-            name : "Armando Casas",
-            email : "ArmandoC@gmail.com",
-            role : "admin",
-            active : true,
-            id : "3"
-        },
-        {
-            photoURL:"asdsadsadsa",
-            name : "Juancho Arias",
-            email : "JArias@gmail.com",
-            role : "admin",
-            active : true,
-            id : "4"
-        }
-    ]
-
-    const [pageSize, setPageSize] = useState(5);
+export const Administradores = () =>{   
+    const [usuarios,setUser] = useState([])
+    const [pageSize, setPageSize] = useState(20);
     const [rowId, setRowId] = useState(null);
+    const getFilteredData = (data) => {
+        return data.filter((obj) => obj.habilitado === true);
+      };
+    useEffect(() => {
+        const fetchData = async () => {
+            const usuariosTotales = await getAllUsers()
+            const filtered = getFilteredData(usuariosTotales);
+            setUser(filtered);
+          };
+        fetchData();
+    },[usuarios])    
         const columns = useMemo(
             () => [
-                {
-                  field: 'photoURL',
-                  headerName: 'Avatar',
-                  width: 60,
-                  renderCell: () => <Avatar src={img} />, // users.foto
-                  sortable: false,
-                  filterable: false,
+                { 
+                    field: 'nombre', 
+                    headerName: 'Nombre',
+                     width: 200
                 },
-                { field: 'name', headerName: 'Nombre', width: 300, editable : true },
-                { field: 'email', headerName: 'Correo', width: 200, editable: true },
+                { 
+                    field: 'correo', 
+                    headerName: 'Correo',
+                    width: 200, 
+                    editable: true 
+                },
                 {
                   field: 'createdAt',
                   headerName: 'Fecha de Creación',
@@ -70,43 +41,56 @@ export const Administradores = () =>{
                     moment('2023-03-14 12:30:00').format('YYYY-MM-DD HH:MM:SS'),
                     editable : true
                 },
-                { field: 'id', headerName: 'Id', width: 200 },
+                { 
+                    field: 'id', 
+                    headerName: 'Id',
+                     width: 100 
+                },
+                { 
+                    field: 'numero', 
+                    headerName: 'Número de teléfono',
+                    width: 150 
+                },
                 {
                   field: 'actions',
                   headerName: 'Acciones',
                   type: 'actions',
                   width: 200,
-                  renderCell: () => (
-                     <UserActions/>  //{...{ params, rowId, setRowId }} 
+                  renderCell: (params) => (
+                     <UserActions rowParams = {params.row}/> 
                   ),
                 },
               ],
               [rowId]
             );
-        // useEffect(() => {
-        //     setSelectedLink(link);
-        //     if (users.length === 0) getUsers(dispatch);
-        // }, []);
     return(
         <>
             <Box
             sx={{
-                height: 400,
-                marginTop: '5%',
-                marginLeft: '5%',
+                height: 500,
+                marginTop: '4.78%',
+                marginLeft: '4.9%',
                 maxWidth: '95%'
                 }}
             >
-                <Typography
-                    variant="h3"
-                    component="h3"
-                    sx={{ textAlign: 'center', mt: 3, mb: 3 }}
+                <Box
+                sx = 
+                {{
+                    display : "flex",
+                    justifyContent: "space-between"
+                }}
                 >
-                    Manage Users
+                <Typography
+                    variant="h4"
+                    component="h1"
+                    sx={{ mt: 3, mb: 3,marginLeft: "5%",color : "black"}}
+                >
+                    Administración de usuarios
                 </Typography>
+                </Box>
                 <DataGrid  
                     columns={columns}
-                    rows={users}
+                    rows={usuarios}
                     getRowId={(row) => row.id}
                     rowsPerPageOptions={[5, 10, 20]}
                     pageSize={pageSize}
@@ -127,10 +111,8 @@ export const Administradores = () =>{
                     ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar": {color: "white"},
                     ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {color: "white"},
                     }}
-                    // onCellEditCommit={() => setRowId("dwqwdqdwqd")}
                 />
             </Box>
-
         </>
     )
 }

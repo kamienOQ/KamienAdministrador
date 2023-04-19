@@ -11,16 +11,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-
 import MuiDrawer from '@mui/material/Drawer';
 import { useDispatch, useSelector } from "react-redux";
-
 import { SideBarList } from './SideBarList';
 import { startLogout } from "../../store/auth";
-
-//import { useValue } from '../../context/ContextProvider';
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -29,7 +24,6 @@ const openedMixin = (theme) => ({
   }),
   overflowX: 'hidden',
 });
-
 const closedMixin = (theme) => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -41,7 +35,6 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -50,7 +43,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -87,16 +79,11 @@ export const SideList = ({ open, setOpen }) => {
         <SideBarList/>
         <Divider sx={{ bgcolor: "dark.main" }}/>
         <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-          <Tooltip title = {displayName} sx={{ bgcolor: "dark.main" }}> 
-            <Avatar                     // title={currentUser?.name || ''}
-            src='/src/admin/pages/Empty_pp.jpg'//   src={currentUser?.photoURL}
-            {...(open && { sx: { width: 100, height: 100 } })}
-            />
-          </Tooltip>
+
         </Box>
         <Box sx={{ textAlign: 'center' }}>
           {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
-          {open && <Typography variant="body2" sx={{ color: "white" }}>{"SuperAdmin" || 'role'}</Typography>}
+          {open && <Typography variant="body2" sx={{ color: "white" }}> Usuario : </Typography>}
           {open && (
             <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
           )}

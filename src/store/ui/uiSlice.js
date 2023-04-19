@@ -4,12 +4,14 @@ export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
         isCategoryModalOpen: false,
+        isModalViewOpen: false,
         isModalViewOpenProduct: false,
         totalPages: 1,
         page: 1,
         searching: '',
         categoriesSelected: '',
         attributesSelected: [],
+        listAttributesSelected: [],
     },
     reducers: {
         onSetTotalPages: ( state, { payload } ) => {
@@ -40,7 +42,8 @@ export const uiSlice = createSlice({
         onCloseProductModal: ( state ) => {
             state.isProductModalOpen = false;
             state.categoriesSelected = '';
-            state.attributesSelected= [];
+            state.attributesSelected = [];
+            state.listAttributesSelected = [];
         },
         onAddCategoriesSelected: ( state, { payload } ) => {
             state.categoriesSelected = payload;
@@ -56,6 +59,15 @@ export const uiSlice = createSlice({
         },
         onDeleteAttributesSelected: ( state, { payload } ) => {
             state.attributesSelected = state.attributesSelected.filter( event => event !== payload );
+            state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload );
+        },
+        onAddListAttributesSelected: ( state, { payload } ) => {
+            if (!state.listAttributesSelected.some((listAttribute) => listAttribute.feature.toLowerCase() === payload.feature.toLowerCase())) {
+                state.listAttributesSelected.push( payload );
+            }
+        },
+        onDeleteListAttributesSelected: ( state, { payload } ) => {
+            state.listAttributesSelected = state.listAttributesSelected.filter( event => event !== payload );
         },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;
@@ -70,10 +82,10 @@ export const uiSlice = createSlice({
             state.isModalViewOpenProduct = false;
         },
         onOpenModalViewCategory: ( state ) => {
-            state.isModalViewOpenCategory = true;
+            state.isModalViewOpen = true;
         },
         onCloseModalViewCategory: ( state ) => {
-            state.isModalViewOpenCategory = false;
+            state.isModalViewOpen = false;
         }
     }
 });
@@ -86,6 +98,10 @@ export const {
     onDownPage,
     onChangePage,
     onRestorePage,
+    onOpenCategoryModal, 
+    onCloseCategoryModal,
+    onOpenModalView,
+    onCloseModalView, 
     onSearchingName,
     onOpenProductModal, 
     onCloseProductModal, 
@@ -93,12 +109,10 @@ export const {
     onDeleteCategoriesSelected, 
     onAddAttributesSelected,
     onDeleteAttributesSelected,
-    onOpenCategoryModal, 
-    onCloseCategoryModal, 
+    onAddListAttributesSelected,
+    onDeleteListAttributesSelected,
     onOpenModalViewProduct,
     onCloseModalViewProduct,
     onOpenModalViewCategory,
     onCloseModalViewCategory,
-    onOpenModalView,
-    onCloseModalView, 
 } = uiSlice.actions;

@@ -3,14 +3,15 @@ import { Modal, Box, Typography, Dialog, DialogContent, Container } from '@mui/m
 import { useCategoriesStore, useUiStore } from '../../../hooks';
 
 export const CategoryView = () => {
-    const { closeModalView, isModalViewOpen } = useUiStore();
+    // const { closeModalView, isModalViewOpen } = useUiStore();
+    const { closeModalViewCategory, isModalViewOpen } = useUiStore();
     const { activeCategory } = useCategoriesStore();
 
     return (
         <Dialog
             className="modal-container-categories"
             open={isModalViewOpen}
-            onClose={closeModalView}
+            onClose={closeModalViewCategory}
             sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
         >
             <DialogContent 

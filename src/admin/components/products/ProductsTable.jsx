@@ -66,7 +66,7 @@ export const ProductsTable = ({ attributes, data }) => {
   const handleSearch = () => {
     if (!filtering || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
+        // onPaginationChange({...paginationModel, page: 0});
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(filter.value);
@@ -77,7 +77,6 @@ export const ProductsTable = ({ attributes, data }) => {
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(value.value);

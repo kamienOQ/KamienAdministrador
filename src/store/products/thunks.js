@@ -2,9 +2,10 @@ import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, wh
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onCleanCategories, onCleanAttributes, onChangeSavingNewProduct, onAddImageProduct, onAddIconProduct, 
-  onAddSuccessMessage, onAddErrorMessage, onCleanProducts ,onAddProductAtStart, onSetProducts, onSetAttributes, 
-  onSetNumberProducts, onAddProductNameLowerCase, onUpdateProduct, onSetRelatedAttributes, onSetCategories, 
-  onSetRelatedCategories } from "./";
+  onAddSuccessMessage, onAddErrorMessage, onCleanProducts, onAddProductAtStart, onSetProducts, onSetAttributes, 
+  onSetListAttributes, onSetNumberProducts, onAddProductNameLowerCase, onUpdateProduct, 
+  onSetRelatedAttributes, onSetCategories, onSetRelatedCategories, onCleanListAttributes, 
+  onSetRelatedListAttributes} from "./productsSlice";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -34,10 +35,12 @@ export const onStartUploadNewProduct = () => {
 
     let duplicateProduct = false;
     dispatch(onAddProductNameLowerCase());
-    const { categoriesSelected } = getState().ui;
     const { attributesSelected } = getState().ui;
-    dispatch(onSetRelatedCategories( categoriesSelected ));
+    const { categoriesSelected } = getState().ui;
+    const { listAttributesSelected } = getState().ui;
     dispatch(onSetRelatedAttributes( attributesSelected ));
+    dispatch(onSetRelatedCategories( categoriesSelected ));
+    dispatch(onSetRelatedListAttributes( listAttributesSelected ));
     const { activeProduct, products, pageSize, page } = getState().products;
 
     dispatch(onChangeSavingNewProduct(true));
@@ -190,14 +193,16 @@ export const onStartNumberProducts = () => {
 export const onStartUpdateProduct = () => {
   return async( dispatch, getState ) => {
 
-      let duplicateProduct = false;
-      const { categoriesSelected } = getState().ui;
-      const { attributesSelected } = getState().ui;
-      dispatch(onAddProductNameLowerCase());
-      dispatch(onChangeSavingNewProduct(true));
-      dispatch(onSetRelatedCategories( categoriesSelected ));
-      dispatch(onSetRelatedAttributes( attributesSelected ));
-      const { activeProduct, preProduct } = getState().products;
+    let duplicateProduct = false;
+    const { categoriesSelected } = getState().ui;
+    const { attributesSelected } = getState().ui;
+    const { listAttributesSelected } = getState().ui;
+    dispatch(onAddProductNameLowerCase());
+    dispatch(onChangeSavingNewProduct(true));
+    dispatch(onSetRelatedCategories( categoriesSelected ));
+    dispatch(onSetRelatedAttributes( attributesSelected ));
+    dispatch(onSetRelatedListAttributes( listAttributesSelected ))
+    const { activeProduct, preProduct } = getState().products;
 
     let q;  
     const collectionRef = collection(FirebaseDB, `/products`);
@@ -289,3 +294,29 @@ export const onStartGetAttributesForm = () => {
     dispatch(onSetAttributes(actualAttribute));
   }
 }
+
+export const onStartGetListAttributesForm = () => {
+  return async (dispatch, getState ) => {
+    dispatch(onCleanListAttributes());
+    const collectionRef = collection(FirebaseDB, `/attributes`);
+    // ciclo para obtener cada atributo relacionado al nombre del atributo
+    let { attributesSelected } = getState().ui;
+    attributesSelected = attributesSelected.map( async (object) => {
+      const q = query(collectionRef, where("attributeName", "==", object));
+      const querySnapshot = await getDocs(q);
+      
+      const actualListAttribute = querySnapshot.docs.map((doc) => {
+        //console.log(doc.data());
+        const attributesFor = doc.data().attributesRelated.map( (attribute) => {
+          // console.log(attribute);
+          return attribute;
+        })
+        // console.log(attributesFor);
+        return attributesFor;
+      });
+      console.log(actualListAttribute[0])
+      dispatch(onSetListAttributes({ 'attributeSelected': object, 'feature': actualListAttribute[0] }));
+    });
+  }
+}
+
