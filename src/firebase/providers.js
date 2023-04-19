@@ -3,7 +3,9 @@ import { FirebaseAuth } from "./config";
 import { FirebaseDB } from "./config";
 import { FirebaseApp } from "./config";
 import { getFirestore } from "firebase/firestore";
+import { collection, doc, getDoc,getDocs,updateDoc } from 'firebase/firestore'
 const db = getFirestore(FirebaseApp)
+
 
 const googleProvider = new GoogleAuthProvider();
 

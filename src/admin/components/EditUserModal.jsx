@@ -108,22 +108,20 @@ return (
             </form>
             <div className="action-buttons" style={{minWidth:"100%"}}>
             <Button
-                className="cancelProduct-button"
+                className="cancelCategory-button"
+                sx={{ backgroundColor: "error.main", color: "tertiary.main", borderRadius: 20 ,mb : 7}}
                 onClick={handleClose}
                 variant="contained"
-                sx={{ 
-                    backgroundColor: "red" ,
-                    m: 3,
-                    borderRadius: "10%"
-                }}
+                
             >
                 <CloseIcon/>
             </Button>
             <Button
-                className="addProduct-button"
+
                 onClick={handleEditUser}
                 variant="contained"
-                sx={{ m: 3 ,borderRadius: "10%" ,backgroundColor:"green"}}
+                className="addCategory-modal-button"
+                sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 ,mb : 7}}
             >
                 <CheckIcon />
             </Button>

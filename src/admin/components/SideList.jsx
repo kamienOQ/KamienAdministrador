@@ -83,7 +83,7 @@ export const SideList = ({ open, setOpen }) => {
         </Box>
         <Box sx={{ textAlign: 'center' }}>
           {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
-          {open && <Typography variant="body2" sx={{ color: "white" }}>{"SuperAdmin" || 'role'}</Typography>}
+          {open && <Typography variant="body2" sx={{ color: "white" }}> Usuario : </Typography>}
           {open && (
             <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
           )}
