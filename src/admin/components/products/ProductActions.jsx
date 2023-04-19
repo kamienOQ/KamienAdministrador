@@ -69,7 +69,7 @@ export const ProductActions = ({ row }) => {
               color: "white",
               '&:hover': { bgcolor: "primary.main" },
             }}
-            onClick={handleOpenEdit}
+            // onClick={handleOpenEdit}
           >
             <EditIcon />
           </Fab>

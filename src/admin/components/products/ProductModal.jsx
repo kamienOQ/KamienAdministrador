@@ -206,7 +206,7 @@ export const ProductModal = () => {
               </div>
               <div className="iconImage-buttons">
                 <IconButton
-                  className="addIcon-button"
+                  className="addIcon-button addCategory-button"
                   color="primary"
                   aria-label="cargar imagen"
                   component="label"
@@ -224,7 +224,7 @@ export const ProductModal = () => {
                   }
                 </IconButton>
                 <IconButton
-                  className="addIcon-button"
+                  className="addIcon-button addCategory-button"
                   color="primary"
                   aria-label="cargar icono"
                   component="label"
