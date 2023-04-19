@@ -62,7 +62,6 @@ export const uiSlice = createSlice({
             state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload );
         },
         onAddListAttributesSelected: ( state, { payload } ) => {
-            console.log(payload)
             if (!state.listAttributesSelected.some((listAttribute) => listAttribute.feature.toLowerCase() === payload.feature.toLowerCase())) {
                 state.listAttributesSelected.push( payload );
             }
@@ -83,10 +82,10 @@ export const uiSlice = createSlice({
             state.isModalViewOpenProduct = false;
         },
         onOpenModalViewCategory: ( state ) => {
-            state.isModalViewOpenCategory = true;
+            state.isModalViewOpen = true;
         },
         onCloseModalViewCategory: ( state ) => {
-            state.isModalViewOpenCategory = false;
+            state.isModalViewOpen = false;
         }
     }
 });

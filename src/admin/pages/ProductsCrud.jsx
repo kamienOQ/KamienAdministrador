@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import BottomNav from "../Components/BottomNav"
-=======
 import { Button, Grid, Typography } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect } from "react";
@@ -8,7 +5,6 @@ import { useProductsStore, useUiStore } from "../../hooks";
 import { ProductModal, Products, ProductView } from "../components/products";
 
 
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
 export const ProductsCrud = () => {
 
   const { openProductModal, closeProductModal, isProductModalOpen, attributesSelected } = useUiStore();
@@ -44,11 +40,6 @@ export const ProductsCrud = () => {
   }
 
   return (
-<<<<<<< HEAD
-    <>
-      <BottomNav/>
-    </>
-=======
     <Grid container
       className="products-container"
       spacing={0}
@@ -89,6 +80,5 @@ export const ProductsCrud = () => {
         <ProductView/>
       </Grid>
     </Grid>
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
   )
 }

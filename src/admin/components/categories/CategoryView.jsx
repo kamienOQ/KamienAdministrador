@@ -1,29 +1,17 @@
-<<<<<<< HEAD
 import { Modal, Box, Typography, Dialog, DialogContent, Container } from '@mui/material';
-=======
-import { Modal, Box, Typography, Dialog, DialogContent } from '@mui/material';
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
 // import { makeStyles } from '@mui/styles';
 import { useCategoriesStore, useUiStore } from '../../../hooks';
 
 export const CategoryView = () => {
-<<<<<<< HEAD
-    const { closeModalView, isModalViewOpen } = useUiStore();
-=======
-    const { openModalViewCategory, isModalViewOpenCategory } = useUiStore();
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
+    // const { closeModalView, isModalViewOpen } = useUiStore();
+    const { closeModalViewCategory, isModalViewOpen } = useUiStore();
     const { activeCategory } = useCategoriesStore();
 
     return (
         <Dialog
             className="modal-container-categories"
-<<<<<<< HEAD
             open={isModalViewOpen}
-            onClose={closeModalView}
-=======
-            open={isModalViewOpenCategory}
-            onClose={openModalViewCategory}
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
+            onClose={closeModalViewCategory}
             sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
         >
             <DialogContent 
@@ -40,7 +28,6 @@ export const CategoryView = () => {
                 }}
             >
                 <img className='view-category-image' src={activeCategory?.image?.url} alt="" />
-<<<<<<< HEAD
                 
             </DialogContent>
             <DialogContent className='container-view-category-icon'>
@@ -54,13 +41,3 @@ export const CategoryView = () => {
         </Dialog>
     );
 }
-=======
-                <Typography variant="h6" sx={{marginTop: 3 }}>
-                    {activeCategory?.categoryName}
-                </Typography>
-            </DialogContent>
-            <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
-        </Dialog>
-    );
-}
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77

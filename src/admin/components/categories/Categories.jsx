@@ -23,10 +23,7 @@ export const Categories = () => {
       sortable: false,
       filterable: false,
       hideable: false,
-<<<<<<< HEAD
       disableColumnMenu: true,
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
       field: "categoryName",
@@ -35,16 +32,12 @@ export const Categories = () => {
       filterable: true,
       sortable: true,
       hideable: false,
-<<<<<<< HEAD
       filterOperators: filterOperatorsName,
       onKeyDown: (event) => {
         if (event.key === "Enter") {
           event.stopPropagation();
         }
       },
-=======
-      filterOperators: filterOperatorsName
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
       field: "date",
@@ -70,10 +63,7 @@ export const Categories = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
       ),
       hideable: false,
-<<<<<<< HEAD
       disableColumnMenu: true
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
       field: "icon",
@@ -86,10 +76,7 @@ export const Categories = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
       ),
       hideable: false,
-<<<<<<< HEAD
       disableColumnMenu: true
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     {
       field: "actions",
@@ -108,8 +95,4 @@ export const Categories = () => {
   return (
     !!categories && <CategoriesTable attributes={attributes} data={categories} />
   );
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77

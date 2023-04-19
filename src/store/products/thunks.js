@@ -5,7 +5,7 @@ import { onCleanCategories, onCleanAttributes, onChangeSavingNewProduct, onAddIm
   onAddSuccessMessage, onAddErrorMessage, onCleanProducts, onAddProductAtStart, onSetProducts, onSetAttributes, 
   onSetListAttributes, onSetNumberProducts, onAddProductNameLowerCase, onUpdateProduct, 
   onSetRelatedAttributes, onSetCategories, onSetRelatedCategories, onCleanListAttributes, 
-  onSetRelatedListAttributes} from "./";
+  onSetRelatedListAttributes} from "./productsSlice";
 
 
 export const onStartUploadFile = (file, type, collectionName) => {

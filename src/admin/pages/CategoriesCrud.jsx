@@ -5,13 +5,10 @@ import { useCategoriesStore, useUiStore } from "../../hooks";
 import { Categories, CategoryModal, CategoryView } from "../components";
 
 
+
 export const CategoriesCrud = () => {
-  const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useUiStore();
-<<<<<<< HEAD
+  const { openCategoryModal, closeCategoryModal, isCategoryModalOpen, isModalViewOpen } = useUiStore();
   const { editing, isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
-=======
-  const { isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
 
   useEffect(() => {
     if (!!message.success) {
@@ -73,7 +70,9 @@ export const CategoriesCrud = () => {
         {isCategoryModalOpen && 
           <CategoryModal />
         }
+        {isModalViewOpen &&
         <CategoryView/>
+        } 
       </Grid>
     </Grid>
   )

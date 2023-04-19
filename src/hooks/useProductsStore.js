@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
-    onSetActiveProduct, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onChangeEditing, 
-    onStartFilterProducts, onSetNumberProducts, onStartNumberProducts, onChangePreProductName, onChangePreProductUpdated, 
-    onStartUpdateProduct, onStartChangeActiveProduct, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters, 
-    onStartGetCategoriesForm, onStartGetAttributesForm, onStartGetListAttributesForm } from "../store/products";
+    onSetActiveProduct,  onChangeEditing, onSetNumberProducts, onChangePreProductName, onChangePreProductUpdated, onChangeActive, onChangePageAndSize, 
+    onChangeFilterings, onChangeFilters} from "../store/products/productsSlice";
+
+import { onStartGetCategoriesForm, onStartGetAttributesForm, onStartGetListAttributesForm, onStartUpdateProduct, 
+    onStartChangeActiveProduct, onStartFilterProducts, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onStartNumberProducts,} from "../store/products/thunks"
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();

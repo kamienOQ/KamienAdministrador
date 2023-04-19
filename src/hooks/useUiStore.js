@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 // //Categories
 // import { onCleanActiveCategory } from '../store/categories';
 // Ui
-import { onCloseCategoryModal, onOpenCategoryModal, onCloseModalView, onOpenModalView } from '../store/ui/uiSlice';
+import { onCloseCategoryModal, onOpenCategoryModal, onCloseModalView, onOpenModalView, onOpenModalViewCategory, 
+    onCloseModalViewCategory, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, onOpenProductModal,  
+    onDeleteAttributesSelected, onDeleteListAttributesSelected, onAddCategoriesSelected, onDeleteCategoriesSelected, } from '../store/ui/uiSlice';
 // Product
-import { onCleanActiveProduct, onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
+import { onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
+import { onCleanActiveProduct } from '../store/products/productsSlice';
 //Categories
-import { onCleanActiveCategory, onOpenModalViewCategory, onCloseModalViewCategory } from '../store/categories';
-// Ui
-import { onAddCategoriesSelected, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, 
-    onOpenProductModal, onDeleteCategoriesSelected, onDeleteAttributesSelected, 
-    onDeleteListAttributesSelected } from '../store';
+import { onCleanActiveCategory,  } from '../store/categories';
+
 
 export const useUiStore = () => {
 
@@ -18,12 +18,12 @@ export const useUiStore = () => {
 
     const { 
         isCategoryModalOpen,
+        isProductModalOpen,
         isModalViewOpen,
         categoriesSelected,
         attributesSelected,
         listAttributesSelected,
         isModalViewOpenProduct, 
-        isModalViewOpenCategory, 
     } = useSelector( state => state.ui );
 
     const openProductModal = () => {
@@ -104,7 +104,6 @@ export const useUiStore = () => {
         attributesSelected,
         listAttributesSelected,
         isModalViewOpenProduct,
-        isModalViewOpenCategory,
 
         //*Métodos
         openCategoryModal,

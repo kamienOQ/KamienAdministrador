@@ -8,11 +8,7 @@ import { useCategoriesStore } from "../../../hooks";
 
 export const CategoriesTable = ({ attributes, data }) => {
 
-<<<<<<< HEAD
-  const { filter, filtering, changeFilter, changeFiltering, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSize } = useCategoriesStore();
-=======
   const { filter, filtering, changeFilterCategory, changeFilteringCategory, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSizeCategory } = useCategoriesStore();
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
@@ -30,11 +26,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   const onPaginationChange = useCallback(
     (newModel) => {
       setPaginationModel(newModel);
-<<<<<<< HEAD
-      changePageAndSize(newModel);
-=======
       changePageAndSizeCategory(newModel);
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     },
     [setPaginationModel]
   );
@@ -43,8 +35,10 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   useEffect(() => {
     if(!filtering){
+      console.log("Filtra1")
       startGetCategories(paginationModel.page, paginationModel.pageSize);
     }if(filtering){
+      console.log("Filtra2")
       startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);
@@ -53,7 +47,6 @@ export const CategoriesTable = ({ attributes, data }) => {
     setRowCountState(numberCategories !== undefined ? numberCategories : 0);
   }, [numberCategories, setRowCountState]);
 
-<<<<<<< HEAD
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter" ) {
@@ -68,37 +61,26 @@ export const CategoriesTable = ({ attributes, data }) => {
     };
   }, [filtering, filter.value, localFilterValue]);
 
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
   const columns = useMemo(() => attributes, [rowId]);
 
 
   // * Filter
   const handleSearch = () => {
-<<<<<<< HEAD
     if (!filtering || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
-        startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFiltering(true);
-=======
-    if (!filtering || filter.value === 'asc' || filter.value === 'desc' || filter.value !== localFilterValue ) {
-      if (Object.keys(filter).length > 0 && filter.field !== undefined && filter.field !== undefined) {
+        // onPaginationChange({...paginationModel, page: 0});
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFilteringCategory(true);
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
         setLocalFilterValue(filter.value);
       }
     }
   };
 
-<<<<<<< HEAD
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFiltering(true);
+        changeFilteringCategory(true);
         setLocalFilterValue(value.value);
       }else if (localFilterValue === "asc" || localFilterValue === "desc") {
         handleRemoveFilter();
@@ -108,14 +90,8 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleRemoveFilter = () => {
     startGetCategories(paginationModel.page, paginationModel.pageSize);
-    changeFiltering(false);
-    changeFilter({});
-=======
-  const handleRemoveFilter = () => {
-    startGetCategories(paginationModel.page, paginationModel.pageSize);
     changeFilteringCategory(false);
     changeFilterCategory({});
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     setSortModel([]);
     setLocalFilterValue('');
     setFilterModel({items: []});
@@ -123,42 +99,25 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleFilterChange = ({ items }) => {
     if (items[0]?.value) {
-<<<<<<< HEAD
-      changeFilter({ field: items[0]?.field, value: items[0]?.value });
-      setSortModel([]);
-      changeFiltering(false);
-=======
       changeFilterCategory({ field: items[0]?.field, value: items[0]?.value });
       setSortModel([]);
       changeFilteringCategory(false);
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     }if (items.length === 0) {
       if(filtering){
         startGetCategories(paginationModel.page, paginationModel.pageSize);
       }
-<<<<<<< HEAD
-      changeFiltering(false);
-      changeFilter({});
-=======
       changeFilteringCategory(false);
       changeFilterCategory({});
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
     }
     setFilterModel({ items });
   };
 
   const handleSortModelChange = (event) => {
     setSortModel(event);
-<<<<<<< HEAD
-    changeFilter({ field: event[0]?.field, value: event[0]?.sort });
-    setFilterModel({items: []});
-    changeFiltering(false);
-    handleSort({ field: event[0]?.field, value: event[0]?.sort });
-=======
     changeFilterCategory({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
     changeFilteringCategory(false);
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
+    handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
   
@@ -169,40 +128,24 @@ export const CategoriesTable = ({ attributes, data }) => {
     >
       <Grid
         className="container-buttons-filter"
-<<<<<<< HEAD
         sx={{display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px"}}
       >
         {/* <Button
-=======
-        sx={{display: 'flex', alignItems: 'center', justifyContent: 'start', width: "1160px"}}
-      >
-        <Button
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
           className="button-filter"
           sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
           onClick={handleSearch}
           startIcon={<FilterAltIcon />}
         >
           Filtrar
-<<<<<<< HEAD
         </Button> */}
         {filtering ? (
           <Button
             className="remove-filter-category"
-=======
-        </Button>
-        {filtering ? (
-          <Button
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
             sx={{
               height: 40,
               backgroundColor: "error.main",
               color: "tertiary.main",
               "&:hover": { bgcolor: "lightError.main" },
-<<<<<<< HEAD
-=======
-              ml: 1,
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
             }}
             onClick={handleRemoveFilter}
             startIcon={<CloseIcon />}
@@ -216,11 +159,8 @@ export const CategoriesTable = ({ attributes, data }) => {
         columns={columns}
         rows={data}
         disableColumnSelector
-<<<<<<< HEAD
         disableColumnHeaderSelection
         disableSelectionOnClick
-=======
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
         loading={isLoading}
         rowCount={rowCountState}
         getRowId={onGetRowId}
@@ -259,21 +199,13 @@ export const CategoriesTable = ({ attributes, data }) => {
           },
           ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {
             color: "white",
-<<<<<<< HEAD
           }, 
           ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
             outline: "none",
           },
           
-=======
-          },
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
         }}
       />
     </Grid>
   );
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> f92577c5bbc5e2139da1eeafc7fa9cdfe30e6e77
