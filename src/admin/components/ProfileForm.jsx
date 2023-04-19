@@ -129,7 +129,7 @@ export const ProfileForm = () => {
 
         </div>  
         <TextField 
-        type={showPassword ? "text" :"password"}
+        type="text"
         sx={{margin: "1%",width:"60%"}} 
         onChange={(e) => setPassword(e.target.value)}
         error = {error}
