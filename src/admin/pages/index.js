@@ -4,4 +4,3 @@ export * from "./ProfilePage";
 export * from "./AboutCrud";
 export * from "./ProductsCrud";
 export * from "./CategoriesCrud";
-export * from "./AttributesCrud";

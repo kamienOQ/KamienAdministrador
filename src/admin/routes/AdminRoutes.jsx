@@ -13,7 +13,7 @@ export const AdminRoutes = () => {
         <Route path= "/Perfil" element = {<ProfilePage/>}/>
         <Route path= "/About" element = {<AboutCrud/>}/>
         <Route path= "/Producto" element = {<ProductsCrud/>}/>
-        <Route path= "/Categorias" element = {<AttributesCrud/>}/>
+        <Route path= "/Categorias" element = {<CategoriesCrud/>}/>
 
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>

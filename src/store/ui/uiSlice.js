@@ -3,35 +3,21 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isAttributeModalOpen: false,
-        totalPages: 1,
-        page: 1,
+        isCategoryModalOpen: false,
+        isModalViewOpen: false,
     },
     reducers: {
-        onSetTotalPages: ( state, { payload } ) => {
-            state.totalPages = payload;
+        onOpenCategoryModal: ( state ) => {
+            state.isCategoryModalOpen = true;
         },
-        onUpPage: ( state ) => {
-            if(state.page < state.totalPages){
-                state.page++;
-            }
+        onCloseCategoryModal: ( state ) => {
+            state.isCategoryModalOpen = false;
         },
-        onDownPage: ( state ) => {
-            if(state.page > 1){
-                state.page--;
-            }
+        onOpenModalView: ( state ) => {
+            state.isModalViewOpen = true;
         },
-        onChangePage: ( state, { payload } ) => {
-            state.page = payload;
-        },
-        onRestorePage: ( state ) => {
-            state.page = 1;
-        },
-        onOpenAttributeModal: ( state ) => {
-            state.isAttributeModalOpen = true;
-        },
-        onCloseAttributeModal: ( state ) => {
-            state.isAttributeModalOpen = false;
+        onCloseModalView: ( state ) => {
+            state.isModalViewOpen = false;
         }
         
     }
@@ -45,6 +31,8 @@ export const {
     onDownPage,
     onChangePage,
     onRestorePage,
-    onOpenAttributeModal, 
-    onCloseAttributeModal, 
+    onOpenCategoryModal, 
+    onCloseCategoryModal,
+    onOpenModalView,
+    onCloseModalView, 
 } = uiSlice.actions;

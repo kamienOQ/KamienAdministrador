@@ -1,10 +1,15 @@
 import { useState,useEffect } from "react";
 import { Box } from "@mui/system"
-import { FormControl,TextField,FormLabel,Button  } from "@mui/material"
+import { FormControl,TextField,FormLabel,Button,IconButton  } from "@mui/material"
 import UpdateIcon from '@mui/icons-material/Update';
 import { updateLoggedUser,updateUserEmail,updateUserPassword,getUserInfo } from "../../firebase/providers";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 export const ProfileForm = () => {
     const [currentUserInfo, setUserInfo] = useState([])
+
+    const [showPassword,setShowPassword] = useState(false)
     // Form useStates 
     const [email,setEmail] = useState("")
     const [name,setName] = useState("")
@@ -16,6 +21,9 @@ export const ProfileForm = () => {
         } 
         fetchCurrentUser()
     },[])
+    const handleShowPassword = () =>{
+        setShowPassword(!showPassword)
+    }
     const handleUpdateUser = async() =>{
         const updatedUser = {}
         if (email !== ""){
@@ -103,13 +111,16 @@ export const ProfileForm = () => {
             <FormLabel sx={{marginLeft:"5%",fontWeight:900}}>
                 Contraseña:
             </FormLabel>
-            <FormLabel sx={{marginRight:"5%"}}>
-                *****************
-            </FormLabel>
+
         </div>  
-        <TextField sx={{margin: "1%"}} 
+        <TextField 
+        type={showPassword ? "text" : "password"}
+        sx={{margin: "1%"}} 
         onChange={(e) => setPassword(e.target.value)}
         > 
+        <IconButton onClick={handleShowPassword}>
+            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        </IconButton>
         </TextField>
     </FormControl>
     </Box>

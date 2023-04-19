@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import {Box, Typography } from '@mui/material';
-import { DataGrid, gridClasses } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import moment from 'moment';
 import { UserActions } from './';
 import { getAllUsers } from '../../firebase/providers';
-export const Administradores = () =>{
+
+export const Administradores = () =>{   
     const [usuarios,setUser] = useState([])
     const [pageSize, setPageSize] = useState(20);
     const [rowId, setRowId] = useState(null);
@@ -24,8 +25,7 @@ export const Administradores = () =>{
                 { 
                     field: 'nombre', 
                     headerName: 'Nombre',
-                     width: 200, 
-                     editable : true 
+                     width: 200
                 },
                 { 
                     field: 'correo', 
@@ -35,7 +35,7 @@ export const Administradores = () =>{
                 },
                 {
                   field: 'createdAt',
-                  headerName: 'createdAt',
+                  headerName: 'Fecha de Creación',
                   width: 200,
                   renderCell: () =>
                     moment('2023-03-14 12:30:00').format('YYYY-MM-DD HH:MM:SS'),
@@ -77,15 +77,13 @@ export const Administradores = () =>{
                 sx = 
                 {{
                     display : "flex",
-                    justifyContent: "space-between",
-                    background: "#000000",
-                    color: "#FFFFFF"
+                    justifyContent: "space-between"
                 }}
                 >
                 <Typography
                     variant="h4"
                     component="h1"
-                    sx={{ mt: 3, mb: 3,marginLeft: "5%" }}
+                    sx={{ mt: 3, mb: 3,marginLeft: "5%",color : "black"}}
                 >
                     Administración de usuarios
                 </Typography>
@@ -115,7 +113,6 @@ export const Administradores = () =>{
                     }}
                 />
             </Box>
-
         </>
     )
 }
