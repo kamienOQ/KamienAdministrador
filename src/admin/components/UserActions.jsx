@@ -1,10 +1,11 @@
 
-import { Box, CircularProgress, Fab } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Fab } from '@mui/material';
+import { useState } from 'react';
 import { AdminEditModal } from './AdminEditModal';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { EditUserModal } from './EditUserModal';
+import { ConfirmationModal } from './ConfirmationModal';
 export const UserActions = ({rowParams}) => {
   const [openEditModal,setEditModal] = useState(false)
   const [openConfirmationModal,setConfirmationModal] = useState(false)
@@ -55,7 +56,7 @@ export const UserActions = ({rowParams}) => {
         >
             <CancelIcon />
         </Fab>
-        <AdminEditModal />
+          
         </Box>
         <ConfirmationModal 
         open = {openConfirmationModal } 
