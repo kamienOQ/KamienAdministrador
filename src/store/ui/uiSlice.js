@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isProductModalOpen: false,
         isCategoryModalOpen: false,
         isModalViewOpenProduct: false,
         totalPages: 1,
@@ -100,4 +99,6 @@ export const {
     onCloseModalViewProduct,
     onOpenModalViewCategory,
     onCloseModalViewCategory,
+    onOpenModalView,
+    onCloseModalView, 
 } = uiSlice.actions;

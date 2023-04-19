@@ -1,16 +1,16 @@
-import { Modal, Box, Typography, Dialog, DialogContent } from '@mui/material';
+import { Modal, Box, Typography, Dialog, DialogContent, Container } from '@mui/material';
 // import { makeStyles } from '@mui/styles';
 import { useCategoriesStore, useUiStore } from '../../../hooks';
 
 export const CategoryView = () => {
-    const { openModalViewCategory, isModalViewOpenCategory } = useUiStore();
+    const { closeModalView, isModalViewOpen } = useUiStore();
     const { activeCategory } = useCategoriesStore();
 
     return (
         <Dialog
             className="modal-container-categories"
-            open={isModalViewOpenCategory}
-            onClose={openModalViewCategory}
+            open={isModalViewOpen}
+            onClose={closeModalView}
             sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
         >
             <DialogContent 
@@ -27,11 +27,16 @@ export const CategoryView = () => {
                 }}
             >
                 <img className='view-category-image' src={activeCategory?.image?.url} alt="" />
-                <Typography variant="h6" sx={{marginTop: 3 }}>
-                    {activeCategory?.categoryName}
-                </Typography>
+                
             </DialogContent>
-            <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
+            <DialogContent className='container-view-category-icon'>
+                <DialogContent sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', gap: 0.1}}>
+                    <img className='view-category-icon' src={activeCategory?.icon?.url} alt="" />
+                    <Typography className='contrast-text' variant="h6" sx={{color: "tertiary.main"}}>
+                        {activeCategory?.categoryName}
+                    </Typography> 
+                </DialogContent>
+            </DialogContent>
         </Dialog>
     );
 }

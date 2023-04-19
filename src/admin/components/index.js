@@ -7,3 +7,4 @@ export * from "./UserActions";
 export * from "./categories";
 export * from "./AdminEditModal";
 export * from "./orders";
+export * from "./attributes";

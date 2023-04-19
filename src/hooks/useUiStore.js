@@ -12,7 +12,6 @@ export const useUiStore = () => {
     const dispatch = useDispatch();
 
     const { 
-        isProductModalOpen,
         isCategoryModalOpen,
         categoriesSelected,
         attributesSelected,

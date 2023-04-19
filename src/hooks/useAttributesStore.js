@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, 
-    onSetNumberCategories, onStartNumberCategories, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, 
-    onStartChangeActiveCategory, onChangeActive, onChangePageAndSize } from "../store/categories";
+import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanAttributes, 
+    onSetActiveCategory, onStartFiltersAttributes, onStartGetAttributes, onStartUploadFile, onStartUploadNewAttribute, onChangeFiltering, 
+    onSetNumberAttributes, onStartNumberAttributes, onChangePreCategoryName, onChangePreAttributeUpdated, onStartUpdateAttribute, 
+    onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize, onStartGetCategoriesForm} from "../store/attributes";
 
-export const useCategoriesStore = () => {
+export const useAttributesStore = () => {
     const dispatch = useDispatch();
 
     const { 
-        activeCategory,
-        categories,
+        activeAttribute,
+        attributes,
         editing,
         filter,
         filtering,
@@ -17,7 +17,8 @@ export const useCategoriesStore = () => {
         isLoading,
         message,
         numberCategories,
-    } = useSelector( state => state.categories );
+        categories,
+    } = useSelector( state => state.attributes );
     
     //*Slice
     const addNewCategory = () => {
@@ -45,7 +46,7 @@ export const useCategoriesStore = () => {
     }
 
     const  setNumberCategories = ( number ) => {
-        dispatch(  onSetNumberCategories( number ) );
+        dispatch(  onSetNumberAttributes( number ) );
     }
 
     const changeEditing = ( value ) => {
@@ -57,7 +58,7 @@ export const useCategoriesStore = () => {
     }
 
     const changePreCategoryUpdated = ( value ) => {
-        dispatch( onChangePreCategoryUpdated( value ) );
+        dispatch( onChangePreAttributeUpdated( value ) );
     }
 
     const changeFiltering = ( value ) => {
@@ -77,7 +78,7 @@ export const useCategoriesStore = () => {
     }
 
     const cleanCategories = () => {
-        dispatch( onCleanCategories() );
+        dispatch( onCleanAttributes() );
     }
     
 
@@ -87,33 +88,37 @@ export const useCategoriesStore = () => {
     }
 
     const startUploadNewCategory = () => {
-        dispatch( onStartUploadNewCategory() );
+        dispatch( onStartUploadNewAttribute() );
     }
 
-    const startGetCategories = (page, size) => {
-        dispatch( onStartGetCategories(page, size) );
+    const startGetAttributes = (page, size) => {
+        dispatch( onStartGetAttributes(page, size) );
     }
 
     const startNumberCategories = () => {
-        dispatch( onStartNumberCategories() );
+        dispatch( onStartNumberAttributes() );
     }
 
-    const startFilterCategories = (page, size, preValue) => {
-        dispatch( onStartFilterCategories(page, size, preValue) );
+    const startFilterAttributes = (page, size, preValue) => {
+        dispatch( onStartFiltersAttributes(page, size, preValue) );
     }
 
     const startUpdateCategory = () => {
-        dispatch( onStartUpdateCategory() );
+        dispatch( onStartUpdateAttribute() );
     }
 
     const startChangeActiveCategory = () => {
-        dispatch( onStartChangeActiveCategory() );
-    }    
+        dispatch( onStartChangeActiveAttribute() );
+    }  
+    
+    const starGetCategoriesForm = () => {
+        dispatch ( onStartGetCategoriesForm() );
+    }
 
     return {
         //*Propiedades
-        activeCategory,
-        categories,
+        activeAttribute,
+        attributes,
         editing,
         filter,
         isLoading,
@@ -121,6 +126,7 @@ export const useCategoriesStore = () => {
         isSaving,
         message,
         numberCategories,
+        categories,
 
         //*Métodos
         addErrorMessage,
@@ -138,12 +144,13 @@ export const useCategoriesStore = () => {
         cleanCategories,
         setActiveCategory,
         setNumberCategories,
-        startFilterCategories,
-        startGetCategories,
+        startFilterAttributes,
+        startGetAttributes,
         startNumberCategories,
         startUploadFile,
         startUploadNewCategory,
         startUpdateCategory,
         startChangeActiveCategory,
+        starGetCategoriesForm,
     }
 }

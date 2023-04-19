@@ -12,6 +12,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import InfoIcon from '@mui/icons-material/Info';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import { Link as RouterLink } from "react-router-dom";
 
 export const SideBarList = () => {

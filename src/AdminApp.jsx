@@ -1,12 +1,12 @@
 //import { Product, ProductPages } from "./products";
 import { AppRouter } from "./Router/AppRouter";
 import './styles.css'
-import { AppTheme } from './theme'
+import { AppTheme } from "./theme";
 
 export const AdminApp = () => {
-    return (
-      <AppTheme>
-          <AppRouter />
-      </AppTheme>
-    );
-}
+  return (
+    <AppTheme>
+      <AppRouter />
+    </AppTheme>
+  )
+};

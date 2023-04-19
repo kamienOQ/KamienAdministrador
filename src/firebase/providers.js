@@ -143,6 +143,40 @@ export const resetPassword = async (oobCode, password) => {
   }
 }
 
+export const getUserInfo = async() =>{
+  try{
+    const usersRef = doc(db, "users" , FirebaseAuth.currentUser.uid)
+    const docSnap = await getDoc(usersRef)
+    return docSnap.data()
+  }catch(error){
+    console.log("Error a la hora de obtener información del usuario : " ,error)
+  }
+}
+export const updateLoggedUser = async(newData) =>{
+  try{
+    const usersRef = doc(db, "users" , FirebaseAuth.currentUser.uid)
+    await updateDoc(usersRef,newData)
+  }catch(error){
+    console.log("Error a la hora de Editar el usuario : " ,error)
+  }
+}
+export const updateUserEmail = async(email) => {
+  try {
+    await updateEmail(FirebaseAuth.currentUser,email);
+    console.log("Email changed successfully!");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const updateUserPassword = async(password) => {
+  try {
+    await updatePassword(FirebaseAuth.currentUser,password);
+    console.log("Email changed successfully!");
+  } catch (error) {
+    console.error(error);
+  }
+  }
 
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut();

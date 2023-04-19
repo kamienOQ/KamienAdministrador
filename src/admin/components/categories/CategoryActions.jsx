@@ -1,29 +1,29 @@
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Box, Fab, Switch } from '@mui/material';
+import { Box, Fab, Switch, Tooltip } from '@mui/material';
 import { useCategoriesStore, useUiStore } from '../../../hooks';
 
 export const CategoryActions = ({ row }) => {
 
-  const { openCategoryModal, openModalViewCategory } = useUiStore();
-  const { changeEditingCategory, setActiveCategory, changePreCategoryName, changeActiveCategory, startChangeActiveCategory } = useCategoriesStore();
+  const { openCategoryModal, openModalView } = useUiStore();
+  const { changeEditing, setActiveCategory, changePreCategoryName, changeActive, startChangeActiveCategory } = useCategoriesStore();
 
   const handleActive = () => {
     setActiveCategory(row);
-    changeActiveCategory();
+    changeActive();
     startChangeActiveCategory();
   }
   
   const handleOpenEdit = () => {
     setActiveCategory(row);
     changePreCategoryName(row.categoryName);
-    changeEditingCategory(true);
+    changeEditing(true);
     openCategoryModal();
   };
 
   const handleOpenView = () => {
     setActiveCategory(row);
-    openModalViewCategory();
+    openModalView();
   };
 
   return (
@@ -37,39 +37,44 @@ export const CategoryActions = ({ row }) => {
           minWidth: '100%'
         }}
       >
-        <Fab
-          color="primary"
-          sx={{
-            width: 40,
-            height: 40,
-            bgcolor: "info.main",
-            color: "white",
-            '&:hover': { bgcolor: "info.main" },
-          }}
-          onClick={handleOpenView}
-        >
-          <VisibilityIcon />
-        </Fab>
-        <Fab
-          color="primary"
-          sx={{
-            width: 40,
-            height: 40,
-            bgcolor: "primary.main",
-            color: "white",
-            '&:hover': { bgcolor: "primary.main" },
-          }}
-          onClick={handleOpenEdit}
-        >
-          <EditIcon />
-        </Fab>
-
-        <Switch
-            checked={!!row?.active ? row?.active : false}
-            onChange={handleActive}
-            name="Activa"
-            color="lightSuccess"
-          />
+        <Tooltip title = "Visualizar" > 
+          <Fab
+            color="primary"
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: "info.main",
+              color: "white",
+              '&:hover': { bgcolor: "info.main" },
+            }}
+            onClick={handleOpenView}
+          >
+            <VisibilityIcon />
+          </Fab>
+        </Tooltip>
+        <Tooltip title = "Editar" > 
+          <Fab
+            color="primary"
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: "primary.main",
+              color: "white",
+              '&:hover': { bgcolor: "primary.main" },
+            }}
+            onClick={handleOpenEdit}
+          >
+            <EditIcon />
+          </Fab>
+        </Tooltip>
+        <Tooltip title = "Activar/Desactivar" > 
+          <Switch
+              checked={!!row?.active ? row?.active : false}
+              onChange={handleActive}
+              name="Activa"
+              color="lightSuccess"
+            />
+        </Tooltip>
       </Box>
     </>
   )

@@ -1,15 +1,22 @@
 import { Button, Grid, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import { useEffect } from "react";
-import { useCategoriesStore, useUiStore } from "../../hooks";
-import { Categories, CategoryModal, CategoryView } from "../components";
+import { useAttributesStore, useAttUiStore } from "../../hooks";
+import { Attributes, AttributeModal, AttributeView } from "../components";
 
 
-export const CategoriesCrud = () => {
-  const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { editing, isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories } = useCategoriesStore();
+
+
+
+export const AttibutesCrud = () => {
+  const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
+  const { isSaving, message, filtering, addNewCategory, startGetAttributes, startNumberCategories,starGetCategoriesForm } = useAttributesStore();
+
+  
 
   useEffect(() => {
+    console.log('Cambió')
     if (!!message.success) {
       closeCategoryModal();
     }
@@ -23,12 +30,13 @@ export const CategoriesCrud = () => {
   
 
   useEffect(() => {
-    startGetCategories();
+    startGetAttributes();
   }, [])
 
   const onOpenModal = () => {
     addNewCategory();
     openCategoryModal();
+    starGetCategoriesForm();
   }
 
   return (
@@ -52,7 +60,7 @@ export const CategoriesCrud = () => {
           <Grid item 
             sx={{ width: "90%", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
           >
-            <Typography variant="h4">Gestión de Categorías</Typography>
+            <Typography variant="h4">Gestión de Atributos</Typography>
             <Button
               className="addCategory-modal-button"
               onClick={onOpenModal}
@@ -61,15 +69,15 @@ export const CategoriesCrud = () => {
               variant='contained'
               disabled={isSaving}
             >
-              Nueva Categoría
+              Nuevo Atributo
             </Button>
           </Grid>
         </Grid>
-        <Categories />
+        <Attributes />
         {isCategoryModalOpen && 
-          <CategoryModal />
+          <AttributeModal />
         }
-        <CategoryView/>
+        <AttributeView/>
       </Grid>
     </Grid>
   )

@@ -23,6 +23,7 @@ export const Categories = () => {
       sortable: false,
       filterable: false,
       hideable: false,
+      disableColumnMenu: true,
     },
     {
       field: "categoryName",
@@ -31,7 +32,12 @@ export const Categories = () => {
       filterable: true,
       sortable: true,
       hideable: false,
-      filterOperators: filterOperatorsName
+      filterOperators: filterOperatorsName,
+      onKeyDown: (event) => {
+        if (event.key === "Enter") {
+          event.stopPropagation();
+        }
+      },
     },
     {
       field: "date",
@@ -57,6 +63,7 @@ export const Categories = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
       ),
       hideable: false,
+      disableColumnMenu: true
     },
     {
       field: "icon",
@@ -69,6 +76,7 @@ export const Categories = () => {
         !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
       ),
       hideable: false,
+      disableColumnMenu: true
     },
     {
       field: "actions",

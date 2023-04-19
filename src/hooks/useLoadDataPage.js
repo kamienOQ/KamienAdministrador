@@ -7,7 +7,7 @@ export const useLoadDataPage = () => {
     const { page } = useSelector( state => state.ui );
     let index = page * 5;
     
-    const loadData = () => {
+    const loadData = () => {    
         
         if(products.length % 5 > 0){
             dispatch(onSetTotalPages(Math.floor(products.length/5) + 1));

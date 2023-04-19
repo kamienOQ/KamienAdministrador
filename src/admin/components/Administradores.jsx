@@ -10,7 +10,6 @@ import "./Administradores.css"
 import img from  "./Empty_pp.jpg"
 import { Margin } from '@mui/icons-material';
 import { light } from '@mui/material/styles/createPalette';
-
 export const Administradores = () =>{
     const users = [
         {
