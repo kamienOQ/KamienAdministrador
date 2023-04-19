@@ -1,4 +1,4 @@
-import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , updateEmail,updatePassword} from "firebase/auth";
 import { FirebaseAuth } from "./config";
 import { FirebaseDB } from "./config";
 import { FirebaseApp } from "./config";
@@ -203,7 +203,7 @@ export const getCurrentUser = async() => {
 }
 export const getAllUsers = async() =>{
   const users = await getDocs(collection(db, "users"))
-  return users.docs.filter(doc => doc.data().habilitado === true).map(doc =>({id: doc.id, ...doc.data()}))
+  return users.docs.filter(doc => doc.data().habilitado === true && doc.id !== FirebaseAuth.currentUser.uid).map(doc =>({id: doc.id, ...doc.data()}))
 };
 
 export const updateUser = async(uid,newData) => {

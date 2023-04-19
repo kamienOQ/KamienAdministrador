@@ -26,9 +26,9 @@ export const ProfileForm = () => {
     }
     const handleUpdateUser = async() =>{
         const updatedUser = {}
-        if (email !== ""){
-            updatedUser.correo = email
+        if (email !== ""){     
             updateUserEmail(email)
+            updatedUser.correo = email
         }
         if (number !== ""){
             updatedUser.numero = number
@@ -114,13 +114,13 @@ export const ProfileForm = () => {
 
         </div>  
         <TextField 
-        type={showPassword ? "text" : "password"}
+        type="text"
         sx={{margin: "1%"}} 
         onChange={(e) => setPassword(e.target.value)}
         > 
-        <IconButton onClick={handleShowPassword}>
+        {/* <IconButton onClick={handleShowPassword}>
             {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-        </IconButton>
+        </IconButton> */}
         </TextField>
     </FormControl>
     </Box>
