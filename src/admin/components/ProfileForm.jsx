@@ -5,7 +5,7 @@ import UpdateIcon from '@mui/icons-material/Update';
 import { updateLoggedUser,updateUserEmail,updateUserPassword,getUserInfo } from "../../firebase/providers";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import { UserToast } from "./UserToast";
 export const ProfileForm = () => {
     const [currentUserInfo, setUserInfo] = useState([])
 
@@ -15,6 +15,11 @@ export const ProfileForm = () => {
     const [name,setName] = useState("")
     const [number,setNumber] = useState("")
     const [password,setPassword] = useState("")
+    const [error,setError] = useState(false)
+    const [errorMsg,setErrorMessage] = useState("")
+
+    const [openToast,setOpenToast] = useState(false)
+    const [toastMsg, setToastMsg] = useState("")
     useEffect(() => {
         const fetchCurrentUser = async() =>{
             setUserInfo(await getUserInfo())  
@@ -26,9 +31,9 @@ export const ProfileForm = () => {
     }
     const handleUpdateUser = async() =>{
         const updatedUser = {}
-        if (email !== ""){
-            updatedUser.correo = email
+        if (email !== ""){     
             updateUserEmail(email)
+            updatedUser.correo = email
         }
         if (number !== ""){
             updatedUser.numero = number
@@ -37,10 +42,20 @@ export const ProfileForm = () => {
             updatedUser.nombre = name
         }
         if (password !== ""){
-            updateUserPassword(password)
+            if (password.length >= 6){
+                updateUserPassword(password)
+            }
+            else{
+                setErrorMessage("La contraseña debe tener más de 6 caracteres.")
+                setError(true)
+            }
+            
         }
+
         updateLoggedUser(updatedUser)
         setUserInfo(await getUserInfo())
+        setToastMsg("Datos Actualizados Correctamente.")
+        setOpenToast(true)
     }
   return (
     <Box
@@ -114,15 +129,16 @@ export const ProfileForm = () => {
 
         </div>  
         <TextField 
-        type={showPassword ? "text" : "password"}
-        sx={{margin: "1%"}} 
+        type="text"
+        sx={{margin: "1%",width:"60%"}} 
         onChange={(e) => setPassword(e.target.value)}
+        error = {error}
+        helperText = {errorMsg}
         > 
-        <IconButton onClick={handleShowPassword}>
-            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-        </IconButton>
+
         </TextField>
     </FormControl>
+    <UserToast message = {toastMsg} openSnackBar = {openToast} setOpenSnackBar = {setOpenToast}/>
     </Box>
   )
 }
