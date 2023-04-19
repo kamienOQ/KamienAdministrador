@@ -11,7 +11,6 @@
     --header: #256EFF;
     --roboto: 'Roboto', sans-serif;
 }
-
 * {
     margin: 0;
     padding: 0;
@@ -20,12 +19,12 @@
 }
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
-    background-color: var(--main-color) !important;
+  background-color: var(--main-color) !important;
   background-color: #0E1116 !important;
 }
 
 .column-container:nth-child(odd) {
-    background-color: var(--border);
+  background-color: var(--border);
 }
 
 label {
@@ -68,11 +67,61 @@ label {
     border-radius: 5px;
 } */
 
+.css-17vwkjt-MuiFormControl-root-MuiDataGrid-filterFormOperatorInput{
+  display: none !important;
+}
+
+.addCategory-button:hover{
+  background-color: var(--hover-success) !important;
+}
+
+.addCategory-modal-button:hover{
+  background-color: var(--hover-success) !important;
+}
+
+.cancelCategory-button:hover{
+  background-color: var(--hover-error) !important;
+  
+}
+
+.addProduct-button:hover{
+  background-color: var(--hover-success) !important;
+}
+
+.addProduct-modal-button:hover{
+  background-color: var(--hover-success) !important;
+}
+
+.cancelProduct-button:hover{
+  background-color: var(--hover-error) !important;
+  
+}
+
+.closeTag-button:hover{
+  background-color: var(--hover-main);
+  cursor: pointer;
+}
+/* 
 .box-border{
+  border: 1px solid var(--border);
   border-radius: 5px;
+} */
+
+.box-border{
+border-radius: 5px;
 }
 
 .category-form{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 420px;
+  margin: .5rem 1rem .5rem 1rem !important;
+}
+
+.product-form{
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -120,6 +169,14 @@ label {
     justify-content: center;
 }
 
+.product-modal-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .upload-files-container{
     display: flex;
@@ -155,6 +212,14 @@ label {
 
 .cancelCategory-button{
     color: var(--white) !important;
+}
+
+.cancelCategory-button{
+  color: var(--white) !important;
+}
+
+.cancelProduct-button{
+  color: var(--white) !important;
 }
 
 .action-buttons {
@@ -247,6 +312,9 @@ label {
     .remove-filter-attributes{
         margin-left: -15px !important;
     }
+    .remove-filter-product{
+        margin-left: 10px !important;
+      }
 }
 
 @media (max-width: 710px) {
@@ -352,5 +420,202 @@ label {
         width: 40%;
         height: 30%;
     }
+
+}
+
+.container-table{
+  flex-direction: column !important;
+}
+
+.view-category-image{
+  width: 95%;
+  height: 80%;
+  border-radius: 5px;
+  opacity: 0.7;
+}
+
+.view-category-icon{
+  width: 70%;
+  height: 65%;
+}
+
+.view-product-image{
+  width: 95%;
+  height: 80%;
+  border-radius: 5px;
+  opacity: 0.7;
+}
+
+.view-product-icon{
+  font-size: 20px;
+  position: absolute;
+  width: 40%;
+  height: 35%;
+  top: 45%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+
+.MuiDataGrid-columnHeaders {
+background-color: var(--header);
+}
+
+.remove-filter-product{
+  margin-left: 25px !important;
+}
+
+@media (max-width: 1250px) {
+  .container-buttons-filter{
+      width: 1130px !important;
+  }
+  .container-table{
+      margin-left: 65px !important;
+      margin-right: 35px !important;
+  }
+  .button-filter{
+      margin-left: -10px !important;
+  }
+  .remove-filter-product{
+    margin-left: 10px !important;
+  }
+}
+
+@media (max-width: 710px) {
+  .secundary-categories-container div{
+      justify-content: space-between;
+  }
+  .view-category-container{
+      width: 400px !important;
+      height: 430px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .container-table{
+      margin-left: 40px !important;
+      margin-right: 10px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .container-table{
+      margin-left: 50px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .categories-container h4{
+      font-size: 24px;
+  }
+  .categories-container button{
+      font-size: 12px;
+  }
+  .product-container h4{
+    font-size: 24px;
+  }
+  .product-container button{
+      font-size: 12px;
+  }
+  .secundary-categories-container{
+      max-height: 180px !important;
+      flex-direction: row !important;
+  }
+  .secundary-categories-container div{
+      display: flex;
+      padding: 1px;
+  }
+  .secundary-products-container{
+    max-height: 180px !important;
+    flex-direction: row !important;
+  }
+  .secundary-products-container div{
+      display: flex;
+      padding: 1px;
+  }
+  .tags-container{
+      grid-template-columns: repeat(1, 1fr);
+      width: 240px;
+  }
+  .category-form{
+      width: 270px;
+      margin: 1rem 2rem 1rem 2rem;
+  }
+  .product-form{
+    width: 270px;
+    margin: 1rem 2rem 1rem 2rem;
+  }
+  .files-name-container{
+      width: 225px !important;
+  }
+  .iconImage-buttons{
+      width: 228px;
+  } 
+  .action-buttons{
+      width: 270px;
+  }
+}
+
+@media (max-width: 410px) {
+  .categories-container h4{
+      margin-left: 20px;
+  }
+  .category-form{
+      width: 230px;
+      margin: 1rem .4rem 1rem .4rem !important;
+  }
+  .secundary-categories-container div{
+      flex-direction: column;
+      font-family: 12px;
+      gap: 10px;
+      justify-content: center;
+  }
+  .products-container h4{
+    margin-left: 20px;
+  }
+  .product-form{
+      width: 230px;
+      margin: 1rem .4rem 1rem .4rem !important;
+  }
+  .secundary-products-container div{
+      flex-direction: column;
+      font-family: 12px;
+      gap: 10px;
+      justify-content: center;
+  }
+  .files-name-container{
+      width: 160px !important;
+  }
+  .iconImage-buttons{
+      width: 160px;
+  } 
+  .action-buttons{
+      width: 220px;
+  }
+
+  .view-category-container{
+      width: 300px !important;
+      height: 400px !important;
+  }
+  .view-category-image{
+      width: 100%;
+      height: 65%;
+  }
+  .view-category-icon{
+      width: 40%;
+      height: 30%;
+  }
+  .view-product-container{
+    width: 300px !important;
+    height: 400px !important;
+  }
+  .view-product-image{
+      width: 100%;
+      height: 65%;
+  }
+  .view-product-icon{
+      width: 40%;
+      height: 30%;
+  }
 
 }

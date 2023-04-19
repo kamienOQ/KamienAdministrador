@@ -1,11 +1,40 @@
-import { async } from "@firebase/util";
-import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, updateEmail,updatePassword } from "firebase/auth";
-import { collection, doc, getDoc,getDocs,updateDoc } from 'firebase/firestore'
+import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 import { FirebaseDB } from "./config";
 import { FirebaseApp } from "./config";
 import { getFirestore } from "firebase/firestore";
 const db = getFirestore(FirebaseApp)
+
+const googleProvider = new GoogleAuthProvider();
+
+export const singInWithGoogle = async() => {
+
+  try {
+      
+      const result = await signInWithPopup(FirebaseAuth, googleProvider );
+      // const credentials = GoogleAuthProvider.credentialFromResult( result );
+      const { displayName, email, photoURL, uid } = result.user;
+      
+      return {
+          ok: true,
+          // User info
+          user: { displayName, email, photoURL, uid }
+      };
+      
+
+  } catch (error) {
+      
+      const errorCode = error.code;
+      const errorMessage = error.message;
+  
+      return {
+          ok: false,
+          errorMessage,
+      };
+  };
+
+};
+
 export const loginWithEmailPassword = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(
@@ -40,6 +69,32 @@ export const loginWithEmailPassword = async (email, password) => {
       errorMessage,
     };
   }
+};
+
+export const registerUserWithEmailPassword = async (email, password, displayName) => {
+
+  try {
+    const result = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
+    const { photoURL, uid } = result.user;
+
+    await updateProfile( FirebaseAuth.currentUser, { displayName });
+
+    return {
+      ok: true,
+      user: {
+        uid,
+        email,
+        displayName,
+        photoURL,
+      },
+    };
+
+  } catch (error) {
+    console.log(error);
+
+    return { ok: false, errorMessage: error.message };
+  }
+
 };
 
 export const resetPasswordEmail = async (email) => {

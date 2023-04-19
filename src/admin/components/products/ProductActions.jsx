@@ -1,29 +1,36 @@
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Fab, Switch, Tooltip } from '@mui/material';
-import { useCategoriesStore, useUiStore } from '../../../hooks';
+import { useProductsState, useProductsStore, useUiStore } from '../../../hooks';
 
-export const CategoryActions = ({ row }) => {
+export const ProductActions = ({ row }) => {
 
-  const { openCategoryModal, openModalViewCategory } = useUiStore();
-  const { changeEditingCategory, setActiveCategory, changePreCategoryName, changeActiveCategory, startChangeActiveCategory } = useCategoriesStore();
+  const { openProductModal, openModalViewProduct, addCategoriesSelected } = useUiStore();
+  const { changeEditing, setActiveProduct, changePreProductName, changeActive, startChangeActiveProduct, startGetAttributesForm, starGetCategoriesForm } = useProductsStore();
+  const { setSelected } = useProductsState();
 
   const handleActive = () => {
-    setActiveCategory(row);
-    changeActiveCategory();
-    startChangeActiveCategory();
+    setActiveProduct(row);
+    changeActive();
+    startChangeActiveProduct();
   }
   
   const handleOpenEdit = () => {
-    setActiveCategory(row);
-    changePreCategoryName(row.categoryName);
-    changeEditingCategory(true);
-    openCategoryModal();
+    setActiveProduct(row);
+    changePreProductName(row.productName);
+    addCategoriesSelected(row.relatedCategories);
+    if(!!row.relatedCategories){
+      setSelected(true);
+    }
+    changeEditing(true);
+    startGetAttributesForm();
+    starGetCategoriesForm();
+    openProductModal();
   };
 
   const handleOpenView = () => {
-    setActiveCategory(row);
-    openModalViewCategory();
+    setActiveProduct(row);
+    openModalViewProduct();
   };
 
   return (
@@ -52,7 +59,7 @@ export const CategoryActions = ({ row }) => {
             <VisibilityIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title = "Editar" > 
+        <Tooltip title = "Editar" >   
           <Fab
             color="primary"
             sx={{
@@ -67,13 +74,13 @@ export const CategoryActions = ({ row }) => {
             <EditIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title = "Activar/Desactivar" > 
+        <Tooltip title = "Activar/Desactivar" >
           <Switch
               checked={!!row?.active ? row?.active : false}
               onChange={handleActive}
               name="Activa"
               color="lightSuccess"
-            />
+          /> 
         </Tooltip>
       </Box>
     </>

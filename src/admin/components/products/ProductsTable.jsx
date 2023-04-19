@@ -3,12 +3,12 @@ import { DataGrid, esES } from "@mui/x-data-grid";
 import { Button, Grid } from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CloseIcon from '@mui/icons-material/Close';
-import { useCategoriesStore } from "../../../hooks";
+import { useProductsStore } from "../../../hooks";
 
 
-export const CategoriesTable = ({ attributes, data }) => {
+export const ProductsTable = ({ attributes, data }) => {
 
-  const { filter, filtering, changeFilterCategory, changeFilteringCategory, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSizeCategory } = useCategoriesStore();
+  const { filter, filtering, changeFilter, changeFiltering, startFilterProducts, startGetProducts, isLoadingProduct, numberProducts, changePageAndSize } = useProductsStore();
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
@@ -20,13 +20,13 @@ export const CategoriesTable = ({ attributes, data }) => {
   const [localFilterValue, setLocalFilterValue] = useState('');
   const [sortModel, setSortModel] = useState([]);
 
-  const [rowCountState, setRowCountState] = useState(numberCategories || 0);
+  const [rowCountState, setRowCountState] = useState(numberProducts || 0);
 
   // * Pagination
   const onPaginationChange = useCallback(
     (newModel) => {
       setPaginationModel(newModel);
-      changePageAndSizeCategory(newModel);
+      changePageAndSize(newModel);
     },
     [setPaginationModel]
   );
@@ -35,17 +35,15 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   useEffect(() => {
     if(!filtering){
-      console.log("Filtra1")
-      startGetCategories(paginationModel.page, paginationModel.pageSize);
+      startGetProducts(paginationModel.page, paginationModel.pageSize);
     }if(filtering){
-      console.log("Filtra2")
-      startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
+      startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);
 
   useEffect(() => {
-    setRowCountState(numberCategories !== undefined ? numberCategories : 0);
-  }, [numberCategories, setRowCountState]);
+    setRowCountState(numberProducts !== undefined ? numberProducts : 0);
+  }, [numberProducts, setRowCountState]);
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -69,8 +67,8 @@ export const CategoriesTable = ({ attributes, data }) => {
     if (!filtering || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
         // onPaginationChange({...paginationModel, page: 0});
-        startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFilteringCategory(true);
+        startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
+        changeFiltering(true);
         setLocalFilterValue(filter.value);
       }
     }
@@ -79,8 +77,8 @@ export const CategoriesTable = ({ attributes, data }) => {
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
-        startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
-        changeFilteringCategory(true);
+        startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
+        changeFiltering(true);
         setLocalFilterValue(value.value);
       }else if (localFilterValue === "asc" || localFilterValue === "desc") {
         handleRemoveFilter();
@@ -89,9 +87,9 @@ export const CategoriesTable = ({ attributes, data }) => {
   };
 
   const handleRemoveFilter = () => {
-    startGetCategories(paginationModel.page, paginationModel.pageSize);
-    changeFilteringCategory(false);
-    changeFilterCategory({});
+    startGetProducts(paginationModel.page, paginationModel.pageSize);
+    changeFiltering(false);
+    changeFilter({});
     setSortModel([]);
     setLocalFilterValue('');
     setFilterModel({items: []});
@@ -99,24 +97,24 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   const handleFilterChange = ({ items }) => {
     if (items[0]?.value) {
-      changeFilterCategory({ field: items[0]?.field, value: items[0]?.value });
+      changeFilter({ field: items[0]?.field, value: items[0]?.value });
       setSortModel([]);
-      changeFilteringCategory(false);
+      changeFiltering(false);
     }if (items.length === 0) {
       if(filtering){
-        startGetCategories(paginationModel.page, paginationModel.pageSize);
+        startGetProducts(paginationModel.page, paginationModel.pageSize);
       }
-      changeFilteringCategory(false);
-      changeFilterCategory({});
+      changeFiltering(false);
+      changeFilter({});
     }
     setFilterModel({ items });
   };
 
   const handleSortModelChange = (event) => {
     setSortModel(event);
-    changeFilterCategory({ field: event[0]?.field, value: event[0]?.sort });
+    changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
-    changeFilteringCategory(false);
+    changeFiltering(false);
     handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
@@ -124,7 +122,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   return (
     <Grid container
       className="container-table"
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto', }}
+      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
     >
       <Grid
         className="container-buttons-filter"
@@ -140,7 +138,7 @@ export const CategoriesTable = ({ attributes, data }) => {
         </Button> */}
         {filtering ? (
           <Button
-            className="remove-filter-category"
+            className="remove-filter-product"
             sx={{
               height: 40,
               backgroundColor: "error.main",
@@ -161,7 +159,7 @@ export const CategoriesTable = ({ attributes, data }) => {
         disableColumnSelector
         disableColumnHeaderSelection
         disableSelectionOnClick
-        loading={isLoading}
+        loading={isLoadingProduct}
         rowCount={rowCountState}
         getRowId={onGetRowId}
         pageSizeOptions={[5, 10, 25]}

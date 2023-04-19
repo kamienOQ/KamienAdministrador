@@ -84,7 +84,6 @@ export const OrdersTable = ({ attributes, data }) => {
        Object.keys(filter).length > 0 &&
         filter.field !== undefined
       ) {
-        onPaginationChange({...paginationModel, page: 0});
         startFilterOrders(
           paginationModel.page,
           paginationModel.pageSize,
@@ -99,7 +98,6 @@ export const OrdersTable = ({ attributes, data }) => {
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
         startFilterOrders(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(value.value);
