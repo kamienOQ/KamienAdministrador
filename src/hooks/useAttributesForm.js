@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { onChangePreCategoryUpdated } from "../store";
+import { onChangePreAttributeUpdated } from "../store";
 
-export const  useCategoriesForm = ( initialForm = {}  ) => {
+export const  useAttributesForm = ( initialForm = {}  ) => {
     const [ formState, setFormState ] = useState( initialForm );
     const dispatch = useDispatch();
 
@@ -11,7 +11,7 @@ export const  useCategoriesForm = ( initialForm = {}  ) => {
       }, [initialForm])
 
     const onInputChange = ({ target }) => {
-        dispatch(onChangePreCategoryUpdated(true));
+        dispatch(onChangePreAttributeUpdated(true));
         const { name, value } = target;
         setFormState({
             ...formState,
