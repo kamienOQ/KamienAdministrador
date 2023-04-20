@@ -17,6 +17,7 @@ export const Administradores = () =>{
             const usuariosTotales = await getAllUsers()
             const filtered = getFilteredData(usuariosTotales);
             setUser(filtered); 
+            console.log('Pasó')
           };
         fetchData();
     },[])    

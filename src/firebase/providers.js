@@ -8,7 +8,7 @@ const db = getFirestore(FirebaseApp)
 
 const googleProvider = new GoogleAuthProvider();
 export const singInWithGoogle = async() => {
-q
+  
   try {
       
       const result = await signInWithPopup(FirebaseAuth, googleProvider );
