@@ -3,9 +3,6 @@ import { Box } from "@mui/system"
 import { FormControl,TextField,FormLabel,Button,IconButton  } from "@mui/material"
 import UpdateIcon from '@mui/icons-material/Update';
 import { updateLoggedUser,updateUserEmail,updateUserPassword,getUserInfo } from "../../firebase/providers";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { UserToast } from "./UserToast";
 export const ProfileForm = () => {
     const [currentUserInfo, setUserInfo] = useState([])
 
@@ -31,15 +28,15 @@ export const ProfileForm = () => {
     }
     const handleUpdateUser = async() =>{
         const updatedUser = {}
-        if (email !== ""){     
-            updateUserEmail(email)
-            updatedUser.correo = email
-        }
         if (number !== ""){
             updatedUser.numero = number
         }
         if (name !== ""){
             updatedUser.nombre = name
+        }
+        if (email !== ""){          
+            updatedUser.correo = email  
+            updateUserEmail(email)
         }
         if (password !== ""){
             if (password.length >= 6){
@@ -138,7 +135,6 @@ export const ProfileForm = () => {
 
         </TextField>
     </FormControl>
-    <UserToast message = {toastMsg} openSnackBar = {openToast} setOpenSnackBar = {setOpenToast}/>
     </Box>
   )
 }

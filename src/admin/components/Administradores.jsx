@@ -16,10 +16,11 @@ export const Administradores = () =>{
         const fetchData = async () => {
             const usuariosTotales = await getAllUsers()
             const filtered = getFilteredData(usuariosTotales);
-            setUser(filtered);
+            setUser(filtered); 
           };
         fetchData();
-    },[usuarios])    
+    },[])    
+
         const columns = useMemo(
             () => [
                 { 
@@ -57,12 +58,13 @@ export const Administradores = () =>{
                   type: 'actions',
                   width: 200,
                   renderCell: (params) => (
-                     <UserActions rowParams = {params.row}/> 
+                     <UserActions rowParams = {params.row} params = {params} setUser = {setUser}/> 
                   ),
                 },
               ],
               [rowId]
             );
+
     return(
         <>
             <Box

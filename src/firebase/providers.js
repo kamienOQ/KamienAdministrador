@@ -1,4 +1,4 @@
-import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , updateEmail,updatePassword} from "firebase/auth";
+import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword,reauthenticateWithCredential , createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , updateEmail,updatePassword} from "firebase/auth";
 import { FirebaseAuth } from "./config";
 import { FirebaseDB } from "./config";
 import { FirebaseApp } from "./config";
@@ -6,11 +6,9 @@ import { getFirestore } from "firebase/firestore";
 import { collection, doc, getDoc,getDocs,updateDoc } from 'firebase/firestore'
 const db = getFirestore(FirebaseApp)
 
-
 const googleProvider = new GoogleAuthProvider();
-
 export const singInWithGoogle = async() => {
-
+q
   try {
       
       const result = await signInWithPopup(FirebaseAuth, googleProvider );
@@ -191,7 +189,7 @@ export const logoutFirebase = async () => {
 
 export const getCurrentUser = async() => {
   try{
-    const currentUserId = FirebaseAuth.currentUser.uid;
+    const currentUserId =FirebaseAuth.currentUser.uid;
     const userRef = doc(FirebaseDB, "users", currentUserId);
     const userSnapshot = await getDoc(userRef)
     const userData = userSnapshot.data()
@@ -213,9 +211,10 @@ export const updateUser = async(uid,newData) => {
   }catch(error){
     console.log("Error a la hora de actualizar el usuario : " ,error)
   }
-};
+}; 
 
 export const eliminateUser = async(uid,newData) => {
+  
   try{
     const usersRef = doc(db, "users" , uid)
     await updateDoc(usersRef,newData)
