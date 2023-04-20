@@ -18,7 +18,7 @@
 
 }
 
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper  {
+.MuiDrawer-paper  {
   background-color: var(--main-color) !important;
   background-color: #0E1116 !important;
 }
@@ -32,11 +32,11 @@ label {
     font-size: 18px;
 }
 
-.css-q68e8e-MuiFormControl-root-MuiDataGrid-filterFormColumnInput{
+.MuiDataGrid-filterFormColumnInput{
     display: none !important;
 }
 
-.css-17vwkjt-MuiFormControl-root-MuiDataGrid-filterFormOperatorInput{
+.MuiDataGrid-filterFormOperatorInput{
     display: none !important;
 }
 
@@ -67,7 +67,7 @@ label {
     border-radius: 5px;
 } */
 
-.css-17vwkjt-MuiFormControl-root-MuiDataGrid-filterFormOperatorInput{
+.MuiDataGrid-filterFormOperatorInput{
   display: none !important;
 }
 

@@ -99,17 +99,17 @@ export const Administradores = () =>{
                     top: 5,
                     bottom:  5,
                     })}
-                    sx={{      
+                    sx={{
                     color: 'dark.main',
                     maxWidth: "1162px",
                     my: "0",
                     mx: "auto",
-                    ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {bgcolor: "info.main", color: "white"},
-                    ".css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root": {color: "white"},
+                    ".MuiDataGrid-columnHeaders": {bgcolor: "info.main", color: "white"},
+                    ".MuiIconButton-root": {color: "white"},
                     ".MuiDataGrid-row:nth-of-type(even)": {bgcolor: "secondary.main"},
-                    ".css-wop1k0-MuiDataGrid-footerContainer": {bgcolor: "info.main", color: "white"},
-                    ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar": {color: "white"},
-                    ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {color: "white"},
+                    ".MuiDataGrid-footerContainer": {bgcolor: "info.main", color: "white"},
+                    ".MuiTablePagination-toolbar": {color: "white"},
+                    ".MuiTablePagination-toolbar svg": {color: "white"},
                     }}
                 />
             </Box>
