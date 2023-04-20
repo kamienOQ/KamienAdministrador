@@ -135,7 +135,6 @@ export const ProfileForm = () => {
 
         </TextField>
     </FormControl>
-    <UserToast message = {toastMsg} openSnackBar = {openToast} setOpenSnackBar = {setOpenToast}/>
     </Box>
   )
 }
