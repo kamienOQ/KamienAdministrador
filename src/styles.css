@@ -71,9 +71,6 @@ label {
   display: none !important;
 }
 
-.addCategory-button:hover{
-  background-color: var(--hover-success) !important;
-}
 
 .addCategory-modal-button:hover{
   background-color: var(--hover-success) !important;
