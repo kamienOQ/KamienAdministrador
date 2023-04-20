@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { UserToast } from "./UserToast";
 import { useState } from "react";
 import { eliminateUser } from "../../firebase/providers";
-export const ConfirmationModal = ({open,setOpen,msg,userParams}) => {
+export const ConfirmationModal = ({open,setOpen,msg,userParams,params,setUser}) => {
     const [openToast,setToast] = useState(false)
     const [mensaje,setMensaje] = useState("")
     const handleClose = () =>{
@@ -16,6 +16,7 @@ export const ConfirmationModal = ({open,setOpen,msg,userParams}) => {
         eliminateUser(userParams.id,userParams)
         setToast(true)
         setOpen(false)
+        setUser(params)
     }
   return (
     <>
