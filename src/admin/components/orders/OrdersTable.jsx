@@ -209,22 +209,22 @@ export const OrdersTable = ({ attributes, data }) => {
           ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
             outline: "none",
           },
-          ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
+          ".MuiDataGrid-columnHeaders": {
             bgcolor: "info.main",
             color: "white",
           },
-          ".css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root": {
+          ".MuiIconButton-root": {
             color: "white",
           },
           ".MuiDataGrid-row:nth-of-type(even)": { bgcolor: "secondary.main" },
-          ".css-wop1k0-MuiDataGrid-footerContainer": {
+          ".MuiDataGrid-footerContainer": {
             bgcolor: "info.main",
             color: "white",
           },
-          ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar": {
+          ".MuiTablePagination-toolbar": {
             color: "white",
           },
-          ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {
+          ".MuiTablePagination-toolbar svg": {
             color: "white",
           },
         }}
