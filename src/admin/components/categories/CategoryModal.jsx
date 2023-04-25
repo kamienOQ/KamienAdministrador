@@ -12,8 +12,9 @@ import { deleteFileUpload } from "../../../helpers";
 export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
-  const { categories, activeCategory, message, editing, setActiveCategory, addErrorMessageCategory, addSuccessMessageCategory,
-    startUploadNewCategory, startNumberCategories, changeEditingCategory, changePreCategoryUpdated, startUpdateCategory } = useCategoriesStore();
+  const { categories, activeCategory, message, editing, isSaving, setActiveCategory, addErrorMessageCategory, addSuccessMessageCategory,
+    startUploadNewCategory, startNumberCategories, changeEditingCategory, changePreCategoryUpdated, startUpdateCategory, startGetCategories } = useCategoriesStore();
+
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
   const { categoryName, onInputChange, formState } = useCategoriesForm(activeCategory);
@@ -136,6 +137,7 @@ export const CategoryModal = () => {
                   component="label"
                   onChange={onUploadImage}
                   sx={{ color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
+                  disabled={isSaving}
                 >
                   <input hidden accept="image/*" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
@@ -153,6 +155,7 @@ export const CategoryModal = () => {
                   component="label"
                   onChange={onUploadIcon}
                   sx={{ color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
+                  disabled={isSaving}
                 >
                   <input hidden accept=".png" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
@@ -177,6 +180,7 @@ export const CategoryModal = () => {
                 onClick={onCloseModa}
                 variant="contained"
                 sx={{ backgroundColor: "error.main", borderRadius: 20 }}
+                disabled={isSaving}
               >
                 <CloseIcon />
               </Button>
@@ -186,6 +190,7 @@ export const CategoryModal = () => {
                 onClick={onSave}
                 variant="contained"
                 sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 }}
+                disabled={isSaving}
               >
                 <CheckIcon />
               </Button>

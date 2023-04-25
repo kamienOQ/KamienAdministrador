@@ -45,6 +45,7 @@ export const onStartUploadNewCategory = () => {
         duplicateCategory = true;
         dispatch(onAddErrorMessage( 'Ya existe una categoría con este nombre' ));
         dispatch(onAddSuccessMessage( '' ));
+        dispatch(onChangeSavingNewCategory(false));
       }
     });
     if(!duplicateCategory){
@@ -157,7 +158,7 @@ export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
     const newCategories = querySnapshot.docs.map((doc, index) => {
       return { id: index + 1 + page * size, ...doc.data() };
     });
-
+    console.log(page)
     dispatch(onSetCategories(newCategories));
   }
 }
@@ -193,6 +194,7 @@ export const onStartUpdateCategory = () => {
           duplicateCategory = true;
           dispatch(onAddErrorMessage( 'Ya existe una categoría con este nombre' ));
           dispatch(onAddSuccessMessage( '' ));
+          dispatch(onChangeSavingNewCategory(false));
         }
       });
     }
@@ -218,7 +220,7 @@ export const onStartUpdateCategory = () => {
   }
 }
 
-export const onStartChangeActive = () => {
+export const onStartChangeActiveCategory = () => {
   return async( dispatch, getState ) => {
 
     dispatch(onChangeSavingNewCategory(true));

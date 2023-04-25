@@ -1,25 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
-// Product
-import { onCleanActiveProduct, onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
-//Categories
-import { onCleanActiveCategory, onOpenModalViewCategory, onCloseModalViewCategory } from '../store';
+// //Categories
+// import { onCleanActiveCategory } from '../store/categories';
 // Ui
-import { onAddCategoriesSelected, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, 
-    onOpenProductModal, onDeleteCategoriesSelected, onDeleteAttributesSelected, 
-    onDeleteListAttributesSelected, onCloseCategoryModal, onOpenCategoryModal } from '../store';
+import { onCloseCategoryModal, onOpenCategoryModal, onCloseModalView, onOpenModalView, onOpenModalViewCategory, 
+    onCloseModalViewCategory, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, onOpenProductModal,  
+    onDeleteAttributesSelected, onDeleteListAttributesSelected, onAddCategoriesSelected, onDeleteCategoriesSelected, } from '../store/ui/uiSlice';
+// Product
+import { onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
+import { onCleanActiveProduct } from '../store/products/productsSlice';
+//Categories
+import { onCleanActiveCategory,  } from '../store/categories';
+
 
 export const useUiStore = () => {
 
     const dispatch = useDispatch();
 
     const { 
-        isProductModalOpen,
         isCategoryModalOpen,
+        isProductModalOpen,
+        isModalViewOpen,
         categoriesSelected,
         attributesSelected,
         listAttributesSelected,
         isModalViewOpenProduct, 
-        isModalViewOpenCategory, 
     } = useSelector( state => state.ui );
 
     const openProductModal = () => {
@@ -38,6 +42,14 @@ export const useUiStore = () => {
     const closeCategoryModal = () => {
         dispatch( onCloseCategoryModal() );
         dispatch( onCleanActiveCategory() );
+    }
+
+    const openModalView = () => {
+        dispatch( onOpenModalView() );
+    }
+
+    const closeModalView = () => {
+        dispatch( onCloseModalView() );
     }
 
     const addCategoriesSelected = ( categoriesSelected ) => {
@@ -80,17 +92,24 @@ export const useUiStore = () => {
         dispatch( onCloseModalViewCategory() )
     }
 
+    
+
     return {
         //*Propiedades
+        isCategoryModalOpen,
+        isModalViewOpen,
         isProductModalOpen,
         isCategoryModalOpen,
         categoriesSelected,
         attributesSelected,
         listAttributesSelected,
         isModalViewOpenProduct,
-        isModalViewOpenCategory,
 
         //*Métodos
+        openCategoryModal,
+        closeCategoryModal,
+        openModalView,
+        closeModalView,
         addCategoriesSelected,
         addAttributesSelected,
         deleteCategoriesSelected,

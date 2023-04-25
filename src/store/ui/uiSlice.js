@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isProductModalOpen: false,
         isCategoryModalOpen: false,
+        isModalViewOpen: false,
         isModalViewOpenProduct: false,
         totalPages: 1,
         page: 1,
@@ -62,7 +62,6 @@ export const uiSlice = createSlice({
             state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload );
         },
         onAddListAttributesSelected: ( state, { payload } ) => {
-            console.log(payload)
             if (!state.listAttributesSelected.some((listAttribute) => listAttribute.feature.toLowerCase() === payload.feature.toLowerCase())) {
                 state.listAttributesSelected.push( payload );
             }
@@ -83,10 +82,10 @@ export const uiSlice = createSlice({
             state.isModalViewOpenProduct = false;
         },
         onOpenModalViewCategory: ( state ) => {
-            state.isModalViewOpenCategory = true;
+            state.isModalViewOpen = true;
         },
         onCloseModalViewCategory: ( state ) => {
-            state.isModalViewOpenCategory = false;
+            state.isModalViewOpen = false;
         }
     }
 });
@@ -99,6 +98,10 @@ export const {
     onDownPage,
     onChangePage,
     onRestorePage,
+    onOpenCategoryModal, 
+    onCloseCategoryModal,
+    onOpenModalView,
+    onCloseModalView, 
     onSearchingName,
     onOpenProductModal, 
     onCloseProductModal, 
@@ -108,8 +111,6 @@ export const {
     onDeleteAttributesSelected,
     onAddListAttributesSelected,
     onDeleteListAttributesSelected,
-    onOpenCategoryModal, 
-    onCloseCategoryModal, 
     onOpenModalViewProduct,
     onCloseModalViewProduct,
     onOpenModalViewCategory,

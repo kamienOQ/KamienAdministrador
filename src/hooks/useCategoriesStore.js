@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory, onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onChangeFiltering, 
-    onSetNumberCategories, onStartNumberCategories, onChangePreCategoryName, onChangePreCategoryUpdated, onStartUpdateCategory, 
-    onStartChangeActive, onChangeActive, onChangePageAndSize } from "../store/categories";
+    onSetActiveCategory,  onChangeFiltering, onSetNumberCategories,  onChangePreCategoryName, onChangePreCategoryUpdated,  onChangeActive, onChangePageAndSize } from "../store/categories/categoriesSlice";
+import { onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onStartNumberCategories, onStartUpdateCategory, 
+    onStartChangeActiveCategory } from "../store/categories/thunks"
 
 export const useCategoriesStore = () => {
     const dispatch = useDispatch();
@@ -28,11 +28,11 @@ export const useCategoriesStore = () => {
         dispatch( onSetActiveCategory( category ) );
     }
 
-    const addImageCategory = ( images ) => {
+    const addImage = ( images ) => {
         dispatch( onAddImage( images ) );
     }
 
-    const addIconCategory = ( images ) => {
+    const addIcon = ( images ) => {
         dispatch( onAddIcon( images ) );
     }
 
@@ -44,8 +44,8 @@ export const useCategoriesStore = () => {
         dispatch( onAddSuccessMessage( message ) );
     }
 
-    const setNumberCategories = ( number ) => {
-        dispatch( onSetNumberCategories( number ) );
+    const  setNumberCategories = ( number ) => {
+        dispatch(  onSetNumberCategories( number ) );
     }
 
     const changeEditingCategory = ( value ) => {
@@ -107,7 +107,7 @@ export const useCategoriesStore = () => {
     }
 
     const startChangeActiveCategory = () => {
-        dispatch( onStartChangeActive() );
+        dispatch( onStartChangeActiveCategory() );
     }    
 
     return {
@@ -124,8 +124,8 @@ export const useCategoriesStore = () => {
 
         //*Métodos
         addErrorMessageCategory,
-        addIconCategory,
-        addImageCategory,
+        addIcon,
+        addImage,
         addNewCategory,
         addSuccessMessageCategory,
         changeActiveCategory,

@@ -3,4 +3,5 @@ export * from "./AdminCrud";
 export * from "./ProfilePage";
 export * from "./AboutCrud";
 export * from "./ProductsCrud";
+export * from "./AttibutesCrud";
 export * from "./CategoriesCrud";

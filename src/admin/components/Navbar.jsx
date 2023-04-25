@@ -6,6 +6,7 @@ import {
   IconButton,
   Tooltip,
   Divider,
+  Avatar
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { Home, Menu } from "@mui/icons-material";
@@ -13,10 +14,8 @@ import { SideList } from "./SideList";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import "./Navbar.css";
-//import SideList from './SideList';
-
+import logo from "./logo.png";
 const drawerWidth = 239;
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -34,14 +33,11 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open}>
@@ -60,7 +56,7 @@ export const Navbar = () => {
           </IconButton>
           <Tooltip title="Volver a la página de gestión de pedidos">
             <IconButton component={RouterLink} sx={{ mr: 1 }} to="/">
-              <Home sx={{ color: "dark.main" }} />
+              <Avatar src = {logo}/>
             </IconButton>
           </Tooltip>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>

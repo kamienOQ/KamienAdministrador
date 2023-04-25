@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
-import { onChangePreProductUpdated } from "../store";
+import { onChangePreProductUpdated } from "../store/products/productsSlice";
 
 export const useProductsForm = ( initialForm = {},  ) => {
     const [ formState, setFormState ] = useState( initialForm );

@@ -66,7 +66,7 @@ export const ProductsTable = ({ attributes, data }) => {
   const handleSearch = () => {
     if (!filtering || filter.value !== localFilterValue ) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
+        // onPaginationChange({...paginationModel, page: 0});
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(filter.value);
@@ -77,7 +77,6 @@ export const ProductsTable = ({ attributes, data }) => {
   const handleSort = (value) => {
     if (!filtering || value.value !== localFilterValue ) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
-        onPaginationChange({...paginationModel, page: 0});
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(value.value);
@@ -180,29 +179,27 @@ export const ProductsTable = ({ attributes, data }) => {
           maxWidth: "1172px",
           my: "0",
           mx: "auto",
-          overflowX: 'auto',
-          ".css-yrdy0g-MuiDataGrid-columnHeaderRow": {
-            bgcolor: "info.main",
-            color: "white",
-          },
-          ".css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root": {
-            color: "white",
-          },
-          ".MuiDataGrid-row:nth-of-type(even)": { bgcolor: "secondary.main" },
-          ".css-wop1k0-MuiDataGrid-footerContainer": {
-            bgcolor: "info.main",
-            color: "white",
-          },
-          ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar": {
-            color: "white",
-          },
-          ".css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar svg": {
-            color: "white",
-          }, 
           ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
             outline: "none",
           },
-          
+          ".MuiDataGrid-columnHeaders": {
+            bgcolor: "info.main",
+            color: "white",
+          },
+          ".MuiIconButton-root": {
+            color: "white",
+          },
+          ".MuiDataGrid-row:nth-of-type(even)": { bgcolor: "secondary.main" },
+          ".MuiDataGrid-footerContainer": {
+            bgcolor: "info.main",
+            color: "white",
+          },
+          ".MuiTablePagination-toolbar": {
+            color: "white",
+          },
+          ".MuiTablePagination-toolbar svg": {
+            color: "white",
+          },
         }}
       />
     </Grid>
