@@ -69,9 +69,10 @@ export const Attributes = () => {
       headerName: "Acciones",
       type: "actions",
       width: 200,
-      sortable: false,
+      sortable: true,
       filterable: false,
       hideable: false,
+      
       getActions: (params) => [
         <AttibutesActions row={params.row}/>
       ]

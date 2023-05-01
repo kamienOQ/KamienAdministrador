@@ -113,6 +113,7 @@ export const AttibutesTable = ({ attributes, data }) => {
   };
 
   const handleSortModelChange = (event) => {
+    console.log(event);
     setSortModel(event);
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
