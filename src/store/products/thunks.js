@@ -311,7 +311,7 @@ export const onStartGetListAttributesForm = () => {
           // console.log(attribute);
           return attribute;
         })
-        // console.log(attributesFor);
+        console.log(attributesFor);
         return attributesFor;
       });
       console.log(actualListAttribute[0])

@@ -6,7 +6,8 @@ export const uiAttSlice = createSlice({
         isCategoryModalOpen: false,
         isModalViewOpen: false,
         attributesSelected: [],
-        categoriesSelected: []
+        categoriesSelected: [],
+        listAttributesSelected: [],
     },
     reducers: {
         onOpenCategoryModal: ( state ) => {
@@ -16,6 +17,7 @@ export const uiAttSlice = createSlice({
             state.isCategoryModalOpen = false;
             state.attributesSelected = [];
             state.categoriesSelected = [];
+            state.listAttributesSelected = []
         },
         onOpenModalView: ( state ) => {
             state.isModalViewOpen = true;
@@ -33,17 +35,28 @@ export const uiAttSlice = createSlice({
                 state.categoriesSelected.push( payload );
             }
         },
+        onAddListAttributesSelected: ( state, { payload } ) => {
+            if (!state.listAttributesSelected.some((listAttributes) => listAttributes.toLowerCase() === payload.toLowerCase())) {
+                state.listAttributesSelected.push( payload );
+            }
+        },
         onSetAttributesSelected: ( state, { payload } ) =>{
             state.attributesSelected = payload;
+        },
+        onSetListAttributesSelected: ( state, { payload } ) =>{
+            state.listAttributesSelected = payload;
         },
         onSetCategoriesSelected: ( state, { payload } ) =>{
             state.categoriesSelected = payload;
         },
         onDeleteCategoriesSelected: ( state, { payload } ) => {
-            state.categoriesSelected= state.categoriesSelected.filter( event => event !== payload );
+            state.categoriesSelected = state.categoriesSelected.filter( event => event !== payload );
         },
         onDeleteAttributesSelected: ( state, { payload } ) => {
-            state.attributesSelected= state.attributesSelected.filter( event => event !== payload );
+            state.attributesSelected = state.attributesSelected.filter( event => event !== payload );
+        },
+        onDeleteListAttributesSelected: ( state, { payload } ) => {
+            state.listAttributesSelected = state.listAttributesSelected.filter( event => event !== payload );
         },
         onAddAttributeNameLowerCase: ( state ) => {
             let formattedName = state.activeCategory.categoryName.toLowerCase();
@@ -66,10 +79,13 @@ export const {
     onOpenModalView,
     onCloseModalView,
     onAddAttributesSelected,
+    onAddListAttributesSelected,
     onAddCategoriesSelected,
     onDeleteAttributesSelected,
+    onDeleteListAttributesSelected,
     onDeleteCategoriesSelected,
     onAddAttributeNameLowerCase,
     onSetAttributesSelected,
+    onSetListAttributesSelected,
     onSetCategoriesSelected
 } = uiAttSlice.actions;
