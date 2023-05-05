@@ -8,7 +8,7 @@ import { useProductsStore } from "../../../hooks";
 
 export const ProductsTable = ({ attributes, data }) => {
 
-  const { filter, filtering, changeFilter, changeFiltering, startFilterProducts, startGetProducts, isLoadingProduct, numberProducts, changePageAndSize } = useProductsStore();
+  const { filter, filtering, changeFilter, changeFiltering, startFilterProducts, startGetProducts, isLoading, numberProducts, changePageAndSize } = useProductsStore();
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({items: []});
@@ -159,7 +159,7 @@ export const ProductsTable = ({ attributes, data }) => {
         disableColumnSelector
         disableColumnHeaderSelection
         disableSelectionOnClick
-        loading={isLoadingProduct}
+        loading={isLoading}
         rowCount={rowCountState}
         getRowId={onGetRowId}
         pageSizeOptions={[5, 10, 25]}

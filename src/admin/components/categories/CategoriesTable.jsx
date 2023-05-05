@@ -35,10 +35,8 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   useEffect(() => {
     if(!filtering){
-      console.log("Filtra1")
       startGetCategories(paginationModel.page, paginationModel.pageSize);
     }if(filtering){
-      console.log("Filtra2")
       startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);

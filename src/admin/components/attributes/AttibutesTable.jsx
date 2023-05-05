@@ -40,7 +40,7 @@ export const AttibutesTable = ({ attributes, data }) => {
       startFilterAttributes(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);
-  
+
 
   useEffect(() => {
     setRowCountState(numberCategories !== undefined ? numberCategories : 0);
@@ -113,7 +113,6 @@ export const AttibutesTable = ({ attributes, data }) => {
   };
 
   const handleSortModelChange = (event) => {
-    console.log(event);
     setSortModel(event);
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
     setFilterModel({items: []});
@@ -121,7 +120,7 @@ export const AttibutesTable = ({ attributes, data }) => {
     handleSort({ field: event[0]?.field, value: event[0]?.sort })
   };
 
-  
+
   return (
     <Grid container
       className="container-table"

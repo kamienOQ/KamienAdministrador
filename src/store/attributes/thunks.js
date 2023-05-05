@@ -210,24 +210,32 @@ export const onStartFiltersAttributes = (page = 0, size = 5, preValue) => {
 
       if(field?.toLowerCase().includes('actions')){
         if(value==='asc'){
-          if (page === 0) {
-            q = query( collectionRef, orderBy("active", "asc"), limit(size) );
-            dispatch(onStartNumberAttributes());
+          if(preValue !== value){
+            q = query( collectionRef, where("active", "==", true), limit(size) );
+            const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
+            dispatch(onSetNumberAttributes(querySnapshot.size));
+          } if (page === 0 || undersized) {
+            q = query( collectionRef, where("active", "==", true), limit(size) );
           } else {
-            const lastVisibleDoc = query( collectionRef,  orderBy("active", "asc"), limit(page * size) );
+            const lastVisibleDoc = query( collectionRef,  where("active", "==", true), limit(page * size) );
             const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
             const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  orderBy("active", "asc"), startAfter(lastVisible), limit(size) );
+            q = query( collectionRef,  where("active", "==", true), startAfter(lastVisible), limit(size) );
           }
         }if(value==='desc'){
-          if (page === 0) {
-            q = query( collectionRef, orderBy("active", "desc"), limit(size) );
-            dispatch(onStartNumberAttributes());
+          if(preValue !== value){
+            q = query( collectionRef, where("active", "==", false), limit(size) );
+            const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
+            dispatch(onSetNumberAttributes(querySnapshot.size));
+          } if (page === 0 || undersized) {
+            q = query( collectionRef, where("active", "==", false), limit(size) );
           } else {
-            const lastVisibleDoc = query( collectionRef,  orderBy("active", "desc"), limit(page * size) );
+            const lastVisibleDoc = query( collectionRef,  where("active", "==", false), limit(page * size) );
             const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
             const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
-            q = query( collectionRef,  orderBy("active", "desc"), startAfter(lastVisible), limit(size) );
+            q = query( collectionRef,  where("active", "==", false), startAfter(lastVisible), limit(size) );
           }
         }
 
@@ -237,7 +245,6 @@ export const onStartFiltersAttributes = (page = 0, size = 5, preValue) => {
       const newAttribute = querySnapshot.docs.map((doc, index) => {
         return { id: index + 1 + page * size, ...doc.data() };
       });
-  
       dispatch(onSetAttributes(newAttribute));
     }
   }

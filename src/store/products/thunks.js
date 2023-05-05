@@ -168,7 +168,40 @@ export const onStartFilterProducts = (page = 0, size = 5, preValue) => {
           const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
           q = query( collectionRef,  where("date", ">=", dateObject.getTime()), startAfter(lastVisible), limit(size) );
         }
+      }if(field?.toLowerCase().includes('actions')){
+        if(value==='asc'){
+          if(preValue !== value){
+            q = query( collectionRef, where("active", "==", true), limit(size) );
+            const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
+            dispatch(onSetNumberProducts(querySnapshot.size));
+          } if (page === 0 || undersized) {
+            q = query( collectionRef, where("active", "==", true), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  where("active", "==", true), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  where("active", "==", true), startAfter(lastVisible), limit(size) );
+          }
+        }if(value==='desc'){
+          if(preValue !== value){
+            q = query( collectionRef, where("active", "==", false), limit(size) );
+            const querySnapshot = await getDocs(q);
+            undersized = (querySnapshot.size <= size) ? true : false;
+            dispatch(onSetNumberProducts(querySnapshot.size));
+          } if (page === 0 || undersized) {
+            q = query( collectionRef, where("active", "==", false), limit(size) );
+          } else {
+            const lastVisibleDoc = query( collectionRef,  where("active", "==", false), limit(page * size) );
+            const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+            const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+            q = query( collectionRef,  where("active", "==", false), startAfter(lastVisible), limit(size) );
+          }
+        }
+  
       }
+
+      
 
       const querySnapshot = await getDocs(q);
       const newProducts = querySnapshot.docs.map((doc, index) => {

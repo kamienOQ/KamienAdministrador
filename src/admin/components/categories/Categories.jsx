@@ -83,7 +83,7 @@ export const Categories = () => {
       headerName: "Acciones",
       type: "actions",
       width: 200,
-      sortable: false,
+      sortable: true,
       filterable: false,
       hideable: false,
       getActions: (params) => [

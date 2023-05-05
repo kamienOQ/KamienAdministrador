@@ -34,7 +34,7 @@ const firebaseConfig = {
   appId: "1:86678841516:web:2fca0057eea81c6671d709"
 };
 
-// // Produccion Firebase configuration
+// Produccion Firebase configuration
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDQmUwAf5t9_lYYJZD9IEPuRYzkhFzlbB8",
 //   authDomain: "project-kamien-main.firebaseapp.com",
