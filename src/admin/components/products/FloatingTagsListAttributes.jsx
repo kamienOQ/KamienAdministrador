@@ -1,12 +1,13 @@
 import { useUiStore } from '../../../hooks';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 export const FloatingTagsListAttributes = () => {
 
     const { listAttributesSelected, deleteListAttributesSelected } = useUiStore();
 
-    const onDeleteTag = (event) => {
+    const onDeleteTag = ( event, listAttribute ) => {
         event.preventDefault();
-        deleteListAttributesSelected( event.target.parentNode.id )
+        deleteListAttributesSelected( listAttribute )
         // console.log(document.getElementById(event.target.parentNode.id))
     }
 
@@ -14,8 +15,8 @@ export const FloatingTagsListAttributes = () => {
         return (
             <div className='tag-container' id={listAttributes.feature} key={listAttributes.feature}>
                 <p>{listAttributes.feature}</p>
-                <button className='closeTag-button' onClick={onDeleteTag}>
-                    X
+                <button className='closeTag-button' onClick={( event ) => onDeleteTag( event, listAttributes )}>
+                    < CancelOutlinedIcon sx={{ fontSize: 'medium', borderTop: '20px' }}/>
                 </button>
             </div>
         );

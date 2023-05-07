@@ -5,8 +5,9 @@ import { useProductsState, useProductsStore, useUiStore } from '../../../hooks';
 
 export const ProductActions = ({ row }) => {
 
-  const { openProductModal, openModalViewProduct, addCategoriesSelected } = useUiStore();
-  const { changeEditing, setActiveProduct, changePreProductName, changeActive, startChangeActiveProduct, startGetAttributesForm, starGetCategoriesForm } = useProductsStore();
+  const { openProductModal, openModalViewProduct, addAttributesSelected, addListAttributesSelected, addCategoriesSelected } = useUiStore();
+  const { activeProduct, changeEditing, setActiveProduct, changePreProductName, changeActive, 
+    startChangeActiveProduct, startGetAttributesForm, starGetCategoriesForm } = useProductsStore();
   const { setSelected } = useProductsState();
 
   const handleActive = () => {
@@ -18,6 +19,12 @@ export const ProductActions = ({ row }) => {
   const handleOpenEdit = () => {
     setActiveProduct(row);
     changePreProductName(row.productName);
+    row.relatedAttributes.forEach(attributeSelected => {
+      addAttributesSelected(attributeSelected);
+    });
+    row.relatedListAttributes.forEach(listAttributeSelected => {
+      addListAttributesSelected(listAttributeSelected);
+    });
     addCategoriesSelected(row.relatedCategories);
     if(!!row.relatedCategories){
       setSelected(true);
@@ -69,7 +76,7 @@ export const ProductActions = ({ row }) => {
               color: "white",
               '&:hover': { bgcolor: "primary.main" },
             }}
-            // onClick={handleOpenEdit}
+            onClick={handleOpenEdit}
           >
             <EditIcon />
           </Fab>

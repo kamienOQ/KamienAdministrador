@@ -347,7 +347,6 @@ export const onStartGetListAttributesForm = () => {
         // console.log(attributesFor);
         return attributesFor;
       });
-      console.log(actualListAttribute[0])
       dispatch(onSetListAttributes({ 'attributeSelected': object, 'feature': actualListAttribute[0] }));
     });
   }
