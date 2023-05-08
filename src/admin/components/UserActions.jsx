@@ -1,11 +1,11 @@
 
 import { Box, Fab } from '@mui/material';
 import { useState } from 'react';
-import { ConfirmationModal } from './confirmationModal';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { EditUserModal } from './EditUserModal';
-export const UserActions = ({rowParams}) => {
+import { ConfirmationModal } from './ConfirmationModal';
+export const UserActions = ({rowParams,params,setUser}) => {
   const [openEditModal,setEditModal] = useState(false)
   const [openConfirmationModal,setConfirmationModal] = useState(false)
   const handleOpen = () =>
@@ -55,14 +55,17 @@ export const UserActions = ({rowParams}) => {
         >
             <CancelIcon />
         </Fab>
+          
         </Box>
         <ConfirmationModal 
         open = {openConfirmationModal } 
         setOpen = {setConfirmationModal}
         msg = {"¿Seguro que quieres eliminar el usuario?"}
         userParams = {rowParams} 
+        params = {params} 
+        setUser = {setUser}
         />
-        <EditUserModal open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}/>
+        <EditUserModal users = {params}setUser = {setUser} open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}  />
     </>
   )
 }

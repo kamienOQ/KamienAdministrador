@@ -3,8 +3,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { UserToast } from "./UserToast";
 import { useState } from "react";
-import { eliminateUser } from "../../firebase/providers";
-export const ConfirmationModal = ({open,setOpen,msg,userParams}) => {
+import { eliminateUser, updateUser } from "../../firebase/providers";
+export const ConfirmationModal = ({open,setOpen,msg,userParams,params,setUser}) => {
     const [openToast,setToast] = useState(false)
     const [mensaje,setMensaje] = useState("")
     const handleClose = () =>{
@@ -16,6 +16,7 @@ export const ConfirmationModal = ({open,setOpen,msg,userParams}) => {
         eliminateUser(userParams.id,userParams)
         setToast(true)
         setOpen(false)
+        setUser(params)
     }
   return (
     <>
@@ -27,27 +28,19 @@ export const ConfirmationModal = ({open,setOpen,msg,userParams}) => {
                 {msg}
             </DialogTitle>
         <div style={{ display: "flex", justifyContent: "space-between" ,width:"100%"}}>
-            <Button
-                className="cancelProduct-button"
+            <Button 
                 onClick={handleClose}
                 variant="contained"
-                sx={{ 
-                    backgroundColor: "red" ,
-                    m: 3,
-                    borderRadius: "10%"
-                }}
+                className="cancelCategory-button"
+                sx={{ backgroundColor: "error.main", color: "tertiary.main", borderRadius: 20 ,mb : 7}}
             >
                 <CloseIcon/>
             </Button>
             <Button
-                className="cancelProduct-button"
                 onClick={deleteUser}
                 variant="contained"
-                sx={{ 
-                    backgroundColor: "green" ,
-                    m: 3,
-                    borderRadius: "10%"
-                }}
+                className="addCategory-modal-button"
+                sx={{ backgroundColor: "success.main", color: "tertiary.main", borderRadius: 20 ,mb : 7}}
             >
                 <CheckIcon/>
             </Button>

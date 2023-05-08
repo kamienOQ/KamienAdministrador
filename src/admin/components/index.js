@@ -9,5 +9,6 @@ export * from "./EditUserModal"
 export * from "./Table";
 export * from "./UserActions";
 export * from "./categories";
+export * from "./attributes";
 export * from "./AdminEditModal";
 export * from "./orders";

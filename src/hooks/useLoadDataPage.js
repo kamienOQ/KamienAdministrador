@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { onChargeProductsByPage, onSetTotalPages } from '../store';
+import { onSetTotalPages } from '../store/ui/uiSlice';
+import { onChargeProductsByPage, } from '../store/products/productsSlice';
 
 export const useLoadDataPage = () => {
     const dispatch = useDispatch()

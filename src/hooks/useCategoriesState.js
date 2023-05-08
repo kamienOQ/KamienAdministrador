@@ -19,16 +19,17 @@ export const useCategoriesState = () => {
   const onUploadImage = ({ target }) => {
     if (target.files.length != 0) {
       if (imageLoad) {
-        let usingImage = false;
-        categories.forEach((object) => {
-          if (object.image.name === activeCategory.image.name) {
-            usingImage = true;
-            return;
-          }
-        });
-        if (!usingImage) {
-          deleteFileUpload(activeCategory.image.name);
-        }
+        // let usingImage = false;
+        // categories.forEach((object) => {
+        //   if (object.image.name === activeCategory.image.name) {
+        //     usingImage = true;
+        //     return;
+        //   }
+        // });
+        // if (!usingImage) {
+        //   deleteFileUpload(activeCategory.image.name);
+        // }
+        deleteFileUpload(activeCategory.image.name);
       }
       setImageLoad(true);
       startUploadFile(target.files[0], "image", "categories");
@@ -39,15 +40,16 @@ export const useCategoriesState = () => {
     if (target.files.length != 0) {
       if (iconLoad) {
         let usingIcon = false;
-        categories.forEach((object) => {
-          if (object.icon.name === activeCategory.icon.name) {
-            usingIcon = true;
-            return;
-          }
-        });
-        if (!usingIcon) {
-          deleteFileUpload(activeCategory.icon.name);
-        }
+        // categories.forEach((object) => {
+        //   if (object.icon.name === activeCategory.icon.name) {
+        //     usingIcon = true;
+        //     return;
+        //   }
+        // });
+        // if (!usingIcon) {
+        //   deleteFileUpload(activeCategory.icon.name);
+        // }
+        deleteFileUpload(activeCategory.icon.name);
       }
       setIconLoad(true);
       startUploadFile(target.files[0], "icon", "categories");

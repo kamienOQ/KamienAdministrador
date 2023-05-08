@@ -12,11 +12,41 @@ import CategoryIcon from '@mui/icons-material/Category';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import InfoIcon from '@mui/icons-material/Info';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import { Link as RouterLink } from "react-router-dom";
 
 export const SideBarList = () => {
   return (
     <List sx={{ bgcolor: "dark.main" }}>
+
+      <Link component={RouterLink} to = "/Producto" sx={{textDecoration: "none", color: "white"}}>
+        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Tooltip title = "Añadir Producto" sx={{ bgcolor: "dark.main" }}> 
+                    <InventoryIcon sx={{ color: "white" }}/>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Añadir Producto"}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+        </ListItem>
+      </Link>
+
       <Link component={RouterLink} to = "/Categorias" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
@@ -46,7 +76,9 @@ export const SideBarList = () => {
         </Link>
 
 
-        <Link component={RouterLink} to = "/Producto" sx={{textDecoration: "none", color: "white"}}>
+       
+
+        <Link component={RouterLink} to = "/Atributos" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -62,12 +94,12 @@ export const SideBarList = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  <Tooltip title = "Añadir Producto" sx={{ bgcolor: "dark.main" }}> 
-                    <InventoryIcon sx={{ color: "white" }}/>
+                  <Tooltip title = "Añadir Atributo" sx={{ bgcolor: "dark.main" }}> 
+                    <StarRateIcon sx={{ color: "white" }}/>
                   </Tooltip>
                 </ListItemIcon>
                 <ListItemText
-                  primary={"Añadir Producto"}
+                  primary={"Añadir Atributo"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>

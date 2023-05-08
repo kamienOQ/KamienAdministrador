@@ -14,6 +14,11 @@ export const categoriesSlice = createSlice({
         editing: false,
         filtering: false,
         filter: {},
+        preCategory: {
+            name: '',
+            updatedName: false
+        },
+        page: 0,
         pageSize: 5,
         activeCategory: null, 
     },
@@ -47,19 +52,22 @@ export const categoriesSlice = createSlice({
             state.isSaving = false;
             state.categories = state.categories.map( category => {
 
-                if (category.categoryName === payload.categoryName ){
+                if (category.categoryName === state.preCategory.name ){
                     return payload;
                 }
 
                 return category;
             });
+            state.preCategory.updatedName = false;
+            state.editing = false;
         },
         onDeleteCategory: ( state, { payload } ) => {
             state.activeCategory = null;
             state.categories =  state.categories.filter( (category) => category.categoryName !== payload );
         },
-        // onChargeCategoriesUploaded: ( state, { payload } ) => {
+        // onChargeCategoriesUploaded: ( state, { payload, prevName } ) => {
         //     let duplicate = false
+        //     if(prevName !== payload.categoryName){}
         //     if(state.categories){
         //         state.categories.forEach(category => {
         //             if(category.categoryName === payload.categoryName)
@@ -100,8 +108,24 @@ export const categoriesSlice = createSlice({
             let formattedName = state.activeCategory.categoryName.toLowerCase();
             state.activeCategory.categoryNameLowerCase = formattedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         },
+        onChangeActive: ( state ) => {
+            state.activeCategory.active = !state.activeCategory.active
+
+            state.categories = state.categories.map( category => {
+                if (category.categoryName === state.activeCategory.categoryName ){
+                    return state.activeCategory;
+                }
+                return category;
+            });
+        },
         onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
+        },
+        onChangePreCategoryName: ( state, { payload } ) => {
+            state.preCategory.name = payload;
+        },
+        onChangePreCategoryUpdated: ( state, { payload } ) => {
+            state.preCategory.updatedName = payload;
         },
         onChangeFiltering: ( state, { payload } )=> {
             state.filtering = payload
@@ -109,8 +133,9 @@ export const categoriesSlice = createSlice({
         onChangeFilter: ( state, { payload } )=> {
             state.filter = payload
         },
-        onChangePageSize: ( state, { payload } )=> {
-            state.pageSize = payload
+        onChangePageAndSize: ( state, { payload } )=> {
+            state.page = payload.page;
+            state.pageSize = payload.pageSize;
         },
         onCleanCategories: ( state ) => {
             state.categories = []
@@ -126,6 +151,7 @@ export const categoriesSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
+    // onChargeCategoriesUploaded,
     onAddCategoryAtStart,
     onAddCategoryNameLowerCase, 
     onAddErrorMessage,
@@ -133,12 +159,14 @@ export const {
     onAddImage, 
     onAddNewCategory, 
     onAddSuccessMessage,
+    onChangeActive,
     onChangeEditing,
     onChangeFilter,
     onChangeFiltering,
-    onChangePageSize,
+    onChangePageAndSize,
+    onChangePreCategoryName,
+    onChangePreCategoryUpdated,
     onChangeSavingNewCategory, 
-    // onChargeCategoriesUploaded,
     onCleanActiveCategory,
     onCleanCategories,
     onDeleteCategory,

@@ -1,5 +1,5 @@
 
-import { Administradores } from "../Components/Administradores"
+import { Administradores } from "../components/Administradores"
 
 export const AdminCrud = () => {
   return (
