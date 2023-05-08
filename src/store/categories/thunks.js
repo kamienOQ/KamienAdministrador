@@ -242,7 +242,7 @@ export const onStartUpdateCategory = () => {
       if (querySnapshot.size === 1) {
         docRef = querySnapshot.docs[0].ref;
       }
-  
+
       await setDoc( docRef, categoryToFireStore, { merge: true } )
       dispatch( onUpdateCategory( activeCategory ) );
       dispatch(onAddSuccessMessage( 'Editado correctamente' ));
