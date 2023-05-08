@@ -1,7 +1,9 @@
 import { collection, doc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 // import { FirebaseDB } from "../../firebase/config";
-import { onSetData } from "./aboutSlice";
+import { onAddLogo, onChangeSavingAbout, onSetData } from "./aboutSlice";
 import { initializeApp } from "firebase/app";
+import { FirebaseStorage } from "../../firebase/config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 const firebaseConfig = {
@@ -15,6 +17,22 @@ const firebaseConfig = {
 
 const FirebaseApp = initializeApp(firebaseConfig);
 const FirebaseDB = getFirestore(FirebaseApp);
+
+export const onStartUploadFile = (file, collectionName) => {
+    return async (dispatch) => {
+      if ( file ){
+        dispatch(onChangeSavingAbout(true));
+        const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+        let imgId = id+collectionName+file.name;
+        const storageRef = ref(FirebaseStorage, imgId);
+  
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        dispatch( onAddLogo( downloadURL ) );
+        dispatch(onChangeSavingAbout(false));
+      }
+    }
+  }
 
 export const onStartGetAbout = () => {
     return async (dispatch) => {
@@ -32,12 +50,13 @@ export const onStartGetAbout = () => {
 
 export const onStartUpdateAbout = () => {
     return async ( dispatch, getState ) => {
-        const { description, instagram, name, whatsapp } = getState().about;
+        const { description, instagram, name, whatsapp, logo } = getState().about;
         const aboutData = {
             'description':  description || '',
             'instagram': instagram || '',
             'name': name || '',
-            'whatsapp': whatsapp || ''
+            'whatsapp': whatsapp || '',
+            'logo': logo || ''
         }
         const aboutDataToFireStore = { ...aboutData };
 

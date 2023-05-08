@@ -11,10 +11,10 @@ import {
 import MuiAppBar from "@mui/material/AppBar";
 import { Home, Menu } from "@mui/icons-material";
 import { SideList } from "./SideList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import "./Navbar.css";
-import logo from "./logo.png";
+import { useAboutStore } from "../../hooks/useAboutStore";
 const drawerWidth = 239;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -34,6 +34,12 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 export const Navbar = () => {
+  const { logo, startGetAbout } = useAboutStore();
+
+  useEffect(() => {
+    startGetAbout();
+  }, [])
+
   const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);

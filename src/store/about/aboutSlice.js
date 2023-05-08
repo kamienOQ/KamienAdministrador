@@ -6,7 +6,9 @@ export const aboutSlice = createSlice({
         description: '',
         instagram: '',
         name: '',
-        whatsapp: ''
+        whatsapp: '',
+        logo: '',
+        isSaving: false
     },
     reducers: {
 
@@ -14,6 +16,7 @@ export const aboutSlice = createSlice({
             state.description = payload[0]?.description;
             state.instagram = payload[0]?.instagram;
             state.name = payload[0]?.name;
+            state.logo = payload[0]?.logo;
             const whatsapp = payload[0]?.whatsapp.toString();
             if( !!whatsapp ){
                 if ( whatsapp.length < 8 || whatsapp.includes('-') ){
@@ -23,9 +26,20 @@ export const aboutSlice = createSlice({
                 }
             }
         },
+        onChangeSavingAbout: ( state, {payload} ) => {
+            state.isSaving = payload;
+        },
+        onAddLogo: ( state, {payload} ) => {
+            state.logo = payload;
+        }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onSetData } = aboutSlice.actions;
+export const { 
+    onSetData,
+    onChangeSavingAbout,
+    onAddLogo 
+
+} = aboutSlice.actions;

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onSetData } from "../store/about/index";
-import { onStartGetAbout, onStartUpdateAbout } from "../store/about/thunks";
+import { onStartGetAbout, onStartUpdateAbout, onStartUploadFile } from "../store/about/thunks";
 
 
 export const useAboutStore = () => {
@@ -10,7 +10,9 @@ export const useAboutStore = () => {
         description,
         instagram,
         name,
-        whatsapp
+        whatsapp,
+        logo,
+        isSaving
     } = useSelector( state => state.about );
 
     //*Slice
@@ -19,6 +21,10 @@ export const useAboutStore = () => {
     }
 
     //*Thunks
+    const startUploadFile = (file, collectionName) => {
+        dispatch( onStartUploadFile(file, collectionName) );
+    }
+
     const startGetAbout = () => {
         dispatch( onStartGetAbout() );
     }
@@ -34,9 +40,12 @@ export const useAboutStore = () => {
         instagram,
         name,
         whatsapp,
+        logo,
+        isSaving,
         
         //*Métodos
         setData,
+        startUploadFile,
         startGetAbout,
         startUpdateAbout,
     }
