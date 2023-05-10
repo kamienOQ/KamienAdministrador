@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { onCleanActiveCategory } from '../store/categories';
 // Ui
 import { onCloseCategoryModal, onOpenCategoryModal, onCloseModalView, onOpenModalView, onOpenModalViewCategory, 
-    onCloseModalViewCategory, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, onOpenProductModal,  
-    onDeleteAttributesSelected, onDeleteListAttributesSelected, onAddCategoriesSelected, onDeleteCategoriesSelected, } from '../store/ui/uiSlice';
+    onCloseModalViewCategory, onAddAttributesSelected, onAddListAttributesSelected, onCloseProductModal, 
+    onOpenProductModal, onDeleteAttributesSelected, onDeleteListAttributesSelected, onAddCategoriesSelected, 
+    onDeleteCategoriesSelected, } from '../store/ui/uiSlice';
 // Product
 import { onCloseModalViewProduct, onOpenModalViewProduct } from '../store';
 import { onCleanActiveProduct } from '../store/products/productsSlice';
