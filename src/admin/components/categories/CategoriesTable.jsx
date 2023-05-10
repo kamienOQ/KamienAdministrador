@@ -181,9 +181,6 @@ export const CategoriesTable = ({ attributes, data }) => {
           maxWidth: "1172px",
           my: "0",
           mx: "auto",
-          ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
-            outline: "none",
-          },
           ".MuiDataGrid-columnHeaders": {
             bgcolor: "info.main",
             color: "white",
