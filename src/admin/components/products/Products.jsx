@@ -76,7 +76,7 @@ export const Products = () => {
       headerName: "Acciones",
       type: "actions",
       width: 200,
-      sortable: false,
+      sortable: true,
       filterable: false,
       hideable: false,
       getActions: (params) => [

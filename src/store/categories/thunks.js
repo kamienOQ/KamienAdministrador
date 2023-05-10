@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore/lite";
+import { collection, doc, getDocs, limit, orderBy, query, setDoc, startAfter, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
 import { onChangeSavingNewCategory, onAddImage, onAddIcon, onAddSuccessMessage, onAddErrorMessage, 
@@ -154,11 +154,43 @@ export const onStartFilterCategories = (page = 0, size = 5, preValue) => {
       }
     }
 
+    if(field?.toLowerCase().includes('actions')){
+      if(value==='asc'){
+        if(preValue !== value){
+          q = query( collectionRef, where("active", "==", true), limit(size) );
+          const querySnapshot = await getDocs(q);
+          undersized = (querySnapshot.size <= size) ? true : false;
+          dispatch(onSetNumberCategories(querySnapshot.size));
+        } if (page === 0 || undersized) {
+          q = query( collectionRef, where("active", "==", true), limit(size) );
+        } else {
+          const lastVisibleDoc = query( collectionRef,  where("active", "==", true), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  where("active", "==", true), startAfter(lastVisible), limit(size) );
+        }
+      }if(value==='desc'){
+        if(preValue !== value){
+          q = query( collectionRef, where("active", "==", false), limit(size) );
+          const querySnapshot = await getDocs(q);
+          undersized = (querySnapshot.size <= size) ? true : false;
+          dispatch(onSetNumberCategories(querySnapshot.size));
+        } if (page === 0 || undersized) {
+          q = query( collectionRef, where("active", "==", false), limit(size) );
+        } else {
+          const lastVisibleDoc = query( collectionRef,  where("active", "==", false), limit(page * size) );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible = lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length-1];
+          q = query( collectionRef,  where("active", "==", false), startAfter(lastVisible), limit(size) );
+        }
+      }
+
+    }
+
     const querySnapshot = await getDocs(q);
     const newCategories = querySnapshot.docs.map((doc, index) => {
       return { id: index + 1 + page * size, ...doc.data() };
     });
-    console.log(page)
     dispatch(onSetCategories(newCategories));
   }
 }
@@ -210,7 +242,7 @@ export const onStartUpdateCategory = () => {
       if (querySnapshot.size === 1) {
         docRef = querySnapshot.docs[0].ref;
       }
-  
+
       await setDoc( docRef, categoryToFireStore, { merge: true } )
       dispatch( onUpdateCategory( activeCategory ) );
       dispatch(onAddSuccessMessage( 'Editado correctamente' ));

@@ -19,7 +19,7 @@ export const useProductsStore = () => {
         filter,
         filtering,
         isSaving,
-        isLoadingProduct,
+        isLoading,
         message,
         numberProducts,
     } = useSelector( state => state.products );
@@ -145,7 +145,7 @@ export const useProductsStore = () => {
         listAttributes,
         editing,
         filter,
-        isLoadingProduct,
+        isLoading,
         filtering,
         isSaving,
         message,

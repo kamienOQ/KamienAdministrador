@@ -1,4 +1,5 @@
 import { useUiStore } from '../../../hooks';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 export const FloatingTags = () => {
 
@@ -26,7 +27,7 @@ export const FloatingTags = () => {
         !!categoriesSelected && (<div className='tag-container' key={categoriesSelected}>
             <p>{categoriesSelected}</p>
             <button className='closeTag-button' onClick={onDeleteTag}>
-                X
+                <CancelOutlinedIcon sx={{ fontSize: 'medium' }} />
             </button>
         </div>)
     )

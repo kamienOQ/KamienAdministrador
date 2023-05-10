@@ -6,6 +6,7 @@ import {
   onStartFilterOrders,
   onStartGetOrders,
   onStartNumberOrders,
+  onStartUpdateOrderStatus,
 } from "../store/orders";
 
 export const useOrdersStore = () => {
@@ -41,6 +42,10 @@ export const useOrdersStore = () => {
     dispatch(onStartFilterOrders(page, size, preValue));
   };
 
+  const startUpdateOrderStatus = (status) => {
+    dispatch(onStartUpdateOrderStatus(status));
+  };
+
   return {
     //*Propiedades
     numberOrders,
@@ -56,5 +61,6 @@ export const useOrdersStore = () => {
     startGetOrders,
     startNumberOrders,
     startFilterOrders,
+    startUpdateOrderStatus,
   };
 };

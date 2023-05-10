@@ -14,7 +14,7 @@ export const CategoryView = () => {
             onClose={closeModalViewCategory}
             sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
         >
-            <DialogContent 
+            {/* <DialogContent 
                 className='view-category-container'
                 sx={{
                     display: 'flex', 
@@ -37,7 +37,24 @@ export const CategoryView = () => {
                         {activeCategory?.categoryName}
                     </Typography> 
                 </DialogContent>
-            </DialogContent>
+            </DialogContent> */}
+            <div className='container-categoriesCards'>
+                <figure className='container-figure-img'>
+                    <img src={activeCategory?.image?.url} alt="" className='categoriesCards-img'/>
+                </figure>
+                <div className='main-container-categoriesCards-icon'>
+                    <div className='info-container-categoriesCards'>
+                        <div className='container-categoriesCards-icon'>
+                            <div className='container-categoriesCards-content'>
+                                <figure className='container-figure-icon'>
+                                    <img src={activeCategory?.icon?.url} alt="" className='categoriesCards-icon' />
+                                </figure>
+                                <h2 className='categoriesCards-text'>{activeCategory?.categoryName}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Dialog>
     );
 }

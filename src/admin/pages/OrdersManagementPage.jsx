@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import { Orders, OrdersView } from "../components";
 import { useOrdersStore } from "../../hooks";
+import { OrdersEdit } from "../components/orders/OrderEdit";
 
 export const OrdersManagementPage = () => {
   const { filtering, startNumberOrders } = useOrdersStore();
@@ -42,6 +43,7 @@ export const OrdersManagementPage = () => {
         </Grid>
         <Orders />
         <OrdersView />
+        <OrdersEdit />
       </Grid>
     </Grid>
   );
