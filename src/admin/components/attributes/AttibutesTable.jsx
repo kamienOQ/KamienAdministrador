@@ -41,7 +41,6 @@ export const AttibutesTable = ({ attributes, data }) => {
     }
   }, [paginationModel]);
 
-
   useEffect(() => {
     setRowCountState(numberCategories !== undefined ? numberCategories : 0);
   }, [numberCategories, setRowCountState]);
@@ -119,7 +118,6 @@ export const AttibutesTable = ({ attributes, data }) => {
     changeFiltering(false);
     handleSort({ field: event[0]?.field, value: event[0]?.sort })
   };
-
 
   return (
     <Grid container

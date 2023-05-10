@@ -146,6 +146,15 @@ label {
     align-items: center;
 }
 
+.product-form{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 420px;
+  margin: .5rem 1rem .5rem 1rem !important;
+}
 
 .tags-container{
     display: grid;

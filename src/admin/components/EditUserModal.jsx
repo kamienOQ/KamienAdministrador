@@ -3,7 +3,8 @@ import {
     DialogContent,
     DialogTitle,
     TextField,
-    Button
+    Button,
+    Switch
    } from "@mui/material"
 import CheckIcon from '@mui/icons-material/Check';
 import { useState } from "react";
@@ -14,32 +15,38 @@ import { useEffect } from "react";
 const containsOnlyNumbers = (str) => {
     return /^\d+$/.test(str);
   }
-export const EditUserModal = ({open,setOpen,userParams}) => 
+export const EditUserModal = ({setUser,open,setOpen,userParams}) => 
 {
     const [username,setUsername] = useState("")
     const [numero,setNumero] = useState("")
     const [message,setMessage] = useState("")
     const [openSnackBar,setOpenSnackBar] = useState(false)
-
+    const [userState,setUserState] = useState(userParams.habilitado)
     const [error,setError] = useState(false)
     const [errorMsg,setErrorMessage] = useState("")
     const handleClose = () => {
         setOpen(false);
     };
+    const SwitchChange = () =>{
+        userParams.habilitado = !userParams.habilitado 
+        setUserState(userParams.habilitado)
+    }
     const handleEditUser = async() =>{
-        if( username !== "" && numero !== "" ){
-            if (!containsOnlyNumbers(numero) && numero.length >= 8){
+        if( username !== "" && numero !== ""){
+            if ((!containsOnlyNumbers(numero) && numero.length >= 8) && numero !== "No definido"){
                 setError(true)
                 setErrorMessage("El número ingresado es inválido")
             }else{
                 userParams.nombre = username
                 userParams.numero = numero
+                userParams.habilitado = userState
                 setMessage("Usuario Editado Correctamente")
                 setOpenSnackBar(true)
                 updateUser(userParams.id,userParams)
                 setOpen(false)
                 setError(false)
                 setErrorMessage("")
+                setUser(params)
             }
         }
     }
@@ -95,7 +102,7 @@ return (
             <TextField
                 type="text"
                 fullWidth
-                placeholder = "8888-8888"
+                placeholder = "88888888"
                 variant="outlined"
                 name="categoryName"
                 onChange= {(e) => handleNumber(e)}
@@ -105,6 +112,16 @@ return (
                     maxLength: 14,
                   }}
             />
+            <div style={{display:"flex",justifyContent:"space-between",width:"100%"}}>
+            <p>
+                Usuario Habilitado: 
+            </p>
+            <Switch
+                checked= {userState}
+                onChange={SwitchChange}
+            >          
+            </Switch>
+            </div>
             </form>
             <div className="action-buttons" style={{minWidth:"100%"}}>
             <Button

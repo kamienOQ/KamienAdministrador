@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Modal, TextField,Fab } from '@mui/material';
-import { blue,grey,red } from '@mui/material/colors';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export const AdminEditModal = ({openModal}) => {
