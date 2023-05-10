@@ -1,22 +1,8 @@
-import { collection, doc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
-// import { FirebaseDB } from "../../firebase/config";
+import { collection, doc, getDocs, query, setDoc } from "firebase/firestore";
 import { onAddLogo, onChangeSavingAbout, onSetData } from "./aboutSlice";
-import { initializeApp } from "firebase/app";
-import { FirebaseStorage } from "../../firebase/config";
+import { FirebaseStorage, FirebaseDB } from "../../firebase/config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBHz7C_ZqXuy7ruUOOdPgwcuxVWTa9wjBc",
-    authDomain: "respaldo-project-kamien.firebaseapp.com",
-    projectId: "respaldo-project-kamien",
-    storageBucket: "respaldo-project-kamien.appspot.com",
-    messagingSenderId: "86678841516",
-    appId: "1:86678841516:web:2fca0057eea81c6671d709"
-};
-
-const FirebaseApp = initializeApp(firebaseConfig);
-const FirebaseDB = getFirestore(FirebaseApp);
 
 export const onStartUploadFile = (file, collectionName) => {
     return async (dispatch) => {

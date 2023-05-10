@@ -7,7 +7,7 @@ import {
   setDoc,
   startAfter,
   where,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 import { FirebaseDB } from "../../firebase/config";
 import {
   onAddErrorMessage,
