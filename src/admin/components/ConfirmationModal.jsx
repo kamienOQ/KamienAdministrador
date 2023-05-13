@@ -3,7 +3,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { UserToast } from "./UserToast";
 import { useState } from "react";
-import { eliminateUser } from "../../firebase/providers";
+import { eliminateUser, updateUser } from "../../firebase/providers";
 export const ConfirmationModal = ({open,setOpen,msg,userParams,params,setUser}) => {
     const [openToast,setToast] = useState(false)
     const [mensaje,setMensaje] = useState("")

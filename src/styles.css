@@ -9,6 +9,7 @@
     --backgroud: #383838;
     --hover-info: #457ef0;
     --header: #256EFF;
+    --background-button: #777777;
     --roboto: 'Roboto', sans-serif;
 }
 * {
@@ -68,35 +69,35 @@ label {
 } */
 
 .MuiDataGrid-filterFormOperatorInput{
-  display: none !important;
+    display: none !important;
 }
 
 
 .addCategory-modal-button:hover{
-  background-color: var(--hover-success) !important;
+    background-color: var(--hover-success) !important;
 }
 
 .cancelCategory-button:hover{
-  background-color: var(--hover-error) !important;
+    background-color: var(--hover-error) !important;
   
 }
 
 .addProduct-button:hover{
-  background-color: var(--hover-success) !important;
+    background-color: var(--hover-success) !important;
 }
 
 .addProduct-modal-button:hover{
-  background-color: var(--hover-success) !important;
+    background-color: var(--hover-success) !important;
 }
 
 .cancelProduct-button:hover{
-  background-color: var(--hover-error) !important;
+    background-color: var(--hover-error) !important;
   
 }
 
 .closeTag-button:hover{
-  background-color: var(--hover-main);
-  cursor: pointer;
+    background-color: var(--hover-main);
+    cursor: pointer;
 }
 /* 
 .box-border{
@@ -105,17 +106,44 @@ label {
 } */
 
 .box-border{
-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .category-form{
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-  width: 420px;
-  margin: .5rem 1rem .5rem 1rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: .5rem 1rem .5rem 1rem !important;
+}
+
+.product-form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    width: 420px;
+    margin: .5rem 1rem .5rem 1rem !important;
+}
+
+.MuiDialog-paper{
+    max-width: 700px !important;
+}
+
+.MuiDialogContent-root{
+    width: 700px;
+}
+
+.floatingTags-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-form{
@@ -127,7 +155,6 @@ border-radius: 5px;
   width: 500px;
   margin: .5rem 1rem .5rem 1rem !important;
 }
-
 
 .tags-container{
     display: grid;
@@ -148,6 +175,10 @@ border-radius: 5px;
     font-size: 14px;
     padding: 5px 10px 5px 10px;
     gap: 5px;
+}
+
+.addCategory-button{
+    background-color: var(--background-button) !important;
 }
 
 .closeTag-button{
@@ -358,7 +389,7 @@ border-radius: 5px;
         width: 240px;
     }
     .category-form{
-        width: 270px;
+        /* width: 270px; */
         margin: 1rem 2rem 1rem 2rem;
     }
     .files-name-container{
@@ -377,7 +408,7 @@ border-radius: 5px;
         margin-left: 20px;
     }
     .category-form{
-        width: 230px;
+        /* width: 230px; */
         margin: 1rem .4rem 1rem .4rem !important;
     }
     .secundary-categories-container div{
@@ -460,7 +491,7 @@ background-color: var(--header);
 }
 
 .remove-filter-product{
-  margin-left: 25px !important;
+  margin-left: 48px !important;
 }
 
 @media (max-width: 1250px) {
@@ -475,7 +506,7 @@ background-color: var(--header);
       margin-left: -10px !important;
   }
   .remove-filter-product{
-    margin-left: 10px !important;
+    margin-left: 33px !important;
   }
 }
 
@@ -536,7 +567,7 @@ background-color: var(--header);
       width: 240px;
   }
   .category-form{
-      width: 270px;
+      /* width: 270px; */
       margin: 1rem 2rem 1rem 2rem;
   }
   .product-form{
@@ -559,7 +590,7 @@ background-color: var(--header);
       margin-left: 20px;
   }
   .category-form{
-      width: 230px;
+      /* width: 230px; */
       margin: 1rem .4rem 1rem .4rem !important;
   }
   .secundary-categories-container div{
@@ -616,4 +647,149 @@ background-color: var(--header);
       height: 30%;
   }
 
+  .MuiDialog-paper{
+    margin: 0px;
+    }
+
+    .MuiDialogContent-root{
+        width: 280px !important;
+    } 
+
 }
+
+
+* *CategoriesCards Styles */
+.container-categoriesCards{
+    margin: 0;
+    position: relative;
+    height: 375px;
+    overflow: hidden;
+}
+
+.container-figure-img{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 375px;
+    overflow: hidden;
+}
+
+.categoriesCards-img{
+    max-width: 100%;
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    box-shadow: none;
+    border-top: none;
+}
+
+.main-container-categoriesCards-icon{
+    transition: transform 0.3s ease;
+    background: rgba(0,0,0,.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.main-container-categoriesCards-icon:hover {
+    background: rgba(63, 63, 62, 0.3);
+
+}
+
+.info-container-categoriesCards{
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.info-container-categoriesCards:hover {
+    transform: translateY(-5px);
+}
+
+.container-categoriesCards-icon{
+    display: table;
+}
+
+.container-categoriesCards-content{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 50px;
+    text-align: center;
+}
+
+.container-figure-icon{
+    margin: 0;
+}
+
+.categoriesCards-icon{
+    transition: transform 0.3s ease;
+    height: 94px;
+    width: auto;
+    max-width: 100%;
+}
+
+.categoriesCards-text{
+    transition: transform 0.3s ease;
+    color: var(--white);
+    background: none!important;
+    display: inline-block;
+    padding: 0;
+    margin: 0 0 5px;
+    white-space: nowrap;
+    position: relative;
+    font-size: 22px;
+    line-height: 1.25;
+    font-weight: 700;
+    display: inline-block;
+    width: 100%;
+}
+
+.about-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 90px 20px 20px 90px;
+}
+
+.about-container-left{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.logo-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 780px){
+    .product-form{
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: 0.5rem 0 !important;
+    }
+
+    .MuiDialog-paper{
+        max-width: 600px !important;
+    }
+    
+    .MuiDialogContent-root{
+        width: 400px;
+    }
+}
+
+

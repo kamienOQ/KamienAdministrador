@@ -6,9 +6,11 @@ import { useOrdersUi } from "../../../hooks";
 import { Box } from "@mui/system";
 
 export const OrderActions = ({ row }) => {
-  const { onViewOrder } = useOrdersUi();
+  const { onViewOrder, onEditOrder } = useOrdersUi();
 
   const viewOrder = useCallback((row) => onViewOrder(row), []);
+
+  const editOrder = useCallback((row) => onEditOrder(row), []);
 
   return (
     <>
@@ -36,6 +38,7 @@ export const OrderActions = ({ row }) => {
         </Fab>
         <Fab
           color="primary"
+          onClick={() => editOrder(row)}
           sx={{
             width: 40,
             height: 40,

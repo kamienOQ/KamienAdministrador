@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,16 +24,6 @@ const firebaseConfig = {
   messagingSenderId: "86678841516",
   appId: "1:86678841516:web:2fca0057eea81c6671d709"
 };
-
-// Produccion Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDQmUwAf5t9_lYYJZD9IEPuRYzkhFzlbB8",
-//   authDomain: "project-kamien-main.firebaseapp.com",
-//   projectId: "project-kamien-main",
-//   storageBucket: "project-kamien-main.appspot.com",
-//   messagingSenderId: "89353296900",
-//   appId: "1:89353296900:web:f9e82eb4c59d960961e951"
-// };
 
 // Produccion Firebase configuration
 // const firebaseConfig = {

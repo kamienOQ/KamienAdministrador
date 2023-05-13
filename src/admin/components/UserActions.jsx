@@ -65,7 +65,7 @@ export const UserActions = ({rowParams,params,setUser}) => {
         params = {params} 
         setUser = {setUser}
         />
-        <EditUserModal open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}  />
+        <EditUserModal users = {params}setUser = {setUser} open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}  />
     </>
   )
 }

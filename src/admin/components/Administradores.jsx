@@ -9,15 +9,11 @@ export const Administradores = () =>{
     const [usuarios,setUser] = useState([])
     const [pageSize, setPageSize] = useState(20);
     const [rowId, setRowId] = useState(null);
-    const getFilteredData = (data) => {
-        return data.filter((obj) => obj.habilitado === true);
-      };
+
     useEffect(() => {
         const fetchData = async () => {
             const usuariosTotales = await getAllUsers()
-            const filtered = getFilteredData(usuariosTotales);
-            setUser(filtered); 
-            console.log('Pasó')
+            setUser(usuariosTotales); 
           };
         fetchData();
     },[])    
@@ -32,16 +28,14 @@ export const Administradores = () =>{
                 { 
                     field: 'correo', 
                     headerName: 'Correo',
-                    width: 200, 
-                    editable: true 
+                    width: 200
                 },
                 {
                   field: 'createdAt',
                   headerName: 'Fecha de Creación',
-                  width: 200,
-                  renderCell: () =>
-                    moment('2023-03-14 12:30:00').format('YYYY-MM-DD HH:MM:SS'),
-                    editable : true
+                  width: 150,
+                  renderCell: (params) =>
+                    moment(params.row.createdAt).format('YYYY-MM-DD HH:MM:SS')
                 },
                 { 
                     field: 'id', 
@@ -51,7 +45,17 @@ export const Administradores = () =>{
                 { 
                     field: 'numero', 
                     headerName: 'Número de teléfono',
-                    width: 150 
+                    width: 100 
+                },
+                {
+                    field: 'habilitado',
+                    headerName: 'Estado',
+                    width: 100,
+                    renderCell: (params) =>(
+                        <div style = {params.row.habilitado ? {color:"green"} :{ color:"red"}}>
+                            { params.row.habilitado ? "Activo": "Deshabilitado"}
+                        </div>
+                    )
                 },
                 {
                   field: 'actions',
@@ -62,6 +66,7 @@ export const Administradores = () =>{
                      <UserActions rowParams = {params.row} params = {params} setUser = {setUser}/> 
                   ),
                 },
+                
               ],
               [rowId]
             );
@@ -114,6 +119,7 @@ export const Administradores = () =>{
                     ".MuiTablePagination-toolbar": {color: "white"},
                     ".MuiTablePagination-toolbar svg": {color: "white"},
                     }}
+
                 />
             </Box>
         </>

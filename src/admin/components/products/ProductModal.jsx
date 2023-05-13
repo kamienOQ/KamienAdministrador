@@ -130,70 +130,77 @@ export const ProductModal = () => {
              sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
             '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
           />
-          <TextField
-            fullWidth
-            id="outlined-select-currency"
-            select
-            label="Atributos del Producto" variant="filled" focused
-            defaultValue=""
-            onChange={onSelectAttribute}
-            helperText={emptyName ? 'Campo vacío' : ''}
-            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
-            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
-          >
-            {/* importar y recorrer attributesUploaded obteniendo el nombre */}
-            {attributes.map((option) => (
-              option.map((option1) => (
-                <MenuItem key={option1} value={option1}>
-                  {option1}
-                </MenuItem>
-              ))
-            ))}
-          </TextField>
-          {selected && <FloatingTagsAttributes />}
-          <TextField
-            fullWidth
-            id="outlined-select-currency"
-            select
-            label="Características de los atributos del Producto" variant="filled" focused
-            defaultValue=""
-            onChange={onSelectListAttribute}
-            helperText={emptyName ? 'Campo vacío' : ''}
-            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
-            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
-          >
-            {/* importar y recorrer attributesUploaded obteniendo el nombre */}
-            {listAttributes.map((option) => (
-              option.feature.map((option1) => (
-                (option1 !== null) && (
+          <div className="floatingTags-container">
+            <TextField
+              fullWidth
+              id="outlined-select-currency"
+              select
+              label="Atributos del Producto" variant="filled" focused
+              defaultValue=""
+              onChange={onSelectAttribute}
+              helperText={emptyName ? 'Campo vacío' : ''}
+              sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+              '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
+            >
+              {/* importar y recorrer attributesUploaded obteniendo el nombre */}
+              {attributes.map((option) => (
+                option.map((option1) => (
                   <MenuItem key={option1} value={option1}>
                     {option1}
                   </MenuItem>
-                )))
+                ))
               ))}
-          </TextField>
-          <FloatingTagsListAttributes />
-          <TextField
-            fullWidth
-            id="outlined-select-currency"
-            select
-            label="Categoría del producto" variant="filled" focused
-            defaultValue=""
-            onChange={onSelectCategory}
-            helperText="Por favor seleccione la categoría del producto"
-            sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
-            '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
-          >
-            {/* importar y recorrer categoriesUploaded obteniendo el nombre */}
-            {categories.map((option) => (
-              option.map((option1) => (
-                <MenuItem key={option1} value={option1}>
-                  {option1}
-                </MenuItem>
-              ))
-            ))}
-          </TextField>
-          <FloatingTags />
+            </TextField>
+            <FloatingTagsAttributes />
+          </div>
+          <div className="floatingTags-container">
+            <TextField
+              fullWidth
+              id="outlined-select-currency"
+              select
+              label="Características de los atributos del Producto" variant="filled" focused
+              defaultValue=""
+              onChange={onSelectListAttribute}
+              helperText={emptyName ? 'Campo vacío' : ''}
+              sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+              '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
+            >
+              {/* importar y recorrer attributesUploaded obteniendo el nombre */}
+              {listAttributes.map((option) => (
+                option.feature.map((option1) => (
+                  (option1 !== null) && (
+                    <MenuItem key={option1} value={option1}>
+                      {option1}
+                    </MenuItem>
+                  )))
+                ))}
+            </TextField>
+            <FloatingTagsListAttributes />
+          </div>
+          <div className="floatingTags-container">
+            <TextField
+              fullWidth
+              id="outlined-select-currency"
+              select
+              label="Categoría del producto" variant="filled" focused
+              defaultValue=""
+              onChange={onSelectCategory}
+              helperText="Por favor seleccione la categoría del producto"
+              sx={{ color: 'quaternary.main', '& label.Mui-focused': {color: 'quaternary.main'}, 
+              '& .MuiFilledInput-underline:after': {borderBottomColor: 'quaternary.main'} }}
+            >
+              {/* importar y recorrer categoriesUploaded obteniendo el nombre */}
+              {categories.map((option) => (
+                option.map((option1) => (
+                  <MenuItem key={option1} value={option1}>
+                    {option1}
+                  </MenuItem>
+                ))
+              ))}
+            </TextField>
+            <FloatingTags />
+          </div>
+          
           <div className="products-modal-buttons">
             <div className="upload-files-container">
               <div className="files-name-container">

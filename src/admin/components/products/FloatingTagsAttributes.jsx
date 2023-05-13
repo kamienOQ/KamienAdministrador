@@ -4,7 +4,6 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 export const FloatingTagsAttributes = () => {
 
     const { attributesSelected, deleteAttributesSelected } = useUiStore();
-
     const onDeleteTag = ( event, attribute ) => {
         event.preventDefault();
         deleteAttributesSelected( attribute )
@@ -23,6 +22,7 @@ export const FloatingTagsAttributes = () => {
     });
 
     return (
+        !!attributesSelected && 
         <div className='tags-container'>{attributes}</div>
     )
 }
