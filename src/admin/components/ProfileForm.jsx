@@ -56,10 +56,10 @@ export const ProfileForm = () => {
     }
   return (
     <Box
+    className="profile-container"
     style = {{
         backgroundColor: "white",
         color:"black",
-        marginLeft: "5%",
         borderRadius: "12px",
         border: "2px solid gray",
         minWidth: "90%",

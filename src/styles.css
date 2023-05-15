@@ -319,11 +319,16 @@ label {
     justify-content: center;
 }
 
+.profile-container {
+    margin-top: 15px;
+    margin-left: 5%;
+}
+
 @media (max-width: 1250px) {
     .container-buttons-filter{
         width: 1130px !important;
     }
-    .container-table{
+    .container-table {
         margin-left: 65px !important;
         margin-right: 35px !important;
     }
@@ -342,7 +347,11 @@ label {
     }
     .remove-filter-product{
         margin-left: 10px !important;
-      }
+    }
+    .profile-container {
+        margin-top: 40px;
+        margin-left: 50px;
+    }
 }
 
 @media (max-width: 710px) {
@@ -355,22 +364,9 @@ label {
     }
 }
 
-@media (max-width: 600px) {
-    .container-table{
-        margin-left: 40px !important;
-        margin-right: 10px !important;
-    }
-}
-
-@media (max-width: 400px) {
-    .container-table{
-        margin-left: 50px !important;
-    }
-}
-
 @media (max-width: 680px) {
     .categories-container h4{
-        font-size: 24px;
+        font-size: 20px;
     }
     .categories-container button{
         font-size: 12px;
@@ -399,6 +395,26 @@ label {
     } 
     .action-buttons{
         width: 270px;
+    }
+    .profile-container {
+        margin-top: 70px;
+        margin-left: 45px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container-table {
+        margin-left: 40px !important;
+        margin-right: 10px !important;
+    }
+    .profile-container {
+        margin: 70px 40px 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .container-table {
+        margin-left: 50px !important;
     }
 }
 
@@ -451,7 +467,7 @@ label {
 
 }
 
-.container-table{
+.container-table {
   flex-direction: column !important;
 }
 
@@ -533,8 +549,9 @@ background-color: var(--header);
 }
 
 @media (max-width: 680px) {
-  .categories-container h4{
-      font-size: 24px;
+  .categories-container h4,
+  .products-container h4{
+      font-size: 22px;
   }
   .categories-container button{
       font-size: 12px;
@@ -542,7 +559,7 @@ background-color: var(--header);
   .product-container h4{
     font-size: 24px;
   }
-  .product-container button{
+  .products-container button{
       font-size: 12px;
   }
   .secundary-categories-container{

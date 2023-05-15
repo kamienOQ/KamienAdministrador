@@ -39,7 +39,7 @@ export const Products = () => {
     {
       field: "price",
       headerName: "Precio",
-      width: 100,
+      width: 200,
       filterable: true,
       sortable: false,
       hideable: false,

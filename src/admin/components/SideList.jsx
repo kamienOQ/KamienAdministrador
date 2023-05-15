@@ -79,7 +79,10 @@ export const SideList = ({ open, setOpen }) => {
         <SideBarList/>
         <Divider sx={{ bgcolor: "dark.main" }}/>
         <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-
+          <Avatar               
+            src='/src/images/Empty_pp.jpg'
+            {...(open && { sx: { width: 100, height: 100 } })}
+          />
         </Box>
         <Box sx={{ textAlign: 'center' }}>
           {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
