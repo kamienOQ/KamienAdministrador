@@ -152,7 +152,7 @@ label {
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  width: 420px;
+  width: 500px;
   margin: .5rem 1rem .5rem 1rem !important;
 } */
 
@@ -183,10 +183,11 @@ label {
 
 .closeTag-button{
     background-color: var(--main-color);
-    color: var(--white);
+    color: var(--backgroud);
     border: none;
     font-size: 16px;
     border-radius: 50px;
+    align-items: center;
 }
 
 .categories-modal-buttons{

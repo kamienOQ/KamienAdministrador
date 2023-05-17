@@ -78,34 +78,6 @@ export const SideBarList = () => {
 
        
 
-        <Link component={RouterLink} to = "/Atributos" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Añadir Atributo" sx={{ bgcolor: "dark.main" }}> 
-                    <StarRateIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Añadir Atributo"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-        </ListItem>
-        </Link>
-
 
         <Link component={RouterLink} to = "/Administradores" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>

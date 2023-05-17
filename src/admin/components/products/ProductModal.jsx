@@ -14,7 +14,7 @@ import { FloatingTagsListAttributes } from "./FloatingTagsListAttributes";
 export const ProductModal = () => { 
 
   const { closeProductModal, isProductModalOpen, categoriesSelected, attributesSelected, 
-    listAttributesSelected  } = useUiStore();
+    listAttributesSelected  } = useUiStore();   
   
   const { products, categories, attributes, listAttributes, activeProduct, editing, message, setActiveProduct, 
     addErrorMessage, addSuccessMessage, startUploadNewProduct, startNumberProducts, changeEditing, 

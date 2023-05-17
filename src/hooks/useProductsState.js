@@ -57,6 +57,7 @@ export const useProductsState = () => {
           }
           //const listForSecondAttribute
           //listAttributes.attributeSelected === target.value
+          return target.listForAttributes;
         })
         
       }

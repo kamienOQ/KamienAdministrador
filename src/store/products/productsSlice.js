@@ -4,7 +4,7 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState: {
         isSaving: false,
-        message: {
+        message: {      
             error: '',
             success: ''
         },
