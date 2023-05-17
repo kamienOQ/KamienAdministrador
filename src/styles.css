@@ -146,7 +146,7 @@ label {
     align-items: center;
 }
 
-.product-form{
+/* .product-form{
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -154,7 +154,7 @@ label {
   align-items: center;
   width: 420px;
   margin: .5rem 1rem .5rem 1rem !important;
-}
+} */
 
 .tags-container{
     display: grid;
@@ -663,10 +663,6 @@ background-color: var(--header);
       height: 30%;
   }
 
-  .MuiDialog-paper{
-    margin: 0px;
-    }
-
     .MuiDialogContent-root{
         width: 280px !important;
     } 
@@ -805,6 +801,10 @@ background-color: var(--header);
     
     .MuiDialogContent-root{
         width: 400px;
+    }
+
+    .MuiDialog-paper{
+        margin: 0px !important;
     }
 }
 
