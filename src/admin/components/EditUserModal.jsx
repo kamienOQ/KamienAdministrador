@@ -12,14 +12,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import { UserToast } from "./UserToast";
 import { updateUser } from "../../firebase/providers";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { onChangeEditSuccess } from "../../store/users/usersSlice";
 const containsOnlyNumbers = (str) => {
     return /^\d+$/.test(str);
   }
 export const EditUserModal = ({setUser,open,setOpen,userParams}) => 
 {
+    const dispatch = useDispatch();
+
     const [username,setUsername] = useState("")
     const [numero,setNumero] = useState("")
-    const [message,setMessage] = useState("")
+    // const [message,setMessage] = useState("")
     const [openSnackBar,setOpenSnackBar] = useState(false)
     const [userState,setUserState] = useState(userParams.habilitado)
     const [error,setError] = useState(false)
@@ -40,13 +44,14 @@ export const EditUserModal = ({setUser,open,setOpen,userParams}) =>
                 userParams.nombre = username
                 userParams.numero = numero
                 userParams.habilitado = userState
-                setMessage("Usuario Editado Correctamente")
+                // setMessage("Usuario Editado Correctamente")
                 setOpenSnackBar(true)
                 updateUser(userParams.id,userParams)
                 setOpen(false)
                 setError(false)
                 setErrorMessage("")
-                setUser(params)
+                // setUser(params)
+                dispatch(onChangeEditSuccess(true));
             }
         }
     }
@@ -145,7 +150,7 @@ return (
             </div>
         </DialogContent> 
     </Dialog>
-    <UserToast openSnackBar = {openSnackBar} setOpenSnackBar = {setOpenSnackBar} message = {message}/>
+    {/* <UserToast openSnackBar = {openSnackBar} setOpenSnackBar = {setOpenSnackBar} message = {message}/> */}
 </>
 )
 }

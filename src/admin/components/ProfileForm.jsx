@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { Box } from "@mui/system"
-import { FormControl,TextField,FormLabel,Button,IconButton  } from "@mui/material"
+import { FormControl,TextField,FormLabel,Button,IconButton, Snackbar, Alert  } from "@mui/material"
 import UpdateIcon from '@mui/icons-material/Update';
 import { updateLoggedUser,updateUserEmail,updateUserPassword,getUserInfo } from "../../firebase/providers";
 export const ProfileForm = () => {
@@ -17,6 +17,9 @@ export const ProfileForm = () => {
 
     const [openToast,setOpenToast] = useState(false)
     const [toastMsg, setToastMsg] = useState("")
+
+    const [editSuccess, setEditSuccess] = useState(false);
+
     useEffect(() => {
         const fetchCurrentUser = async() =>{
             setUserInfo(await getUserInfo())  
@@ -27,6 +30,7 @@ export const ProfileForm = () => {
         setShowPassword(!showPassword)
     }
     const handleUpdateUser = async() =>{
+        let tempError = false;
         const updatedUser = {}
         if (number !== ""){
             updatedUser.numero = number
@@ -45,6 +49,7 @@ export const ProfileForm = () => {
             else{
                 setErrorMessage("La contraseña debe tener más de 6 caracteres.")
                 setError(true)
+                tempError = true;
             }
             
         }
@@ -53,7 +58,15 @@ export const ProfileForm = () => {
         setUserInfo(await getUserInfo())
         setToastMsg("Datos Actualizados Correctamente.")
         setOpenToast(true)
+        if(!tempError && (number !== "" || name !== "" || email !== "" || password !== "")){
+            setEditSuccess(true);
+        }
     }
+
+    const handleCloseEditMessage = () => {
+        setEditSuccess(false);
+      };
+
   return (
     <Box
     className="profile-container"
@@ -65,6 +78,15 @@ export const ProfileForm = () => {
         minWidth: "90%",
         height: "vh"
     }}>
+    <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleCloseEditMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+        anchorOrigin={{
+        vertical: "top", 
+        horizontal: "right"
+    }}>
+        <Alert onClose={handleCloseEditMessage} severity="success" sx={{ width: '100%'}}>
+            Se editó correctamente
+        </Alert>
+    </Snackbar>
     <div style={{display:"flex",justifyContent:"space-between"}}>
         <h2 style={{margin:"4%",color:"grey",width:"96%",fontWeight:900}}>
             Información general

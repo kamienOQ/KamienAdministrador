@@ -14,6 +14,7 @@ export const ordersSlice = createSlice({
     filtering: false,
     filter: {},
     pageSize: 5,
+    editSuccess: false,
   },
   reducers: {
     onSetOrders: (state, action) => {
@@ -73,6 +74,9 @@ export const ordersSlice = createSlice({
     onChangePageSize: (state, action) => {
       state.pageSize = action.payload;
     },
+    onChangeEditSuccess: (state, action) => {
+      state.editSuccess = action.payload;
+    },
   },
 });
 
@@ -91,4 +95,5 @@ export const {
   onChangeFiltering,
   onChangeFilter,
   onChangePageSize,
+  onChangeEditSuccess,
 } = ordersSlice.actions;

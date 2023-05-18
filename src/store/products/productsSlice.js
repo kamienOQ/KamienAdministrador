@@ -23,7 +23,9 @@ export const productsSlice = createSlice({
         },
         page: 0,
         pageSize: 5,
-        activeProduct: null, 
+        activeProduct: null,
+        createSuccess: false,
+        editSuccess: false, 
     },
     reducers: {
         onChangeSavingNewProduct: ( state, { payload } ) => {
@@ -190,6 +192,12 @@ export const productsSlice = createSlice({
         onCleanProductsUploaded: ( state ) => {
             state.productsUploaded = [];
         },
+        onChangeCreateSuccess: (state, action) => {
+            state.createSuccess = action.payload;
+        },
+        onChangeEditSuccess: (state, action) => {
+            state.editSuccess = action.payload;
+        },
     }
 });
 
@@ -232,5 +240,7 @@ export const {
     onChangeFilterings,
     onChangePageAndSize,
     onChangePreProductName,
-    onChangePreProductUpdated
+    onChangePreProductUpdated,
+    onChangeCreateSuccess,
+    onChangeEditSuccess,
 } = productsSlice.actions;

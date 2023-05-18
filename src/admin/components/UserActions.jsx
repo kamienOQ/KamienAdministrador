@@ -22,7 +22,7 @@ export const UserActions = ({rowParams,params,setUser}) => {
             m: 1,
             position: 'relative',
             display: 'flex',
-            justifyContent : 'space-between',
+            justifyContent : 'center',
             minWidth: '100%'
         }}
         >
@@ -42,7 +42,7 @@ export const UserActions = ({rowParams,params,setUser}) => {
             <EditIcon />
         </Fab>
 
-        <Fab
+        {/* <Fab
           color="primary"
           sx={{
             width: 40,
@@ -54,17 +54,17 @@ export const UserActions = ({rowParams,params,setUser}) => {
           onClick = {handleConfirmationModalOpen}
         >
             <CancelIcon />
-        </Fab>
+        </Fab> */}
           
         </Box>
-        <ConfirmationModal 
+        {/* <ConfirmationModal 
         open = {openConfirmationModal } 
         setOpen = {setConfirmationModal}
         msg = {"¿Seguro que quieres eliminar el usuario?"}
         userParams = {rowParams} 
         params = {params} 
         setUser = {setUser}
-        />
+        /> */}
         <EditUserModal users = {params}setUser = {setUser} open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}  />
     </>
   )

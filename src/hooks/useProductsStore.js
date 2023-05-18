@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
     onSetActiveProduct,  onChangeEditing, onSetNumberProducts, onChangePreProductName, onChangePreProductUpdated, onChangeActive, onChangePageAndSize, 
-    onChangeFilterings, onChangeFilters} from "../store/products/productsSlice";
+    onChangeFilterings, onChangeFilters, onChangeEditSuccess, onChangeCreateSuccess} from "../store/products/productsSlice";
 
 import { onStartGetCategoriesForm, onStartGetAttributesForm, onStartGetListAttributesForm, onStartUpdateProduct, 
     onStartChangeActiveProduct, onStartFilterProducts, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onStartNumberProducts,} from "../store/products/thunks"
@@ -22,6 +22,8 @@ export const useProductsStore = () => {
         isLoading,
         message,
         numberProducts,
+        createSuccess,
+        editSuccess,
     } = useSelector( state => state.products );
 
     //*Slice
@@ -88,6 +90,14 @@ export const useProductsStore = () => {
     const cleanProducts = () => {
         dispatch( onCleanProducts() );
     }
+
+    const changeCreateSuccess = (value) => {
+        dispatch(onChangeCreateSuccess(value));
+    };
+
+    const changeEditSuccess = (value) => {
+    dispatch(onChangeEditSuccess(value));
+    };
     
 
     //*Thunks
@@ -150,6 +160,8 @@ export const useProductsStore = () => {
         isSaving,
         message,
         numberProducts,
+        createSuccess,
+        editSuccess,
 
         //*Métodos
         addErrorMessage,
@@ -178,5 +190,7 @@ export const useProductsStore = () => {
         startUpdateProduct,
         startUploadFile,
         startUploadNewProduct,
+        changeCreateSuccess,
+        changeEditSuccess,
     }
 }

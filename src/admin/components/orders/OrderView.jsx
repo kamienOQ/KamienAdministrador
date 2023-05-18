@@ -1,29 +1,21 @@
-import { Grid, IconButton, Modal, Typography } from "@mui/material";
+import { Dialog, DialogContent, Grid, IconButton, Modal, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useOrdersUi } from "../../../hooks";
+import { OrderProducts } from "./OrderProducts";
 
 export const OrdersView = () => {
   const { openViewModal, activeOrder, closeViewModal } = useOrdersUi();
-
   return (
-    <Modal
+    <Dialog
       open={openViewModal}
       onClose={closeViewModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
     >
-      <Grid
-        container
+      <DialogContent
         sx={{
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
           width: 400,
-          bgcolor: "white",
-          color: "dark.main",
-          p: 4,
-          borderRadius: "10px",
-          position: "relative",
         }}
       >
         <IconButton
@@ -133,8 +125,36 @@ export const OrdersView = () => {
             </Typography>
             <Typography>{activeOrder?.status}</Typography>
           </Grid>
+          {activeOrder?.products && 
+          <>
+            <Grid
+            item
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+              mt: 1.5,
+              mb: .5
+            }}
+            >
+              <Typography variant="subtitle1" sx={{
+                textAlign: "center",
+                width: "100%",
+                fontSize: "24px",
+                bgcolor: "dark.main",
+                color: "white",
+                borderRadius: "10px",
+              }}>
+                Productos:
+              </Typography>
+            </Grid>
+            {activeOrder?.products.map((product, index) => (
+              <OrderProducts product={product} index={index} key={index}/>
+            ))}
+          </>
+        }
         </Grid>
-      </Grid>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };

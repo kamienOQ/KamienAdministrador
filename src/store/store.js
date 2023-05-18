@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { attibutesSlice, uiAttSlice, categoriesSlice, uiSlice, productsSlice, aboutSlice } from './'
 import { authSlice } from "./auth";
 import { ordersSlice } from "./orders";
+import { usersSlice } from './users/usersSlice';
 
 export const store = configureStore({
     reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
         auth: authSlice.reducer,
         orders: ordersSlice.reducer,
         about: aboutSlice.reducer,
+        users: usersSlice.reducer,
     }
 });

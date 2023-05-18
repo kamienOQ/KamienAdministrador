@@ -7,6 +7,7 @@ import {
   ListItemText,
   Tooltip,
 } from '@mui/material';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import CategoryIcon from '@mui/icons-material/Category';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -18,6 +19,34 @@ import { Link as RouterLink } from "react-router-dom";
 export const SideBarList = () => {
   return (
     <List sx={{ bgcolor: "dark.main" }}>
+
+      <Link component={RouterLink} to = "/" sx={{textDecoration: "none", color: "white"}}>
+        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Tooltip title = "Gestión de Pedidos" sx={{ bgcolor: "dark.main" }}> 
+                    <ShoppingBasketIcon sx={{ color: "white" }}/>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Añadir Administrador"}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+        </ListItem>
+      </Link>
 
       <Link component={RouterLink} to = "/Producto" sx={{textDecoration: "none", color: "white"}}>
         <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>

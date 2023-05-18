@@ -18,7 +18,7 @@ export const ProductModal = () => {
   
   const { products, categories, attributes, listAttributes, activeProduct, editing, message, setActiveProduct, 
     addErrorMessage, addSuccessMessage, startUploadNewProduct, startNumberProducts, changeEditing, 
-    changePreProductUpdated, startUpdateProduct, isSaving } = useProductsStore();
+    changePreProductUpdated, startUpdateProduct, isSaving, changeCreateSuccess, changeEditSuccess } = useProductsStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategory, 
     onSelectAttribute, onSelectListAttribute, selected } = useProductsState();
 
@@ -86,8 +86,10 @@ export const ProductModal = () => {
         startUploadNewProduct();
         startNumberProducts();
         changePreProductUpdated(false);
+        changeCreateSuccess(true);
       }if(editing){
         startUpdateProduct();
+        changeEditSuccess(true);
       }
     }
   }
