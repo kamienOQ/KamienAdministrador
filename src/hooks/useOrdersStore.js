@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  onChangeEditSuccess,
   onChangeFilter,
   onChangeFiltering,
   onChangePageSize,
@@ -11,7 +12,7 @@ import {
 
 export const useOrdersStore = () => {
   const dispatch = useDispatch();
-  const { numberOrders, isLoading, orders, filter, filtering } = useSelector(
+  const { numberOrders, isLoading, orders, filter, filtering, editSuccess} = useSelector(
     (state) => state.orders
   );
 
@@ -27,6 +28,10 @@ export const useOrdersStore = () => {
 
   const changePageSize = (pageSize) => {
     dispatch(onChangePageSize(pageSize));
+  };
+
+  const changeEditSuccess = (value) => {
+    dispatch(onChangeEditSuccess(value));
   };
 
   //*Thunks
@@ -53,11 +58,13 @@ export const useOrdersStore = () => {
     orders,
     filter,
     filtering,
+    editSuccess,
 
     //*Métodos
     changeFilter,
     changeFiltering,
     changePageSize,
+    changeEditSuccess,
     startGetOrders,
     startNumberOrders,
     startFilterOrders,

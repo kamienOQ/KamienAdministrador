@@ -39,7 +39,8 @@ export const AttributeModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
   const { attributes, activeAttribute, message, editing, setActiveCategory, addErrorMessage, addSuccessMessage,
-    startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory,categories} = useAttributesStore();
+    startUploadNewCategory, startNumberCategories, changeEditing, changePreCategoryUpdated, startUpdateCategory,categories, 
+    changeCreateSuccess, changeEditSuccess } = useAttributesStore();
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategories, onSelectAttributes } = useAttributesState();
 
   const { attributeName, categoriesRelated, attributesList, onInputChange, formState } = useAttributesForm(activeAttribute);
@@ -76,8 +77,10 @@ export const AttributeModal = () => {
         startUploadNewCategory();
         startNumberCategories();
         changePreCategoryUpdated(false);
+        changeCreateSuccess(true);
       }if(editing){
         startUpdateCategory();
+        changeEditSuccess(true);
       }
     }
   }

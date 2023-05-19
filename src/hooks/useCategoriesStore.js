@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanCategories, 
-    onSetActiveCategory,  onChangeFiltering, onSetNumberCategories,  onChangePreCategoryName, onChangePreCategoryUpdated,  onChangeActive, onChangePageAndSize } from "../store/categories/categoriesSlice";
+    onSetActiveCategory,  onChangeFiltering, onSetNumberCategories,  onChangePreCategoryName, onChangePreCategoryUpdated,  onChangeActive, 
+    onChangePageAndSize, onChangeCreateSuccess, onChangeEditSuccess } from "../store/categories/categoriesSlice";
 import { onStartFilterCategories, onStartGetCategories, onStartUploadFile, onStartUploadNewCategory, onStartNumberCategories, onStartUpdateCategory, 
     onStartChangeActiveCategory } from "../store/categories/thunks"
 
@@ -17,6 +18,10 @@ export const useCategoriesStore = () => {
         isLoading,
         message,
         numberCategories,
+        createSuccess,
+        editSuccess,
+        activeSuccess,
+        inactiveSuccess,
     } = useSelector( state => state.categories );
     
     //*Slice
@@ -79,6 +84,15 @@ export const useCategoriesStore = () => {
     const cleanCategories = () => {
         dispatch( onCleanCategories() );
     }
+
+    const changeCreateSuccess = (value) => {
+        dispatch(onChangeCreateSuccess(value));
+    };
+
+    const changeEditSuccess = (value) => {
+    dispatch(onChangeEditSuccess(value));
+    };
+
     
 
     //*Thunks
@@ -121,6 +135,8 @@ export const useCategoriesStore = () => {
         isSaving,
         message,
         numberCategories,
+        createSuccess,
+        editSuccess,
 
         //*Métodos
         addErrorMessageCategory,
@@ -145,5 +161,7 @@ export const useCategoriesStore = () => {
         startUploadNewCategory,
         startUpdateCategory,
         startChangeActiveCategory,
+        changeCreateSuccess,
+        changeEditSuccess,
     }
 }

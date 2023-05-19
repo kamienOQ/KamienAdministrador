@@ -1,4 +1,4 @@
-import { Button, Typography, TextField, IconButton, Tooltip, Avatar} from "@mui/material"
+import { Button, Typography, TextField, IconButton, Tooltip, Avatar, Snackbar, Alert} from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
@@ -27,6 +27,7 @@ export const AboutCrud = () => {
     name: lName, whatsapp: lWhatsapp, onInputChange, formState } = useAboutForm(aboutData);  
   
   const [editMode, setEditMode] = useState(false);
+  const [editSuccess, setEditSuccess] = useState(false);
 
   const handleEdit = () => {
     setEditMode(true);
@@ -37,6 +38,7 @@ export const AboutCrud = () => {
     setData([formState]);
     startUpdateAbout();
     setEditMode(false);
+    setEditSuccess(true);
   };
 
   const onUploadImage = ({ target }) => {
@@ -48,9 +50,23 @@ export const AboutCrud = () => {
     }
   };
 
+  const handleCloseEditMessage = () => {
+    setEditSuccess(false);
+  };
+
   return (
 
     <div className="about-container">
+        <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleCloseEditMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+          anchorOrigin={{
+          vertical: "top", 
+          horizontal: "right"
+        }}>
+          <Alert onClose={handleCloseEditMessage} severity="success" sx={{ width: '100%'}}>
+            Se editó correctamente
+          </Alert>
+        </Snackbar>
+
         <div className="about-container-left">
           <Typography variant="h4">Acerca de Nosotros</Typography>
           <Typography variant="h6" gutterBottom>

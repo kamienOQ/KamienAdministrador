@@ -1,11 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Alert, Box, Grid, Snackbar, Typography } from "@mui/material";
 import { DataGrid, esES } from "@mui/x-data-grid";
 import moment from "moment";
 import { UserActions } from "./";
 import { getAllUsers } from "../../firebase/providers";
+import { useDispatch, useSelector } from "react-redux";
+import { onChangeEditSuccess } from "../../store/users/usersSlice";
 
 export const Administradores = () => {
+  const dispatch = useDispatch();
+
+  const { editSuccess } = useSelector( state => state.users );
+
   const [usuarios, setUser] = useState([]);
   const [pageSize, setPageSize] = useState(20);
   const [rowId, setRowId] = useState(null);
@@ -78,6 +84,10 @@ export const Administradores = () => {
     [rowId]
   );
 
+  const handleCloseEditMessage = () => {
+    dispatch(onChangeEditSuccess(false));
+  };
+
   return (
     // <>
     //     <Box
@@ -129,6 +139,16 @@ export const Administradores = () => {
       spacing={0}
       alignContent="start"
     >
+        <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleCloseEditMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+          anchorOrigin={{
+          vertical: "top", 
+          horizontal: "right"
+        }}>
+          <Alert onClose={handleCloseEditMessage} severity="success" sx={{ width: '100%'}}>
+            Se editó correctamente
+          </Alert>
+        </Snackbar>
+
       <Grid
         container
         className="table-container"

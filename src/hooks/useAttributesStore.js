@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAddErrorMessage, onAddIcon, onAddImage, onAddNewCategory, onAddSuccessMessage, onChangeEditing, onChangeFilter, onCleanAttributes, 
     onSetActiveCategory, onStartFiltersAttributes, onStartGetAttributes, onStartUploadFile, onStartUploadNewAttribute, onChangeFiltering, 
     onSetNumberAttributes, onStartNumberAttributes, onChangePreCategoryName, onChangePreAttributeUpdated, onStartUpdateAttribute, 
-    onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize, onStartGetCategoriesForm} from "../store/attributes";
+    onStartChangeActiveAttribute, onChangeActive, onChangePageAndSize, onStartGetCategoriesForm, onChangeCreateSuccess, onChangeEditSuccess} from "../store/attributes";
 
 export const useAttributesStore = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,8 @@ export const useAttributesStore = () => {
         message,
         numberCategories,
         categories,
+        createSuccess,
+        editSuccess,
     } = useSelector( state => state.attributes );
     
     //*Slice
@@ -80,6 +82,14 @@ export const useAttributesStore = () => {
     const cleanCategories = () => {
         dispatch( onCleanAttributes() );
     }
+
+    const changeCreateSuccess = (value) => {
+        dispatch(onChangeCreateSuccess(value));
+    }
+
+    const changeEditSuccess = (value) => {
+    dispatch(onChangeEditSuccess(value));
+    }
     
 
     //*Thunks
@@ -127,6 +137,8 @@ export const useAttributesStore = () => {
         message,
         numberCategories,
         categories,
+        createSuccess,
+        editSuccess,
 
         //*Métodos
         addErrorMessage,
@@ -152,5 +164,7 @@ export const useAttributesStore = () => {
         startUpdateCategory,
         startChangeActiveCategory,
         starGetCategoriesForm,
+        changeCreateSuccess,
+        changeEditSuccess,
     }
 }

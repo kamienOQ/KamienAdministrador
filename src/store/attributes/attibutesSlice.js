@@ -21,7 +21,9 @@ export const attibutesSlice = createSlice({
         },
         page: 0,
         pageSize: 5,
-        activeAttribute: null, 
+        activeAttribute: null,
+        createSuccess: false,
+        editSuccess: false,   
     },
     reducers: {
         onChangeSavingNewAttribute: ( state, { payload } ) => {
@@ -138,9 +140,14 @@ export const attibutesSlice = createSlice({
         onSetExamplesRelated: ( state, { payload } ) => {
             state.activeAttribute.attributesList = payload;
         },
-
         onCleanCategories: ( state ) => {
             state.categories = [];
+        },
+        onChangeCreateSuccess: (state, action) => {
+            state.createSuccess = action.payload;
+        },
+        onChangeEditSuccess: (state, action) => {
+            state.editSuccess = action.payload;
         },
 
     }
@@ -176,4 +183,6 @@ export const {
     onSetCategoriesRelated,
     onSetCategories,
     onCleanCategories,
+    onChangeCreateSuccess,
+    onChangeEditSuccess,
 } = attibutesSlice.actions;

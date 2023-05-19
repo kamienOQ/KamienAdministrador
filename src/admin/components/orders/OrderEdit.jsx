@@ -23,7 +23,7 @@ export const OrdersEdit = () => {
     errorMessage,
     addErrorMessage,
   } = useOrdersUi();
-  const { startUpdateOrderStatus } = useOrdersStore();
+  const { startUpdateOrderStatus, changeEditSuccess } = useOrdersStore();
   const [status, setStatus] = useState(activeOrder?.status);
 
   useEffect(() => {
@@ -37,6 +37,7 @@ export const OrdersEdit = () => {
   const onSave = () => {
     if (activeOrder?.status !== status) {
       startUpdateOrderStatus(status);
+      changeEditSuccess(true);
     } else {
       addErrorMessage("No ha cambiado el estado del pedido");
     }

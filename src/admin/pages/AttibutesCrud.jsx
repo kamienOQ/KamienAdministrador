@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material"
+import { Alert, Button, Grid, Snackbar, Typography } from "@mui/material"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { useEffect } from "react";
@@ -11,7 +11,8 @@ import { Attributes, AttributeModal, AttributeView } from "../components";
 
 export const AttibutesCrud = () => {
   const { openCategoryModal, closeCategoryModal, isCategoryModalOpen } = useAttUiStore();
-  const { isSaving, message, filtering, addNewCategory, startGetAttributes, startNumberCategories,starGetCategoriesForm } = useAttributesStore();
+  const { isSaving, message, filtering, addNewCategory, startGetAttributes, startNumberCategories,starGetCategoriesForm, 
+          changeEditSuccess, changeCreateSuccess, createSuccess, editSuccess} = useAttributesStore();
 
   
 
@@ -39,12 +40,40 @@ export const AttibutesCrud = () => {
     starGetCategoriesForm();
   }
 
+  const handleCloseEditMessage = () => {
+    changeEditSuccess(false);
+  };
+
+  const handleCloseCreateMessage = () => {
+    changeCreateSuccess(false);
+  };
+
   return (
     <Grid container
       className="categories-container"
       spacing={0}
       alignContent="start"
     >
+      <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleCloseEditMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+        anchorOrigin={{
+        vertical: "top", 
+        horizontal: "right"
+      }}>
+        <Alert onClose={handleCloseEditMessage} severity="success" sx={{ width: '100%'}}>
+          Se editó correctamente
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={createSuccess} autoHideDuration={3000} onClose={handleCloseCreateMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+        anchorOrigin={{
+        vertical: "top", 
+        horizontal: "right"
+      }}>
+        <Alert onClose={handleCloseCreateMessage} severity="success" sx={{ width: '100%'}}>
+          Se creó correctamente
+        </Alert>
+      </Snackbar>
+
       <Grid container
         sx={{
           height: 400,

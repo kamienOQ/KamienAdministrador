@@ -20,7 +20,9 @@ export const categoriesSlice = createSlice({
         },
         page: 0,
         pageSize: 5,
-        activeCategory: null, 
+        activeCategory: null,
+        createSuccess: false,
+        editSuccess: false,
     },
     reducers: {
         onChangeSavingNewCategory: ( state, { payload } ) => {
@@ -117,6 +119,14 @@ export const categoriesSlice = createSlice({
                 }
                 return category;
             });
+
+            if(!state.activeCategory.active === true){
+                state.activeCategory = true;
+                state.inactiveSuccess = false;
+            }else{
+                state.activeCategory = false;
+                state.inactiveSuccess = true;
+            }
         },
         onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
@@ -144,6 +154,12 @@ export const categoriesSlice = createSlice({
         },
         onCleanActiveCategory: ( state ) => {
             state.activeCategory = null;
+        },
+        onChangeCreateSuccess: (state, action) => {
+            state.createSuccess = action.payload;
+        },
+        onChangeEditSuccess: (state, action) => {
+            state.editSuccess = action.payload;
         },
     }
 });
@@ -174,4 +190,6 @@ export const {
     onSetCategories,
     onSetNumberCategories,
     onUpdateCategory,
+    onChangeCreateSuccess,
+    onChangeEditSuccess,
 } = categoriesSlice.actions;

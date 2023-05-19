@@ -13,7 +13,8 @@ export const CategoryModal = () => {
 
   const { closeCategoryModal, isCategoryModalOpen } = useUiStore();
   const { categories, activeCategory, message, editing, isSaving, setActiveCategory, addErrorMessageCategory, addSuccessMessageCategory,
-    startUploadNewCategory, startNumberCategories, changeEditingCategory, changePreCategoryUpdated, startUpdateCategory, startGetCategories } = useCategoriesStore();
+    startUploadNewCategory, startNumberCategories, changeEditingCategory, changePreCategoryUpdated, startUpdateCategory,
+    changeCreateSuccess, changeEditSuccess } = useCategoriesStore();
 
   const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon } = useCategoriesState();
 
@@ -83,8 +84,10 @@ export const CategoryModal = () => {
         startUploadNewCategory();
         startNumberCategories();
         changePreCategoryUpdated(false);
+        changeCreateSuccess(true);
       }if(editing){
         startUpdateCategory();
+        changeEditSuccess(true);
       }
     }
   }
