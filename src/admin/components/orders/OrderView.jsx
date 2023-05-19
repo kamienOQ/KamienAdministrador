@@ -15,7 +15,7 @@ export const OrdersView = () => {
     >
       <DialogContent
         sx={{
-          width: 400,
+          width: 600,
         }}
       >
         <IconButton
