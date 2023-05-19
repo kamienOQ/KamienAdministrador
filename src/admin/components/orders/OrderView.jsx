@@ -5,6 +5,8 @@ import { OrderProducts } from "./OrderProducts";
 
 export const OrdersView = () => {
   const { openViewModal, activeOrder, closeViewModal } = useOrdersUi();
+  
+
   return (
     <Dialog
       open={openViewModal}
@@ -145,14 +147,29 @@ export const OrdersView = () => {
                 color: "white",
                 borderRadius: "10px",
               }}>
-                Productos:
+                Productos
               </Typography>
             </Grid>
             {activeOrder?.products.map((product, index) => (
               <OrderProducts product={product} index={index} key={index}/>
             ))}
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+                borderTop: "2px solid black",
+                mt: '3px'
+              }}
+            >
+              <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                Total:
+              </Typography>
+              <Typography>{activeOrder.totalPrice}</Typography>
+            </Grid>
           </>
-        }
+          }
         </Grid>
       </DialogContent>
     </Dialog>
