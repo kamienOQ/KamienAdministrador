@@ -41,7 +41,7 @@ export const SideBarList = () => {
                   </Tooltip>
                 </ListItemIcon>
                 <ListItemText
-                  primary={"Añadir Administrador"}
+                  primary={"Gestión de Pedidos"}
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
