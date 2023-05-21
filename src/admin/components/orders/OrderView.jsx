@@ -20,12 +20,6 @@ export const OrdersView = () => {
           width: 600,
         }}
       >
-        <IconButton
-          sx={{ position: "absolute", top: 0, right: 0 }}
-          onClick={closeViewModal}
-        >
-          <CloseIcon />
-        </IconButton>
         <Typography
           id="modal-modal-title"
           variant="h6"
@@ -33,11 +27,8 @@ export const OrdersView = () => {
           sx={{
             textAlign: "center",
             width: "100%",
-            p: 2,
             fontSize: "24px",
-            bgcolor: "dark.main",
-            color: "white",
-            borderRadius: "10px",
+            color: "dark.main",
           }}
         >
           Información del pedido
@@ -47,7 +38,7 @@ export const OrdersView = () => {
           direction="column"
           justifyContent="center"
           alignItems="center"
-          sx={{ mt: 2 }}
+          sx={{ mt: 1, borderTop: "2px solid black" }}
         >
           <Grid
             item
@@ -139,13 +130,11 @@ export const OrdersView = () => {
               mb: .5
             }}
             >
-              <Typography variant="subtitle1" sx={{
+              <Typography variant="h6" sx={{
                 textAlign: "center",
                 width: "100%",
                 fontSize: "24px",
-                bgcolor: "dark.main",
-                color: "white",
-                borderRadius: "10px",
+                color: "dark.main",
               }}>
                 Productos
               </Typography>
