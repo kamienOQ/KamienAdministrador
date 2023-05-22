@@ -67,7 +67,8 @@ export const uiSlice = createSlice({
             }
         },
         onDeleteListAttributesSelected: ( state, { payload } ) => {
-            state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload.attributeSelected && event.feature !== payload.feature );
+            console.log(payload)
+            state.listAttributesSelected = state.listAttributesSelected.filter( event => event.attributeSelected !== payload.attributeSelected || event.feature !== payload.feature );
         },
         onOpenCategoryModal: ( state ) => {
             state.isCategoryModalOpen = true;

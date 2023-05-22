@@ -75,6 +75,7 @@ export const productsSlice = createSlice({
                 return product;
             });
             state.preProduct.updatedName = false;
+            state.editing = false;
         },
         onDeleteProduct: ( state, { payload } ) => {
             state.activeProduct = null;

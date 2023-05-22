@@ -56,6 +56,7 @@ export const attibutesSlice = createSlice({
                 return category;
             });
             state.preCategory.updatedName = false;
+            state.editing = false;
         },
         onDeleteCategory: ( state, { payload } ) => {
             state.activeAttribute = null;
