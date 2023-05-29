@@ -119,14 +119,6 @@ export const categoriesSlice = createSlice({
                 }
                 return category;
             });
-
-            if(!state.activeCategory.active === true){
-                state.activeCategory = true;
-                state.inactiveSuccess = false;
-            }else{
-                state.activeCategory = false;
-                state.inactiveSuccess = true;
-            }
         },
         onChangeEditing: ( state, { payload } ) => {
             state.editing = payload;
