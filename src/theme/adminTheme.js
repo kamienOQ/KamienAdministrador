@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 export const adminTheme = createTheme({
   palette: {
     primary: {
-      main: '#D1B000'
+      main: '#0E1116'
     },
     secondary: {
       main: '#c9c9c9'
@@ -13,6 +13,9 @@ export const adminTheme = createTheme({
     },
     quaternary: {
       main: '#000000'
+    },
+    edit: {
+      main: '#d1b000'
     },
     dark: {
       main: '#0E1116'

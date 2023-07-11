@@ -91,7 +91,7 @@ export const ProfileForm = () => {
         <h2 style={{margin:"4%",color:"grey",width:"96%",fontWeight:900}}>
             Información general
         </h2>
-        <Button type="outlined" style={{borderRadius:"12px",border: "1px solid",margin:"25px"}} onClick= {handleUpdateUser}>
+        <Button type="outlined" style={{borderRadius:"12px",border: "1px solid",margin:"25px",color:"black"}} onClick= {handleUpdateUser}>
             <UpdateIcon />
             <h4>
                 Actualizar Información

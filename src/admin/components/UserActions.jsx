@@ -28,13 +28,13 @@ export const UserActions = ({rowParams,params,setUser}) => {
         >
 
         <Fab
-          color="primary"
+          color="edit"
           sx={{
             width: 40,
             height: 40,
-            bgcolor: "primary.main",
+            bgcolor: "edit.main",
             color: "white",
-            '&:hover': { bgcolor: "primary.main" },
+            '&:hover': { bgcolor: "edit.main" },
           }}
           onClick = {handleOpen}
            

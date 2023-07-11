@@ -58,7 +58,7 @@ export const Navbar = () => {
               ...(open && { display: "none" }),
             }}
           >
-            <Menu sx={{ color: "dark.main" }} />
+            <Menu sx={{ color: "tertiary.main" }} />
           </IconButton>
           <Tooltip title="Volver a la página de gestión de pedidos">
             <IconButton component={RouterLink} sx={{ mr: 1 }} to="/">
@@ -70,7 +70,7 @@ export const Navbar = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Divider sx={{ bgcolor: "primary.main" }} />
+      <Divider sx={{ bgcolor: "edit.main" }} />
       <SideList {...{ open, setOpen }} />
     </Box>
   );
