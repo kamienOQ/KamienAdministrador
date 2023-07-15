@@ -37,14 +37,14 @@ export const OrderActions = ({ row }) => {
           <VisibilityIcon />
         </Fab>
         <Fab
-          color="primary"
+          color="edit"
           onClick={() => editOrder(row)}
           sx={{
             width: 40,
             height: 40,
-            bgcolor: "primary.main",
+            bgcolor: "edit.main",
             color: "white",
-            "&:hover": { bgcolor: "primary.main" },
+            "&:hover": { bgcolor: "edit.main" },
           }}
         >
           <EditIcon />

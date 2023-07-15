@@ -77,11 +77,11 @@ export const AboutCrud = () => {
         <Tooltip title = "Logo" >
           <IconButton
             className="addCategory-button"
-            color="primary"
+            color="edit"
             aria-label="cargar imagen"
             component="label"
             onChange={onUploadImage}
-            sx={{ color: "secondary.main", padding: logo !== '' ? '3px' : '12px' }}
+            sx={{ color: "edit.main", padding: logo !== '' ? '3px' : '12px' }}
             disabled={ !editMode || isSaving}
           >
             <input hidden accept="image/*" type="file" />
@@ -138,7 +138,7 @@ export const AboutCrud = () => {
               Guardar 
             </Button>
           ) : (
-            <Button variant="contained" onClick={handleEdit} startIcon={<EditIcon />}>
+            <Button variant="contained" color="info" onClick={handleEdit} startIcon={<EditIcon />}>
               Editar
             </Button>
           )}
