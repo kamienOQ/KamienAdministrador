@@ -719,7 +719,8 @@ label {
   }
 }
 
-* *CategoriesCards Styles */ .container-categoriesCards {
+/*CategoriesCards Styles */ 
+.container-categoriesCards {
   margin: 0;
   position: relative;
   height: 375px;
