@@ -4,19 +4,19 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-const apiKeyMain = process.env.REACT_APP_API_KEY_MAIN;
-const authDomainMain = process.env.REACT_APP_API_AUTHDOMAIN_MAIN;
-const projectIdMain = process.env.REACT_APP_API_PROJECTID_MAIN;
-const storageBucketMain = process.env.REACT_APP_API_STORAGEBUCKET_MAIN;
-const messagingSenderIdMain = process.env.REACT_APP_API_MESSAGINGSENDERID_MAIN;
-const appIdMain = process.env.REACT_APP_API_APPID_MAIN; 
+const apiKeyMain =import.meta.env.VITE_APP_API_KEY_MAIN;
+const authDomainMain =import.meta.env.VITE_APP_API_AUTHDOMAIN_MAIN;
+const projectIdMain =import.meta.env.VITE_APP_API_PROJECTID_MAIN;
+const storageBucketMain =import.meta.env.VITE_APP_API_STORAGEBUCKET_MAIN;
+const messagingSenderIdMain =import.meta.env.VITE_APP_API_MESSAGINGSENDERID_MAIN;
+const appIdMain =import.meta.env.VITE_APP_API_APPID_MAIN; 
 
-const apiKey = process.env.REACT_APP_API_KEY;
-const authDomain = process.env.REACT_APP_API_AUTHDOMAIN;
-const projectId = process.env.REACT_APP_API_PROJECTID;
-const storageBucket = process.env.REACT_APP_API_STORAGEBUCKET;
-const messagingSenderId = process.env.REACT_APP_API_MESSAGINGSENDERID;
-const appId = process.env.REACT_APP_API_APPID_MAIN; 
+const apiKey =import.meta.env.VITE_APP_API_KEY;
+const authDomain =import.meta.env.VITE_APP_API_AUTHDOMAIN;
+const projectId =import.meta.env.VITE_APP_API_PROJECTID;
+const storageBucket =import.meta.env.VITE_APP_API_STORAGEBUCKET;
+const messagingSenderId =import.meta.env.VITE_APP_API_MESSAGINGSENDERID;
+const appId =import.meta.env.VITE_APP_API_APPID; 
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -40,6 +40,7 @@ const firebaseConfig = {
   messagingSenderId: messagingSenderIdMain,
   appId: appIdMain
 };
+
 
 // Initialize Firebase
 export const FirebaseApp = initializeApp(firebaseConfig);
