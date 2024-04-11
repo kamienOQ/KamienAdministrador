@@ -1,4 +1,5 @@
 .MuiDataGrid-columnsContainer .MuiDataGrid-colCell,
 .MuiDataGrid-viewport .MuiDataGrid-cell {
-  color: red; /* Cambiar a cualquier color que desees */
+  color: red;
+  /* Cambiar a cualquier color que desees */
 }

@@ -223,7 +223,7 @@ export const ProductModal = () => {
                   sx={{ color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
                   disabled={isSaving}
                 >
-                  <input hidden accept="image/*" type="file" />
+                  <input hidden accept="image/*, .webp" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
                   {imageLoad &&
                     <Avatar
@@ -241,7 +241,7 @@ export const ProductModal = () => {
                   sx={{ color: "secondary.main", padding: iconLoad ? '3px' : '12px' }}
                   disabled={isSaving}
                 >
-                  <input hidden accept=".png" type="file" />
+                  <input hidden accept=".png, .webp" type="file" />
                   <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
                   {iconLoad &&
                     <Avatar

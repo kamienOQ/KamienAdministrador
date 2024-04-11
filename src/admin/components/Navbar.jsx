@@ -15,7 +15,9 @@ import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import "./Navbar.css";
 import { useAboutStore } from "../../hooks/useAboutStore";
+
 const drawerWidth = 239;
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -33,17 +35,18 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
 export const Navbar = () => {
   const { logo, startGetAbout } = useAboutStore();
+  const [open, setOpen] = useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
   useEffect(() => {
     startGetAbout();
   }, [])
 
-  const [open, setOpen] = useState(false);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open}>
@@ -62,7 +65,7 @@ export const Navbar = () => {
           </IconButton>
           <Tooltip title="Volver a la página de gestión de pedidos">
             <IconButton component={RouterLink} sx={{ mr: 1 }} to="/">
-              <Avatar src = {logo}/>
+              <Avatar src={logo} />
             </IconButton>
           </Tooltip>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>

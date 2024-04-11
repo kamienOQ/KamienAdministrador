@@ -67,35 +67,35 @@ export const SideList = ({ open, setOpen }) => {
   const onLogout = () => {
     dispatch(startLogout());
   };
-   
+
   return (
     <Drawer variant="permanent" open={open} sx={{ bgcolor: "dark.main" }}>
-        <DrawerHeader sx={{ bgcolor: "dark.main" }}>
-          <IconButton onClick={() => setOpen(false)}>
-            <ChevronLeft sx={{ color: "white" }}/>
+      <DrawerHeader sx={{ bgcolor: "dark.main" }}>
+        <IconButton onClick={() => setOpen(false)}>
+          <ChevronLeft sx={{ color: "white" }} />
+        </IconButton>
+      </DrawerHeader>
+      <Divider sx={{ bgcolor: "dark.main" }} />
+      <SideBarList />
+      <Divider sx={{ bgcolor: "dark.main" }} />
+      <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
+        <Avatar
+          src='/src/images/Empty_pp.jpg'
+          {...(open && { sx: { width: 100, height: 100 } })}
+        />
+      </Box>
+      <Box sx={{ textAlign: 'center' }}>
+        {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
+        {open && <Typography variant="body2" sx={{ color: "white" }}> Usuario : </Typography>}
+        {open && (
+          <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
+        )}
+        <Tooltip title="Cerrar sesión" sx={{ mt: 1 }}>
+          <IconButton onClick={onLogout}>
+            <Logout sx={{ color: "white" }} />
           </IconButton>
-        </DrawerHeader>
-        <Divider sx={{ bgcolor: "dark.main" }}/>
-        <SideBarList/>
-        <Divider sx={{ bgcolor: "dark.main" }}/>
-        <Box sx={{ mx: 'auto', mt: 3, mb: 1 }}>
-          <Avatar               
-            src='/src/images/Empty_pp.jpg'
-            {...(open && { sx: { width: 100, height: 100 } })}
-          />
-        </Box>
-        <Box sx={{ textAlign: 'center' }}>
-          {open && <Typography sx={{ color: "white" }}>{displayName}</Typography>}
-          {open && <Typography variant="body2" sx={{ color: "white" }}> Usuario : </Typography>}
-          {open && (
-            <Typography variant="body2" sx={{ color: "white" }}>{email}</Typography>
-          )}
-          <Tooltip title="Cerrar sesión" sx={{ mt: 1 }}>
-            <IconButton onClick={onLogout}>
-              <Logout sx={{ color: "white" }}/>
-            </IconButton>
-          </Tooltip>
-        </Box>
+        </Tooltip>
+      </Box>
     </Drawer>
   )
 }

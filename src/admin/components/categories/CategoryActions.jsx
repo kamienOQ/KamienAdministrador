@@ -72,7 +72,7 @@ export const CategoryActions = ({ row }) => {
               checked={!!row?.active ? row?.active : false}
               onChange={handleActive}
               name="Activa"
-              color="lightSuccess"
+              color={row?.active ? "success" : "error"}
             />
         </Tooltip>
       </Box>

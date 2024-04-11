@@ -20,206 +20,201 @@ export const SideBarList = () => {
   return (
     <List sx={{ bgcolor: "dark.main" }}>
 
-      <Link component={RouterLink} to = "/" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Gestión de Pedidos" sx={{ bgcolor: "dark.main" }}> 
-                    <ShoppingBasketIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Gestión de Pedidos"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+      <Link component={RouterLink} to="/" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Gestión de Pedidos" sx={{ bgcolor: "dark.main" }}>
+                <ShoppingBasketIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Gestión de Pedidos"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
       </Link>
 
-      <Link component={RouterLink} to = "/Producto" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Añadir Producto" sx={{ bgcolor: "dark.main" }}> 
-                    <InventoryIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Añadir Producto"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+      <Link component={RouterLink} to="/Producto" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Añadir Producto" sx={{ bgcolor: "dark.main" }}>
+                <InventoryIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Añadir Producto"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
       </Link>
 
-      <Link component={RouterLink} to = "/Categorias" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Añadir Categoría" sx={{ bgcolor: "dark.main" }}> 
-                    <CategoryIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Añadir Categoría"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+      <Link component={RouterLink} to="/Categorias" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Añadir Categoría" sx={{ bgcolor: "dark.main" }}>
+                <CategoryIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Añadir Categoría"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
-        </Link>
+      </Link>
 
-
-       
-
-        <Link component={RouterLink} to = "/Atributos" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Añadir Atributo" sx={{ bgcolor: "dark.main" }}> 
-                    <StarRateIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Añadir Atributo"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+      <Link component={RouterLink} to="/Atributos" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Añadir Atributo" sx={{ bgcolor: "dark.main" }}>
+                <StarRateIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Añadir Atributo"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
-        </Link>
+      </Link>
 
-
-        <Link component={RouterLink} to = "/Administradores" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Añadir Administrador" sx={{ bgcolor: "dark.main" }}> 
-                    <GroupAddIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Añadir Administrador"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+      <Link component={RouterLink} to="/Administradores" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Añadir Administrador" sx={{ bgcolor: "dark.main" }}>
+                <GroupAddIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Añadir Administrador"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
-        </Link>
-                  
+      </Link>
 
-        <Link component={RouterLink} to = "/About" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Añadir Acerca De" sx={{ bgcolor: "dark.main" }}> 
-                    <InfoIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Añadir Acerca De"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
+      <Link component={RouterLink} to="/About" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Añadir Acerca De" sx={{ bgcolor: "dark.main" }}>
+                <InfoIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Añadir Acerca De"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
-        </Link>
+      </Link>
 
-        <Link component={RouterLink} to = "/Perfil" sx={{textDecoration: "none", color: "white"}}>
-        <ListItem key= "Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Tooltip title = "Configurar Cuenta" sx={{ bgcolor: "dark.main" }}> 
-                    <ManageAccountsIcon sx={{ color: "white" }}/>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={"Configurar Cuenta"}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton> 
+      <Link component={RouterLink} to="/Perfil" sx={{ textDecoration: "none", color: "white" }}>
+        <ListItem key="Añadir Usuario Administrador" disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <Tooltip title="Configurar Cuenta" sx={{ bgcolor: "dark.main" }}>
+                <ManageAccountsIcon sx={{ color: "white" }} />
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText
+              primary={"Configurar Cuenta"}
+              sx={{ opacity: open ? 1 : 0 }}
+            />
+          </ListItemButton>
         </ListItem>
-        </Link>
+      </Link>
     </List>
   )
 }

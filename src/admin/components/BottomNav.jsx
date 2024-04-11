@@ -1,21 +1,21 @@
 import {
-    BottomNavigation,
-    BottomNavigationAction,
-    Box,
-    Paper,
-  } from '@mui/material';
-  import { AddLocationAlt, Bed, LocationOn } from '@mui/icons-material';
-  import { useEffect, useRef, useState } from 'react';
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Paper,
+} from '@mui/material';
+import { AddLocationAlt, Bed, LocationOn } from '@mui/icons-material';
+import { useEffect, useRef, useState } from 'react';
 
 const BottomNav = () => {
   const [value, setValue] = useState(0);
-//   const ref = useRef();
-//   useEffect(() => {
-//     ref.current.ownerDocument.body.scrollTop = 0;
-//   }, [value]);
+  //   const ref = useRef();
+  //   useEffect(() => {
+  //     ref.current.ownerDocument.body.scrollTop = 0;
+  //   }, [value]);
   return (
     <Box >
-         <Paper 
+      <Paper
         elevation={3}
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2 }}
       >

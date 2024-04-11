@@ -122,7 +122,52 @@ export const ProductsTable = ({ attributes, data }) => {
   return (
     <Grid container
       className="container-table"
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto' }}
+      sx={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'start', 
+        maxWidth: "1172px", 
+        height: 450, 
+        my: "0", 
+        mx: "auto", 
+        gap: .6, 
+        overflowX: 'auto',
+        '@media (min-width: 200px)': {
+          marginTop: "-10px"
+        },
+        '@media (min-width: 300px)': {
+          marginBottom: "-400px"
+        },
+        '@media (min-width: 375px)': {
+          marginBottom: "-400px",
+          marginTop: "-105px",
+        },
+        '@media (min-width: 412px) and (min-height: 600px)': {
+          maxWidth: "873px",
+          maxHeight: "400px",
+          marginTop: "-50px",
+        },
+        '@media (min-width: 500px)': {
+          maxWidth: "873px",
+          maxHeight: "400px",
+          marginBottom: "-300px"
+        },
+        '@media (min-width: 800px) and (min-height: 900px)': {
+          maxWidth: "873px",
+          maxHeight: "400px",
+          marginBottom: "-400px"
+        },
+        '@media (min-width: 1024px) and (min-height: 600px)': {
+          maxWidth: "873px",
+          maxHeight: "400px",
+          marginBottom: "-180px"
+        },
+        '@media (min-width: 1024px) and (min-height: 800px)': {
+          maxWidth: "1200px",
+          maxHeight: "400px",
+          marginBottom: "-400px"
+        }, 
+      }}
     >
       <Grid
         className="container-buttons-filter"
@@ -199,6 +244,15 @@ export const ProductsTable = ({ attributes, data }) => {
           },
           ".MuiTablePagination-toolbar svg": {
             color: "white",
+          },
+          '@media (min-width: 200px)': {
+            maxHeight: "390px"
+          },
+          '@media (min-width: 1024px) and (min-height: 600px)': {
+            maxWidth: "1150px"
+          },
+          '@media (min-width: 1024px) and (min-height: 800px)': {
+            maxWidth: "1180px",
           },
         }}
       />

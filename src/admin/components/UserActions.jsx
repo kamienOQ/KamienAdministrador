@@ -5,27 +5,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { EditUserModal } from './EditUserModal';
 import { ConfirmationModal } from './ConfirmationModal';
-export const UserActions = ({rowParams,params,setUser}) => {
-  const [openEditModal,setEditModal] = useState(false)
-  const [openConfirmationModal,setConfirmationModal] = useState(false)
-  const handleOpen = () =>
-  {
+
+export const UserActions = ({ rowParams, params, setUser }) => {
+  const [openEditModal, setEditModal] = useState(false)
+  const [openConfirmationModal, setConfirmationModal] = useState(false)
+  const handleOpen = () => {
     setEditModal(true)
   }
-  const handleConfirmationModalOpen = () =>{
+  const handleConfirmationModalOpen = () => {
     setConfirmationModal(true)
   }
   return (
     <>
-        <Box
+      <Box
         sx={{
-            m: 1,
-            position: 'relative',
-            display: 'flex',
-            justifyContent : 'center',
-            minWidth: '100%'
+          m: 1,
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          minWidth: '100%'
         }}
-        >
+      >
 
         <Fab
           color="edit"
@@ -36,10 +36,10 @@ export const UserActions = ({rowParams,params,setUser}) => {
             color: "white",
             '&:hover': { bgcolor: "edit.main" },
           }}
-          onClick = {handleOpen}
-           
+          onClick={handleOpen}
+
         >
-            <EditIcon />
+          <EditIcon />
         </Fab>
 
         {/* <Fab
@@ -55,9 +55,9 @@ export const UserActions = ({rowParams,params,setUser}) => {
         >
             <CancelIcon />
         </Fab> */}
-          
-        </Box>
-        {/* <ConfirmationModal 
+
+      </Box>
+      {/* <ConfirmationModal 
         open = {openConfirmationModal } 
         setOpen = {setConfirmationModal}
         msg = {"¿Seguro que quieres eliminar el usuario?"}
@@ -65,7 +65,7 @@ export const UserActions = ({rowParams,params,setUser}) => {
         params = {params} 
         setUser = {setUser}
         /> */}
-        <EditUserModal users = {params}setUser = {setUser} open = {openEditModal} setOpen = {setEditModal} userParams ={rowParams}  />
+      <EditUserModal users={params} setUser={setUser} open={openEditModal} setOpen={setEditModal} userParams={rowParams} />
     </>
   )
 }

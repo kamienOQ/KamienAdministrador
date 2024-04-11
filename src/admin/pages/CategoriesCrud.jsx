@@ -4,11 +4,9 @@ import { useEffect } from "react";
 import { useCategoriesStore, useUiStore } from "../../hooks";
 import { Categories, CategoryModal, CategoryView } from "../components";
 
-
-
 export const CategoriesCrud = () => {
   const { openCategoryModal, closeCategoryModal, isCategoryModalOpen, isModalViewOpen } = useUiStore();
-  const { isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories, 
+  const { isSaving, message, filtering, addNewCategory, startGetCategories, startNumberCategories,
     changeEditSuccess, changeCreateSuccess, createSuccess, editSuccess } = useCategoriesStore();
 
   useEffect(() => {
@@ -18,11 +16,11 @@ export const CategoriesCrud = () => {
   }, [message.success]);
 
   useEffect(() => {
-    if(!filtering){
+    if (!filtering) {
       startNumberCategories();
     }
   }, [filtering])
-  
+
 
   useEffect(() => {
     startGetCategories();
@@ -54,22 +52,22 @@ export const CategoriesCrud = () => {
           maxWidth: "95%",
         }}
       >
-          <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleCloseEditMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+        <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleCloseEditMessage} sx={{ alignItems: "flex-start", mt: "42px" }}
           anchorOrigin={{
-          vertical: "top", 
-          horizontal: "right"
-        }}>
-          <Alert onClose={handleCloseEditMessage} severity="success" sx={{ width: '100%'}}>
+            vertical: "top",
+            horizontal: "right"
+          }}>
+          <Alert onClose={handleCloseEditMessage} severity="success" sx={{ width: '100%' }}>
             Se editó correctamente
           </Alert>
         </Snackbar>
 
-        <Snackbar open={createSuccess} autoHideDuration={3000} onClose={handleCloseCreateMessage} sx={{alignItems: "flex-start", mt: "42px"}} 
+        <Snackbar open={createSuccess} autoHideDuration={3000} onClose={handleCloseCreateMessage} sx={{ alignItems: "flex-start", mt: "42px" }}
           anchorOrigin={{
-          vertical: "top", 
-          horizontal: "right"
-        }}>
-          <Alert onClose={handleCloseCreateMessage} severity="success" sx={{ width: '100%'}}>
+            vertical: "top",
+            horizontal: "right"
+          }}>
+          <Alert onClose={handleCloseCreateMessage} severity="success" sx={{ width: '100%' }}>
             Se creó correctamente
           </Alert>
         </Snackbar>
@@ -79,7 +77,7 @@ export const CategoriesCrud = () => {
           spacing={2}
           sx={{ padding: 4, mt: 8, borderRadius: 1.2, display: 'flex', direction: 'column', alignItems: 'center', justifyContent: 'center' }}
         >
-          <Grid item 
+          <Grid item
             sx={{ width: "90%", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
           >
             <Typography variant="h4">Gestión de Categorías</Typography>
@@ -96,12 +94,12 @@ export const CategoriesCrud = () => {
           </Grid>
         </Grid>
         <Categories />
-        {isCategoryModalOpen && 
+        {isCategoryModalOpen &&
           <CategoryModal />
         }
         {isModalViewOpen &&
-        <CategoryView/>
-        } 
+          <CategoryView />
+        }
       </Grid>
     </Grid>
   )

@@ -17,7 +17,6 @@ export const AttibutesCrud = () => {
   
 
   useEffect(() => {
-    console.log('Cambió')
     if (!!message.success) {
       closeCategoryModal();
     }

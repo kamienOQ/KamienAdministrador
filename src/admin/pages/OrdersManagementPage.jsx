@@ -8,7 +8,7 @@ export const OrdersManagementPage = () => {
   const { filtering, startNumberOrders, changeEditSuccess, editSuccess } = useOrdersStore();
 
   useEffect(() => {
-    if(!filtering){
+    if (!filtering) {
       startNumberOrders();
     }
   }, [filtering]);
@@ -19,12 +19,12 @@ export const OrdersManagementPage = () => {
 
   return (
     <>
-      <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleClose} sx={{alignItems: "flex-start", mt: "42px"}} 
+      <Snackbar open={editSuccess} autoHideDuration={3000} onClose={handleClose} sx={{ alignItems: "flex-start", mt: "42px" }}
         anchorOrigin={{
-        vertical: "top", 
-        horizontal: "right"
-      }}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%'}}>
+          vertical: "top",
+          horizontal: "right"
+        }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Se editó correctamente
         </Alert>
       </Snackbar>

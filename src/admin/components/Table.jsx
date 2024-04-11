@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { DataGrid, esES } from "@mui/x-data-grid";
 
 export const Table = ({ attributes, data }) => {
@@ -10,7 +10,6 @@ export const Table = ({ attributes, data }) => {
   });
 
   const columns = useMemo(() => attributes, [rowId]);
-
 
   return (
     <>

@@ -11,7 +11,7 @@ export const CategoriesTable = ({ attributes, data }) => {
   const { filter, filtering, changeFilterCategory, changeFilteringCategory, startFilterCategories, startGetCategories, isLoading, numberCategories, changePageAndSizeCategory } = useCategoriesStore();
   const [rowId, setRowId] = useState(null);
 
-  const [filterModel, setFilterModel] = useState({items: []});
+  const [filterModel, setFilterModel] = useState({ items: [] });
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,
     page: 0,
@@ -34,11 +34,9 @@ export const CategoriesTable = ({ attributes, data }) => {
   const onGetRowId = useCallback((row) => row.id, []);
 
   useEffect(() => {
-    if(!filtering){
-      console.log("Filtra1")
+    if (!filtering) {
       startGetCategories(paginationModel.page, paginationModel.pageSize);
-    }if(filtering){
-      console.log("Filtra2")
+    } if (filtering) {
       startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);
@@ -49,8 +47,8 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter" ) {
-        if (!filtering || filter.value !== localFilterValue ) {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        if (!filtering || filter.value !== localFilterValue) {
           handleSearch()
         }
       }
@@ -66,7 +64,7 @@ export const CategoriesTable = ({ attributes, data }) => {
 
   // * Filter
   const handleSearch = () => {
-    if (!filtering || filter.value !== localFilterValue ) {
+    if (!filtering || filter.value !== localFilterValue) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
         // onPaginationChange({...paginationModel, page: 0});
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
@@ -77,12 +75,12 @@ export const CategoriesTable = ({ attributes, data }) => {
   };
 
   const handleSort = (value) => {
-    if (!filtering || value.value !== localFilterValue ) {
+    if (!filtering || value.value !== localFilterValue) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
         startFilterCategories(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFilteringCategory(true);
         setLocalFilterValue(value.value);
-      }else if (localFilterValue === "asc" || localFilterValue === "desc") {
+      } else if (localFilterValue === "asc" || localFilterValue === "desc") {
         handleRemoveFilter();
       }
     }
@@ -94,7 +92,7 @@ export const CategoriesTable = ({ attributes, data }) => {
     changeFilterCategory({});
     setSortModel([]);
     setLocalFilterValue('');
-    setFilterModel({items: []});
+    setFilterModel({ items: [] });
   };
 
   const handleFilterChange = ({ items }) => {
@@ -102,8 +100,8 @@ export const CategoriesTable = ({ attributes, data }) => {
       changeFilterCategory({ field: items[0]?.field, value: items[0]?.value });
       setSortModel([]);
       changeFilteringCategory(false);
-    }if (items.length === 0) {
-      if(filtering){
+    } if (items.length === 0) {
+      if (filtering) {
         startGetCategories(paginationModel.page, paginationModel.pageSize);
       }
       changeFilteringCategory(false);
@@ -115,20 +113,30 @@ export const CategoriesTable = ({ attributes, data }) => {
   const handleSortModelChange = (event) => {
     setSortModel(event);
     changeFilterCategory({ field: event[0]?.field, value: event[0]?.sort });
-    setFilterModel({items: []});
+    setFilterModel({ items: [] });
     changeFilteringCategory(false);
     handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
-  
+
   return (
     <Grid container
       className="container-table"
-      sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', maxWidth: "1172px", height: 450, my: "0", mx: "auto", gap: .6, overflowX: 'auto', }}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'start',
+        maxWidth: "1172px",
+        height: 450,
+        my: "0",
+        mx: "auto",
+        gap: .6,
+        overflowX: 'auto'
+      }}
     >
       <Grid
         className="container-buttons-filter"
-        sx={{display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px"}}
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px" }}
       >
         {/* <Button
           className="button-filter"
@@ -198,11 +206,10 @@ export const CategoriesTable = ({ attributes, data }) => {
           },
           ".MuiTablePagination-toolbar svg": {
             color: "white",
-          }, 
+          },
           ".MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
             outline: "none",
           },
-          
         }}
       />
     </Grid>

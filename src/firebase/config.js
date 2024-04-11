@@ -16,15 +16,6 @@ import { getStorage } from "firebase/storage";
 //   appId: "1:237921208573:web:b18d13984139377091d694",
 // };
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBHz7C_ZqXuy7ruUOOdPgwcuxVWTa9wjBc",
-//   authDomain: "respaldo-project-kamien.firebaseapp.com",
-//   projectId: "respaldo-project-kamien",
-//   storageBucket: "respaldo-project-kamien.appspot.com",
-//   messagingSenderId: "86678841516",
-//   appId: "1:86678841516:web:2fca0057eea81c6671d709"
-// };
-
 // Produccion Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDQmUwAf5t9_lYYJZD9IEPuRYzkhFzlbB8",
@@ -39,4 +30,4 @@ const firebaseConfig = {
 export const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseAuth = getAuth(FirebaseApp);
 export const FirebaseDB = getFirestore(FirebaseApp);
-export const FirebaseStorage = getStorage();
+export const FirebaseStorage = getStorage(); 

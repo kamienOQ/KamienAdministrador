@@ -1,30 +1,49 @@
-import { confirmPasswordReset, sendPasswordResetEmail, signInWithEmailAndPassword,reauthenticateWithCredential , createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , updateEmail,updatePassword} from "firebase/auth";
+import {
+  confirmPasswordReset,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  reauthenticateWithCredential,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  updateEmail,
+  updatePassword,
+} from "firebase/auth";
 import { FirebaseAuth } from "./config";
 import { FirebaseDB } from "./config";
 import { FirebaseApp } from "./config";
 import { getFirestore } from "firebase/firestore";
-import { collection, doc, getDoc,getDocs,updateDoc,setDoc,query,where } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  setDoc,
+  query,
+  where,
+} from "firebase/firestore";
 
-const db = getFirestore(FirebaseApp)
+const db = getFirestore(FirebaseApp);
 const googleProvider = new GoogleAuthProvider();
-export const singInWithGoogle = async() => {
+export const singInWithGoogle = async () => {
   try {
-      const result = await signInWithPopup(FirebaseAuth, googleProvider );
-      // const credentials = GoogleAuthProvider.credentialFromResult( result );
-      const { displayName, email, photoURL, uid } = result.user;
-      return {
-          ok: true,
-          // User info
-          user: { displayName, email, photoURL, uid }
-      };
+    const result = await signInWithPopup(FirebaseAuth, googleProvider);
+    // const credentials = GoogleAuthProvider.credentialFromResult( result );
+    const { displayName, email, photoURL, uid } = result.user;
+    return {
+      ok: true,
+      // User info
+      user: { displayName, email, photoURL, uid },
+    };
   } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      return {
-          ok: false,
-          errorMessage,
-      };
-  };
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    return {
+      ok: false,
+      errorMessage,
+    };
+  }
 };
 
 export const loginWithEmailPassword = async (email, password) => {
@@ -48,8 +67,12 @@ export const loginWithEmailPassword = async (email, password) => {
     console.log(error);
     const errorCode = error.code;
     let errorMessage = error.message;
-    if (errorCode === "auth/wrong-password" || errorCode === "auth/user-not-found") {
-      errorMessage = "Credenciales incorrectas. Por favor, verifica tu correo y contraseña e intenta de nuevo.";
+    if (
+      errorCode === "auth/wrong-password" ||
+      errorCode === "auth/user-not-found"
+    ) {
+      errorMessage =
+        "Credenciales incorrectas. Por favor, verifica tu correo y contraseña e intenta de nuevo.";
     } else if (errorCode === "auth/invalid-email") {
       errorMessage = "El correo es inválido.";
     }
@@ -60,17 +83,31 @@ export const loginWithEmailPassword = async (email, password) => {
   }
 };
 
-export const registerUserWithEmailPassword = async (email, password, displayName) => {
+export const registerUserWithEmailPassword = async (
+  email,
+  password,
+  displayName
+) => {
   try {
-    const result = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
+    const result = await createUserWithEmailAndPassword(
+      FirebaseAuth,
+      email,
+      password
+    );
     const { photoURL, uid } = result.user;
-      let fechaActual = new Date()
-      let fecha = `${fechaActual.getDate()}-${fechaActual.getMonth()}-${fechaActual.getFullYear()}`
-      const newUser = {correo: email, nombre : displayName,habilitado: false,numero: "No definido",createdAt: fecha}
-      await setDoc(doc(db,"users",uid),newUser)
-      await updateProfile( FirebaseAuth.currentUser, { displayName });
+    let fechaActual = new Date();
+    let fecha = `${fechaActual.getDate()}-${fechaActual.getMonth()}-${fechaActual.getFullYear()}`;
+    const newUser = {
+      correo: email,
+      nombre: displayName,
+      habilitado: false,
+      numero: "No definido",
+      createdAt: fecha,
+    };
+    await setDoc(doc(db, "users", uid), newUser);
+    await updateProfile(FirebaseAuth.currentUser, { displayName });
     return {
-        ok: true,
+      ok: true,
       user: {
         uid,
         email,
@@ -82,16 +119,15 @@ export const registerUserWithEmailPassword = async (email, password, displayName
     console.log(error);
     return { ok: false, errorMessage: error.message };
   }
-
 };
 
 export const resetPasswordEmail = async (email) => {
   try {
-    await sendPasswordResetEmail( FirebaseAuth, email );
+    await sendPasswordResetEmail(FirebaseAuth, email);
 
     return {
       ok: true,
-      success: true
+      success: true,
     };
   } catch (error) {
     console.log(error);
@@ -109,15 +145,15 @@ export const resetPasswordEmail = async (email) => {
       errorMessage,
     };
   }
-}
+};
 
 export const resetPassword = async (oobCode, password) => {
   try {
-    await confirmPasswordReset( FirebaseAuth, oobCode, password );
+    await confirmPasswordReset(FirebaseAuth, oobCode, password);
 
     return {
       ok: true,
-      success: true
+      success: true,
     };
   } catch (error) {
     console.log(error);
@@ -125,7 +161,8 @@ export const resetPassword = async (oobCode, password) => {
     let errorMessage = error.message;
 
     if (errorCode === "auth/invalid-action-code") {
-      errorMessage = "El enlace de restablecimiento de contraseña que se ha proporcionado es inválido, expirado o ya se ha utilizado.";
+      errorMessage =
+        "El enlace de restablecimiento de contraseña que se ha proporcionado es inválido, expirado o ya se ha utilizado.";
     }
 
     return {
@@ -133,101 +170,101 @@ export const resetPassword = async (oobCode, password) => {
       errorMessage,
     };
   }
-}
+};
 
-export const getUserInfo = async() =>{
-  try{
-    const usersRef = doc(db, "users" , FirebaseAuth.currentUser.uid)
-    const docSnap = await getDoc(usersRef)
-    return docSnap.data()
-  }catch(error){
-    console.log("Error a la hora de obtener información del usuario : " ,error)
-  }
-}
-export const updateLoggedUser = async(newData) =>{
-  try{
-    const usersRef = doc(db, "users" , FirebaseAuth.currentUser.uid)
-    await updateDoc(usersRef,newData)
-  }catch(error){
-    console.log("Error a la hora de Editar el usuario : " ,error)
-  }
-}
-export const updateUserEmail = async(email) => {
+export const getUserInfo = async () => {
   try {
-    await updateEmail(FirebaseAuth.currentUser,email);
+    const usersRef = doc(db, "users", FirebaseAuth.currentUser.uid);
+    const docSnap = await getDoc(usersRef);
+    return docSnap.data();
+  } catch (error) {
+    console.log("Error a la hora de obtener información del usuario : ", error);
+  }
+};
+export const updateLoggedUser = async (newData) => {
+  try {
+    const usersRef = doc(db, "users", FirebaseAuth.currentUser.uid);
+    await updateDoc(usersRef, newData);
+  } catch (error) {
+    console.log("Error a la hora de Editar el usuario : ", error);
+  }
+};
+export const updateUserEmail = async (email) => {
+  try {
+    await updateEmail(FirebaseAuth.currentUser, email);
     console.log("Email changed successfully!");
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-export const updateUserPassword = async(password) => {
+export const updateUserPassword = async (password) => {
   try {
-    await updatePassword(FirebaseAuth.currentUser,password);
+    await updatePassword(FirebaseAuth.currentUser, password);
     console.log("Password changed successfully!");
   } catch (error) {
     console.error(error);
   }
-  }
+};
 
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut();
-}
+};
 
-
-export const getCurrentUser = async() => {
-  try{
-    if (FirebaseAuth.currentUser){
-      const currentUserId =FirebaseAuth.currentUser.uid;
+export const getCurrentUser = async () => {
+  try {
+    if (FirebaseAuth.currentUser) {
+      const currentUserId = FirebaseAuth.currentUser.uid;
       const userRef = doc(db, "users", currentUserId);
-      const userSnapshot = await getDoc(userRef)
-      const userData = userSnapshot.data()
-      return userData
-    }  
-  }catch(error){
-    console.log(error)
-    return 0
+      const userSnapshot = await getDoc(userRef);
+      const userData = userSnapshot.data();
+      return userData;
+    }
+  } catch (error) {
+    console.log(error);
+    return 0;
   }
-}
-export const getCurrentUserWithId = async(uid) => {
-  try{
+};
+export const getCurrentUserWithId = async (uid) => {
+  try {
     const userRef = doc(db, "users", uid);
-    const userSnapshot = await getDoc(userRef)
-    const userData = userSnapshot.data()
-    return userData
-  }catch(error){
-    console.log(error)
-    return 0
+    const userSnapshot = await getDoc(userRef);
+    const userData = userSnapshot.data();
+    return userData;
+  } catch (error) {
+    console.log(error);
+    return 0;
   }
-}
-export const getAllUsers = async() =>{
-  const users = await getDocs(collection(db, "users"))
-  return users.docs.filter(doc => doc.id !== FirebaseAuth.currentUser.uid).map(doc =>({id: doc.id, ...doc.data()}))
+};
+export const getAllUsers = async () => {
+  const users = await getDocs(collection(db, "users"));
+  return users.docs
+    .filter((doc) => doc.id !== FirebaseAuth.currentUser.uid)
+    .map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
-export const updateUser = async(uid,newData) => {
-  try{
-    const usersRef = doc(db, "users" , uid)
-    await updateDoc(usersRef,newData)
-  }catch(error){
-    console.log("Error a la hora de actualizar el usuario : " ,error)
-  }
-}; 
-
-export const eliminateUser = async(uid,newData) => {
-  
-  try{
-    const usersRef = doc(db, "users" , uid)
-    await updateDoc(usersRef,newData)
-  }catch(error){
-    console.log("Error a la hora de eliminar el usuario : " ,error)
+export const updateUser = async (uid, newData) => {
+  try {
+    const usersRef = doc(db, "users", uid);
+    await updateDoc(usersRef, newData);
+  } catch (error) {
+    console.log("Error a la hora de actualizar el usuario : ", error);
   }
 };
 
-export const searchUserWithEmail= async(email) => {
-    const userRef = query(collection(db, "users"),where("correo","==",email));
-    const querySnapshot = await getDocs(userRef);
-    querySnapshot.forEach((doc) => {
-      return doc.data()});  
-    };
-    
+export const eliminateUser = async (uid, newData) => {
+  try {
+    const usersRef = doc(db, "users", uid);
+    await updateDoc(usersRef, newData);
+  } catch (error) {
+    console.log("Error a la hora de eliminar el usuario : ", error);
+  }
+};
+
+export const searchUserWithEmail = async (email) => {
+  const userRef = query(collection(db, "users"), where("correo", "==", email));
+  const querySnapshot = await getDocs(userRef);
+  querySnapshot.forEach((doc) => {
+    return doc.data();
+  });
+};
