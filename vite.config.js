@@ -5,5 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     hmr: true,
+  },
+  build: {
+    rollupOptions: {
+      external: ['react-dom/client']
+    }
   }
 })
