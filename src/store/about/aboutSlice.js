@@ -17,14 +17,15 @@ export const aboutSlice = createSlice({
             state.instagram = payload[0]?.instagram;
             state.name = payload[0]?.name;
             state.logo = payload[0]?.logo;
-            const whatsapp = payload[0]?.whatsapp.toString();
-            if( !!whatsapp ){
-                if ( whatsapp.length < 8 || whatsapp.includes('-') ){
-                    state.whatsapp = whatsapp;
-                }else{
-                    state.whatsapp = whatsapp.slice(0, 4) + "-" + whatsapp.slice(4, 8);
-                }
-            }
+            state.whatsapp = payload[0]?.whatsapp;
+            // const whatsapp = payload[0]?.whatsapp.toString();
+            // if( !!whatsapp ){
+            //     if ( whatsapp.length < 8 || whatsapp.includes('-') ){
+            //         state.whatsapp = whatsapp;
+            //     }else{
+            //         state.whatsapp = whatsapp.slice(0, 4) + "-" + whatsapp.slice(4, 8);
+            //     }
+            // }
         },
         onChangeSavingAbout: ( state, {payload} ) => {
             state.isSaving = payload;
@@ -34,6 +35,8 @@ export const aboutSlice = createSlice({
         }
     }
 });
+
+console.log(aboutSlice);
 
 
 // Action creators are generated for each case reducer function

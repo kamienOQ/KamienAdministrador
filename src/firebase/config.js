@@ -23,12 +23,12 @@ const appId =import.meta.env.VITE_APP_API_APPID;
 
 // Your web app's Firebase configuration
 // const firebaseConfig = {
-  // apiKey: apiKey,
-  // authDomain: authDomain,
-  // projectId: projectId,
-  // storageBucket: storageBucket,
-  // messagingSenderId: messagingSenderId,
-  // appId: appId
+//   apiKey: apiKey,
+//   authDomain: authDomain,
+//   projectId: projectId,
+//   storageBucket: storageBucket,
+//   messagingSenderId: messagingSenderId,
+//   appId: appId
 // };
 
 // Produccion Firebase configuration
