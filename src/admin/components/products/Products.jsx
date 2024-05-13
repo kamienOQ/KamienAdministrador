@@ -53,7 +53,9 @@ export const Products = () => {
       sortable: false,
       filterable: false,
       renderCell: (params) => (
-        !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
+        params.value && params.value.url && params.value.name && (
+          <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
+        )
       ),
       hideable: false,
       disableColumnMenu: true
@@ -66,7 +68,9 @@ export const Products = () => {
       sortable: false,
       filterable: false,
       renderCell: (params) => (
-        !!params.value.url && <img src={params.value.url} alt={params.value.name} style={{ width: '25%' }} />
+        params.value && params.value.url && params.value.name && (
+          <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
+        )
       ),
       hideable: false,
       disableColumnMenu: true
@@ -80,7 +84,7 @@ export const Products = () => {
       filterable: false,
       hideable: false,
       getActions: (params) => [
-        <ProductActions row={params.row}/>
+        <ProductActions row={params.row} />
       ]
     },
   ];
@@ -88,5 +92,5 @@ export const Products = () => {
   return (
     !!products && <ProductsTable attributes={attributes} data={products} />
   );
-  
+
 };
