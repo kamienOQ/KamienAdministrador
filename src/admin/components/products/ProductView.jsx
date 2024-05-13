@@ -11,13 +11,13 @@ export const ProductView = () => {
             className="modal-container-products"
             open={isModalViewOpenProduct}
             onClose={closeModalViewProduct}
-            sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-            <DialogContent 
+            <DialogContent
                 className='view-product-container'
                 sx={{
-                    display: 'flex', 
-                    alignItems: 'center', 
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'column',
                     outline: 'none',
@@ -26,8 +26,11 @@ export const ProductView = () => {
                     height: 630,
                 }}
             >
-                <img className='view-product-image' src={activeProduct?.image?.url} alt="" />
-                <img className='view-product-icon' src={activeProduct?.icon?.url} alt="" />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '5px' }}>
+                    <img className='view-product-image' src={activeProduct?.image?.url} alt="" />
+                    <img className='view-product-icon' src={activeProduct?.icon?.url} alt="" />
+                    <img className='view-product-photo' src={activeProduct?.photo?.url} alt="" />
+                </Box>
                 <Typography variant="h6">
                     {activeProduct?.productName}
                 </Typography>

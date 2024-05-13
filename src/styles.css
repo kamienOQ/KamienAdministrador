@@ -12,6 +12,7 @@
   --background-button: #777777;
   --roboto: "Roboto", sans-serif;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -20,9 +21,12 @@
 
 /* Ocultar la barra de desplazamiento en navegadores basados en WebKit */
 ::-webkit-scrollbar {
-  width: 8px; /* Tamaño del scroll en vertical */
-  height: 8px; /* Tamaño del scroll en horizontal */
-  display: none; /* Ocultar scroll */
+  width: 8px;
+  /* Tamaño del scroll en vertical */
+  height: 8px;
+  /* Tamaño del scroll en horizontal */
+  display: none;
+  /* Ocultar scroll */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -34,9 +38,12 @@
 /* Nota: Firefox no admite personalización de colores en la barra de desplazamiento */
 /* Por lo tanto, la barra de desplazamiento se oculta pero se muestra en color gris por defecto */
 body::-webkit-scrollbar {
-  width: 8px; /* Tamaño del scroll en vertical */
-  height: 8px; /* Tamaño del scroll en horizontal */
-  display: none; /* Ocultar scroll */
+  width: 8px;
+  /* Tamaño del scroll en vertical */
+  height: 8px;
+  /* Tamaño del scroll en horizontal */
+  display: none;
+  /* Ocultar scroll */
 }
 
 body::-webkit-scrollbar-thumb {
@@ -48,9 +55,12 @@ body::-webkit-scrollbar-thumb {
 /* Nota: Microsoft Edge no admite personalización de colores en la barra de desplazamiento */
 /* Por lo tanto, la barra de desplazamiento se oculta pero se muestra en color gris por defecto */
 body::-ms-scrollbar {
-  width: 8px; /* Tamaño del scroll en vertical */
-  height: 8px; /* Tamaño del scroll en horizontal */
-  display: none; /* Ocultar scroll */
+  width: 8px;
+  /* Tamaño del scroll en vertical */
+  height: 8px;
+  /* Tamaño del scroll en horizontal */
+  display: none;
+  /* Ocultar scroll */
 }
 
 body::-ms-scrollbar-thumb {
@@ -100,6 +110,7 @@ label {
   background-color: var(--hover-main);
   cursor: pointer;
 }
+
 /* 
 .box-border{
     border: 1px solid var(--border);
@@ -134,6 +145,7 @@ label {
   background-color: var(--hover-main);
   cursor: pointer;
 }
+
 /* 
 .box-border{
   border: 1px solid var(--border);
@@ -306,29 +318,29 @@ label {
   overflow-x: auto;
 
   @media (min-width: 200px) {
-      margin-top: -10px;
+    margin-top: -10px;
   }
-  
+
   @media (min-width: 300px) {
-      margin-bottom: -400px;
+    margin-bottom: -400px;
   }
-  
+
   @media (min-width: 375px) {
-      margin-top: -120px;
+    margin-top: -120px;
   }
-  
+
   @media (min-width: 412px) and (min-height: 600px),
   (min-width: 500px),
   (min-width: 800px) and (min-height: 900px),
   (min-width: 1024px) and (min-height: 600px) {
-      max-width: 873px;
-      max-height: 400px;
+    max-width: 873px;
+    max-height: 400px;
   }
-  
+
   @media (min-width: 1024px) and (min-height: 800px) {
-      max-width: 1200px;
-      max-height: 400px;
-      margin-bottom: -400px;
+    max-width: 1200px;
+    max-height: 400px;
+    margin-bottom: -400px;
   }
 }
 
@@ -338,6 +350,7 @@ label {
   border-radius: 5px;
   opacity: 0.7;
 }
+
 /* .container-view-category-icon{
     font-size: 20px;
     position: absolute;
@@ -356,6 +369,7 @@ label {
   z-index: 1;
   transform: translate(-50%, -50%);
 }
+
 /* .view-category-icon{
     font-size: 20px;
     position: absolute;
@@ -378,6 +392,7 @@ label {
 .contrast-text {
   text-shadow: 1px 1px 1px #000;
 }
+
 .container-add-attributes {
   display: flex;
   flex-wrap: nowrap;
@@ -396,13 +411,16 @@ label {
   .container-buttons-filter {
     width: 1130px !important;
   }
+
   .container-table {
     margin-left: 65px !important;
     margin-right: 35px !important;
   }
+
   .remove-filter {
     margin-left: -10px !important;
   }
+
   .remove-filter-category {
     margin-left: -15px !important;
   }
@@ -410,12 +428,15 @@ label {
   .button-filter {
     margin-left: -10px !important;
   }
+
   .remove-filter-attributes {
     margin-left: -15px !important;
   }
+
   .remove-filter-product {
     margin-left: 10px !important;
   }
+
   .profile-container {
     margin-top: 40px;
     margin-left: 50px;
@@ -426,6 +447,7 @@ label {
   .secundary-categories-container div {
     justify-content: space-between;
   }
+
   .view-category-container {
     width: 400px !important;
     height: 430px !important;
@@ -436,34 +458,43 @@ label {
   .categories-container h4 {
     font-size: 20px;
   }
+
   .categories-container button {
     font-size: 12px;
   }
+
   .secundary-categories-container {
     max-height: 180px !important;
     flex-direction: row !important;
   }
+
   .secundary-categories-container div {
     display: flex;
     padding: 1px;
   }
+
   .tags-container {
     grid-template-columns: repeat(1, 1fr);
     width: 240px;
   }
+
   .category-form {
     /* width: 270px; */
     margin: 1rem 2rem 1rem 2rem;
   }
+
   .files-name-container {
     width: 225px !important;
   }
+
   .iconImage-buttons {
     width: 228px;
   }
+
   .action-buttons {
     width: 270px;
   }
+
   .profile-container {
     margin-top: 70px;
     margin-left: 45px;
@@ -475,6 +506,7 @@ label {
     margin-left: 40px !important;
     margin-right: 10px !important;
   }
+
   .profile-container {
     margin: 70px 40px 0;
   }
@@ -496,22 +528,27 @@ label {
   .categories-container h4 {
     margin-left: 20px;
   }
+
   .category-form {
     /* width: 230px; */
     margin: 1rem 0.4rem 1rem 0.4rem !important;
   }
+
   .secundary-categories-container div {
     flex-direction: column;
     font-family: 12px;
     gap: 10px;
     justify-content: center;
   }
+
   .files-name-container {
     width: 160px !important;
   }
+
   .iconImage-buttons {
     width: 160px;
   }
+
   .action-buttons {
     width: 220px;
   }
@@ -534,6 +571,7 @@ label {
     width: 100%;
     height: 65%;
   }
+
   .view-category-icon {
     width: 40%;
     height: 30%;
@@ -557,10 +595,14 @@ label {
 }
 
 .view-product-image {
-  width: 95%;
-  height: 80%;
-  border-radius: 5px;
-  opacity: 0.7;
+  font-size: 20px;
+  position: absolute;
+  width: 40%;
+  height: 35%;
+  top: 81%;
+  right: 10%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
 }
 
 .view-product-icon {
@@ -568,8 +610,19 @@ label {
   position: absolute;
   width: 40%;
   height: 35%;
-  top: 45%;
-  left: 50%;
+  top: 20%;
+  left: 74%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+
+.view-product-photo {
+  font-size: 20px;
+  position: absolute;
+  width: 40%;
+  height: 35%;
+  top: 20%;
+  left: 25%;
   z-index: 1;
   transform: translate(-50%, -50%);
 }
@@ -586,38 +639,42 @@ label {
   .container-buttons-filter {
     width: 1130px !important;
   }
+
   .container-table {
     margin-left: 65px !important;
     margin-right: 35px !important;
   }
+
   .button-filter {
     margin-left: -10px !important;
   }
+
   .remove-filter-product {
     margin-left: 33px !important;
   }
 }
 
 @media (max-width: 780px) {
-    .product-form {
-      grid-template-columns: 1fr;
-      width: 100%;
-      margin: 0.5rem 0 !important;
-    }
-  
-    .MuiDialog-paper {
-      max-width: 600px !important;
-    }
-  
-    .MuiDialog-paper {
-      margin: 0px !important;
-    }
+  .product-form {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin: 0.5rem 0 !important;
+  }
+
+  .MuiDialog-paper {
+    max-width: 600px !important;
+  }
+
+  .MuiDialog-paper {
+    margin: 0px !important;
+  }
 }
 
 @media (max-width: 710px) {
   .secundary-categories-container div {
     justify-content: space-between;
   }
+
   .view-category-container {
     width: 400px !important;
     height: 430px !important;
@@ -629,6 +686,7 @@ label {
     margin-left: 40px !important;
     margin-right: 10px !important;
   }
+
   .MuiDialogContent-root {
     width: 400px !important;
   }
@@ -641,53 +699,67 @@ label {
 }
 
 @media (max-width: 680px) {
+
   .categories-container h4,
   .products-container h4 {
     font-size: 22px;
   }
+
   .categories-container button {
     font-size: 12px;
   }
+
   .product-container h4 {
     font-size: 24px;
   }
+
   .products-container button {
     font-size: 12px;
   }
+
   .secundary-categories-container {
     max-height: 180px !important;
     flex-direction: row !important;
   }
+
   .secundary-categories-container div {
     display: flex;
     padding: 1px;
   }
+
   .secundary-products-container {
     max-height: 180px !important;
     flex-direction: row !important;
   }
+
   .secundary-products-container div {
     display: flex;
     padding: 1px;
   }
+
   .tags-container {
     grid-template-columns: repeat(1, 1fr);
     width: 240px;
   }
+
   .category-form {
     /* width: 270px; */
     margin: 1rem 2rem 1rem 2rem;
   }
+
   .product-form {
     width: 270px;
     margin: 1rem 2rem 1rem 2rem;
   }
+
   .files-name-container {
     width: 225px !important;
   }
+
   .iconImage-buttons {
     width: 228px;
   }
+
   .action-buttons {
     width: 270px;
   }
@@ -697,35 +769,43 @@ label {
   .categories-container h4 {
     margin-left: 20px;
   }
+
   .category-form {
     /* width: 230px; */
     margin: 1rem 0.4rem 1rem 0.4rem !important;
   }
+
   .secundary-categories-container div {
     flex-direction: column;
     font-family: 12px;
     gap: 10px;
     justify-content: center;
   }
+
   .products-container h4 {
     margin-left: 20px;
   }
+
   .product-form {
     width: 230px;
     margin: 1rem 0.4rem 1rem 0.4rem !important;
   }
+
   .secundary-products-container div {
     flex-direction: column;
     font-family: 12px;
     gap: 10px;
     justify-content: center;
   }
+
   .files-name-container {
     width: 160px !important;
   }
+
   .iconImage-buttons {
     width: 160px;
   }
+
   .action-buttons {
     width: 220px;
   }
@@ -734,32 +814,43 @@ label {
     width: 300px !important;
     height: 400px !important;
   }
+
   .view-category-image {
     width: 100%;
     height: 65%;
   }
+
   .view-category-icon {
     width: 40%;
     height: 30%;
   }
+
   .view-product-container {
     width: 300px !important;
     height: 400px !important;
   }
+
   .view-product-image {
-    width: 100%;
-    height: 65%;
+    width: 40%;
+    height: 30%;
   }
+
   .view-product-icon {
     width: 40%;
     height: 30%;
   }
+
+  .view-photo-icon {
+    width: 40%;
+    height: 30%;
+  }
+
   .MuiDialogContent-root {
     width: 280px !important;
   }
 }
 
-/*CategoriesCards Styles */ 
+/*CategoriesCards Styles */
 .container-categoriesCards {
   margin: 0;
   position: relative;
