@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onAddErrorMessage, onAddIconProduct, onAddImageProduct, onAddNewProduct, onAddProducts, onAddSuccessMessage, onChangeAscending, onCleanProducts, 
-    onSetActiveProduct,  onChangeEditing, onSetNumberProducts, onChangePreProductName, onChangePreProductUpdated, onChangeActive, onChangePageAndSize, 
-    onChangeFilterings, onChangeFilters, onChangeEditSuccess, onChangeCreateSuccess} from "../store/products/productsSlice";
+import { onAddErrorMessage, onAddIconProduct, onAddPhotoProduct, onAddImageProduct, onAddNewProduct, onAddProducts, 
+    onAddSuccessMessage, onChangeAscending, onCleanProducts, onSetActiveProduct,  onChangeEditing, onSetNumberProducts, 
+    onChangePreProductName, onChangePreProductUpdated, onChangeActive, onChangePageAndSize, onChangeFilterings, onChangeFilters,
+    onChangeEditSuccess, onChangeCreateSuccess} from "../store/products/productsSlice";
 
 import { onStartGetCategoriesForm, onStartGetAttributesForm, onStartGetListAttributesForm, onStartUpdateProduct, 
-    onStartChangeActiveProduct, onStartFilterProducts, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, onStartNumberProducts,} from "../store/products/thunks"
+    onStartChangeActiveProduct, onStartFilterProducts, onStartGetProducts, onStartUploadFile, onStartUploadNewProduct, 
+    onStartNumberProducts,} from "../store/products/thunks"
 
 export const useProductsStore = () => {
     const dispatch = useDispatch();
@@ -41,6 +43,10 @@ export const useProductsStore = () => {
 
     const addIconProduct = ( images ) => {
         dispatch( onAddIconProduct( images ) );
+    }
+
+    const addPhotoProduct = ( images ) => {
+        dispatch( onAddPhotoProduct( images ) );
     }
 
     const addProducts = ( products ) => {
@@ -166,6 +172,7 @@ export const useProductsStore = () => {
         //*Métodos
         addErrorMessage,
         addIconProduct,
+        addPhotoProduct,
         addImageProduct,
         addNewProduct,
         addProducts, 

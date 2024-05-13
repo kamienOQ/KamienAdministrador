@@ -49,7 +49,7 @@ export const Products = () => {
       field: "image",
       headerName: "Imagen",
       type: "image",
-      width: 200,
+      width: 125,
       sortable: false,
       filterable: false,
       renderCell: (params) => (
@@ -62,9 +62,24 @@ export const Products = () => {
     },
     {
       field: "icon",
-      headerName: "Icono",
+      headerName: "Imagen 2",
       type: "image",
-      width: 200,
+      width: 125,
+      sortable: false,
+      filterable: false,
+      renderCell: (params) => (
+        params.value && params.value.url && params.value.name && (
+          <img src={params.value.url} alt={params.value.name} style={{ width: '35%' }} />
+        )
+      ),
+      hideable: false,
+      disableColumnMenu: true
+    },
+    {
+      field: "photo",
+      headerName: "Imagen 3",
+      type: "image",
+      width: 125,
       sortable: false,
       filterable: false,
       renderCell: (params) => (

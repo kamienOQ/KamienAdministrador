@@ -19,19 +19,22 @@ export const ProductModal = () => {
   const { products, categories, attributes, listAttributes, activeProduct, editing, message, setActiveProduct, 
     addErrorMessage, addSuccessMessage, startUploadNewProduct, startNumberProducts, changeEditing, 
     changePreProductUpdated, startUpdateProduct, isSaving, changeCreateSuccess, changeEditSuccess } = useProductsStore();
-  const { imageLoad, setImageLoad, iconLoad, setIconLoad, onUploadImage, onUploadIcon, onSelectCategory, 
-    onSelectAttribute, onSelectListAttribute, selected } = useProductsState();
+  const { imageLoad, setImageLoad, iconLoad, setIconLoad, photoLoad, setPhotoLoad, onUploadImage, onUploadIcon, onUploadPhoto,
+    onSelectCategory, onSelectAttribute, onSelectListAttribute, selected } = useProductsState();
 
   const { productName, price, atributes, onInputChange, formState } = useProductsForm(activeProduct);
   const [ emptyName, setEmptyName ] = useState(false);
   
   useEffect(() => {
     if(editing){
-      if(activeProduct.image.url){
+      if(activeProduct && activeProduct.image.url){
         setImageLoad(true);
       }
-      if(activeProduct.icon.url){
+      if(activeProduct.icon && activeProduct.icon.url){
         setIconLoad(true);
+      }
+      if(activeProduct.photo && activeProduct.photo.url){
+        setPhotoLoad(true);
       }
     }
   }, []);
@@ -44,11 +47,11 @@ export const ProductModal = () => {
   useEffect(() => {
     addErrorMessage('');
     addSuccessMessage('');
-  }, [formState, categoriesSelected, attributesSelected, listAttributesSelected,imageLoad, iconLoad ]);
+  }, [formState, categoriesSelected, attributesSelected, listAttributesSelected, imageLoad, iconLoad, photoLoad]);
   
   
   const onCloseModa = () => {
-    if (imageLoad) {
+    if (imageLoad && activeProduct.image && activeProduct.image.name) {
       let usingImage = false;
       products.forEach(object => {
         if (object.image.name === activeProduct.image.name) {
@@ -60,7 +63,8 @@ export const ProductModal = () => {
         deleteFileUpload(activeProduct.image.name);
       }
     }
-    if (iconLoad) {
+
+    if (iconLoad && activeProduct.icon && activeProduct.icon.name) {
       let usingIcon = false;
       products.forEach(object => {
         if (object.icon.name === activeProduct.icon.name) {
@@ -70,6 +74,19 @@ export const ProductModal = () => {
       });
       if (!usingIcon) {
         deleteFileUpload(activeProduct.icon.name);
+      }
+    }
+
+    if (photoLoad && activeProduct.photo && activeProduct.photo.name) {
+      let usingPhoto = false;
+      products.forEach(object => {
+        if (object.photo.name === activeProduct.photo.name) {
+          usingPhoto = true;
+          return;
+        }
+      });
+      if (!usingPhoto) {
+        deleteFileUpload(activeProduct.photo.name);
       }
     }
 
@@ -210,7 +227,10 @@ export const ProductModal = () => {
                   Imagen
                 </Typography>
                 <Typography sx={ { color: "quaternary.main", fontWeight: 'bold' }}>
-                  Icono
+                  Imagen 2
+                </Typography>
+                <Typography sx={ { color: "quaternary.main", fontWeight: 'bold' }}>
+                  Imagen 3
                 </Typography>
               </div>
               <div className="iconImage-buttons">
@@ -223,7 +243,7 @@ export const ProductModal = () => {
                   sx={{ color: "secondary.main", padding: imageLoad ? '3px' : '12px' }}
                   disabled={isSaving}
                 >
-                  <input hidden accept="image/*, .webp" type="file" />
+                  <input hidden accept=".png, .webp" type="file" />
                   <AddPhotoAlternateIcon style={{ display: imageLoad ? 'none' : '' }} />
                   {imageLoad &&
                     <Avatar
@@ -232,6 +252,8 @@ export const ProductModal = () => {
                     />
                   }
                 </IconButton>
+
+
                 <IconButton
                   className="addIcon-button addCategory-button"
                   color="primary"
@@ -242,11 +264,31 @@ export const ProductModal = () => {
                   disabled={isSaving}
                 >
                   <input hidden accept=".png, .webp" type="file" />
-                  <AddReactionIcon style={{ display: iconLoad ? 'none' : '' }} />
+                  <AddPhotoAlternateIcon style={{ display: iconLoad ? 'none' : '' }} />
                   {iconLoad &&
                     <Avatar
                       alt="Icono"
                       src={activeProduct?.icon.url}
+                    />
+                  }
+                </IconButton>
+
+
+                <IconButton
+                  className="addIcon-button addCategory-button"
+                  color="primary"
+                  aria-label="cargar imagen"
+                  component="label"
+                  onChange={onUploadPhoto}
+                  sx={{ color: "secondary.main", padding: photoLoad ? '3px' : '12px' }}
+                  disabled={isSaving}
+                >
+                  <input hidden accept=".png, .webp" type="file" />
+                  <AddPhotoAlternateIcon style={{ display: photoLoad ? 'none' : '' }} />
+                  {photoLoad &&
+                    <Avatar
+                      alt="Imagen 2"
+                      src={activeProduct?.photo.url}
                     />
                   }
                 </IconButton>

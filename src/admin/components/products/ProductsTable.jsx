@@ -11,7 +11,7 @@ export const ProductsTable = ({ attributes, data }) => {
   const { filter, filtering, changeFilter, changeFiltering, startFilterProducts, startGetProducts, isLoading, numberProducts, changePageAndSize } = useProductsStore();
   const [rowId, setRowId] = useState(null);
 
-  const [filterModel, setFilterModel] = useState({items: []});
+  const [filterModel, setFilterModel] = useState({ items: [] });
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 5,
     page: 0,
@@ -34,9 +34,9 @@ export const ProductsTable = ({ attributes, data }) => {
   const onGetRowId = useCallback((row) => row.id, []);
 
   useEffect(() => {
-    if(!filtering){
+    if (!filtering) {
       startGetProducts(paginationModel.page, paginationModel.pageSize);
-    }if(filtering){
+    } if (filtering) {
       startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
     }
   }, [paginationModel]);
@@ -47,8 +47,8 @@ export const ProductsTable = ({ attributes, data }) => {
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter" ) {
-        if (!filtering || filter.value !== localFilterValue ) {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        if (!filtering || filter.value !== localFilterValue) {
           handleSearch()
         }
       }
@@ -64,7 +64,7 @@ export const ProductsTable = ({ attributes, data }) => {
 
   // * Filter
   const handleSearch = () => {
-    if (!filtering || filter.value !== localFilterValue ) {
+    if (!filtering || filter.value !== localFilterValue) {
       if (Object.keys(filter).length > 0 && filter.field !== undefined) {
         // onPaginationChange({...paginationModel, page: 0});
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
@@ -75,12 +75,12 @@ export const ProductsTable = ({ attributes, data }) => {
   };
 
   const handleSort = (value) => {
-    if (!filtering || value.value !== localFilterValue ) {
+    if (!filtering || value.value !== localFilterValue) {
       if (Object.keys(value).length > 0 && value.field !== undefined) {
         startFilterProducts(paginationModel.page, paginationModel.pageSize, localFilterValue);
         changeFiltering(true);
         setLocalFilterValue(value.value);
-      }else if (localFilterValue === "asc" || localFilterValue === "desc") {
+      } else if (localFilterValue === "asc" || localFilterValue === "desc") {
         handleRemoveFilter();
       }
     }
@@ -92,7 +92,7 @@ export const ProductsTable = ({ attributes, data }) => {
     changeFilter({});
     setSortModel([]);
     setLocalFilterValue('');
-    setFilterModel({items: []});
+    setFilterModel({ items: [] });
   };
 
   const handleFilterChange = ({ items }) => {
@@ -100,8 +100,8 @@ export const ProductsTable = ({ attributes, data }) => {
       changeFilter({ field: items[0]?.field, value: items[0]?.value });
       setSortModel([]);
       changeFiltering(false);
-    }if (items.length === 0) {
-      if(filtering){
+    } if (items.length === 0) {
+      if (filtering) {
         startGetProducts(paginationModel.page, paginationModel.pageSize);
       }
       changeFiltering(false);
@@ -113,24 +113,24 @@ export const ProductsTable = ({ attributes, data }) => {
   const handleSortModelChange = (event) => {
     setSortModel(event);
     changeFilter({ field: event[0]?.field, value: event[0]?.sort });
-    setFilterModel({items: []});
+    setFilterModel({ items: [] });
     changeFiltering(false);
     handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
-  
+
   return (
     <Grid container
       className="container-table"
-      sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'start', 
-        maxWidth: "1172px", 
-        height: 450, 
-        my: "0", 
-        mx: "auto", 
-        gap: .6, 
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'start',
+        maxWidth: "1172px",
+        height: 450,
+        my: "0",
+        mx: "auto",
+        gap: .6,
         overflowX: 'auto',
         '@media (min-width: 200px)': {
           marginTop: "-10px"
@@ -166,12 +166,12 @@ export const ProductsTable = ({ attributes, data }) => {
           maxWidth: "1200px",
           maxHeight: "400px",
           marginBottom: "-400px"
-        }, 
+        },
       }}
     >
       <Grid
         className="container-buttons-filter"
-        sx={{display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px"}}
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px" }}
       >
         {/* <Button
           className="button-filter"
