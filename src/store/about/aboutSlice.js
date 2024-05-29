@@ -36,9 +36,6 @@ export const aboutSlice = createSlice({
     }
 });
 
-console.log(aboutSlice);
-
-
 // Action creators are generated for each case reducer function
 export const { 
     onSetData,
