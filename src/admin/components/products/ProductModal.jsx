@@ -253,7 +253,6 @@ export const ProductModal = () => {
                   }
                 </IconButton>
 
-
                 <IconButton
                   className="addIcon-button addCategory-button"
                   color="primary"
@@ -272,7 +271,6 @@ export const ProductModal = () => {
                     />
                   }
                 </IconButton>
-
 
                 <IconButton
                   className="addIcon-button addCategory-button"

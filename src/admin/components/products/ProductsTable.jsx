@@ -7,8 +7,9 @@ import { useProductsStore } from "../../../hooks";
 
 
 export const ProductsTable = ({ attributes, data }) => {
-
-  const { filter, filtering, changeFilter, changeFiltering, startFilterProducts, startGetProducts, isLoading, numberProducts, changePageAndSize } = useProductsStore();
+  const { filter, filtering, changeFilter, changeFiltering, startFilterProducts, startGetProducts, isLoading,
+    numberProducts, changePageAndSize
+  } = useProductsStore();
   const [rowId, setRowId] = useState(null);
 
   const [filterModel, setFilterModel] = useState({ items: [] });
@@ -118,6 +119,12 @@ export const ProductsTable = ({ attributes, data }) => {
     handleSort({ field: event[0]?.field, value: event[0]?.sort });
   };
 
+  // Ajust dinamically the height of the table acocording to the page size
+  const getGridHeight = (pageSize) => {
+    const rowHeight = 52;
+    const headerFooterHeight = 450;
+    return (rowHeight * pageSize) + headerFooterHeight;
+  };
 
   return (
     <Grid container
@@ -127,7 +134,7 @@ export const ProductsTable = ({ attributes, data }) => {
         alignItems: 'center',
         justifyContent: 'start',
         maxWidth: "1172px",
-        height: 450,
+        height: getGridHeight(paginationModel.pageSize),
         my: "0",
         mx: "auto",
         gap: .6,
@@ -173,14 +180,24 @@ export const ProductsTable = ({ attributes, data }) => {
         className="container-buttons-filter"
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', width: "1160px" }}
       >
-        {/* <Button
+        <Button
           className="button-filter"
-          sx={{ height: 40, backgroundColor: 'filter.main', color: 'tertiary.main', '&:hover': { bgcolor: "lightInfo.main" }, }}
+          sx={{ 
+            height: 40, 
+            marginRight: 10, 
+            backgroundColor: 'filter.main', 
+            color: 'tertiary.main', 
+            '&:hover': { bgcolor: "lightInfo.main" }, 
+            left: 5,
+            '@media (min-width: 1024px)': {
+              marginLeft: 1
+            },
+          }}
           onClick={handleSearch}
           startIcon={<FilterAltIcon />}
         >
           Filtrar
-        </Button> */}
+        </Button>
         {filtering ? (
           <Button
             className="remove-filter-product"

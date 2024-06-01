@@ -8,6 +8,7 @@ import {
   setDoc,
   startAfter,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { FirebaseDB, FirebaseStorage } from "../../firebase/config";
@@ -33,6 +34,7 @@ import {
   onSetRelatedCategories,
   onCleanListAttributes,
   onSetRelatedListAttributes,
+  onDeleteProduct,
 } from "./productsSlice";
 
 export const onStartUploadFile = (file, type, collectionName) => {
@@ -114,36 +116,44 @@ export const onStartUploadNewProduct = () => {
 
 export const onStartGetProducts = (page = 0, size = 5) => {
   return async (dispatch) => {
-    dispatch(onCleanProducts());
+    return new Promise(async (resolve, reject) => {
+      try {
+        dispatch(onCleanProducts());
 
-    const collectionRef = collection(FirebaseDB, `/products`);
-    let q;
+        const collectionRef = collection(FirebaseDB, `/products`);
+        let q;
 
-    if (page === 0) {
-      q = query(collectionRef, orderBy("date", "desc"), limit(size));
-    } else {
-      const lastVisibleDoc = query(
-        collectionRef,
-        orderBy("date", "desc"),
-        limit(page * size)
-      );
-      const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
-      const lastVisible =
-        lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length - 1];
-      q = query(
-        collectionRef,
-        orderBy("date", "desc"),
-        startAfter(lastVisible),
-        limit(size)
-      );
-    }
+        if (page === 0) {
+          q = query(collectionRef, orderBy("date", "desc"), limit(size));
+        } else {
+          const lastVisibleDoc = query(
+            collectionRef,
+            orderBy("date", "desc"),
+            limit(page * size)
+          );
+          const lastVisibleDocSnapshot = await getDocs(lastVisibleDoc);
+          const lastVisible =
+            lastVisibleDocSnapshot.docs[lastVisibleDocSnapshot.docs.length - 1];
+          q = query(
+            collectionRef,
+            orderBy("date", "desc"),
+            startAfter(lastVisible),
+            limit(size)
+          );
+        }
 
-    const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(q);
 
-    const newProducts = querySnapshot.docs.map((doc, index) => {
-      return { id: index + 1 + page * size, ...doc.data() };
+        const newProducts = querySnapshot.docs.map((doc, index) => {
+          return { id: index + 1 + page * size, ...doc.data() };
+        });
+        dispatch(onSetProducts(newProducts));
+
+        resolve(); // Resuelve la promesa una vez que se completan las operaciones
+      } catch (error) {
+        reject(error); // Rechaza la promesa si hay un error
+      }
     });
-    dispatch(onSetProducts(newProducts));
   };
 };
 
@@ -502,3 +512,49 @@ export const onStartGetListAttributesForm = () => {
     });
   };
 };
+
+export const onStartDeleteProduct = (product) => {
+  return async (dispatch, getState) => {
+    try {
+      // Crear una referencia a la colección 'products'
+      const productRef = collection(FirebaseDB, "products");
+      
+      // Crear una consulta para buscar el documento con el productName específico
+      const q = query(productRef, where("productName", "==", product.productName));
+
+      // Ejecutar la consulta
+      const querySnapshot = await getDocs(q);
+
+      // Almacenar promesas de eliminación
+      const deletePromises = [];
+
+      // Iterar sobre los documentos encontrados y eliminar el documento con el productName específico
+      querySnapshot.forEach(async (doc) => {
+        if (doc.exists()) {
+          await deleteDoc(doc.ref);
+        }
+      });
+
+      // Esperar a que todas las promesas de eliminación se completen
+      await Promise.all(deletePromises);
+
+      // Obtener el estado actual para obtener la página y el tamaño de la página
+      const page = getState().products.page;
+      const pageSize = getState().products.pageSize;
+
+      // Después de eliminar el producto, obtener los productos actualizados
+      await dispatch(onStartGetProducts(page, pageSize));
+      
+      dispatch(onDeleteProduct(product.id));
+      dispatch(onAddSuccessMessage("Producto eliminado con éxito"));
+    } catch (error) {
+      console.error("Error al borrar el producto: ", error);
+      dispatch(onAddErrorMessage("Error al eliminar el producto"));
+    }
+    setTimeout(() => {
+      dispatch(onAddSuccessMessage(""));
+      dispatch(onAddErrorMessage(""));
+    }, 1000);
+  };
+};
+

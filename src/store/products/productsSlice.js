@@ -83,8 +83,9 @@ export const productsSlice = createSlice({
     onDeleteProduct: (state, { payload }) => {
       state.activeProduct = null;
       state.products = state.products.filter(
-        (product) => product.productName !== payload
+        (product) => product.id !== payload
       );
+      state.message.success = "Producto eliminado con éxito";
     },
     onChargeProductsUploaded: (state, { payload }) => {
       let duplicate = false;

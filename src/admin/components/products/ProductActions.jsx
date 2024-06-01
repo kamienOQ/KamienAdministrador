@@ -1,13 +1,14 @@
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Fab, Switch, Tooltip } from '@mui/material';
 import { useProductsState, useProductsStore, useUiStore } from '../../../hooks';
 
 export const ProductActions = ({ row }) => {
 
   const { openProductModal, openModalViewProduct, addAttributesSelected, addListAttributesSelected, addCategoriesSelected } = useUiStore();
-  const { activeProduct, changeEditing, setActiveProduct, changePreProductName, changeActive, 
-    startChangeActiveProduct, startGetAttributesForm, starGetCategoriesForm } = useProductsStore();
+  const { activeProduct, products, changeEditing, setActiveProduct, changePreProductName, changeActive, startGetProducts,
+    startChangeActiveProduct, startGetAttributesForm, starGetCategoriesForm, startDeleteProduct  } = useProductsStore();
   const { setSelected } = useProductsState();
 
   const handleActive = () => {
@@ -15,7 +16,7 @@ export const ProductActions = ({ row }) => {
     changeActive();
     startChangeActiveProduct();
   }
-  
+
   const handleOpenEdit = () => {
     setActiveProduct(row);
     changePreProductName(row.productName);
@@ -26,7 +27,7 @@ export const ProductActions = ({ row }) => {
       addListAttributesSelected(listAttributeSelected);
     });
     addCategoriesSelected(row.relatedCategories);
-    if(!!row.relatedCategories){
+    if (!!row.relatedCategories) {
       setSelected(true);
     }
     changeEditing(true);
@@ -40,6 +41,10 @@ export const ProductActions = ({ row }) => {
     openModalViewProduct();
   };
 
+  const handleDelete = () => {
+    startDeleteProduct (row);
+  };
+
   return (
     <>
       <Box
@@ -51,7 +56,7 @@ export const ProductActions = ({ row }) => {
           minWidth: '100%'
         }}
       >
-        <Tooltip title = "Visualizar" > 
+        <Tooltip title="Visualizar" >
           <Fab
             color="primary"
             sx={{
@@ -66,7 +71,7 @@ export const ProductActions = ({ row }) => {
             <VisibilityIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title = "Editar" >   
+        <Tooltip title="Editar" >
           <Fab
             color="edit"
             sx={{
@@ -81,15 +86,31 @@ export const ProductActions = ({ row }) => {
             <EditIcon />
           </Fab>
         </Tooltip>
-        <Tooltip title = "Activar/Desactivar" >
+        <Tooltip title="Eliminar">
+          <Fab
+            color="error"
+            sx={{
+              width: 40,
+              height: 40,
+              bgcolor: 'error.main',
+              color: 'white',
+              '&:hover': { bgcolor: 'error.main' },
+            }}
+            onClick={handleDelete}
+          >
+            <DeleteIcon />
+          </Fab>
+        </Tooltip>
+        <Tooltip title="Activar/Desactivar" >
           <Switch
-              checked={!!row?.active ? row?.active : false}
-              onChange={handleActive}
-              name="Activa"
-              color={row?.active ? "success" : "error"}
-          /> 
+            checked={!!row?.active ? row?.active : false}
+            onChange={handleActive}
+            name="Activa"
+            color={row?.active ? "success" : "error"}
+          />
         </Tooltip>
       </Box>
     </>
   )
 }
+

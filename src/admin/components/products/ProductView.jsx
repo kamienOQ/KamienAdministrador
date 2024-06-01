@@ -27,9 +27,9 @@ export const ProductView = () => {
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '5px' }}>
-                    <img className='view-product-image' src={activeProduct?.image?.url} alt="" />
-                    <img className='view-product-icon' src={activeProduct?.icon?.url} alt="" />
-                    <img className='view-product-photo' src={activeProduct?.photo?.url} alt="" />
+                    <img className='view-product-image' src={activeProduct?.image?.url} alt="Product Image" />
+                    <img className='view-product-icon' src={activeProduct?.icon?.url} alt="Product Icon" />
+                    <img className='view-product-photo' src={activeProduct?.photo?.url} alt="Product Photo" />
                 </Box>
                 <Typography variant="h6">
                     {activeProduct?.productName}
