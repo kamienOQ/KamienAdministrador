@@ -95,7 +95,78 @@ export const ProductsCrud = () => {
                 className="addProduct-modal-button"
                 onClick={onOpenModal}
                 startIcon={<AddCircleIcon />}
-                sx={{ backgroundColor: 'success.main', minWidth: 0, color: "tertiary.main" }}
+                sx={{ 
+                  backgroundColor: 'success.main', 
+                  minWidth: 0, 
+                  marginRight: 28, 
+                  color: "tertiary.main",
+                  '@media (min-width: 300px) and (min-height: 600px)': {
+                    marginRight: -18,
+                  },
+                  '@media (min-width: 360px) and (min-height: 600px)': {
+                    marginRight: -20,
+                  },
+                  '@media (min-width: 375px) and (min-height: 600px)': {
+                    marginRight: -21,
+                  },
+                  '@media (min-width: 390px) and (min-height: 600px)': {
+                    marginRight: -23,
+                  },
+                  '@media (min-width: 400px) and (min-height: 600px)': {
+                    marginRight: -5,
+                  },
+                  '@media (min-width: 500px) and (min-height: 600px)': {
+                    marginRight: -6,
+                  },
+                  '@media (min-width: 700px) and (min-height: 600px)': {
+                    marginRight: -4,
+                  },
+                  '@media (min-width: 800px) and (min-height: 600px)': {
+                    marginRight: -5,
+                  },
+                  '@media (min-width: 900px) and (min-height: 600px)': {
+                    marginRight: -5,
+                  },
+                  '@media (min-width: 1024px) and (min-height: 600px)': {
+                    marginRight: -6,
+                  },
+                  '@media (min-width: 1024px) and (min-height: 800px)': {
+                    marginRight: 1,
+                  },
+                  '@media (min-width: 1024px) and (min-height: 900px)': {
+                    marginRight: -5,
+                  },
+                  '@media (min-width: 1024px) and (min-height: 1000px)': {
+                    marginRight: -6,
+                  },
+                  '@media (min-width: 1100px)': {
+                    marginRight: -6,
+                  }, 
+                  '@media (min-width: 1200px)': {
+                    marginRight: -6,
+                  }, 
+                  '@media (min-width: 1300px)': {
+                    marginRight: -5,
+                  }, 
+                  '@media (min-width: 1350px)': {
+                    marginRight: -2,
+                  }, 
+                  '@media (min-width: 1390px)': {
+                    marginRight: 0,
+                  }, 
+                  '@media (min-width: 1400px)': {
+                    marginRight: 9,
+                  }, 
+                  '@media (min-width: 1500px)': {
+                    marginRight: 10,
+                  }, 
+                  '@media (min-width: 1600px)': {
+                    marginRight: 14,
+                  }, 
+                  '@media (min-width: 1800px)': {
+                    marginRight: 28,
+                  },
+                }}
                 variant='contained'
                 disabled={isSaving}
               >

@@ -133,7 +133,7 @@ export const ProductsTable = ({ attributes, data }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'start',
-        maxWidth: "1172px",
+        maxWidth: "1200px",
         height: getGridHeight(paginationModel.pageSize),
         my: "0",
         mx: "auto",
@@ -147,31 +147,36 @@ export const ProductsTable = ({ attributes, data }) => {
         },
         '@media (min-width: 375px)': {
           marginBottom: "-400px",
-          marginTop: "-105px",
+          marginTop: "-15px",
         },
         '@media (min-width: 412px) and (min-height: 600px)': {
           maxWidth: "873px",
-          maxHeight: "400px",
-          marginTop: "-50px",
+          maxHeight: "410px",
+          marginTop: "-80px",
         },
         '@media (min-width: 500px)': {
           maxWidth: "873px",
-          maxHeight: "400px",
+          maxHeight: "420px",
           marginBottom: "-300px"
         },
         '@media (min-width: 800px) and (min-height: 900px)': {
           maxWidth: "873px",
-          maxHeight: "400px",
+          maxHeight: "420px",
           marginBottom: "-400px"
         },
         '@media (min-width: 1024px) and (min-height: 600px)': {
           maxWidth: "873px",
-          maxHeight: "400px",
-          marginBottom: "-180px"
+          maxHeight: "420px",
+          marginBottom: "-330px"
         },
         '@media (min-width: 1024px) and (min-height: 800px)': {
           maxWidth: "1200px",
-          maxHeight: "400px",
+          maxHeight: "420px",
+          marginBottom: "-400px"
+        },
+        '@media (min-width: 1200px) and (min-height: 800px)': {
+          maxWidth: "1200px",
+          maxHeight: "420px",
           marginBottom: "-400px"
         },
       }}
